@@ -4,7 +4,7 @@
 # COMSM0166 Project Template
 A project template for the Software Engineering Discipline and Practice module (COMSM0166).
 
-## Info hi
+## Info
 
 This is the template for your group project repo/report. We'll be setting up your repo and assigning you to it after the group forming activity. You can delete this info section, but please keep the rest of the repo structure intact.
 
@@ -29,7 +29,7 @@ GROUP PHOTO. Add a group photo here.
 
 - Group member 1, name, email, role
 - Group member 2, name, email, role
-- Group member 3, name, email, role
+- Group member 3, Thanusha Gorva, jx25475@bristol.ac.uk, role
 - Group member 4, name, email, role
 - Group member 5, name, email, role
 - Group member 6, name, email, role
