@@ -47,9 +47,9 @@ GROUP PHOTO. Add a group photo here.
 
 ### - [Kanban Borad Link](https://github.com/orgs/UoB-COMSM0166/projects/172)
 
-### - Paper Prototypes:
+### - Prototypes:
 
-1. Lost in Bristol
+1. Paper Prototype (Lost in Bristol)
 
 https://github.com/user-attachments/assets/0ca057d0-9038-4678-b6c5-b5da47b4a736
 
