@@ -45,8 +45,6 @@ GROUP PHOTO. Add a group photo here.
 
 ## Week 3
 
-### - Initial ideas:
-
 ### - Kanban Board:
 - [Group27-Kanban](https://github.com/orgs/UoB-COMSM0166/projects/172)
 
