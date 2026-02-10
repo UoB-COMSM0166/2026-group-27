@@ -27,6 +27,11 @@ VIDEO. Include a demo video of your game here (you don't have to wait until the 
 
 GROUP PHOTO. Add a group photo here.
 
+| First Header  | Second Header |
+| ------------- | ------------- |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
+
 - Group member 1, Liz Chen, ji25241@bristol.ac.uk, TBD
 - Group member 2, Suki Dai, daisy20010313@gmail.com, role
 - Group member 3, Thanusha Gorva, jx25475@bristol.ac.uk, role
