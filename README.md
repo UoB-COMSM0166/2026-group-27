@@ -32,12 +32,11 @@ GROUP PHOTO. Add a group photo here.
 - Group member 3, Thanusha Gorva, jx25475@bristol.ac.uk, role
 - Group member 4, Yizhou Pan, izapan610@gmail.com, role
 - Group member 5, name, email, role
-- Group member 6, name, email, role
 
 ### Initial ideas:
 
 ### Kanban Board:
-
+- [Group27-Kanban](https://github.com/orgs/UoB-COMSM0166/projects/172)
 
 
 ### Paper Prototype (Lost in Bristol):
