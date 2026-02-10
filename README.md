@@ -33,17 +33,30 @@ GROUP PHOTO. Add a group photo here.
 - Group member 4, Yizhou Pan, izapan610@gmail.com, role
 - Group member 5, name, email, role
 
+## Week 2
+
+### - Drawing App: 
+
+### - Game Ideas:
+
+1. First Game Idea
+ 
+2. Second Game Idea
+
+## Week 3
+
 ### Initial ideas:
 
 ### Kanban Board:
 - [Group27-Kanban](https://github.com/orgs/UoB-COMSM0166/projects/172)
 
+### Paper Prototypes:
 
-### Paper Prototype (Lost in Bristol):
+1. Lost in Bristol
 
 https://github.com/user-attachments/assets/0ca057d0-9038-4678-b6c5-b5da47b4a736
 
-
+2. Second Game Prototype
 
 
 ## Project Report
