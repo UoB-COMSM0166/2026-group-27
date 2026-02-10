@@ -34,7 +34,13 @@ GROUP PHOTO. Add a group photo here.
 - Group member 5, name, email, role
 - Group member 6, name, email, role
 
-## Paper Prototype (Lost in Bristol)
+### Initial ideas
+
+### Kanban Board
+
+
+
+### Paper Prototype (Lost in Bristol)
 
 https://github.com/user-attachments/assets/0ca057d0-9038-4678-b6c5-b5da47b4a736
 
