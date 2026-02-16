@@ -31,7 +31,7 @@ GROUP PHOTO. Add a group photo here.
 - Group member 2, Suki Dai, daisy20010313@gmail.com, role
 - Group member 3, Thanusha Gorva, jx25475@bristol.ac.uk, role
 - Group member 4, Yizhou Pan, izapan610@gmail.com, role
-- Group member 5, name, email, role
+- Group member 5, Maniza Singh,jq25952@bristol.ac.uk, role
 
 ## Week 2
 
