@@ -73,6 +73,9 @@ Epics
 | **Interaction / UI** | Dynamic HUD | Access a clear Heads-Up Display showing location and a compass to maintain orientation. | Persistent UI bar displays "Area Name" and a "Proximity Sensor" that glows brighter as the player nears goals. |
 | **Completionist** | Game Loop | Overcome obstacles like 'Traffic Jams' to reach Temple Meads and trigger a final score. | Random obstacles spawn every 30s; reaching the final destination triggers a Win Screen with score calculation. |
 
+## Week 5 (Requirements + Class Diagram + Sequence Diagram)
+
+## Week 7 (Think aloud + Heuristic Evaluation)
 
 ## Project Report
 
