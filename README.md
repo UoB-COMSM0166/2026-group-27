@@ -25,7 +25,6 @@ VIDEO. Include a demo video of your game here (you don't have to wait until the 
 
 ## Your Group
 
-GROUP PHOTO. 
 ![IMG_2016](https://github.com/user-attachments/assets/edee6a1f-7401-426d-9795-981e69593d5a)
 
 - Group member 1, Liz Chen, ji25241@bristol.ac.uk, TBD
