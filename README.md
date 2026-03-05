@@ -43,7 +43,7 @@ VIDEO. Include a demo video of your game here (you don't have to wait until the 
  
 2. Second Game Idea
 
-## Week 3
+## Week 3 (Review + Paper Prototyping)
 
 ### - [Kanban Board](https://github.com/orgs/UoB-COMSM0166/projects/172)
 
