@@ -45,7 +45,7 @@ VIDEO. Include a demo video of your game here (you don't have to wait until the 
 
 ## Week 3
 
-### - [Kanban Borad Link](https://github.com/orgs/UoB-COMSM0166/projects/172)
+### - [Kanban Board](https://github.com/orgs/UoB-COMSM0166/projects/172)
 
 ### - Prototypes:
 
