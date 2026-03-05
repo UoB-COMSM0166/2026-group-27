@@ -75,7 +75,12 @@ Epics
 
 ## Week 5 (Requirements + Class Diagram + Sequence Diagram)
 
-## Week 7 (Think aloud + Heuristic Evaluation)
+## Week 7 (Qualitative Evaluation) 
+
+### - Think aloud:
+
+![WhatsApp Image 2026-03-03 at 14 29 48](https://github.com/user-attachments/assets/1887556b-4cfa-4070-af65-5c08ed2f0774)
+
 
 ## Project Report
 
