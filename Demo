@@ -1,12 +1,12 @@
-// 游戏常量
+// 游戏常量 / Game constants
 const KEY_PAUSE = 80, KEY_M = 77;
 const blockSize = 32;
 const miniMapScale = 3;
 const mazeW = 16;
 const mazeH = 16;
-const timeLimit = 5; // 5分钟时间限制
+const timeLimit = 5; // 5分钟时间限制 / 5-minute time limit
 
-// 游戏变量
+// 游戏变量 / Game variables
 let worldWidth = 0;
 let worldHeight = 0;
 let gTime = 0;
@@ -18,7 +18,7 @@ let start = true;
 let end = false;
 let moving = false;
 
-// 游戏对象
+// 游戏对象 / Game objects
 let mazeMap;
 let cam;
 let wall = [];
@@ -30,7 +30,7 @@ let snorkel;
 let player;
 let dir = 0;
 
-// 道具状态
+// 道具状态 / Item states
 let hasMiniMap = false;
 let hasFlipper = false;
 let hasSnorkel = false;
@@ -44,19 +44,19 @@ let endTimeInformation = 0;
 function setup() {
     createCanvas(800, 600);
     
-    // 创建迷宫
+    // 创建迷宫 / Create maze
     mazeMap = new Maze(mazeW, mazeH, 'random', 1, 1);
     
-    // 创建玩家
+    // 创建玩家 / Create player
     player = new Rect(32, 32, 32, 48, true);
     
-    // 创建相机
+    // 创建相机 / Create camera
     cam = new Camera();
     
-    // 设置地图
+    // 设置地图 / Set map
     setMap();
     
-    // 创建宝箱（随机位置）
+    // 创建宝箱（随机位置） / Create chest (random position)
     let x = floor(random(64, width - blockSize));
     let y = floor(random(96, height - blockSize));
     box = new Rect(x, y, blockSize, blockSize, true);
@@ -67,7 +67,7 @@ function setup() {
         box = new Rect(x, y, blockSize, blockSize, true);
     }
     
-    // 创建装备
+    // 创建装备 / Create equipment
     x = floor(random(64, (mazeMap.gridH - 4) * blockSize));
     y = floor(random(96, (mazeMap.gridW - 4) * blockSize));
     snorkel = new Rect(x, y, blockSize, blockSize, true);
@@ -93,29 +93,30 @@ function setup() {
 }
 
 function draw() {
-    // p5.js 自带 deltaTime 是毫秒
-    let dt = window.deltaTime / 1000;  // 或者直接用 p5 的 deltaTime：deltaTime / 1000
+    // p5.js 自带 deltaTime 是毫秒 / p5.js built-in deltaTime is in milliseconds
+    let dt = window.deltaTime / 1000;  // 或者直接用 p5 的 deltaTime：deltaTime / 1000 / Or directly use p5's deltaTime: deltaTime / 1000
     if (dt > 1) dt = 0;
 
     act(dt);
     drawGame();
 }
+
 function drawGame() {
-    // 绘制黑色背景
+    // 绘制黑色背景 / Draw black background
     background(0);
     
-    // 绘制迷宫
+    // 绘制迷宫 / Draw maze
     drawMaze();
     
-    // 绘制玩家（用简单的图形代替）
+    // 绘制玩家（用简单的图形代替） / Draw player (using simple shapes)
     drawPlayer();
     
-    // 绘制宝箱
+    // 绘制宝箱 / Draw chest
     if (!hasMiniMap) {
         drawBox(box.left - cam.x, box.top - cam.y);
     }
     
-    // 绘制装备
+    // 绘制装备 / Draw equipment
     if (!hasSnorkel && hasMiniMap) {
         drawSnorkel(snorkel.left - cam.x, snorkel.top - cam.y);
     }
@@ -124,22 +125,22 @@ function drawGame() {
         drawFlipper(flipper.left - cam.x, flipper.top - cam.y);
     }
     
-    // 绘制信息提示
+    // 绘制信息提示 / Draw instruction message
     if (endTimeInformation > elapsedTime) {
         drawInformation();
     }
     
-    // 绘制弹窗消息
+    // 绘制弹窗消息 / Draw popup message
     if (endTimePopUp > elapsedTime) {
         drawPopUp();
     }
     
-    // 绘制小地图
+    // 绘制小地图 / Draw mini map
     if (hasMiniMap && showMiniMap) {
         drawMiniMap();
     }
     
-    // 绘制暂停/开始/游戏结束界面
+    // 绘制暂停/开始/游戏结束界面 / Draw pause/start/game over screen
     if (pause) {
         if (start) {
             drawStart();
@@ -152,7 +153,7 @@ function drawGame() {
         }
     }
     
-    // 绘制时间
+    // 绘制时间 / Draw elapsed time
     drawElapsedTime();
 }
 
@@ -160,17 +161,17 @@ function act(deltaTime) {
     gTime += deltaTime;
     
     if (!pause) {
-        // 检查时间限制
+        // 检查时间限制 / Check time limit
         if (elapsedTime > timeLimit * 60) {
             gameover = true;
             gameoverMsg = "You have run out of time!";
             pause = true;
         }
         
-        // 增加经过时间
+        // 增加经过时间 / Increase elapsed time
         elapsedTime += deltaTime;
         
-        // 移动玩家
+        // 移动玩家 / Move player
         if (keyIsDown(UP_ARROW)) {
             dir = 2;
             moving = true;
@@ -287,7 +288,7 @@ function act(deltaTime) {
             waterIntersects();
         }
         
-        // 聚焦相机到玩家
+        // 聚焦相机到玩家 / Focus camera on player
         cam.focus(player.left, player.top);
     }
 }
@@ -295,24 +296,24 @@ function act(deltaTime) {
 function keyPressed() {
     lastKeyPress = keyCode;
     
-    // 暂停/继续
+    // 暂停/继续 / Pause/Resume
     if (!start && keyCode === KEY_PAUSE) {
         pause = !pause;
     }
     
-    // 开始游戏
+    // 开始游戏 / Start game
     if (keyCode === ENTER) {
         pause = false;
         start = false;
         triggerInformation(1);
     }
     
-    // 重新开始
+    // 重新开始 / Restart game
     if (keyCode === ESCAPE && (end || gameover)) {
         resetGame();
     }
     
-    // 显示/隐藏地图
+    // 显示/隐藏地图 / Show/Hide map
     if (keyCode === KEY_M) {
         showMiniMap = !showMiniMap;
     }
@@ -322,40 +323,40 @@ function keyReleased() {
     moving = false;
 }
 
-// ==================== 绘制图形函数 ====================
+// ==================== 绘制图形函数 / Drawing functions ====================
 
-// 绘制玩家
+// 绘制玩家 / Draw player
 function drawPlayer() {
     push();
     translate(player.left - cam.x, player.top - cam.y);
     
-    // 身体 - 蓝色圆形
+    // 身体 - 蓝色圆形 / Body - blue ellipse
     fill(50, 150, 255);
     noStroke();
     ellipse(blockSize/2, 24, 28, 36);
     
-    // 头部 - 浅肤色圆形
+    // 头部 - 浅肤色圆形 / Head - light skin tone ellipse
     fill(255, 220, 177);
     ellipse(blockSize/2, 12, 20, 20);
     
-    // 眼睛
+    // 眼睛 / Eyes
     fill(0);
     ellipse(blockSize/2 - 4, 10, 3, 3);
     ellipse(blockSize/2 + 4, 10, 3, 3);
     
-    // 根据方向绘制简单指示
+    // 根据方向绘制简单指示 / Draw simple direction indicator based on facing
     fill(255);
-    if (dir === 0) { // 下
+    if (dir === 0) { // 下 / Down
         ellipse(blockSize/2, 16, 2, 4);
-    } else if (dir === 1) { // 右
+    } else if (dir === 1) { // 右 / Right
         ellipse(blockSize/2 + 2, 12, 4, 2);
-    } else if (dir === 2) { // 上
+    } else if (dir === 2) { // 上 / Up
         ellipse(blockSize/2, 8, 2, 4);
-    } else { // 左
+    } else { // 左 / Left
         ellipse(blockSize/2 - 2, 12, 4, 2);
     }
     
-    // 如果在移动，添加简单动画效果
+    // 如果在移动，添加简单动画效果 / Add simple animation effect when moving
     if (moving) {
         let offset = sin(elapsedTime * 10) * 2;
         translate(0, offset);
@@ -364,65 +365,65 @@ function drawPlayer() {
     pop();
 }
 
-// 绘制宝箱
+// 绘制宝箱 / Draw chest
 function drawBox(x, y) {
     push();
-    // 棕色箱子
+    // 棕色箱子 / Brown chest body
     fill(139, 69, 19);
     rect(x + 4, y + 12, 24, 16);
-    // 金色锁
+    // 金色锁 / Golden lock
     fill(255, 215, 0);
     rect(x + 14, y + 16, 4, 8);
     ellipse(x + 16, y + 18, 6, 6);
-    // 箱子盖
+    // 箱子盖 / Chest lid
     fill(160, 82, 45);
     rect(x + 4, y + 8, 24, 6);
     pop();
 }
 
-// 绘制呼吸管
+// 绘制呼吸管 / Draw snorkel
 function drawSnorkel(x, y) {
     push();
-    // 管子 - 黄色
+    // 管子 - 黄色 / Tube - yellow
     stroke(255, 200, 0);
     strokeWeight(3);
     noFill();
     arc(x + 16, y + 20, 12, 20, PI, TWO_PI);
     line(x + 22, y + 20, x + 22, y + 8);
-    // 顶部
+    // 顶部 / Top piece
     fill(255, 200, 0);
     noStroke();
     ellipse(x + 22, y + 8, 6, 6);
-    // 咬嘴
+    // 咬嘴 / Mouthpiece
     fill(255, 100, 100);
     ellipse(x + 10, y + 20, 8, 6);
     pop();
 }
 
-// 绘制脚蹼
+// 绘制脚蹼 / Draw flipper
 function drawFlipper(x, y) {
     push();
-    // 主体 - 蓝绿色
+    // 主体 - 蓝绿色 / Main body - cyan/teal
     fill(0, 200, 200);
     noStroke();
-    // 左脚蹼
+    // 左脚蹼 / Left flipper
     ellipse(x + 12, y + 20, 10, 20);
     triangle(x + 7, y + 28, x + 17, y + 28, x + 12, y + 32);
-    // 右脚蹼
+    // 右脚蹼 / Right flipper
     ellipse(x + 20, y + 20, 10, 20);
     triangle(x + 15, y + 28, x + 25, y + 28, x + 20, y + 32);
     pop();
 }
 
-// 绘制水
+// 绘制水 / Draw water
 function drawWater(x, y) {
     push();
-    // 蓝色水波纹
+    // 蓝色水波纹 / Blue water ripple base
     fill(30, 144, 255, 150);
     noStroke();
     rect(x, y, blockSize, blockSize);
     
-    // 波纹效果
+    // 波纹效果 / Ripple effect
     stroke(100, 200, 255, 100);
     strokeWeight(2);
     noFill();
@@ -435,15 +436,15 @@ function drawWater(x, y) {
     pop();
 }
 
-// 绘制墙壁
+// 绘制墙壁 / Draw wall
 function drawWall(x, y) {
     push();
-    // 绿色树篱效果
+    // 绿色树篱效果 / Green hedge effect
     fill(34, 139, 34);
     noStroke();
     rect(x, y, blockSize, blockSize);
     
-    // 添加纹理
+    // 添加纹理 / Add texture
     fill(20, 100, 20);
     for (let i = 0; i < 5; i++) {
         for (let j = 0; j < 5; j++) {
@@ -455,15 +456,15 @@ function drawWall(x, y) {
     pop();
 }
 
-// 绘制地面
+// 绘制地面 / Draw terrain
 function drawTerrain(x, y) {
     push();
-    // 浅棕色地面
+    // 浅棕色地面 / Light brown ground
     fill(210, 180, 140);
     noStroke();
     rect(x, y, blockSize, blockSize);
     
-    // 添加简单纹理
+    // 添加简单纹理 / Add simple texture
     stroke(190, 160, 120);
     strokeWeight(1);
     for (let i = 0; i < 3; i++) {
@@ -473,7 +474,7 @@ function drawTerrain(x, y) {
     pop();
 }
 
-// ==================== 工具函数 ====================
+// ==================== 工具函数 / Utility functions ====================
 
 function convertTime(time) {
     let seconds = floor(time % 60);
@@ -495,9 +496,9 @@ function fillTextMultiLine(txt, x, y) {
     }
 }
 
-// ==================== 类定义 ====================
+// ==================== 类定义 / Class definitions ====================
 
-// 相机类
+// 相机类 / Camera class
 class Camera {
     constructor() {
         this.x = 0;
@@ -522,7 +523,7 @@ class Camera {
     }
 }
 
-// 矩形类
+// 矩形类 / Rectangle class
 class Rect {
     constructor(x, y, w, h, createFromTopLeft, type) {
         this.width = (w === undefined) ? 0 : w;
@@ -582,7 +583,7 @@ class Rect {
     }
 }
 
-// 迷宫类
+// 迷宫类 / Maze class
 class Maze {
     constructor(w, h, nextCell, startX, startY) {
         this.w = (isNaN(w) || w < 5 || w > 999) ? 20 : w;
@@ -704,7 +705,7 @@ class Maze {
     }
 }
 
-// ==================== 地图设置 ====================
+// ==================== 地图设置 / Map setup ====================
 
 function checkRowColLimits(row, col) {
     return (col > 1 && col < mazeMap.gridH - 1 && 
@@ -740,7 +741,7 @@ function setMap() {
     worldHeight = mazeMap.gridW * blockSize;
 }
 
-// ==================== 绘制界面 ====================
+// ==================== 绘制界面 / UI drawing ====================
 
 function drawStart() {
     fill(162, 44, 41);
@@ -888,17 +889,17 @@ function drawInformation() {
 }
 
 function drawMaze() {
-    // 绘制地面
+    // 绘制地面 / Draw terrain
     for (let t of terrain) {
         drawTerrain(t.left - cam.x, t.top - cam.y);
     }
     
-    // 绘制墙壁
+    // 绘制墙壁 / Draw walls
     for (let w of wall) {
         drawWall(w.left - cam.x, w.top - cam.y);
     }
     
-    // 绘制水
+    // 绘制水 / Draw water
     for (let w of water) {
         drawWater(w.left - cam.x, w.top - cam.y);
     }
@@ -927,18 +928,18 @@ function drawMiniMap() {
              miniMapScale, miniMapScale);
     }
     
-    // 玩家
+    // 玩家 / Player
     fill(255, 0, 0);
     noStroke();
     circle((player.left / blockSize) * miniMapScale + miniMapLeft + miniMapBorder + 1,
            (player.top / blockSize) * miniMapScale + miniMapTop + miniMapBorder + 1, 4);
     
-    // 呼吸管
+    // 呼吸管 / Snorkel
     fill(0, 255, 0);
     circle((snorkel.left / blockSize) * miniMapScale + miniMapLeft + miniMapBorder + 1,
            (snorkel.top / blockSize) * miniMapScale + miniMapTop + miniMapBorder + 1, 4);
     
-    // 脚蹼
+    // 脚蹼 / Flipper
     circle((flipper.left / blockSize) * miniMapScale + miniMapLeft + miniMapBorder + 1,
            (flipper.top / blockSize) * miniMapScale + miniMapTop + miniMapBorder + 1, 4);
 }
@@ -958,7 +959,7 @@ function drawElapsedTime() {
     textAlign(LEFT);
 }
 
-// ==================== 碰撞检测 ====================
+// ==================== 碰撞检测 / Collision detection ====================
 
 function intersectsWall(object) {
     for (let w of wall) {
@@ -1017,7 +1018,7 @@ function triggerPopUp(title, message, time) {
     popUpMessage = message;
 }
 
-// ==================== 重置游戏 ====================
+// ==================== 重置游戏 / Reset game ====================
 
 function resetGame() {
     gTime = 0;
