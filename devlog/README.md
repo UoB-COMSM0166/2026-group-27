@@ -13,8 +13,8 @@ This folder stores developer logs.
 - Next Plan:
   - complete story, find solition of the combination of buildings and map
 ### Iza：
--  Completed:
-  - uploaded demo2
+- Completed:
+  - uploaded and optimise demo2
 - In Progress:
   - add mist and combat system, including attack key and enemies
 - Problems: 
