@@ -1,0 +1,1369 @@
+// ==================== 游戏常量 ====================
+const KEY_PAUSE = 80;
+const KEY_M = 77;
+const KEY_SPACE = 32;
+
+const blockSize = 32;
+const miniMapScale = 3;
+const mazeW = 16;
+const mazeH = 16;
+const timeLimit = 5; // 5分钟
+
+const playerSpeed = 120;
+const bulletSpeed = 320;
+const enemyCount = 5;
+const fogRadius = 140;
+
+// ==================== 游戏变量 ====================
+let worldWidth = 0;
+let worldHeight = 0;
+let gTime = 0;
+let elapsedTime = 0;
+let lastKeyPress = null;
+let pause = true;
+let gameover = false;
+let start = true;
+let end = false;
+let moving = false;
+
+// ==================== 游戏对象 ====================
+let mazeMap;
+let cam;
+let wall = [];
+let terrain = [];
+let player;
+let dir = 0;
+
+let box;
+let lampItem;
+let gunItem;
+let exitDoor;
+
+let bullets = [];
+let enemies = [];
+
+let mazeLayer;
+let fogLayer;
+
+// ==================== 状态 ====================
+let hasMiniMap = false;
+let hasLamp = false;
+let hasGun = false;
+let showMiniMap = true;
+
+let endTimePopUp = 0;
+let popUpTitle = '';
+let popUpMessage = '';
+let gameoverMsg = '';
+let endTimeInformation = 0;
+
+// ==================== p5 入口 ====================
+function setup() {
+    createCanvas(800, 600);
+
+    mazeMap = new Maze(mazeW, mazeH, 'random', 1, 1);
+    player = new Rect(32, 32, 32, 48, true);
+    cam = new Camera();
+
+    setMap();
+    buildMazeLayer();
+
+    fogLayer = createGraphics(width, height);
+
+    createBox();
+    createLamp();
+    createGun();
+    createExitDoor();
+    createEnemies();
+}
+
+function draw() {
+    let dt = deltaTime / 1000;
+    if (dt > 1) dt = 0;
+
+    act(dt);
+    drawGame();
+}
+
+// ==================== 游戏主流程 ====================
+function drawGame() {
+    background(0);
+
+    drawMaze();
+    drawDoor(exitDoor.left - cam.x, exitDoor.top - cam.y);
+
+    if (!hasMiniMap) {
+        drawBox(box.left - cam.x, box.top - cam.y);
+    }
+
+    if (!hasLamp && hasMiniMap) {
+        drawLamp(lampItem.left - cam.x, lampItem.top - cam.y);
+    }
+
+    if (!hasGun && hasMiniMap) {
+        drawGun(gunItem.left - cam.x, gunItem.top - cam.y);
+    }
+
+    for (let e of enemies) {
+        e.draw();
+    }
+
+    for (let b of bullets) {
+        b.draw();
+    }
+
+    drawPlayer();
+    drawFog();
+
+    if (endTimeInformation > elapsedTime) {
+        drawInformation();
+    }
+
+    if (endTimePopUp > elapsedTime) {
+        drawPopUp();
+    }
+
+    if (hasMiniMap && showMiniMap) {
+        drawMiniMap();
+    }
+
+    if (pause) {
+        if (start) {
+            drawStart();
+        } else if (end) {
+            drawEnd();
+        } else if (gameover) {
+            drawGameOver();
+        } else {
+            drawPause();
+        }
+    }
+
+    drawElapsedTime();
+    drawHud();
+}
+
+function act(dt) {
+    gTime += dt;
+
+    if (!pause) {
+        if (elapsedTime > timeLimit * 60) {
+            gameover = true;
+            gameoverMsg = "You have run out of time!";
+            pause = true;
+            return;
+        }
+
+        elapsedTime += dt;
+
+        handlePlayerMovement(dt);
+        handlePickupsAndGoal();
+        updateBullets(dt);
+        updateEnemies(dt);
+
+        cam.focus(player.left, player.top);
+    }
+}
+
+// ==================== 输入 ====================
+function keyPressed() {
+    lastKeyPress = keyCode;
+
+    if (!start && keyCode === KEY_PAUSE) {
+        pause = !pause;
+    }
+
+    if (keyCode === ENTER) {
+        pause = false;
+        start = false;
+        triggerInformation(1.5);
+    }
+
+    if (keyCode === ESCAPE && (end || gameover)) {
+        resetGame();
+    }
+
+    if (keyCode === KEY_M) {
+        showMiniMap = !showMiniMap;
+    }
+
+    if (keyCode === KEY_SPACE && hasGun && !pause) {
+        shootBullet();
+    }
+}
+
+function keyReleased() {
+    moving = false;
+}
+
+// ==================== 玩家移动 ====================
+function handlePlayerMovement(dt) {
+    moving = false;
+
+    if (keyIsDown(UP_ARROW)) {
+        dir = 2;
+        moving = true;
+        player.top -= playerSpeed * dt;
+        solveWallCollision('up');
+    }
+
+    if (keyIsDown(RIGHT_ARROW)) {
+        dir = 1;
+        moving = true;
+        player.left += playerSpeed * dt;
+        solveWallCollision('right');
+    }
+
+    if (keyIsDown(DOWN_ARROW)) {
+        dir = 0;
+        moving = true;
+        player.top += playerSpeed * dt;
+        solveWallCollision('down');
+    }
+
+    if (keyIsDown(LEFT_ARROW)) {
+        dir = 3;
+        moving = true;
+        player.left -= playerSpeed * dt;
+        solveWallCollision('left');
+    }
+}
+
+function solveWallCollision(direction) {
+    for (let w of wall) {
+        if (player.intersects(w)) {
+            if (direction === 'up') player.top = w.bottom;
+            if (direction === 'right') player.right = w.left;
+            if (direction === 'down') player.bottom = w.top;
+            if (direction === 'left') player.left = w.right;
+        }
+    }
+}
+
+// ==================== 第二关逻辑 ====================
+function handlePickupsAndGoal() {
+    if (!hasMiniMap && player.intersects(box)) {
+        boxIntersects();
+    }
+
+    if (!hasLamp && hasMiniMap && player.intersects(lampItem)) {
+        lampIntersects();
+    }
+
+    if (!hasGun && hasMiniMap && player.intersects(gunItem)) {
+        gunIntersects();
+    }
+
+    if (player.intersects(exitDoor)) {
+        if (hasLamp && hasGun) {
+            end = true;
+            pause = true;
+        } else {
+            triggerPopUp(
+                "Door locked!",
+                "You should first find the lamp and the gun.",
+                2.5
+            );
+        }
+    }
+}
+
+function shootBullet() {
+    let startX = player.left + player.width / 2;
+    let startY = player.top + player.height / 2;
+    bullets.push(new Bullet(startX, startY, dir));
+}
+
+function updateBullets(dt) {
+    for (let b of bullets) {
+        b.update(dt);
+
+        let bRect = new Rect(b.x - b.r, b.y - b.r, b.r * 2, b.r * 2, true);
+
+        for (let e of enemies) {
+            if (e.alive && b.alive && bRect.intersects(e.rect)) {
+                e.alive = false;
+                b.alive = false;
+            }
+        }
+    }
+
+    bullets = bullets.filter(b => b.alive);
+    enemies = enemies.filter(e => e.alive);
+}
+
+function updateEnemies(dt) {
+    for (let e of enemies) {
+        e.update(dt);
+    }
+}
+
+// ==================== 生成位置工具 ====================
+function createItemInStartView(avoidList = []) {
+    let minX = blockSize * 2;
+    let minY = blockSize * 2;
+    let maxX = width - blockSize * 3;
+    let maxY = height - blockSize * 3;
+
+    let item;
+
+    for (let i = 0; i < 300; i++) {
+        let x = snapToGrid(random(minX, maxX));
+        let y = snapToGrid(random(minY, maxY));
+
+        item = new Rect(x, y, blockSize, blockSize, true);
+
+        if (intersectsWall(item)) continue;
+        if (item.intersects(player)) continue;
+
+        let overlap = false;
+        for (let other of avoidList) {
+            if (other && item.intersects(other)) {
+                overlap = true;
+                break;
+            }
+        }
+        if (overlap) continue;
+
+        return item;
+    }
+
+    return new Rect(128, 128, blockSize, blockSize, true);
+}
+
+function createItemInMidArea(avoidList = []) {
+    let minX = max(width * 0.45, blockSize * 6);
+    let minY = max(height * 0.35, blockSize * 5);
+    let maxX = min(worldWidth - blockSize * 4, width + 260);
+    let maxY = min(worldHeight - blockSize * 4, height + 220);
+
+    let item;
+
+    for (let i = 0; i < 400; i++) {
+        let x = snapToGrid(random(minX, maxX));
+        let y = snapToGrid(random(minY, maxY));
+
+        item = new Rect(x, y, blockSize, blockSize, true);
+
+        if (intersectsWall(item)) continue;
+        if (item.intersects(player)) continue;
+
+        let overlap = false;
+        for (let other of avoidList) {
+            if (other && item.intersects(other)) {
+                overlap = true;
+                break;
+            }
+        }
+        if (overlap) continue;
+
+        return item;
+    }
+
+    return new Rect(416, 256, blockSize, blockSize, true);
+}
+
+function createItemFarArea(w, h, avoidList = []) {
+    let minX = max(worldWidth - width * 0.55, blockSize * 8);
+    let minY = max(worldHeight - height * 0.55, blockSize * 8);
+    let maxX = worldWidth - w - blockSize * 2;
+    let maxY = worldHeight - h - blockSize * 2;
+
+    let item;
+
+    for (let i = 0; i < 500; i++) {
+        let x = snapToGrid(random(minX, maxX));
+        let y = snapToGrid(random(minY, maxY));
+
+        item = new Rect(x, y, w, h, true);
+
+        if (intersectsWall(item)) continue;
+
+        let overlap = false;
+        for (let other of avoidList) {
+            if (other && item.intersects(other)) {
+                overlap = true;
+                break;
+            }
+        }
+        if (overlap) continue;
+
+        return item;
+    }
+
+    return new Rect(worldWidth - 3 * blockSize, worldHeight - 4 * blockSize, w, h, true);
+}
+
+function isInStartView(x, y) {
+    return x < width - blockSize * 2 && y < height - blockSize * 2;
+}
+
+// ==================== 创建对象 ====================
+function createBox() {
+    box = createItemInStartView([]);
+}
+
+function createLamp() {
+    lampItem = createItemInStartView([box]);
+}
+
+function createGun() {
+    gunItem = createItemInMidArea([box, lampItem]);
+}
+
+function createExitDoor() {
+    exitDoor = createItemFarArea(blockSize, 40, [box, lampItem, gunItem]);
+
+    // 门通常高度40，略微往上吸附到格线
+    exitDoor.left = snapToGrid(exitDoor.left);
+    exitDoor.top = snapToGrid(exitDoor.top);
+}
+
+function createEnemies() {
+    enemies = [];
+
+    for (let i = 0; i < enemyCount; i++) {
+        let e = null;
+
+        for (let tries = 0; tries < 600; tries++) {
+            let x = snapToGrid(random(width + 40, worldWidth - blockSize * 3));
+            let y = snapToGrid(random(height * 0.6, worldHeight - blockSize * 3));
+
+            if (isInStartView(x, y)) continue;
+
+            e = new Enemy(x, y);
+
+            if (
+                intersectsWall(e.rect) ||
+                e.rect.intersects(player) ||
+                e.rect.intersects(box) ||
+                e.rect.intersects(lampItem) ||
+                e.rect.intersects(gunItem) ||
+                e.rect.intersects(exitDoor)
+            ) {
+                e = null;
+                continue;
+            }
+
+            break;
+        }
+
+        if (e) {
+            enemies.push(e);
+        }
+    }
+}
+
+// ==================== 道具拾取 ====================
+function boxIntersects() {
+    hasMiniMap = true;
+    triggerPopUp(
+        "Mini Map found!",
+        "You can show/hide the map by pressing 'M'.\nNow search for a lamp and a gun.",
+        3
+    );
+}
+
+function lampIntersects() {
+    hasLamp = true;
+    triggerPopUp(
+        "Lamp found!",
+        "The fog clears around you now.\nNow search for the gun and the exit door.",
+        3
+    );
+}
+
+function gunIntersects() {
+    hasGun = true;
+    triggerPopUp(
+        "Gun found!",
+        "Press SPACE to shoot.\nNow search for the exit door.",
+        3
+    );
+}
+
+// ==================== 绘制：角色与对象 ====================
+function drawPlayer() {
+    push();
+    translate(player.left - cam.x, player.top - cam.y);
+
+    if (moving) {
+        let offset = sin(elapsedTime * 10) * 2;
+        translate(0, offset);
+    }
+
+    noStroke();
+
+    fill(0, 0, 0, 70);
+    ellipse(blockSize / 2, 42, 18, 8);
+
+    fill(50, 150, 255);
+    ellipse(blockSize / 2, 24, 28, 36);
+
+    fill(255, 220, 177);
+    ellipse(blockSize / 2, 12, 20, 20);
+
+    fill(0);
+    ellipse(blockSize / 2 - 4, 10, 3, 3);
+    ellipse(blockSize / 2 + 4, 10, 3, 3);
+
+    fill(255);
+    if (dir === 0) ellipse(blockSize / 2, 16, 2, 4);
+    else if (dir === 1) ellipse(blockSize / 2 + 2, 12, 4, 2);
+    else if (dir === 2) ellipse(blockSize / 2, 8, 2, 4);
+    else ellipse(blockSize / 2 - 2, 12, 4, 2);
+
+    if (hasGun) {
+        fill(50);
+        rect(20, 22, 8, 4, 1);
+    }
+
+    pop();
+}
+
+function drawBox(x, y) {
+    push();
+    noStroke();
+
+    fill(90, 50, 15, 80);
+    ellipse(x + 16, y + 28, 18, 6);
+
+    fill(139, 69, 19);
+    rect(x + 4, y + 12, 24, 16, 3);
+
+    fill(160, 82, 45);
+    rect(x + 4, y + 8, 24, 7, 3);
+
+    fill(255, 215, 0);
+    rect(x + 14, y + 16, 4, 8, 2);
+    ellipse(x + 16, y + 18, 6, 6);
+
+    pop();
+}
+
+function drawLamp(x, y) {
+    push();
+    noStroke();
+
+    fill(80, 60, 40);
+    rect(x + 12, y + 18, 8, 10, 2);
+
+    fill(255, 220, 100);
+    ellipse(x + 16, y + 14, 14, 14);
+
+    fill(255, 220, 100, 80);
+    ellipse(x + 16, y + 14, 24, 24);
+
+    pop();
+}
+
+function drawGun(x, y) {
+    push();
+    noStroke();
+
+    fill(40);
+    rect(x + 8, y + 14, 16, 6, 2);
+    rect(x + 20, y + 12, 6, 4, 1);
+    rect(x + 10, y + 18, 5, 10, 2);
+
+    pop();
+}
+
+function drawDoor(x, y) {
+    push();
+    noStroke();
+
+    fill(70, 40, 20);
+    rect(x + 3, y, 26, 40, 4);
+
+    fill(120, 80, 40);
+    rect(x + 7, y + 4, 18, 32, 3);
+
+    fill(255, 215, 0);
+    circle(x + 22, y + 20, 4);
+
+    pop();
+}
+
+function drawHud() {
+    fill(255);
+    textSize(12);
+    textFont('Arial');
+    textAlign(LEFT);
+
+    let y = 20;
+    text("Level 2 Demo", 15, y);
+    y += 16;
+    text("Map: " + (hasMiniMap ? "Yes" : "No"), 15, y);
+    y += 16;
+    text("Lamp: " + (hasLamp ? "Yes" : "No"), 15, y);
+    y += 16;
+    text("Gun: " + (hasGun ? "Yes" : "No"), 15, y);
+    y += 16;
+    text("Enemies: " + enemies.length, 15, y);
+}
+
+// ==================== 迷雾 ====================
+function drawFog() {
+    fogLayer.clear();
+    fogLayer.noStroke();
+    fogLayer.fill(0, 0, 0, 220);
+    fogLayer.rect(0, 0, width, height);
+
+    if (hasLamp) {
+        fogLayer.erase();
+        fogLayer.circle(
+            player.left - cam.x + player.width / 2,
+            player.top - cam.y + player.height / 2,
+            fogRadius * 2
+        );
+        fogLayer.noErase();
+    }
+
+    image(fogLayer, 0, 0);
+}
+
+// ==================== 子弹与敌人 ====================
+class Bullet {
+    constructor(x, y, dir) {
+        this.x = x;
+        this.y = y;
+        this.r = 4;
+        this.dir = dir;
+        this.alive = true;
+    }
+
+    update(dt) {
+        if (this.dir === 0) this.y += bulletSpeed * dt;
+        if (this.dir === 1) this.x += bulletSpeed * dt;
+        if (this.dir === 2) this.y -= bulletSpeed * dt;
+        if (this.dir === 3) this.x -= bulletSpeed * dt;
+
+        let bRect = new Rect(this.x - this.r, this.y - this.r, this.r * 2, this.r * 2, true);
+
+        for (let w of wall) {
+            if (bRect.intersects(w)) {
+                this.alive = false;
+                return;
+            }
+        }
+
+        if (this.x < 0 || this.y < 0 || this.x > worldWidth || this.y > worldHeight) {
+            this.alive = false;
+        }
+    }
+
+    draw() {
+        push();
+        noStroke();
+        fill(255, 220, 80);
+        circle(this.x - cam.x, this.y - cam.y, this.r * 2);
+        pop();
+    }
+}
+
+class Enemy {
+    constructor(x, y) {
+        this.rect = new Rect(x, y, 28, 28, true);
+        this.dir = floor(random(4));
+        this.speed = 60;
+        this.alive = true;
+        this.changeTimer = random(1, 3);
+    }
+
+    update(dt) {
+        if (!this.alive) return;
+
+        this.changeTimer -= dt;
+        if (this.changeTimer <= 0) {
+            this.dir = floor(random(4));
+            this.changeTimer = random(1, 3);
+        }
+
+        let oldLeft = this.rect.left;
+        let oldTop = this.rect.top;
+
+        if (this.dir === 0) this.rect.top += this.speed * dt;
+        if (this.dir === 1) this.rect.left += this.speed * dt;
+        if (this.dir === 2) this.rect.top -= this.speed * dt;
+        if (this.dir === 3) this.rect.left -= this.speed * dt;
+
+        for (let w of wall) {
+            if (this.rect.intersects(w)) {
+                this.rect.left = oldLeft;
+                this.rect.top = oldTop;
+                this.dir = floor(random(4));
+                break;
+            }
+        }
+
+        if (this.rect.intersects(player)) {
+            gameover = true;
+            gameoverMsg = "An enemy caught you!";
+            pause = true;
+        }
+    }
+
+    draw() {
+        push();
+        translate(this.rect.left - cam.x, this.rect.top - cam.y);
+
+        noStroke();
+        fill(130, 40, 40);
+        ellipse(14, 18, 22, 20);
+
+        fill(170, 55, 55);
+        ellipse(14, 11, 18, 18);
+
+        fill(255);
+        ellipse(10, 10, 4, 4);
+        ellipse(18, 10, 4, 4);
+
+        fill(0);
+        ellipse(10, 10, 2, 2);
+        ellipse(18, 10, 2, 2);
+
+        fill(255, 255, 255, 70);
+        ellipse(14, 11, 8, 5);
+
+        pop();
+    }
+}
+
+// ==================== 工具函数 ====================
+function convertTime(time) {
+    let seconds = floor(time % 60);
+    let minutes = floor((time / 60) % 60);
+
+    minutes = (minutes < 10) ? "0" + minutes : minutes;
+    seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+    return minutes + ":" + seconds;
+}
+
+function fillTextMultiLine(txt, x, y) {
+    let lineHeight = 16;
+    let lines = txt.split("\n");
+
+    for (let i = 0; i < lines.length; i++) {
+        text(lines[i], x, y);
+        y += lineHeight;
+    }
+}
+
+function snapToGrid(value) {
+    return floor(value / blockSize) * blockSize;
+}
+
+function tileSeed(x, y) {
+    return abs((x * 73856093) ^ (y * 19349663)) % 1000;
+}
+
+function intersectsWall(object) {
+    for (let w of wall) {
+        if (object.intersects(w)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function triggerInformation(time) {
+    endTimeInformation = elapsedTime + time;
+}
+
+function triggerPopUp(title, message, time) {
+    endTimePopUp = elapsedTime + time;
+    popUpTitle = title;
+    popUpMessage = message;
+}
+
+// ==================== 相机 / 矩形 / 迷宫 ====================
+class Camera {
+    constructor() {
+        this.x = 0;
+        this.y = 0;
+    }
+
+    focus(x, y) {
+        this.x = x - width / 2;
+        this.y = y - height / 2;
+
+        if (this.x < 0) this.x = 0;
+        else if (this.x > worldWidth - width) this.x = worldWidth - width;
+
+        if (this.y < 0) this.y = 0;
+        else if (this.y > worldHeight - height) this.y = worldHeight - height;
+    }
+}
+
+class Rect {
+    constructor(x, y, w, h, createFromTopLeft, type) {
+        this.width = (w === undefined) ? 0 : w;
+        this.height = (h === undefined) ? this.width : h;
+
+        if (createFromTopLeft) {
+            this.left = (x === undefined) ? 0 : x;
+            this.top = (y === undefined) ? 0 : y;
+        } else {
+            this.x = (x === undefined) ? 0 : x;
+            this.y = (y === undefined) ? 0 : y;
+        }
+
+        this.t = (type === undefined) ? -1 : type;
+    }
+
+    get x() {
+        return this.left + this.width / 2;
+    }
+
+    set x(value) {
+        this.left = value - this.width / 2;
+    }
+
+    get y() {
+        return this.top + this.height / 2;
+    }
+
+    set y(value) {
+        this.top = value - this.height / 2;
+    }
+
+    get right() {
+        return this.left + this.width;
+    }
+
+    set right(value) {
+        this.left = value - this.width;
+    }
+
+    get bottom() {
+        return this.top + this.height;
+    }
+
+    set bottom(value) {
+        this.top = value - this.height;
+    }
+
+    intersects(rect) {
+        if (rect !== undefined) {
+            return (
+                this.left < rect.right &&
+                this.right > rect.left &&
+                this.top < rect.bottom &&
+                this.bottom > rect.top
+            );
+        }
+        return false;
+    }
+}
+
+class Maze {
+    constructor(w, h, nextCell, startX, startY) {
+        this.w = (isNaN(w) || w < 5 || w > 999) ? 20 : w;
+        this.h = (isNaN(h) || h < 5 || h > 999) ? 20 : h;
+        this.map = [];
+
+        for (let y = 0; y < h; y++) {
+            this.map[y] = [];
+            for (let x = 0; x < w; x++) {
+                this.map[y][x] = { N: 0, S: 0, E: 0, W: 0, V: 0 };
+            }
+        }
+
+        this.nextCell = (
+            typeof nextCell === 'undefined' ||
+            (nextCell !== 'first' && nextCell !== 'last' && nextCell !== 'random')
+        ) ? 'random' : nextCell;
+
+        this.startX = (isNaN(startX) || startX < 0 || startX >= w) ? 0 : startX;
+        this.startY = (isNaN(startY) || startY < 0 || startY >= h) ? 0 : startY;
+
+        this.build();
+    }
+
+    toGrid() {
+        let grid = [];
+
+        for (let y = 0; y < (this.h * 3 + 1); y++) {
+            grid[y] = [];
+            for (let x = 0; x < (this.w * 3 + 1); x++) {
+                grid[y][x] = 0;
+            }
+        }
+
+        for (let y = 0; y < this.h; y++) {
+            let py = (y * 3) + 1;
+
+            for (let x = 0; x < this.w; x++) {
+                let px = (x * 3) + 1;
+
+                grid[py][px] = 1;
+                grid[py][px + 1] = 1;
+                grid[py + 1][px] = 1;
+                grid[py + 1][px + 1] = 1;
+
+                if (this.map[y][x].N === 1) {
+                    grid[py - 1][px] = 1;
+                    grid[py - 1][px + 1] = 1;
+                }
+                if (this.map[y][x].S === 1) {
+                    grid[py + 1][px] = 1;
+                    grid[py + 1][px + 1] = 1;
+                }
+                if (this.map[y][x].E === 1) {
+                    grid[py][px + 1] = 1;
+                    grid[py + 1][px + 1] = 1;
+                }
+                if (this.map[y][x].W === 1) {
+                    grid[py][px - 1] = 1;
+                    grid[py + 1][px - 1] = 1;
+                }
+            }
+        }
+
+        this.gridMap = grid;
+        this.gridH = grid.length;
+        this.gridW = grid[0].length;
+    }
+
+    build() {
+        let cells = [];
+        cells.push({ x: this.startX, y: this.startY });
+        this.map[this.startY][this.startX].V = 1;
+
+        let modDir = {
+            'N': { y: -1, x: 0, o: 'S' },
+            'S': { y: 1, x: 0, o: 'N' },
+            'W': { y: 0, x: -1, o: 'E' },
+            'E': { y: 0, x: 1, o: 'W' }
+        };
+
+        while (cells.length > 0) {
+            let i = (this.nextCell === 'first') ? 0 :
+                    (this.nextCell === 'last') ? cells.length - 1 :
+                    floor(random(cells.length));
+
+            let cell = cells[i];
+            let n = [];
+
+            if (cell.x > 0 && this.map[cell.y][cell.x - 1].V === 0) n.push('W');
+            if (cell.x < this.w - 1 && this.map[cell.y][cell.x + 1].V === 0) n.push('E');
+            if (cell.y > 0 && this.map[cell.y - 1][cell.x].V === 0) n.push('N');
+            if (cell.y < this.h - 1 && this.map[cell.y + 1][cell.x].V === 0) n.push('S');
+
+            if (n.length === 0) {
+                cells.splice(i, 1);
+                continue;
+            }
+
+            let direction = n[floor(random(n.length))];
+            let destX = cell.x + modDir[direction].x;
+            let destY = cell.y + modDir[direction].y;
+
+            this.map[cell.y][cell.x][direction] = 1;
+            this.map[destY][destX][modDir[direction].o] = 1;
+            this.map[destY][destX].V = 1;
+
+            cells.push({ x: destX, y: destY });
+        }
+
+        this.toGrid();
+    }
+}
+
+// ==================== 地图设置 ====================
+function setMap() {
+    wall = [];
+    terrain = [];
+
+    for (let y = 0; y < mazeMap.gridH; y++) {
+        for (let x = 0; x < mazeMap.gridW; x++) {
+            if (mazeMap.gridMap[y][x] === 1) {
+                terrain.push(new Rect(x * blockSize, y * blockSize, blockSize, blockSize, true));
+            } else {
+                wall.push(new Rect(x * blockSize, y * blockSize, blockSize, blockSize, true, 0));
+            }
+        }
+    }
+
+    worldWidth = mazeMap.gridW * blockSize;
+    worldHeight = mazeMap.gridH * blockSize;
+}
+
+// ==================== 地图预渲染 ====================
+function buildMazeLayer() {
+    mazeLayer = createGraphics(worldWidth, worldHeight);
+    mazeLayer.background(12, 16, 22);
+
+    for (let t of terrain) {
+        drawTerrainToLayer(mazeLayer, t.left, t.top);
+    }
+
+    for (let w of wall) {
+        drawWallToLayer(mazeLayer, w.left, w.top);
+    }
+}
+
+function drawMaze() {
+    image(mazeLayer, -cam.x, -cam.y);
+}
+
+function isWallTile(gridX, gridY) {
+    if (gridX < 0 || gridY < 0 || gridY >= mazeMap.gridH || gridX >= mazeMap.gridW) {
+        return false;
+    }
+    return mazeMap.gridMap[gridY][gridX] === 0;
+}
+
+function drawTerrainToLayer(g, x, y) {
+    const gx = floor(x / blockSize);
+    const gy = floor(y / blockSize);
+    const seed = tileSeed(gx, gy);
+
+    g.push();
+    g.noStroke();
+
+    g.fill(100, 108, 120);
+    g.rect(x, y, blockSize, blockSize);
+
+    g.fill(112, 120, 132);
+    g.rect(x + 2, y + 2, blockSize - 4, 8, 2);
+
+    g.stroke(86, 92, 103);
+    g.strokeWeight(1);
+    g.line(x + 5 + (seed % 3), y + 8, x + 12 + (seed % 2), y + 10);
+    g.line(x + 18, y + 18 + (seed % 2), x + 26, y + 21);
+    g.line(x + 9, y + 24, x + 15, y + 26);
+
+    g.noStroke();
+    g.fill(140, 148, 160, 70);
+    g.circle(x + 7 + (seed % 4), y + 13, 2);
+    g.circle(x + 23, y + 9 + (seed % 3), 2);
+    g.circle(x + 18, y + 27, 2);
+
+    g.pop();
+}
+
+function drawWallToLayer(g, x, y) {
+    const gx = floor(x / blockSize);
+    const gy = floor(y / blockSize);
+
+    const up = isWallTile(gx, gy - 1);
+    const down = isWallTile(gx, gy + 1);
+    const left = isWallTile(gx - 1, gy);
+    const right = isWallTile(gx + 1, gy);
+
+    const seed = tileSeed(gx, gy);
+
+    g.push();
+    g.noStroke();
+
+    g.fill(42, 50, 62);
+    g.rect(x, y, blockSize, blockSize);
+
+    g.fill(58, 68, 82);
+    g.rect(x + 2, y + 2, blockSize - 4, blockSize - 4, 4);
+
+    if (!up) {
+        g.fill(88, 102, 120);
+        g.rect(x + 2, y + 2, blockSize - 4, 5, 3);
+    }
+
+    if (!left) {
+        g.fill(76, 88, 104);
+        g.rect(x + 2, y + 2, 5, blockSize - 4, 3);
+    }
+
+    if (!down) {
+        g.fill(18, 24, 32, 160);
+        g.rect(x + 2, y + blockSize - 7, blockSize - 4, 5, 3);
+    }
+
+    if (!right) {
+        g.fill(18, 24, 32, 130);
+        g.rect(x + blockSize - 7, y + 2, 5, blockSize - 4, 3);
+    }
+
+    g.fill(92, 105, 122, 120);
+    g.rect(x + 6, y + 8, 8, 5, 2);
+    g.rect(x + 18, y + 7 + (seed % 2), 7, 5, 2);
+    g.rect(x + 10, y + 19, 10, 6, 2);
+
+    g.pop();
+}
+
+// ==================== UI ====================
+function drawStart() {
+    fill(50, 65, 98);
+    noStroke();
+    rect(width / 2 - 170, height / 2 - 70, 340, 140, 8);
+
+    textAlign(CENTER);
+    fill(255);
+    textSize(30);
+    textFont('Impact');
+    text('Explorer Camp - Level 2', width / 2, height / 2 - 18);
+
+    textSize(12);
+    textFont('Verdana');
+    text("Find the map, lamp, gun and reach the door.", width / 2, height / 2 + 10);
+
+    if (floor(gTime * 3) % 2 === 1) {
+        text("Press ENTER to start", width / 2, height / 2 + 35);
+    }
+
+    textAlign(LEFT);
+}
+
+function drawEnd() {
+    fill(50, 65, 98);
+    noStroke();
+    rect(width / 2 - 160, height / 2 - 60, 320, 130, 8);
+
+    textAlign(CENTER);
+    fill(255);
+    textSize(24);
+    textFont('Impact');
+    text('LEVEL 2 COMPLETE', width / 2, height / 2 - 20);
+
+    textSize(12);
+    textFont('Verdana');
+    text("You escaped through the door.", width / 2, height / 2 + 5);
+
+    if (floor(gTime * 3) % 2 === 1) {
+        text("Press ESC to restart demo", width / 2, height / 2 + 32);
+    }
+
+    textAlign(LEFT);
+}
+
+function drawPause() {
+    fill(50, 65, 98);
+    noStroke();
+    rect(width / 2 - 145, height / 2 - 50, 290, 100, 8);
+
+    textAlign(CENTER);
+    fill(255);
+    textSize(20);
+    textFont('Impact');
+    text('PAUSE', width / 2, height / 2);
+
+    if (floor(gTime * 3) % 2 === 1) {
+        textSize(12);
+        textFont('Verdana');
+        text("Press 'P' to pause/resume the game", width / 2, height / 2 + 20);
+    }
+
+    textAlign(LEFT);
+}
+
+function drawGameOver() {
+    fill(120, 40, 40);
+    noStroke();
+    rect(width / 2 - 160, height / 2 - 60, 320, 120, 8);
+
+    textAlign(CENTER);
+    fill(255);
+    textSize(20);
+    textFont('Impact');
+    text('GAME OVER', width / 2, height / 2 - 25);
+
+    textSize(11);
+    textFont('Verdana');
+    text(gameoverMsg, width / 2, height / 2);
+
+    if (floor(gTime * 3) % 2 === 1) {
+        text("Press ESC to restart", width / 2, height / 2 + 28);
+    }
+
+    textAlign(LEFT);
+}
+
+function drawPopUp() {
+    fill(80, 105, 140);
+    noStroke();
+    rect(width / 2 - 160, 75, 320, 120, 8);
+
+    textAlign(CENTER);
+    fill(255);
+    textSize(16);
+    textFont('Verdana');
+    text(popUpTitle, width / 2, 100);
+
+    textSize(12);
+    fillTextMultiLine(popUpMessage, width / 2, 130);
+
+    textAlign(LEFT);
+}
+
+function drawInformation() {
+    fill(80, 105, 140);
+    noStroke();
+    rect(width / 2 - 210, 70, 420, 340, 8);
+
+    textAlign(CENTER);
+    fill(255);
+    textSize(16);
+    textFont('Verdana');
+    text('Instructions', width / 2, 100);
+
+    textAlign(LEFT);
+    textSize(12);
+
+    text('Find the chest first to unlock the mini map.', width / 2 - 190, 140);
+    text('Then search for the lamp and the gun.', width / 2 - 190, 160);
+    text('The lamp clears the fog around you.', width / 2 - 190, 180);
+    text('Use SPACE to shoot after getting the gun.', width / 2 - 190, 200);
+    text('Avoid enemies and reach the door to win.', width / 2 - 190, 220);
+    text("Press 'M' to show/hide mini map.", width / 2 - 190, 250);
+    text("Press 'P' to pause.", width / 2 - 190, 270);
+
+    textAlign(CENTER);
+    textSize(10);
+    stroke(255);
+    strokeWeight(2);
+    noFill();
+
+    text('Up', width / 2, 305);
+    rect(width / 2 - 22.5, 280, 45, 45, 10);
+
+    text('Left', width / 2 - 50, 356);
+    rect(width / 2 - 72.5, 330, 45, 45, 10);
+
+    text('Down', width / 2, 356);
+    rect(width / 2 - 22.5, 330, 45, 45, 10);
+
+    text('Right', width / 2 + 50, 356);
+    rect(width / 2 + 27.5, 330, 45, 45, 10);
+
+    textAlign(LEFT);
+}
+
+function drawMiniMap() {
+    let miniMapBorder = 5;
+    let miniMapLeft = 10;
+    let miniMapTop = height - mazeMap.gridH * miniMapScale - 10 - miniMapBorder;
+
+    fill(255);
+    noStroke();
+    rect(
+        miniMapLeft,
+        miniMapTop,
+        mazeMap.gridW * miniMapScale + 10,
+        mazeMap.gridH * miniMapScale + 10
+    );
+
+    fill(210);
+    rect(
+        miniMapLeft + miniMapBorder,
+        miniMapTop + miniMapBorder,
+        mazeMap.gridW * miniMapScale,
+        mazeMap.gridH * miniMapScale
+    );
+
+    fill(0);
+    for (let w of wall) {
+        rect(
+            (w.left / blockSize) * miniMapScale + miniMapLeft + miniMapBorder,
+            (w.top / blockSize) * miniMapScale + miniMapTop + miniMapBorder,
+            miniMapScale,
+            miniMapScale
+        );
+    }
+
+    fill(0, 200, 0);
+    rect(
+        (exitDoor.left / blockSize) * miniMapScale + miniMapLeft + miniMapBorder,
+        (exitDoor.top / blockSize) * miniMapScale + miniMapTop + miniMapBorder,
+        miniMapScale,
+        miniMapScale
+    );
+
+    if (!hasLamp) {
+        fill(255, 220, 0);
+        circle(
+            (lampItem.left / blockSize) * miniMapScale + miniMapLeft + miniMapBorder + 1,
+            (lampItem.top / blockSize) * miniMapScale + miniMapTop + miniMapBorder + 1,
+            4
+        );
+    }
+
+    if (!hasGun) {
+        fill(0, 120, 255);
+        circle(
+            (gunItem.left / blockSize) * miniMapScale + miniMapLeft + miniMapBorder + 1,
+            (gunItem.top / blockSize) * miniMapScale + miniMapTop + miniMapBorder + 1,
+            4
+        );
+    }
+
+    fill(180, 0, 180);
+    for (let e of enemies) {
+        circle(
+            (e.rect.left / blockSize) * miniMapScale + miniMapLeft + miniMapBorder + 1,
+            (e.rect.top / blockSize) * miniMapScale + miniMapTop + miniMapBorder + 1,
+            3
+        );
+    }
+
+    fill(255, 0, 0);
+    circle(
+        (player.left / blockSize) * miniMapScale + miniMapLeft + miniMapBorder + 1,
+        (player.top / blockSize) * miniMapScale + miniMapTop + miniMapBorder + 1,
+        4
+    );
+}
+
+function drawElapsedTime() {
+    fill(0);
+    noStroke();
+    rect(width / 2 - 37, 5, 74, 42);
+
+    fill(255);
+    rect(width / 2 - 32, 10, 64, 32);
+
+    fill(0);
+    textAlign(CENTER);
+    textSize(20);
+    textFont('Arial');
+    text(convertTime(elapsedTime), width / 2, 32);
+    textAlign(LEFT);
+}
+
+// ==================== 重置 ====================
+function resetGame() {
+    gTime = 0;
+    elapsedTime = 0;
+    lastKeyPress = null;
+    pause = true;
+    gameover = false;
+    start = true;
+    end = false;
+    moving = false;
+
+    wall = [];
+    terrain = [];
+    dir = 0;
+
+    box = null;
+    lampItem = null;
+    gunItem = null;
+    exitDoor = null;
+
+    bullets = [];
+    enemies = [];
+
+    hasMiniMap = false;
+    hasLamp = false;
+    hasGun = false;
+    showMiniMap = true;
+
+    endTimePopUp = 0;
+    popUpTitle = '';
+    popUpMessage = '';
+    gameoverMsg = '';
+    endTimeInformation = 0;
+
+    setup();
+}
