@@ -1,4 +1,4 @@
-// ==================== 游戏常量 ====================
+// ==================== 游戏常量 / Game Constants ====================
 const KEY_PAUSE = 80;
 const KEY_M = 77;
 const KEY_SPACE = 32;
@@ -7,14 +7,14 @@ const blockSize = 32;
 const miniMapScale = 3;
 const mazeW = 16;
 const mazeH = 16;
-const timeLimit = 5; // 5分钟
+const timeLimit = 5; // 5分钟 / 5 minutes
 
 const playerSpeed = 120;
 const bulletSpeed = 320;
 const enemyCount = 5;
 const fogRadius = 140;
 
-// ==================== 游戏变量 ====================
+// ==================== 游戏变量 / Game Variables ====================
 let worldWidth = 0;
 let worldHeight = 0;
 let gTime = 0;
@@ -26,7 +26,7 @@ let start = true;
 let end = false;
 let moving = false;
 
-// ==================== 游戏对象 ====================
+// ==================== 游戏对象 / Game Objects ====================
 let mazeMap;
 let cam;
 let wall = [];
@@ -45,7 +45,7 @@ let enemies = [];
 let mazeLayer;
 let fogLayer;
 
-// ==================== 状态 ====================
+// ==================== 状态 / States ====================
 let hasMiniMap = false;
 let hasLamp = false;
 let hasGun = false;
@@ -57,7 +57,7 @@ let popUpMessage = '';
 let gameoverMsg = '';
 let endTimeInformation = 0;
 
-// ==================== p5 入口 ====================
+// ==================== p5 入口 / p5 Entry ====================
 function setup() {
     createCanvas(800, 600);
 
@@ -85,7 +85,7 @@ function draw() {
     drawGame();
 }
 
-// ==================== 游戏主流程 ====================
+// ==================== 游戏主流程 / Main Game Flow ====================
 function drawGame() {
     background(0);
 
@@ -165,7 +165,7 @@ function act(dt) {
     }
 }
 
-// ==================== 输入 ====================
+// ==================== 输入 / Input ====================
 function keyPressed() {
     lastKeyPress = keyCode;
 
@@ -196,7 +196,7 @@ function keyReleased() {
     moving = false;
 }
 
-// ==================== 玩家移动 ====================
+// ==================== 玩家移动 / Player Movement ====================
 function handlePlayerMovement(dt) {
     moving = false;
 
@@ -240,7 +240,7 @@ function solveWallCollision(direction) {
     }
 }
 
-// ==================== 第二关逻辑 ====================
+// ==================== 第二关逻辑 / Level 2 Logic ====================
 function handlePickupsAndGoal() {
     if (!hasMiniMap && player.intersects(box)) {
         boxIntersects();
@@ -298,7 +298,7 @@ function updateEnemies(dt) {
     }
 }
 
-// ==================== 生成位置工具 ====================
+// ==================== 生成位置工具 / Spawn Position Helpers ====================
 function createItemInStartView(avoidList = []) {
     let minX = blockSize * 2;
     let minY = blockSize * 2;
@@ -398,7 +398,7 @@ function isInStartView(x, y) {
     return x < width - blockSize * 2 && y < height - blockSize * 2;
 }
 
-// ==================== 创建对象 ====================
+// ==================== 创建对象 / Create Objects ====================
 function createBox() {
     box = createItemInStartView([]);
 }
@@ -414,7 +414,7 @@ function createGun() {
 function createExitDoor() {
     exitDoor = createItemFarArea(blockSize, 40, [box, lampItem, gunItem]);
 
-    // 门通常高度40，略微往上吸附到格线
+    // 门通常高度40，略微往上吸附到格线 / Door height is usually 40, snap slightly upward to the grid
     exitDoor.left = snapToGrid(exitDoor.left);
     exitDoor.top = snapToGrid(exitDoor.top);
 }
@@ -454,7 +454,7 @@ function createEnemies() {
     }
 }
 
-// ==================== 道具拾取 ====================
+// ==================== 道具拾取 / Item Pickups ====================
 function boxIntersects() {
     hasMiniMap = true;
     triggerPopUp(
@@ -482,7 +482,7 @@ function gunIntersects() {
     );
 }
 
-// ==================== 绘制：角色与对象 ====================
+// ==================== 绘制：角色与对象 / Draw: Characters and Objects ====================
 function drawPlayer() {
     push();
     translate(player.left - cam.x, player.top - cam.y);
@@ -603,7 +603,7 @@ function drawHud() {
     text("Enemies: " + enemies.length, 15, y);
 }
 
-// ==================== 迷雾 ====================
+// ==================== 迷雾 / Fog ====================
 function drawFog() {
     fogLayer.clear();
     fogLayer.noStroke();
@@ -623,7 +623,7 @@ function drawFog() {
     image(fogLayer, 0, 0);
 }
 
-// ==================== 子弹与敌人 ====================
+// ==================== 子弹与敌人 / Bullets and Enemies ====================
 class Bullet {
     constructor(x, y, dir) {
         this.x = x;
@@ -730,7 +730,7 @@ class Enemy {
     }
 }
 
-// ==================== 工具函数 ====================
+// ==================== 工具函数 / Utility Functions ====================
 function convertTime(time) {
     let seconds = floor(time % 60);
     let minutes = floor((time / 60) % 60);
@@ -778,7 +778,7 @@ function triggerPopUp(title, message, time) {
     popUpMessage = message;
 }
 
-// ==================== 相机 / 矩形 / 迷宫 ====================
+// ==================== 相机 / 矩形 / 迷宫 / Camera / Rect / Maze ====================
 class Camera {
     constructor() {
         this.x = 0;
@@ -972,7 +972,7 @@ class Maze {
     }
 }
 
-// ==================== 地图设置 ====================
+// ==================== 地图设置 / Map Setup ====================
 function setMap() {
     wall = [];
     terrain = [];
@@ -991,7 +991,7 @@ function setMap() {
     worldHeight = mazeMap.gridH * blockSize;
 }
 
-// ==================== 地图预渲染 ====================
+// ==================== 地图预渲染 / Map Pre-render ====================
 function buildMazeLayer() {
     mazeLayer = createGraphics(worldWidth, worldHeight);
     mazeLayer.background(12, 16, 22);
@@ -1093,7 +1093,7 @@ function drawWallToLayer(g, x, y) {
     g.pop();
 }
 
-// ==================== UI ====================
+// ==================== UI 界面 / UI Screens ====================
 function drawStart() {
     fill(50, 65, 98);
     noStroke();
@@ -1331,7 +1331,7 @@ function drawElapsedTime() {
     textAlign(LEFT);
 }
 
-// ==================== 重置 ====================
+// ==================== 重置 / Reset ====================
 function resetGame() {
     gTime = 0;
     elapsedTime = 0;
