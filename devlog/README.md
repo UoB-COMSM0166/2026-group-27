@@ -8,7 +8,7 @@ This folder stores developer logs.
   - uploaded and optimise demo
 - In Progress:
   - write game story and optimise playing mechanism
-- Problems: 
+- Problems:
   -incoporate buldings of Bristol into map
 - Next Plan:
   - complete story, find solition of the combination of buildings and map
