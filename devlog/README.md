@@ -9,7 +9,7 @@ This folder stores developer logs.
 - In Progress:
   - write game story and optimise playing mechanism
 - Problems:
-  -incoporate buldings of Bristol into map
+  - incoporate buldings of Bristol into map
 - Next Plan:
   - complete story, find solition of the combination of buildings and map
 ### Iza：
