@@ -54,7 +54,7 @@ characters:
 
 | Game Idea | Inspiration | Description | Possible Challenges |
 | :--- | :--- | :--- | :--- |
-| Lost In Bristol | Pac-man (1980) <br> The legend of Zelda (1986) |
+| Lost In Bristol | Pac-man (1980) <br> <br> The legend of Zelda (1986) |
  
 
 ## Week 3 (Review + Paper Prototyping)
