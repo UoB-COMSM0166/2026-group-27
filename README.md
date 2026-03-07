@@ -65,14 +65,16 @@ Game Idea 3 |
 
 ### - Prototypes:
 
-1. Paper Prototype (Lost in Bristol)
+1. Lost in Bristol: Paper Prototype 
 
 https://github.com/user-attachments/assets/0ca057d0-9038-4678-b6c5-b5da47b4a736
 
-2. Second Game Prototype
+2. Second Game: Powerpoint Prototype
 
 
 ### - Final Idea: 
+
+We have chosen to work on Lost in Bristol because... 
 
 ## Week 4 (Requirements)
 
