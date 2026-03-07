@@ -54,9 +54,10 @@ characters:
 
 | Game Idea | Inspiration | Description | Possible Challenges |
 | :--- | :--- | :--- | :--- |
-| Lost In Bristol |
+| Lost In Bristol | Pac-man (1980)
+
+The legend of Zelda (1986)
  
-3. Second Game Idea
 
 ## Week 3 (Review + Paper Prototyping)
 
