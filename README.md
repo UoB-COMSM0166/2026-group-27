@@ -54,8 +54,8 @@ characters:
 
 | Game Idea | Inspiration | Description | Possible Challenges |
 | :--- | :--- | :--- | :--- |
-| Lost In Bristol | Pac-man (1980) <br> <br> The legend of Zelda (1986) | - Maze-exploration game incorporating landmarks, culture, and people from Bristol. <br> <br> 
-- Fight enemies, collect weapons, and find buildings/landmarks from Bristol while going through the maze. This combines the maze navigation and enemies in Pac-Man with the equipment, combat and exploration features in the Legend of Zelda  <br> <br> 
+| Lost In Bristol | Pac-man (1980) <br> <br> The legend of Zelda (1986) | - Maze-exploration game incorporating landmarks, culture, and people from Bristol. 
+<br> <br> - Fight enemies, collect weapons, and find buildings/landmarks from Bristol while going through the maze. This combines the maze navigation and enemies in Pac-Man with the equipment, combat and exploration features in the Legend of Zelda  <br> <br> 
  
 
 ## Week 3 (Review + Paper Prototyping)
