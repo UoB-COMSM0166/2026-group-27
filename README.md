@@ -51,9 +51,12 @@ characters:
 
 ### - Game Ideas:
 
-1. First Game Idea
+
+| Game Idea | Inspiration | Description | Possible Challenges |
+| :--- | :--- | :--- | :--- |
+| Lost In Bristol |
  
-2. Second Game Idea
+3. Second Game Idea
 
 ## Week 3 (Review + Paper Prototyping)
 
