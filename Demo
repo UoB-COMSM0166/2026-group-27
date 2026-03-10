@@ -971,7 +971,7 @@ function intersectsWall(object) {
 }
 
 function boxIntersects() {
-    triggerPopUp("Well, Mini Map found!", 
+    triggerPopUp("Mini Map found!", 
                  "You can show/hide the Map pressing 'M' \n \n Now, you should search a snorkel and a flipper", 
                  3);
     hasMiniMap = true;
@@ -982,7 +982,7 @@ function snorkelIntersects() {
     if (!hasFlipper) {
         msg = "Now, you should search a flipper.";
     }
-    triggerPopUp("Well, Snorkel found!", msg, 3);
+    triggerPopUp("Snorkel found!", msg, 3);
     hasSnorkel = true;
 }
 
@@ -991,7 +991,7 @@ function flipperIntersects() {
     if (!hasSnorkel) {
         msg = "Now, you should search a snorkel.";
     }
-    triggerPopUp("Well, Flipper found!", msg, 3);
+    triggerPopUp("Flipper found!", msg, 3);
     hasFlipper = true;
 }
 
