@@ -25,7 +25,7 @@ This folder stores developer logs.
 
 ## week: 8
 
-### Thanusha
+### Thanusha:
 
 - Completed:
     - designed the first draft of the Fox and Banksy character
