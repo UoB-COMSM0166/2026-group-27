@@ -21,3 +21,14 @@ This folder stores developer logs.
   - enemies are too small and not very aggressive
 - Next Plan:
   - creat demo3 of the third map of this game
+ 
+
+## week: 8
+
+### Thanusha
+
+- Completed:
+    - designed the first draft of the Fox and Banksy character
+  
+- In Progress:
+    - Designing maze walls and buildings  
