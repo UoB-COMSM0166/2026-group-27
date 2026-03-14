@@ -34,7 +34,7 @@ This folder stores developer logs.
     - Designing maze walls and buildings  
 ### Iza：
 - Completed:
-  - uploaded and optimise demo3; uploaded menu page
+  - uploaded and optimise demo3; uploaded menu page; upload shop page
 - In Progress:
   - add money from kills to buy other guns
   - add portals and big boss
