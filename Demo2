@@ -7,12 +7,21 @@ const blockSize = 32;
 const miniMapScale = 3;
 const mazeW = 16;
 const mazeH = 16;
-const timeLimit = 5; // 5分钟 / 5 minutes
+const timeLimit = 5;
 
 const playerSpeed = 120;
-const bulletSpeed = 320;
-const enemyCount = 5;
-const fogRadius = 140;
+const enemyCount = 8;
+
+// 第二关雾比第三关更暗一点 / Level 2 fog is slightly darker than Level 3
+const fogRadiusNoLamp = 0;
+const fogRadiusWithLamp = 165;
+
+// 商城枪支配置 / Shop gun configs
+const gunConfigs = {
+    1: { name: "Pistol", damage: 10, bulletSpeed: 320, cooldown: 0.22, color: [40, 40, 40] },
+    2: { name: "Rifle", damage: 14, bulletSpeed: 380, cooldown: 0.16, color: [20, 70, 130] },
+    3: { name: "Heavy Gun", damage: 20, bulletSpeed: 410, cooldown: 0.26, color: [120, 70, 20] }
+};
 
 // ==================== 游戏变量 / Game Variables ====================
 let worldWidth = 0;
@@ -51,6 +60,13 @@ let hasLamp = false;
 let hasGun = false;
 let showMiniMap = true;
 
+let currentGunLevel = 1;
+let currentGunStats = gunConfigs[1];
+let shootCooldownTimer = 0;
+
+let smallKillCount = 0;
+let coinsEarnedThisRun = 0;
+
 let endTimePopUp = 0;
 let popUpTitle = '';
 let popUpMessage = '';
@@ -60,6 +76,9 @@ let endTimeInformation = 0;
 // ==================== p5 入口 / p5 Entry ====================
 function setup() {
     createCanvas(800, 600);
+
+    currentGunLevel = getStoredGunLevel();
+    currentGunStats = gunConfigs[currentGunLevel] || gunConfigs[1];
 
     mazeMap = new Maze(mazeW, mazeH, 'random', 1, 1);
     player = new Rect(32, 32, 32, 48, true);
@@ -101,7 +120,7 @@ function drawGame() {
     }
 
     if (!hasGun && hasMiniMap) {
-        drawGun(gunItem.left - cam.x, gunItem.top - cam.y);
+        drawGunPickup(gunItem.left - cam.x, gunItem.top - cam.y);
     }
 
     for (let e of enemies) {
@@ -115,28 +134,16 @@ function drawGame() {
     drawPlayer();
     drawFog();
 
-    if (endTimeInformation > elapsedTime) {
-        drawInformation();
-    }
+    if (endTimeInformation > elapsedTime) drawInformation();
+    if (endTimePopUp > elapsedTime) drawPopUp();
 
-    if (endTimePopUp > elapsedTime) {
-        drawPopUp();
-    }
-
-    if (hasMiniMap && showMiniMap) {
-        drawMiniMap();
-    }
+    if (hasMiniMap && showMiniMap) drawMiniMap();
 
     if (pause) {
-        if (start) {
-            drawStart();
-        } else if (end) {
-            drawEnd();
-        } else if (gameover) {
-            drawGameOver();
-        } else {
-            drawPause();
-        }
+        if (start) drawStart();
+        else if (end) drawEnd();
+        else if (gameover) drawGameOver();
+        else drawPause();
     }
 
     drawElapsedTime();
@@ -145,6 +152,7 @@ function drawGame() {
 
 function act(dt) {
     gTime += dt;
+    if (shootCooldownTimer > 0) shootCooldownTimer -= dt;
 
     if (!pause) {
         if (elapsedTime > timeLimit * 60) {
@@ -269,9 +277,54 @@ function handlePickupsAndGoal() {
 }
 
 function shootBullet() {
+    if (shootCooldownTimer > 0) return;
+
     let startX = player.left + player.width / 2;
     let startY = player.top + player.height / 2;
-    bullets.push(new Bullet(startX, startY, dir));
+
+    let target = null;
+    if (hasLamp) {
+        target = findAutoTarget(startX, startY, 210);
+    }
+
+    if (target) {
+        let dx = target.x - startX;
+        let dy = target.y - startY;
+        let d = sqrt(dx * dx + dy * dy);
+        let vx = (dx / max(d, 1)) * currentGunStats.bulletSpeed;
+        let vy = (dy / max(d, 1)) * currentGunStats.bulletSpeed;
+        bullets.push(new Bullet(startX, startY, -1, vx, vy, currentGunStats.damage));
+    } else {
+        bullets.push(new Bullet(startX, startY, dir, null, null, currentGunStats.damage));
+    }
+
+    shootCooldownTimer = currentGunStats.cooldown;
+}
+
+function findAutoTarget(px, py, range) {
+    let best = null;
+    let bestD = Infinity;
+
+    for (let e of enemies) {
+        if (!e.alive) continue;
+        let ex = e.rect.left + e.rect.width / 2;
+        let ey = e.rect.top + e.rect.height / 2;
+        let dx = ex - px;
+        let dy = ey - py;
+        let d = sqrt(dx * dx + dy * dy);
+        if (d <= range && d < bestD) {
+            bestD = d;
+            best = { x: ex, y: ey, ref: e };
+        }
+    }
+
+    return best;
+}
+
+function addCoins(amount) {
+    coinsEarnedThisRun += amount;
+    let total = Number(localStorage.getItem('gameCoins') || '0');
+    localStorage.setItem('gameCoins', String(total + amount));
 }
 
 function updateBullets(dt) {
@@ -284,6 +337,8 @@ function updateBullets(dt) {
             if (e.alive && b.alive && bRect.intersects(e.rect)) {
                 e.alive = false;
                 b.alive = false;
+                smallKillCount += 1;
+                addCoins(1);
             }
         }
     }
@@ -298,7 +353,7 @@ function updateEnemies(dt) {
     }
 }
 
-// ==================== 生成位置工具 / Spawn Position Helpers ====================
+// ==================== 生成位置工具 / Spawn Helpers ====================
 function createItemInStartView(avoidList = []) {
     let minX = blockSize * 2;
     let minY = blockSize * 2;
@@ -323,9 +378,7 @@ function createItemInStartView(avoidList = []) {
                 break;
             }
         }
-        if (overlap) continue;
-
-        return item;
+        if (!overlap) return item;
     }
 
     return new Rect(128, 128, blockSize, blockSize, true);
@@ -355,47 +408,10 @@ function createItemInMidArea(avoidList = []) {
                 break;
             }
         }
-        if (overlap) continue;
-
-        return item;
+        if (!overlap) return item;
     }
 
     return new Rect(416, 256, blockSize, blockSize, true);
-}
-
-function createItemFarArea(w, h, avoidList = []) {
-    let minX = max(worldWidth - width * 0.55, blockSize * 8);
-    let minY = max(worldHeight - height * 0.55, blockSize * 8);
-    let maxX = worldWidth - w - blockSize * 2;
-    let maxY = worldHeight - h - blockSize * 2;
-
-    let item;
-
-    for (let i = 0; i < 500; i++) {
-        let x = snapToGrid(random(minX, maxX));
-        let y = snapToGrid(random(minY, maxY));
-
-        item = new Rect(x, y, w, h, true);
-
-        if (intersectsWall(item)) continue;
-
-        let overlap = false;
-        for (let other of avoidList) {
-            if (other && item.intersects(other)) {
-                overlap = true;
-                break;
-            }
-        }
-        if (overlap) continue;
-
-        return item;
-    }
-
-    return new Rect(worldWidth - 3 * blockSize, worldHeight - 4 * blockSize, w, h, true);
-}
-
-function isInStartView(x, y) {
-    return x < width - blockSize * 2 && y < height - blockSize * 2;
 }
 
 // ==================== 创建对象 / Create Objects ====================
@@ -412,49 +428,43 @@ function createGun() {
 }
 
 function createExitDoor() {
-    exitDoor = createItemFarArea(blockSize, 40, [box, lampItem, gunItem]);
+    let x = (mazeMap.gridW - 3) * blockSize;
+    let y = (mazeMap.gridH - 4) * blockSize;
 
-    // 门通常高度40，略微往上吸附到格线 / Door height is usually 40, snap slightly upward to the grid
-    exitDoor.left = snapToGrid(exitDoor.left);
-    exitDoor.top = snapToGrid(exitDoor.top);
+    exitDoor = new Rect(x, y, blockSize, 40, true);
+
+    while (intersectsWall(exitDoor)) {
+        x -= blockSize;
+        exitDoor = new Rect(x, y, blockSize, 40, true);
+    }
 }
 
 function createEnemies() {
     enemies = [];
 
     for (let i = 0; i < enemyCount; i++) {
-        let e = null;
+        let x = floor(random(64, worldWidth - blockSize * 2));
+        let y = floor(random(96, worldHeight - blockSize * 2));
+        let e = new Enemy(snapToGrid(x), snapToGrid(y));
 
-        for (let tries = 0; tries < 600; tries++) {
-            let x = snapToGrid(random(width + 40, worldWidth - blockSize * 3));
-            let y = snapToGrid(random(height * 0.6, worldHeight - blockSize * 3));
-
-            if (isInStartView(x, y)) continue;
-
-            e = new Enemy(x, y);
-
-            if (
-                intersectsWall(e.rect) ||
-                e.rect.intersects(player) ||
-                e.rect.intersects(box) ||
-                e.rect.intersects(lampItem) ||
-                e.rect.intersects(gunItem) ||
-                e.rect.intersects(exitDoor)
-            ) {
-                e = null;
-                continue;
-            }
-
-            break;
+        while (
+            intersectsWall(e.rect) ||
+            e.rect.intersects(player) ||
+            e.rect.intersects(box) ||
+            e.rect.intersects(lampItem) ||
+            e.rect.intersects(gunItem) ||
+            e.rect.intersects(exitDoor)
+        ) {
+            x = floor(random(64, worldWidth - blockSize * 2));
+            y = floor(random(96, worldHeight - blockSize * 2));
+            e = new Enemy(snapToGrid(x), snapToGrid(y));
         }
 
-        if (e) {
-            enemies.push(e);
-        }
+        enemies.push(e);
     }
 }
 
-// ==================== 道具拾取 / Item Pickups ====================
+// ==================== 道具拾取 / Pickups ====================
 function boxIntersects() {
     hasMiniMap = true;
     triggerPopUp(
@@ -468,7 +478,7 @@ function lampIntersects() {
     hasLamp = true;
     triggerPopUp(
         "Lamp found!",
-        "The fog clears around you now.\nNow search for the gun and the exit door.",
+        "The fog clears around you now.\nAuto-lock is enabled in the lit area.",
         3
     );
 }
@@ -477,12 +487,12 @@ function gunIntersects() {
     hasGun = true;
     triggerPopUp(
         "Gun found!",
-        "Press SPACE to shoot.\nNow search for the exit door.",
+        "Press SPACE to shoot.",
         3
     );
 }
 
-// ==================== 绘制：角色与对象 / Draw: Characters and Objects ====================
+// ==================== 绘制 / Draw ====================
 function drawPlayer() {
     push();
     translate(player.left - cam.x, player.top - cam.y);
@@ -514,8 +524,13 @@ function drawPlayer() {
     else ellipse(blockSize / 2 - 2, 12, 4, 2);
 
     if (hasGun) {
-        fill(50);
-        rect(20, 22, 8, 4, 1);
+        let c = currentGunStats.color;
+        fill(c[0], c[1], c[2]);
+
+        if (dir === 0) rect(13, 24, 6, 10, 2);
+        else if (dir === 1) rect(18, 20, 12, 5, 2);
+        else if (dir === 2) rect(13, 10, 6, 10, 2);
+        else rect(2, 20, 12, 5, 2);
     }
 
     pop();
@@ -557,7 +572,7 @@ function drawLamp(x, y) {
     pop();
 }
 
-function drawGun(x, y) {
+function drawGunPickup(x, y) {
     push();
     noStroke();
 
@@ -594,20 +609,25 @@ function drawHud() {
     let y = 20;
     text("Level 2 Demo", 15, y);
     y += 16;
+    text("Gun: " + currentGunStats.name, 15, y);
+    y += 16;
     text("Map: " + (hasMiniMap ? "Yes" : "No"), 15, y);
     y += 16;
     text("Lamp: " + (hasLamp ? "Yes" : "No"), 15, y);
     y += 16;
-    text("Gun: " + (hasGun ? "Yes" : "No"), 15, y);
-    y += 16;
     text("Enemies: " + enemies.length, 15, y);
+    y += 16;
+    text("Kills: " + smallKillCount, 15, y);
+    y += 16;
+    text("Coins this run: £" + coinsEarnedThisRun, 15, y);
 }
 
-// ==================== 迷雾 / Fog ====================
 function drawFog() {
     fogLayer.clear();
     fogLayer.noStroke();
-    fogLayer.fill(0, 0, 0, 220);
+
+    // 比以前亮一点，但比第三关更暗 / Slightly brighter than before, but darker than level 3
+    fogLayer.fill(10, 12, 18, 185);
     fogLayer.rect(0, 0, width, height);
 
     if (hasLamp) {
@@ -615,7 +635,7 @@ function drawFog() {
         fogLayer.circle(
             player.left - cam.x + player.width / 2,
             player.top - cam.y + player.height / 2,
-            fogRadius * 2
+            fogRadiusWithLamp * 2
         );
         fogLayer.noErase();
     }
@@ -623,21 +643,28 @@ function drawFog() {
     image(fogLayer, 0, 0);
 }
 
-// ==================== 子弹与敌人 / Bullets and Enemies ====================
 class Bullet {
-    constructor(x, y, dir) {
+    constructor(x, y, dir, vx = null, vy = null, damage = 10) {
         this.x = x;
         this.y = y;
         this.r = 4;
         this.dir = dir;
+        this.vx = vx;
+        this.vy = vy;
+        this.damage = damage;
         this.alive = true;
     }
 
     update(dt) {
-        if (this.dir === 0) this.y += bulletSpeed * dt;
-        if (this.dir === 1) this.x += bulletSpeed * dt;
-        if (this.dir === 2) this.y -= bulletSpeed * dt;
-        if (this.dir === 3) this.x -= bulletSpeed * dt;
+        if (this.vx !== null && this.vy !== null) {
+            this.x += this.vx * dt;
+            this.y += this.vy * dt;
+        } else {
+            if (this.dir === 0) this.y += currentGunStats.bulletSpeed * dt;
+            if (this.dir === 1) this.x += currentGunStats.bulletSpeed * dt;
+            if (this.dir === 2) this.y -= currentGunStats.bulletSpeed * dt;
+            if (this.dir === 3) this.x -= currentGunStats.bulletSpeed * dt;
+        }
 
         let bRect = new Rect(this.x - this.r, this.y - this.r, this.r * 2, this.r * 2, true);
 
@@ -731,6 +758,12 @@ class Enemy {
 }
 
 // ==================== 工具函数 / Utility Functions ====================
+function getStoredGunLevel() {
+    let level = Number(localStorage.getItem('shopGunLevel') || '1');
+    if (!gunConfigs[level]) level = 1;
+    return level;
+}
+
 function convertTime(time) {
     let seconds = floor(time % 60);
     let minutes = floor((time / 60) % 60);
@@ -778,7 +811,7 @@ function triggerPopUp(title, message, time) {
     popUpMessage = message;
 }
 
-// ==================== 相机 / 矩形 / 迷宫 / Camera / Rect / Maze ====================
+// ==================== 类 / Classes ====================
 class Camera {
     constructor() {
         this.x = 0;
@@ -813,37 +846,17 @@ class Rect {
         this.t = (type === undefined) ? -1 : type;
     }
 
-    get x() {
-        return this.left + this.width / 2;
-    }
+    get x() { return this.left + this.width / 2; }
+    set x(value) { this.left = value - this.width / 2; }
 
-    set x(value) {
-        this.left = value - this.width / 2;
-    }
+    get y() { return this.top + this.height / 2; }
+    set y(value) { this.top = value - this.height / 2; }
 
-    get y() {
-        return this.top + this.height / 2;
-    }
+    get right() { return this.left + this.width; }
+    set right(value) { this.left = value - this.width; }
 
-    set y(value) {
-        this.top = value - this.height / 2;
-    }
-
-    get right() {
-        return this.left + this.width;
-    }
-
-    set right(value) {
-        this.left = value - this.width;
-    }
-
-    get bottom() {
-        return this.top + this.height;
-    }
-
-    set bottom(value) {
-        this.top = value - this.height;
-    }
+    get bottom() { return this.top + this.height; }
+    set bottom(value) { this.top = value - this.height; }
 
     intersects(rect) {
         if (rect !== undefined) {
@@ -972,7 +985,7 @@ class Maze {
     }
 }
 
-// ==================== 地图设置 / Map Setup ====================
+// ==================== 地图 / Map ====================
 function setMap() {
     wall = [];
     terrain = [];
@@ -991,18 +1004,12 @@ function setMap() {
     worldHeight = mazeMap.gridH * blockSize;
 }
 
-// ==================== 地图预渲染 / Map Pre-render ====================
 function buildMazeLayer() {
     mazeLayer = createGraphics(worldWidth, worldHeight);
     mazeLayer.background(12, 16, 22);
 
-    for (let t of terrain) {
-        drawTerrainToLayer(mazeLayer, t.left, t.top);
-    }
-
-    for (let w of wall) {
-        drawWallToLayer(mazeLayer, w.left, w.top);
-    }
+    for (let t of terrain) drawTerrainToLayer(mazeLayer, t.left, t.top);
+    for (let w of wall) drawWallToLayer(mazeLayer, w.left, w.top);
 }
 
 function drawMaze() {
@@ -1010,9 +1017,7 @@ function drawMaze() {
 }
 
 function isWallTile(gridX, gridY) {
-    if (gridX < 0 || gridY < 0 || gridY >= mazeMap.gridH || gridX >= mazeMap.gridW) {
-        return false;
-    }
+    if (gridX < 0 || gridY < 0 || gridY >= mazeMap.gridH || gridX >= mazeMap.gridW) return false;
     return mazeMap.gridMap[gridY][gridX] === 0;
 }
 
@@ -1053,7 +1058,6 @@ function drawWallToLayer(g, x, y) {
     const down = isWallTile(gx, gy + 1);
     const left = isWallTile(gx - 1, gy);
     const right = isWallTile(gx + 1, gy);
-
     const seed = tileSeed(gx, gy);
 
     g.push();
@@ -1065,25 +1069,10 @@ function drawWallToLayer(g, x, y) {
     g.fill(58, 68, 82);
     g.rect(x + 2, y + 2, blockSize - 4, blockSize - 4, 4);
 
-    if (!up) {
-        g.fill(88, 102, 120);
-        g.rect(x + 2, y + 2, blockSize - 4, 5, 3);
-    }
-
-    if (!left) {
-        g.fill(76, 88, 104);
-        g.rect(x + 2, y + 2, 5, blockSize - 4, 3);
-    }
-
-    if (!down) {
-        g.fill(18, 24, 32, 160);
-        g.rect(x + 2, y + blockSize - 7, blockSize - 4, 5, 3);
-    }
-
-    if (!right) {
-        g.fill(18, 24, 32, 130);
-        g.rect(x + blockSize - 7, y + 2, 5, blockSize - 4, 3);
-    }
+    if (!up) g.fill(88, 102, 120), g.rect(x + 2, y + 2, blockSize - 4, 5, 3);
+    if (!left) g.fill(76, 88, 104), g.rect(x + 2, y + 2, 5, blockSize - 4, 3);
+    if (!down) g.fill(18, 24, 32, 160), g.rect(x + 2, y + blockSize - 7, blockSize - 4, 5, 3);
+    if (!right) g.fill(18, 24, 32, 130), g.rect(x + blockSize - 7, y + 2, 5, blockSize - 4, 3);
 
     g.fill(92, 105, 122, 120);
     g.rect(x + 6, y + 8, 8, 5, 2);
@@ -1093,7 +1082,7 @@ function drawWallToLayer(g, x, y) {
     g.pop();
 }
 
-// ==================== UI 界面 / UI Screens ====================
+// ==================== UI / Screens ====================
 function drawStart() {
     fill(50, 65, 98);
     noStroke();
@@ -1108,9 +1097,10 @@ function drawStart() {
     textSize(12);
     textFont('Verdana');
     text("Find the map, lamp, gun and reach the door.", width / 2, height / 2 + 10);
+    text(`Current gun: ${currentGunStats.name}`, width / 2, height / 2 + 28);
 
     if (floor(gTime * 3) % 2 === 1) {
-        text("Press ENTER to start", width / 2, height / 2 + 35);
+        text("Press ENTER to start", width / 2, height / 2 + 50);
     }
 
     textAlign(LEFT);
@@ -1119,20 +1109,22 @@ function drawStart() {
 function drawEnd() {
     fill(50, 65, 98);
     noStroke();
-    rect(width / 2 - 160, height / 2 - 60, 320, 130, 8);
+    rect(width / 2 - 170, height / 2 - 72, 340, 150, 8);
 
     textAlign(CENTER);
     fill(255);
     textSize(24);
     textFont('Impact');
-    text('LEVEL 2 COMPLETE', width / 2, height / 2 - 20);
+    text('LEVEL 2 COMPLETE', width / 2, height / 2 - 24);
 
     textSize(12);
     textFont('Verdana');
-    text("You escaped through the door.", width / 2, height / 2 + 5);
+    text(`Kills: ${smallKillCount}`, width / 2, height / 2 + 4);
+    text(`Coins earned this run: £${coinsEarnedThisRun}`, width / 2, height / 2 + 24);
+    text(`Total coins: £${localStorage.getItem('gameCoins') || '0'}`, width / 2, height / 2 + 44);
 
     if (floor(gTime * 3) % 2 === 1) {
-        text("Press ESC to restart demo", width / 2, height / 2 + 32);
+        text("Press ESC to restart demo", width / 2, height / 2 + 66);
     }
 
     textAlign(LEFT);
@@ -1161,20 +1153,22 @@ function drawPause() {
 function drawGameOver() {
     fill(120, 40, 40);
     noStroke();
-    rect(width / 2 - 160, height / 2 - 60, 320, 120, 8);
+    rect(width / 2 - 170, height / 2 - 72, 340, 150, 8);
 
     textAlign(CENTER);
     fill(255);
     textSize(20);
     textFont('Impact');
-    text('GAME OVER', width / 2, height / 2 - 25);
+    text('GAME OVER', width / 2, height / 2 - 28);
 
     textSize(11);
     textFont('Verdana');
-    text(gameoverMsg, width / 2, height / 2);
+    text(gameoverMsg, width / 2, height / 2 - 6);
+    text(`Kills: ${smallKillCount}`, width / 2, height / 2 + 18);
+    text(`Coins earned this run: £${coinsEarnedThisRun}`, width / 2, height / 2 + 36);
 
     if (floor(gTime * 3) % 2 === 1) {
-        text("Press ESC to restart", width / 2, height / 2 + 28);
+        text("Press ESC to restart", width / 2, height / 2 + 60);
     }
 
     textAlign(LEFT);
@@ -1193,14 +1187,13 @@ function drawPopUp() {
 
     textSize(12);
     fillTextMultiLine(popUpMessage, width / 2, 130);
-
     textAlign(LEFT);
 }
 
 function drawInformation() {
     fill(80, 105, 140);
     noStroke();
-    rect(width / 2 - 210, 70, 420, 340, 8);
+    rect(width / 2 - 210, 70, 420, 350, 8);
 
     textAlign(CENTER);
     fill(255);
@@ -1210,13 +1203,12 @@ function drawInformation() {
 
     textAlign(LEFT);
     textSize(12);
-
     text('Find the chest first to unlock the mini map.', width / 2 - 190, 140);
     text('Then search for the lamp and the gun.', width / 2 - 190, 160);
     text('The lamp clears the fog around you.', width / 2 - 190, 180);
-    text('Use SPACE to shoot after getting the gun.', width / 2 - 190, 200);
-    text('Avoid enemies and reach the door to win.', width / 2 - 190, 220);
-    text("Press 'M' to show/hide mini map.", width / 2 - 190, 250);
+    text('Inside the lit area, auto-lock can help aiming.', width / 2 - 190, 200);
+    text('Defeat enemies to earn £1 each.', width / 2 - 190, 220);
+    text("Use SPACE to shoot, 'M' to toggle mini map.", width / 2 - 190, 250);
     text("Press 'P' to pause.", width / 2 - 190, 270);
 
     textAlign(CENTER);
@@ -1247,20 +1239,10 @@ function drawMiniMap() {
 
     fill(255);
     noStroke();
-    rect(
-        miniMapLeft,
-        miniMapTop,
-        mazeMap.gridW * miniMapScale + 10,
-        mazeMap.gridH * miniMapScale + 10
-    );
+    rect(miniMapLeft, miniMapTop, mazeMap.gridW * miniMapScale + 10, mazeMap.gridH * miniMapScale + 10);
 
     fill(210);
-    rect(
-        miniMapLeft + miniMapBorder,
-        miniMapTop + miniMapBorder,
-        mazeMap.gridW * miniMapScale,
-        mazeMap.gridH * miniMapScale
-    );
+    rect(miniMapLeft + miniMapBorder, miniMapTop + miniMapBorder, mazeMap.gridW * miniMapScale, mazeMap.gridH * miniMapScale);
 
     fill(0);
     for (let w of wall) {
@@ -1358,6 +1340,10 @@ function resetGame() {
     hasLamp = false;
     hasGun = false;
     showMiniMap = true;
+
+    shootCooldownTimer = 0;
+    smallKillCount = 0;
+    coinsEarnedThisRun = 0;
 
     endTimePopUp = 0;
     popUpTitle = '';
