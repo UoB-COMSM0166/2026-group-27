@@ -32,3 +32,12 @@ This folder stores developer logs.
   
 - In Progress:
     - Designing maze walls and buildings  
+### Iza：
+- Completed:
+  - uploaded and optimise demo3; uploaded purchase page
+- In Progress:
+  - add money from kills
+  - add portals and big boss
+  - add automatic enemy locking
+- Next Plan:
+  - integrate games
