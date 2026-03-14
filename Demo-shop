@@ -1,0 +1,664 @@
+// ==================== 商城数据 / Shop Data ====================
+const shopItems = [
+  {
+    level: 1,
+    name: "Pistol",
+    price: 0,
+    damage: 10,
+    speed: 340,
+    cooldown: 0.22,
+    color: [70, 70, 80],
+    accent: [180, 180, 190],
+    desc: "Balanced starter weapon"
+  },
+  {
+    level: 2,
+    name: "Rifle",
+    price: 8,
+    damage: 14,
+    speed: 390,
+    cooldown: 0.16,
+    color: [40, 90, 150],
+    accent: [170, 220, 255],
+    desc: "Fast and accurate"
+  },
+  {
+    level: 3,
+    name: "Heavy Gun",
+    price: 15,
+    damage: 20,
+    speed: 420,
+    cooldown: 0.26,
+    color: [140, 90, 35],
+    accent: [255, 220, 140],
+    desc: "High damage, slower fire"
+  }
+]
+
+// ==================== 全局变量 / Globals ====================
+let coins = 0
+let ownedGunLevel = 1
+let equippedGunLevel = 1
+
+let selectedIndex = 0
+let hoverIndex = -1
+let rotationAngle = 0
+
+let buyButtons = []
+let equipButtons = []
+
+let uiPulse = 0
+let flashTimer = 0
+let flashText = ""
+let flashGood = true
+
+// 音效 / Sounds
+let audioCtx = null
+
+// ==================== p5 入口 / p5 Entry ====================
+function setup() {
+  createCanvas(980, 640)
+  textFont('Arial')
+
+  initShopStorage()
+  loadShopState()
+}
+
+function draw() {
+  uiPulse += 0.03
+  rotationAngle += 0.03
+  if (flashTimer > 0) flashTimer--
+
+  background(14, 18, 28)
+  drawBackgroundGlow()
+  drawTitleBar()
+  drawInstructions()
+  drawWeaponCards()
+  drawPreviewPanel()
+  drawBottomStatus()
+  drawFlashMessage()
+}
+
+// ==================== 初始化 / Init ====================
+function initShopStorage() {
+  if (localStorage.getItem("gameCoins") === null) {
+    localStorage.setItem("gameCoins", "0")
+  }
+  if (localStorage.getItem("ownedGunLevel") === null) {
+    localStorage.setItem("ownedGunLevel", "1")
+  }
+  if (localStorage.getItem("shopGunLevel") === null) {
+    localStorage.setItem("shopGunLevel", "1")
+  }
+}
+
+function loadShopState() {
+  coins = Number(localStorage.getItem("gameCoins") || "0")
+  ownedGunLevel = Number(localStorage.getItem("ownedGunLevel") || "1")
+  equippedGunLevel = Number(localStorage.getItem("shopGunLevel") || "1")
+
+  if (ownedGunLevel < 1) ownedGunLevel = 1
+  if (equippedGunLevel < 1) equippedGunLevel = 1
+  if (equippedGunLevel > ownedGunLevel) equippedGunLevel = ownedGunLevel
+}
+
+function saveShopState() {
+  localStorage.setItem("gameCoins", String(coins))
+  localStorage.setItem("ownedGunLevel", String(ownedGunLevel))
+  localStorage.setItem("shopGunLevel", String(equippedGunLevel))
+}
+
+// ==================== 绘制主界面 / Main Drawing ====================
+function drawBackgroundGlow() {
+  noStroke()
+  fill(40, 60, 100, 30)
+  circle(width * 0.18, height * 0.18, 260)
+  fill(70, 40, 120, 28)
+  circle(width * 0.82, height * 0.22, 320)
+  fill(30, 90, 90, 24)
+  circle(width * 0.72, height * 0.82, 260)
+}
+
+function drawTitleBar() {
+  drawPanel(20, 18, width - 40, 88)
+
+  fill(255)
+  textAlign(LEFT, CENTER)
+  textSize(28)
+  textStyle(BOLD)
+  text("WEAPON SHOP", 40, 52)
+
+  textStyle(NORMAL)
+  textSize(14)
+  fill(200)
+  text("Pure p5 shop demo", 42, 82)
+
+  fill(255, 220, 120)
+  textSize(18)
+  textAlign(RIGHT, CENTER)
+  text(`Coins: £${coins}`, width - 40, 52)
+
+  fill(180, 220, 255)
+  textSize(14)
+  text(
+    `Equipped: ${shopItems[equippedGunLevel - 1].name}`,
+    width - 40,
+    80
+  )
+}
+
+function drawInstructions() {
+  drawPanel(20, 118, width - 40, 54)
+
+  fill(215)
+  textAlign(LEFT, CENTER)
+  textSize(14)
+  text(
+    "Mouse: hover / click    Keyboard: ← → select, B buy, E equip, 1/2/3 quick select",
+    38,
+    145
+  )
+}
+
+function drawWeaponCards() {
+  buyButtons = []
+  equipButtons = []
+  hoverIndex = -1
+
+  let startX = 20
+  let cardY = 188
+  let gap = 18
+  let cardW = 290
+  let cardH = 255
+
+  for (let i = 0; i < shopItems.length; i++) {
+    let x = startX + i * (cardW + gap)
+    drawWeaponCard(i, x, cardY, cardW, cardH)
+  }
+}
+
+function drawWeaponCard(i, x, y, w, h) {
+  let item = shopItems[i]
+  let isSelected = selectedIndex === i
+
+  let hoveringCard = mouseX >= x && mouseX <= x + w && mouseY >= y && mouseY <= y + h
+  if (hoveringCard) hoverIndex = i
+
+  let hoverLift = hoveringCard ? -4 : 0
+  let glow = isSelected ? 1 : 0
+  if (hoveringCard) glow = max(glow, 0.7)
+
+  push()
+  translate(0, hoverLift)
+
+  drawCardGlow(x, y, w, h, item.accent, glow)
+  drawPanel(x, y, w, h)
+
+  if (isSelected) {
+    noFill()
+    stroke(item.accent[0], item.accent[1], item.accent[2], 220)
+    strokeWeight(2)
+    rect(x + 2, y + 2, w - 4, h - 4, 14)
+  }
+
+  drawWeaponIcon(item, x + 22, y + 24, 72, 72)
+
+  fill(255)
+  textAlign(LEFT, TOP)
+  textStyle(BOLD)
+  textSize(22)
+  text(item.name, x + 108, y + 26)
+
+  textStyle(NORMAL)
+  textSize(13)
+  fill(200)
+  textAlign(LEFT, TOP)
+  text(item.desc, x + 108, y + 58)
+
+  let tagText = ""
+  let tagColor = [90, 90, 110]
+
+  if (equippedGunLevel === item.level) {
+    tagText = "EQUIPPED"
+    tagColor = [40, 150, 90]
+  } else if (ownedGunLevel >= item.level) {
+    tagText = "OWNED"
+    tagColor = [70, 100, 160]
+  } else {
+    tagText = `PRICE £${item.price}`
+    tagColor = [130, 90, 40]
+  }
+
+  drawTag(tagText, x + 108, y + 90, tagColor)
+
+  fill(235)
+  textAlign(LEFT, TOP)
+  textSize(14)
+  text(`Damage: ${item.damage}`, x + 24, y + 128)
+  text(`Bullet Speed: ${item.speed}`, x + 24, y + 152)
+  text(`Cooldown: ${item.cooldown}s`, x + 24, y + 176)
+
+  let buyRect = { x: x + 24, y: y + 206, w: 110, h: 34 }
+  let equipRect = { x: x + 152, y: y + 206, w: 110, h: 34 }
+
+  buyButtons.push(buyRect)
+  equipButtons.push(equipRect)
+
+  let canBuy = ownedGunLevel < item.level
+  let canEquip = ownedGunLevel >= item.level && equippedGunLevel !== item.level
+
+  drawButton(
+    buyRect.x, buyRect.y, buyRect.w, buyRect.h,
+    canBuy ? "Buy" : "Purchased",
+    canBuy,
+    mouseOverRect(buyRect.x, buyRect.y, buyRect.w, buyRect.h),
+    [40, 110, 220]
+  )
+
+  drawButton(
+    equipRect.x, equipRect.y, equipRect.w, equipRect.h,
+    equippedGunLevel === item.level ? "Equipped" : "Equip",
+    canEquip,
+    mouseOverRect(equipRect.x, equipRect.y, equipRect.w, equipRect.h),
+    [30, 150, 100]
+  )
+
+  pop()
+}
+
+function drawPreviewPanel() {
+  drawPanel(20, 466, width - 40, 154)
+
+  let item = shopItems[selectedIndex]
+
+  fill(255)
+  textAlign(LEFT, TOP)
+  textStyle(BOLD)
+  textSize(22)
+  text("Preview", 38, 486)
+
+  textStyle(NORMAL)
+  textSize(14)
+  fill(200)
+  text("Showcase model / pseudo-3D display", 38, 516)
+
+  let cx = 265
+  let cy = 548
+
+  // 阴影 / shadow
+  push()
+  noStroke()
+  fill(0, 0, 0, 55)
+  ellipse(cx, cy + 30, 120, 26)
+  pop()
+
+  // 底座 / stand
+  push()
+  noStroke()
+  fill(255, 255, 255, 14)
+  rect(cx - 78, cy + 18, 156, 10, 8)
+  fill(180, 220, 255, 20)
+  rect(cx - 60, cy + 6, 120, 8, 6)
+  pop()
+
+  // 展示枪模型 / showcase model
+  push()
+  translate(cx, cy)
+  drawGunShowcaseModel(item)
+  pop()
+
+  fill(235)
+  textAlign(LEFT, TOP)
+  textSize(16)
+  text(`Selected: ${item.name}`, 420, 492)
+  text(`Damage: ${item.damage}`, 420, 520)
+  text(`Bullet Speed: ${item.speed}`, 420, 546)
+  text(`Cooldown: ${item.cooldown}s`, 420, 572)
+
+  fill(180, 220, 255)
+  textSize(14)
+  text(
+    "Hint: after buying, equip it here. Your Level 2 / Level 3 scripts can read shopGunLevel from localStorage.",
+    420,
+    598
+  )
+}
+
+function drawBottomStatus() {
+  if (hoverIndex !== -1) {
+    let item = shopItems[hoverIndex]
+    fill(255, 245, 200)
+    textAlign(RIGHT, CENTER)
+    textSize(14)
+    text(`Hovering: ${item.name}`, width - 34, height - 14)
+  }
+}
+
+function drawFlashMessage() {
+  if (flashTimer <= 0) return
+
+  let alpha = map(flashTimer, 0, 60, 0, 220)
+  noStroke()
+  fill(flashGood ? color(40, 170, 90, alpha) : color(180, 70, 70, alpha))
+  rect(width / 2 - 170, 112, 340, 40, 10)
+
+  fill(255, alpha)
+  textAlign(CENTER, CENTER)
+  textSize(16)
+  text(flashText, width / 2, 132)
+}
+
+// ==================== UI 小组件 / UI Components ====================
+function drawPanel(x, y, w, h) {
+  noStroke()
+  fill(24, 30, 45, 235)
+  rect(x, y, w, h, 14)
+
+  fill(255, 255, 255, 10)
+  rect(x + 2, y + 2, w - 4, 20, 12)
+}
+
+function drawCardGlow(x, y, w, h, accent, strength) {
+  if (strength <= 0) return
+  noStroke()
+  fill(accent[0], accent[1], accent[2], 18 * strength)
+  rect(x - 6, y - 6, w + 12, h + 12, 18)
+}
+
+function drawTag(label, x, y, c) {
+  noStroke()
+  fill(c[0], c[1], c[2], 210)
+  rect(x, y, 106, 26, 999)
+
+  fill(255)
+  textAlign(CENTER, CENTER)
+  textSize(12)
+  text(label, x + 53, y + 13)
+}
+
+function drawButton(x, y, w, h, label, enabled, hovered, baseColor) {
+  let c = enabled ? baseColor : [90, 95, 110]
+  let brighten = hovered && enabled ? 25 : 0
+
+  noStroke()
+  fill(c[0] + brighten, c[1] + brighten, c[2] + brighten)
+  rect(x, y, w, h, 10)
+
+  fill(255, 255, 255, hovered ? 28 : 16)
+  rect(x + 2, y + 2, w - 4, 10, 8)
+
+  fill(255)
+  textAlign(CENTER, CENTER)
+  textSize(14)
+  text(label, x + w / 2, y + h / 2)
+}
+
+function drawWeaponIcon(item, x, y, w, h) {
+  noStroke()
+  fill(18, 22, 32)
+  rect(x, y, w, h, 14)
+
+  push()
+  translate(x + w / 2, y + h / 2)
+  scale(0.9)
+  drawGunModel(item, 0, 0, 0.9)
+  pop()
+}
+
+function drawGunModel(item, x, y, s = 1) {
+  push()
+  translate(x, y)
+  scale(s)
+
+  let body = item.color
+  let accent = item.accent
+
+  noStroke()
+
+  fill(body[0], body[1], body[2])
+  rect(-36, -6, 52, 12, 4)
+  rect(12, -4, 16, 8, 3)
+  rect(-20, 6, 10, 20, 4)
+
+  fill(accent[0], accent[1], accent[2])
+  rect(-28, -10, 18, 5, 3)
+  rect(-2, -3, 10, 6, 2)
+
+  fill(255, 255, 255, 40)
+  rect(-34, -4, 18, 3, 2)
+
+  pop()
+}
+
+// 更像展柜展示的伪3D模型 / pseudo-3D showcase model
+function drawGunShowcaseModel(item) {
+  let body = item.color
+  let accent = item.accent
+
+  let yaw = sin(rotationAngle) * 0.9
+  let bob = sin(rotationAngle * 1.4) * 4
+
+  let bodyLen = 78 + cos(rotationAngle) * 10
+  let barrelLen = 26 + cos(rotationAngle) * 6
+
+  rotate(-0.28)
+  translate(0, bob)
+
+  noStroke()
+
+  // 阴影层 / shadow layer
+  push()
+  fill(0, 0, 0, 35)
+  rect(-bodyLen * 0.55 + 3, -8 + 3, bodyLen, 16, 6)
+  rect(bodyLen * 0.12 + 3, -5 + 3, barrelLen, 10, 4)
+  rect(-18 + 3, 8 + 3, 14, 32, 6)
+  pop()
+
+  // 主体 / main body
+  fill(body[0], body[1], body[2])
+  rect(-bodyLen * 0.55, -8, bodyLen, 16, 6)
+
+  // 枪管 / barrel
+  rect(bodyLen * 0.12, -5, barrelLen, 10, 4)
+
+  // 握把 / grip
+  rect(-18, 8, 14, 32, 6)
+
+  // 枪托 / rear stock
+  rect(-bodyLen * 0.55 - 12, -4, 16, 8, 4)
+
+  // 高光 / highlights
+  fill(accent[0], accent[1], accent[2], 230)
+  rect(-bodyLen * 0.38, -12, bodyLen * 0.34, 6, 4)
+  rect(-4, -4, 14, 8, 3)
+
+  fill(255, 255, 255, 60)
+  rect(bodyLen * 0.18, -3, barrelLen * 0.45, 3, 2)
+
+  // 伪3D厚度 / fake thickness
+  fill(
+    max(body[0] - 25, 0),
+    max(body[1] - 25, 0),
+    max(body[2] - 25, 0)
+  )
+  quad(
+    -bodyLen * 0.55, 8,
+    bodyLen * 0.45, 8,
+    bodyLen * 0.45 + yaw * 7, 14,
+    -bodyLen * 0.55 + yaw * 7, 14
+  )
+
+  quad(
+    -18, 40,
+    -4, 40,
+    -4 + yaw * 3, 46,
+    -18 + yaw * 3, 46
+  )
+
+  // 小反光 / sparkle
+  fill(255, 255, 255, 70)
+  ellipse(-bodyLen * 0.08, -1, 10, 6)
+}
+
+// ==================== 交互 / Interaction ====================
+function mousePressed() {
+  ensureAudio()
+
+  for (let i = 0; i < shopItems.length; i++) {
+    if (mouseOverRect(buyButtons[i].x, buyButtons[i].y, buyButtons[i].w, buyButtons[i].h)) {
+      selectedIndex = i
+      tryBuy(i)
+      return
+    }
+
+    if (mouseOverRect(equipButtons[i].x, equipButtons[i].y, equipButtons[i].w, equipButtons[i].h)) {
+      selectedIndex = i
+      tryEquip(i)
+      return
+    }
+  }
+
+  let startX = 20
+  let cardY = 188
+  let gap = 18
+  let cardW = 290
+  let cardH = 255
+
+  for (let i = 0; i < shopItems.length; i++) {
+    let x = startX + i * (cardW + gap)
+    if (mouseOverRect(x, cardY, cardW, cardH)) {
+      selectedIndex = i
+      playHoverTone()
+      return
+    }
+  }
+}
+
+function keyPressed() {
+  ensureAudio()
+
+  if (keyCode === LEFT_ARROW) {
+    selectedIndex = max(0, selectedIndex - 1)
+    playHoverTone()
+  } else if (keyCode === RIGHT_ARROW) {
+    selectedIndex = min(shopItems.length - 1, selectedIndex + 1)
+    playHoverTone()
+  } else if (key === 'b' || key === 'B') {
+    tryBuy(selectedIndex)
+  } else if (key === 'e' || key === 'E') {
+    tryEquip(selectedIndex)
+  } else if (key === '1') {
+    selectedIndex = 0
+    playHoverTone()
+  } else if (key === '2') {
+    selectedIndex = 1
+    playHoverTone()
+  } else if (key === '3') {
+    selectedIndex = 2
+    playHoverTone()
+  }
+}
+
+function tryBuy(index) {
+  let item = shopItems[index]
+
+  if (ownedGunLevel >= item.level) {
+    showFlash("Already purchased", false)
+    playFailTone()
+    return
+  }
+
+  if (coins < item.price) {
+    showFlash("Not enough coins", false)
+    playFailTone()
+    return
+  }
+
+  coins -= item.price
+  ownedGunLevel = item.level
+  saveShopState()
+
+  showFlash(`Purchased ${item.name}`, true)
+  playBuyTone()
+}
+
+function tryEquip(index) {
+  let item = shopItems[index]
+
+  if (ownedGunLevel < item.level) {
+    showFlash("Buy it first", false)
+    playFailTone()
+    return
+  }
+
+  if (equippedGunLevel === item.level) {
+    showFlash("Already equipped", false)
+    playHoverTone()
+    return
+  }
+
+  equippedGunLevel = item.level
+  saveShopState()
+
+  showFlash(`Equipped ${item.name}`, true)
+  playEquipTone()
+}
+
+function showFlash(msg, good) {
+  flashText = msg
+  flashGood = good
+  flashTimer = 60
+}
+
+function mouseOverRect(x, y, w, h) {
+  return mouseX >= x && mouseX <= x + w && mouseY >= y && mouseY <= y + h
+}
+
+// ==================== 音效 / Audio ====================
+function ensureAudio() {
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)()
+  }
+  if (audioCtx.state === "suspended") {
+    audioCtx.resume()
+  }
+}
+
+function playTone(freq, duration, type = "sine", volume = 0.03) {
+  if (!audioCtx) return
+
+  let osc = audioCtx.createOscillator()
+  let gain = audioCtx.createGain()
+
+  osc.type = type
+  osc.frequency.value = freq
+  gain.gain.value = volume
+
+  osc.connect(gain)
+  gain.connect(audioCtx.destination)
+
+  let now = audioCtx.currentTime
+  gain.gain.setValueAtTime(volume, now)
+  gain.gain.exponentialRampToValueAtTime(0.0001, now + duration)
+
+  osc.start(now)
+  osc.stop(now + duration)
+}
+
+function playBuyTone() {
+  playTone(520, 0.08, "triangle", 0.05)
+  setTimeout(() => playTone(680, 0.10, "triangle", 0.05), 60)
+}
+
+function playEquipTone() {
+  playTone(480, 0.07, "sine", 0.04)
+  setTimeout(() => playTone(620, 0.09, "sine", 0.04), 50)
+}
+
+function playFailTone() {
+  playTone(220, 0.10, "sawtooth", 0.04)
+}
+
+function playHoverTone() {
+  playTone(360, 0.04, "square", 0.02)
+}
