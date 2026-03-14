@@ -12,7 +12,7 @@ const timeLimit = 5;
 const playerSpeed = 120;
 const enemyCount = 8;
 
-// 第二关雾比第三关更暗一点 / Level 2 fog is slightly darker than Level 3
+// 迷雾亮度 / fog 
 const fogRadiusNoLamp = 0;
 const fogRadiusWithLamp = 165;
 
