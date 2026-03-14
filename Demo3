@@ -26,7 +26,7 @@ const bossProjectileDamage = 14;
 const bossSpeed = 36;
 const bossShootCooldown = 1.6;
 
-// 迷雾亮度改成和第二关一样 / Match level 2 fog brightness
+// 迷雾亮度 / Fog brightness
 const fogAlpha = 185;
 const fogRevealRadius = 165;
 
