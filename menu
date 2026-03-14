@@ -1,7 +1,3 @@
-// ==================== Lost in Bristol - Main Menu Hub ====================
-// 主菜单枢纽（只负责菜单、角色、关卡选择、说明，不内嵌商店内容）
-// Main hub (menu, characters, level select, guide only; shop is not embedded here)
-
 // ==================== 场景常量 / Scene constants ====================
 const SCENE_MAIN_MENU = "main_menu";
 const SCENE_LEVEL_SELECT = "level_select";
@@ -39,7 +35,7 @@ let selectedCharacterId = 1;
 let audioCtx = null;
 
 // ==================== 角色数据 / Character data ====================
-// 目前先用颜色区分角色，之后可以替换成你们画好的角色图片
+// 目前先用颜色区分角色，之后可以替换成画好的角色图片
 // Characters are currently color-coded placeholders and can be replaced with real art later
 const characterOptions = [
   {
