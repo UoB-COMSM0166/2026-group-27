@@ -7,7 +7,7 @@ const blockSize = 32;
 const miniMapScale = 3;
 const mazeW = 16;
 const mazeH = 16;
-const timeLimit = 7;
+const timeLimit = 5;
 
 const playerSpeed = 120;
 const enemyCount = 15;
