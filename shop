@@ -52,22 +52,28 @@ let flashTimer = 0
 let flashText = ""
 let flashGood = true
 
-// 音效 / Sounds
 let audioCtx = null
+
+// 布局缓存 / Layout cache
+let layout = null
 
 // ==================== p5 入口 / p5 Entry ====================
 function setup() {
-  createCanvas(980, 640)
+  createCanvas(windowWidth, windowHeight)
   textFont('Arial')
+  updateCanvasSize()
 
   initShopStorage()
   loadShopState()
+  computeLayout()
 }
 
 function draw() {
   uiPulse += 0.03
   rotationAngle += 0.03
   if (flashTimer > 0) flashTimer--
+
+  computeLayout()
 
   background(14, 18, 28)
   drawBackgroundGlow()
@@ -77,6 +83,11 @@ function draw() {
   drawPreviewPanel()
   drawBottomStatus()
   drawFlashMessage()
+}
+
+function windowResized() {
+  updateCanvasSize()
+  computeLayout()
 }
 
 // ==================== 初始化 / Init ====================
@@ -108,55 +119,103 @@ function saveShopState() {
   localStorage.setItem("shopGunLevel", String(equippedGunLevel))
 }
 
+function updateCanvasSize() {
+  const w = max(windowWidth, 920)
+  const h = max(windowHeight, 700)
+  resizeCanvas(w, h)
+}
+
+// ==================== 布局 / Layout ====================
+function computeLayout() {
+  const margin = clamp(width * 0.02, 16, 28)
+  const titleH = clamp(height * 0.11, 82, 96)
+  const infoH = clamp(height * 0.065, 48, 60)
+  const gapY = 14
+  const gapX = clamp(width * 0.018, 12, 20)
+
+  const cardsY = margin + titleH + gapY + infoH + gapY
+  const previewH = clamp(height * 0.24, 150, 190)
+  const footerReserve = 28
+  const availableForCards = height - cardsY - previewH - footerReserve - gapY - margin
+
+  const cardsH = clamp(availableForCards, 230, 295)
+  const cardW = floor((width - margin * 2 - gapX * 2) / 3)
+
+  layout = {
+    margin,
+    titleH,
+    infoH,
+    gapY,
+    gapX,
+    cardsY,
+    cardsH,
+    cardW,
+    previewY: cardsY + cardsH + gapY,
+    previewH
+  }
+}
+
+function getUIScale() {
+  return min(width / 980, height / 720)
+}
+
 // ==================== 绘制主界面 / Main Drawing ====================
 function drawBackgroundGlow() {
   noStroke()
   fill(40, 60, 100, 30)
-  circle(width * 0.18, height * 0.18, 260)
+  circle(width * 0.18, height * 0.18, min(width, height) * 0.36)
   fill(70, 40, 120, 28)
-  circle(width * 0.82, height * 0.22, 320)
+  circle(width * 0.82, height * 0.22, min(width, height) * 0.42)
   fill(30, 90, 90, 24)
-  circle(width * 0.72, height * 0.82, 260)
+  circle(width * 0.72, height * 0.82, min(width, height) * 0.35)
 }
 
 function drawTitleBar() {
-  drawPanel(20, 18, width - 40, 88)
+  const m = layout.margin
+  const h = layout.titleH
+  drawPanel(m, m, width - m * 2, h)
+
+  const s = getUIScale()
 
   fill(255)
   textAlign(LEFT, CENTER)
-  textSize(28)
+  textSize(clamp(28 * s, 22, 30))
   textStyle(BOLD)
-  text("WEAPON SHOP", 40, 52)
+  text("WEAPON SHOP", m + 18, m + h * 0.42)
 
   textStyle(NORMAL)
-  textSize(14)
+  textSize(clamp(14 * s, 12, 15))
   fill(200)
-  text("Pure p5 shop demo", 42, 82)
+  text("Pure p5 shop demo", m + 20, m + h * 0.74)
 
   fill(255, 220, 120)
-  textSize(18)
+  textSize(clamp(18 * s, 14, 20))
   textAlign(RIGHT, CENTER)
-  text(`Coins: £${coins}`, width - 40, 52)
+  text(`Coins: £${coins}`, width - m - 18, m + h * 0.42)
 
   fill(180, 220, 255)
-  textSize(14)
+  textSize(clamp(14 * s, 11, 15))
   text(
     `Equipped: ${shopItems[equippedGunLevel - 1].name}`,
-    width - 40,
-    80
+    width - m - 18,
+    m + h * 0.74
   )
 }
 
 function drawInstructions() {
-  drawPanel(20, 118, width - 40, 54)
+  const m = layout.margin
+  const y = m + layout.titleH + layout.gapY
+  const h = layout.infoH
+
+  drawPanel(m, y, width - m * 2, h)
 
   fill(215)
   textAlign(LEFT, CENTER)
-  textSize(14)
+  textSize(clamp(14 * getUIScale(), 11, 15))
   text(
     "Mouse: hover / click    Keyboard: ← → select, B buy, E equip, 1/2/3 quick select",
-    38,
-    145
+    m + 18,
+    y + h / 2
   )
 }
 
@@ -165,15 +224,9 @@ function drawWeaponCards() {
   equipButtons = []
   hoverIndex = -1
 
-  let startX = 20
-  let cardY = 188
-  let gap = 18
-  let cardW = 290
-  let cardH = 255
-
   for (let i = 0; i < shopItems.length; i++) {
-    let x = startX + i * (cardW + gap)
-    drawWeaponCard(i, x, cardY, cardW, cardH)
+    const x = layout.margin + i * (layout.cardW + layout.gapX)
+    drawWeaponCard(i, x, layout.cardsY, layout.cardW, layout.cardsH)
   }
 }
 
@@ -188,6 +241,18 @@ function drawWeaponCard(i, x, y, w, h) {
   let glow = isSelected ? 1 : 0
   if (hoveringCard) glow = max(glow, 0.7)
 
+  const s = min(1, w / 290)
+  const pad = 18 * s
+  const iconSize = clamp(72 * s, 52, 72)
+  const titleX = x + pad + iconSize + 14 * s
+  const bodyLeft = x + pad
+  const textWidth = w - pad * 2 - iconSize - 18 * s
+  const smallText = clamp(14 * s, 11, 14)
+  const titleText = clamp(22 * s, 16, 22)
+  const descText = clamp(13 * s, 10, 13)
+  const buttonH = clamp(34 * s, 28, 34)
+  const buttonW = (w - pad * 2 - 12 * s) / 2
+
   push()
   translate(0, hoverLift)
 
@@ -201,19 +266,18 @@ function drawWeaponCard(i, x, y, w, h) {
     rect(x + 2, y + 2, w - 4, h - 4, 14)
   }
 
-  drawWeaponIcon(item, x + 22, y + 24, 72, 72)
+  drawWeaponIcon(item, x + pad, y + pad, iconSize, iconSize)
 
   fill(255)
   textAlign(LEFT, TOP)
   textStyle(BOLD)
-  textSize(22)
-  text(item.name, x + 108, y + 26)
+  textSize(titleText)
+  drawFitText(item.name, titleX, y + pad - 2, textWidth, 1.2)
 
   textStyle(NORMAL)
-  textSize(13)
+  textSize(descText)
   fill(200)
-  textAlign(LEFT, TOP)
-  text(item.desc, x + 108, y + 58)
+  drawWrappedText(item.desc, titleX, y + pad + 28 * s, textWidth, 16 * s, 2)
 
   let tagText = ""
   let tagColor = [90, 90, 110]
@@ -229,17 +293,36 @@ function drawWeaponCard(i, x, y, w, h) {
     tagColor = [130, 90, 40]
   }
 
-  drawTag(tagText, x + 108, y + 90, tagColor)
+  drawTag(
+    tagText,
+    titleX,
+    y + pad + iconSize - 10 * s,
+    tagColor,
+    min(112 * s, textWidth)
+  )
 
   fill(235)
   textAlign(LEFT, TOP)
-  textSize(14)
-  text(`Damage: ${item.damage}`, x + 24, y + 128)
-  text(`Bullet Speed: ${item.speed}`, x + 24, y + 152)
-  text(`Cooldown: ${item.cooldown}s`, x + 24, y + 176)
+  textSize(smallText)
 
-  let buyRect = { x: x + 24, y: y + 206, w: 110, h: 34 }
-  let equipRect = { x: x + 152, y: y + 206, w: 110, h: 34 }
+  let statsY = y + pad + iconSize + 18 * s
+  drawFitText(`Damage: ${item.damage}`, bodyLeft, statsY, w - pad * 2, 1.2)
+  drawFitText(`Bullet Speed: ${item.speed}`, bodyLeft, statsY + 24 * s, w - pad * 2, 1.2)
+  drawFitText(`Cooldown: ${item.cooldown}s`, bodyLeft, statsY + 48 * s, w - pad * 2, 1.2)
+
+  let buyRect = {
+    x: x + pad,
+    y: y + h - pad - buttonH,
+    w: buttonW,
+    h: buttonH
+  }
+
+  let equipRect = {
+    x: x + pad + buttonW + 12 * s,
+    y: y + h - pad - buttonH,
+    w: buttonW,
+    h: buttonH
+  }
 
   buyButtons.push(buyRect)
   equipButtons.push(equipRect)
@@ -267,60 +350,69 @@ function drawWeaponCard(i, x, y, w, h) {
 }
 
 function drawPreviewPanel() {
-  drawPanel(20, 466, width - 40, 154)
+  const x = layout.margin
+  const y = layout.previewY
+  const w = width - layout.margin * 2
+  const h = layout.previewH
+  const s = getUIScale()
+
+  drawPanel(x, y, w, h)
 
   let item = shopItems[selectedIndex]
 
   fill(255)
   textAlign(LEFT, TOP)
   textStyle(BOLD)
-  textSize(22)
-  text("Preview", 38, 486)
+  textSize(clamp(22 * s, 18, 24))
+  text("Preview", x + 18, y + 18)
 
   textStyle(NORMAL)
-  textSize(14)
+  textSize(clamp(14 * s, 11, 14))
   fill(200)
-  text("Showcase model / pseudo-3D display", 38, 516)
+  text("Showcase model / pseudo-3D display", x + 18, y + 50)
 
-  let cx = 265
-  let cy = 548
+  let showcaseX = x + min(245, w * 0.26)
+  let showcaseY = y + h * 0.58
 
-  // 阴影 / shadow
   push()
   noStroke()
   fill(0, 0, 0, 55)
-  ellipse(cx, cy + 30, 120, 26)
+  ellipse(showcaseX, showcaseY + 30, min(120, w * 0.12), 26)
   pop()
 
-  // 底座 / stand
   push()
   noStroke()
   fill(255, 255, 255, 14)
-  rect(cx - 78, cy + 18, 156, 10, 8)
+  rect(showcaseX - 78, showcaseY + 18, 156, 10, 8)
   fill(180, 220, 255, 20)
-  rect(cx - 60, cy + 6, 120, 8, 6)
+  rect(showcaseX - 60, showcaseY + 6, 120, 8, 6)
   pop()
 
-  // 展示枪模型 / showcase model
   push()
-  translate(cx, cy)
+  translate(showcaseX, showcaseY)
+  scale(clamp(s, 0.85, 1.15))
   drawGunShowcaseModel(item)
   pop()
 
+  let infoX = x + min(420, w * 0.42)
+
   fill(235)
   textAlign(LEFT, TOP)
-  textSize(16)
-  text(`Selected: ${item.name}`, 420, 492)
-  text(`Damage: ${item.damage}`, 420, 520)
-  text(`Bullet Speed: ${item.speed}`, 420, 546)
-  text(`Cooldown: ${item.cooldown}s`, 420, 572)
+  textSize(clamp(16 * s, 13, 16))
+  drawFitText(`Selected: ${item.name}`, infoX, y + 24, w - (infoX - x) - 20, 1.2)
+  drawFitText(`Damage: ${item.damage}`, infoX, y + 52, w - (infoX - x) - 20, 1.2)
+  drawFitText(`Bullet Speed: ${item.speed}`, infoX, y + 80, w - (infoX - x) - 20, 1.2)
+  drawFitText(`Cooldown: ${item.cooldown}s`, infoX, y + 108, w - (infoX - x) - 20, 1.2)
 
   fill(180, 220, 255)
-  textSize(14)
-  text(
+  textSize(clamp(14 * s, 11, 14))
+  drawWrappedText(
     "Hint: after buying, equip it here. Your Level 2 / Level 3 scripts can read shopGunLevel from localStorage.",
-    420,
-    598
+    infoX,
+    y + 136,
+    w - (infoX - x) - 24,
+    16,
+    2
   )
 }
 
@@ -329,8 +421,8 @@ function drawBottomStatus() {
     let item = shopItems[hoverIndex]
     fill(255, 245, 200)
     textAlign(RIGHT, CENTER)
-    textSize(14)
-    text(`Hovering: ${item.name}`, width - 34, height - 14)
+    textSize(clamp(14 * getUIScale(), 11, 14))
+    text(`Hovering: ${item.name}`, width - layout.margin, height - 14)
   }
 }
 
@@ -340,11 +432,11 @@ function drawFlashMessage() {
   let alpha = map(flashTimer, 0, 60, 0, 220)
   noStroke()
   fill(flashGood ? color(40, 170, 90, alpha) : color(180, 70, 70, alpha))
-  rect(width / 2 - 170, 112, 340, 40, 10)
+  rect(width / 2 - min(170, width * 0.18), 112, min(340, width * 0.36), 40, 10)
 
   fill(255, alpha)
   textAlign(CENTER, CENTER)
-  textSize(16)
+  textSize(clamp(16 * getUIScale(), 12, 16))
   text(flashText, width / 2, 132)
 }
 
@@ -355,7 +447,7 @@ function drawPanel(x, y, w, h) {
   rect(x, y, w, h, 14)
 
   fill(255, 255, 255, 10)
-  rect(x + 2, y + 2, w - 4, 20, 12)
+  rect(x + 2, y + 2, w - 4, min(20, h * 0.18), 12)
 }
 
 function drawCardGlow(x, y, w, h, accent, strength) {
@@ -365,15 +457,15 @@ function drawCardGlow(x, y, w, h, accent, strength) {
   rect(x - 6, y - 6, w + 12, h + 12, 18)
 }
 
-function drawTag(label, x, y, c) {
+function drawTag(label, x, y, c, tagW = 106) {
   noStroke()
   fill(c[0], c[1], c[2], 210)
-  rect(x, y, 106, 26, 999)
+  rect(x, y, tagW, 26, 999)
 
   fill(255)
   textAlign(CENTER, CENTER)
-  textSize(12)
-  text(label, x + 53, y + 13)
+  textSize(clamp(12 * getUIScale(), 10, 12))
+  text(label, x + tagW / 2, y + 13)
 }
 
 function drawButton(x, y, w, h, label, enabled, hovered, baseColor) {
@@ -385,12 +477,12 @@ function drawButton(x, y, w, h, label, enabled, hovered, baseColor) {
   rect(x, y, w, h, 10)
 
   fill(255, 255, 255, hovered ? 28 : 16)
-  rect(x + 2, y + 2, w - 4, 10, 8)
+  rect(x + 2, y + 2, w - 4, min(10, h * 0.35), 8)
 
   fill(255)
   textAlign(CENTER, CENTER)
-  textSize(14)
-  text(label, x + w / 2, y + h / 2)
+  textSize(clamp(14 * getUIScale(), 11, 14))
+  drawCenteredFitText(label, x + w / 2, y + h / 2, w - 10)
 }
 
 function drawWeaponIcon(item, x, y, w, h) {
@@ -400,7 +492,7 @@ function drawWeaponIcon(item, x, y, w, h) {
 
   push()
   translate(x + w / 2, y + h / 2)
-  scale(0.9)
+  scale(min(0.9, w / 80))
   drawGunModel(item, 0, 0, 0.9)
   pop()
 }
@@ -430,7 +522,6 @@ function drawGunModel(item, x, y, s = 1) {
   pop()
 }
 
-// 更像展柜展示的伪3D模型 / pseudo-3D showcase model
 function drawGunShowcaseModel(item) {
   let body = item.color
   let accent = item.accent
@@ -446,7 +537,6 @@ function drawGunShowcaseModel(item) {
 
   noStroke()
 
-  // 阴影层 / shadow layer
   push()
   fill(0, 0, 0, 35)
   rect(-bodyLen * 0.55 + 3, -8 + 3, bodyLen, 16, 6)
@@ -454,20 +544,12 @@ function drawGunShowcaseModel(item) {
   rect(-18 + 3, 8 + 3, 14, 32, 6)
   pop()
 
-  // 主体 / main body
   fill(body[0], body[1], body[2])
   rect(-bodyLen * 0.55, -8, bodyLen, 16, 6)
-
-  // 枪管 / barrel
   rect(bodyLen * 0.12, -5, barrelLen, 10, 4)
-
-  // 握把 / grip
   rect(-18, 8, 14, 32, 6)
-
-  // 枪托 / rear stock
   rect(-bodyLen * 0.55 - 12, -4, 16, 8, 4)
 
-  // 高光 / highlights
   fill(accent[0], accent[1], accent[2], 230)
   rect(-bodyLen * 0.38, -12, bodyLen * 0.34, 6, 4)
   rect(-4, -4, 14, 8, 3)
@@ -475,7 +557,6 @@ function drawGunShowcaseModel(item) {
   fill(255, 255, 255, 60)
   rect(bodyLen * 0.18, -3, barrelLen * 0.45, 3, 2)
 
-  // 伪3D厚度 / fake thickness
   fill(
     max(body[0] - 25, 0),
     max(body[1] - 25, 0),
@@ -495,9 +576,65 @@ function drawGunShowcaseModel(item) {
     -18 + yaw * 3, 46
   )
 
-  // 小反光 / sparkle
   fill(255, 255, 255, 70)
   ellipse(-bodyLen * 0.08, -1, 10, 6)
+}
+
+// ==================== 文本工具 / Text Helpers ====================
+function drawFitText(str, x, y, maxWidth, lineHeightFactor = 1.2) {
+  let originalSize = textSize()
+  let s = originalSize
+
+  while (s > 9 && textWidth(str) > maxWidth) {
+    s -= 0.5
+    textSize(s)
+  }
+
+  text(str, x, y)
+  textSize(originalSize)
+}
+
+function drawCenteredFitText(str, cx, cy, maxWidth) {
+  let originalSize = textSize()
+  let s = originalSize
+
+  while (s > 9 && textWidth(str) > maxWidth) {
+    s -= 0.5
+    textSize(s)
+  }
+
+  text(str, cx, cy)
+  textSize(originalSize)
+}
+
+function drawWrappedText(str, x, y, maxWidth, lineHeight = 16, maxLines = 2) {
+  let words = str.split(' ')
+  let lines = []
+  let current = ""
+
+  for (let w of words) {
+    let test = current.length === 0 ? w : current + " " + w
+    if (textWidth(test) <= maxWidth) {
+      current = test
+    } else {
+      if (current.length > 0) lines.push(current)
+      current = w
+    }
+  }
+  if (current.length > 0) lines.push(current)
+
+  if (lines.length > maxLines) {
+    lines = lines.slice(0, maxLines)
+    let last = lines[maxLines - 1]
+    while (textWidth(last + "...") > maxWidth && last.length > 0) {
+      last = last.slice(0, -1)
+    }
+    lines[maxLines - 1] = last + "..."
+  }
+
+  for (let i = 0; i < lines.length; i++) {
+    text(lines[i], x, y + i * lineHeight)
+  }
 }
 
 // ==================== 交互 / Interaction ====================
@@ -518,15 +655,9 @@ function mousePressed() {
     }
   }
 
-  let startX = 20
-  let cardY = 188
-  let gap = 18
-  let cardW = 290
-  let cardH = 255
-
   for (let i = 0; i < shopItems.length; i++) {
-    let x = startX + i * (cardW + gap)
-    if (mouseOverRect(x, cardY, cardW, cardH)) {
+    const x = layout.margin + i * (layout.cardW + layout.gapX)
+    if (mouseOverRect(x, layout.cardsY, layout.cardW, layout.cardsH)) {
       selectedIndex = i
       playHoverTone()
       return
@@ -661,4 +792,9 @@ function playFailTone() {
 
 function playHoverTone() {
   playTone(360, 0.04, "square", 0.02)
+}
+
+// ==================== 工具 / Utils ====================
+function clamp(v, minV, maxV) {
+  return min(max(v, minV), maxV)
 }
