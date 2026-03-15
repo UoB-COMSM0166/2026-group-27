@@ -6,8 +6,8 @@ const SCENE_GUIDE = "guide";
 const SCENE_LEVEL_LAUNCH = "level_launch";
 
 // ==================== 路由配置 / Route configuration ====================
-// 这里填写你之后各页面对应的 HTML 文件名
-// Put your later page HTML filenames here
+// 页面对应的 HTML 文件名
+// Put page HTML filenames
 const pageRoutes = {
   level1: "level1.html",
   level2: "level2.html",
