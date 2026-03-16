@@ -41,3 +41,12 @@ This folder stores developer logs.
   - add automatic enemy locking
 - Next Plan:
   - integrate games
+### keyu：
+- Completed:
+  - Find some suitable sounds for the enemy and boss
+  - Find some suitable music for the background
+- In Progress:
+  - Find some suitable sounds for the gun and treasure chest
+  - add sounds into the game
+- Next Plan:
+  - rewarding system
