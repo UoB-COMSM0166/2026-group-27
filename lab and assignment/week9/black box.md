@@ -4,8 +4,8 @@
 | Test ID | Feature | Input / Action | Expected Result | Status |
 |--------|--------|----------------|-----------------|--------|
 | N1 | Shop | Coins ≥ price, click buy | Purchase succeeds, coins deducted | Pass |
-| N2 | Movement | Press W/A/S/D | Player moves in correct direction | Pass |
-| N3 | Teleport | Enter portal A | Player appears at portal B | Pass |
+| N2 | Movement | Press ↑/←/↓/→ | Player moves in correct direction | Pass |
+| N3 | Teleport | Enter any portal | Player appears at a random portal | Pass |
 | N4 | Item | Pick up key | Key disappears and is collected | Pass |
 | N5 | Combat | Shoot enemy | Enemy takes damage | Pass |
 | N6 | Win Condition | Reach exit with objective | Level completed | Pass |
