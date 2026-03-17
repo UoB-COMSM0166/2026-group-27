@@ -754,14 +754,6 @@ function drawLevelLaunchScene() {
   }
 
   fill(180, 220, 255);
-  textSize(px(14));
-  textBox(
-    "This menu is designed to open your separate gameplay pages. Use the start button below to jump into the matching level HTML file.",
-    leftX + leftW + gap + px(20),
-    topY + boxH - px(92),
-    rightW - px(40),
-    px(60)
-  );
 
   addMenuButton(area.x + px(40), area.y + area.h - px(56), px(200), px(40), "Back to Levels", () => {
     changeScene(SCENE_LEVEL_SELECT);
