@@ -196,7 +196,6 @@ Epics
 
 - **Participants**: 10 users
 - **Questionnaires**: SUS (System Usability Scale) + NASA TLX (Task Load Index)
-- **Testing Date**: March 2026
 - **Difficulty Levels**: Two levels tested per participant
 
 ---
