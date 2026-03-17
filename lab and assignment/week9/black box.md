@@ -1,4 +1,4 @@
-## Black-box Testing
+### Black-box Testing
 
 ## Normal
 | Test ID | Type | Feature | Input / Action | Expected Result | Status |
