@@ -407,7 +407,7 @@ function drawPreviewPanel() {
   fill(180, 220, 255)
   textSize(clamp(14 * s, 11, 14))
   drawWrappedText(
-    "Hint: after buying, equip it here. Your Level 2 / Level 3 scripts can read shopGunLevel from localStorage.",
+    "Hint: after buying, equip it here.",
     infoX,
     y + 136,
     w - (infoX - x) - 24,
