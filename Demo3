@@ -462,7 +462,7 @@ function updateBullets(dt) {
                     e.alive = false;
                     smallKillCount += 1;
                     addCoins(1);
-                    healPlayer(20);
+                    healPlayer(5);//回复血量/restore life
                 }
             }
         }
