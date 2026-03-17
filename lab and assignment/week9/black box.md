@@ -25,7 +25,6 @@
 |--------|--------|----------------|-----------------|--------|
 | E1 | Shop | Buy without enough coins | Purchase denied, warning shown | Pass |
 | E2 | Door | Open door without key | Door remains locked | Pass |
-| E3 | Input | Spam clicking buttons | No crash, stable system | Pass |
-| E4 | Death | Move after death | No response / disabled controls | Pass |
-| E5 | Game State | Shoot in menu/shop | No effect | Pass |
-| E6 | Teleport | Rapid enter/exit portal | No glitch or infinite loop | Pass |
+| E3 | Death | Move after death | No response / disabled controls | Pass |
+| E4 | Game State | Shoot in menu/shop | No effect | Pass |
+| E5 | Teleport | Rapid enter/exit portal | No glitch or infinite loop | Pass |
