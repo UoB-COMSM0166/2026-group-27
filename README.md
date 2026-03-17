@@ -17,9 +17,9 @@ You will be developing your game using [P5.js](https://p5js.org) a javascript li
 
 STRAPLINE. Master the hills, icons, and urban labyrinth of Bristol in a classic maze exploration game with a modern cultural twist.
 
-[game](https://uob-comsm0166.github.io/2026-group-27/)
+[Here is our game](https://uob-comsm0166.github.io/2026-group-27/)
 
-IMAGE.<img width="1099" height="823" alt="image" src="https://github.com/user-attachments/assets/714cf088-0ab7-432a-a486-5d9f9bbc3420" />
+<img width="1099" height="823" alt="image" src="https://github.com/user-attachments/assets/714cf088-0ab7-432a-a486-5d9f9bbc3420" />
 
 VIDEO. Include a demo video of your game here (you don't have to wait until the end, you can insert a work in progress video)
 
