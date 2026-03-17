@@ -1,0 +1,12 @@
+| Test ID | Module          | Input / Action                | Expected Result                   | Actual Result | Status |
+| ------- | --------------- | ----------------------------- | --------------------------------- | ------------- | ------ |
+| M1      | Main Menu       | Open game                     | Main menu displayed correctly     | As expected   | Pass   |
+| P1      | Player Movement | Press W                       | Player moves upward               | As expected   | Pass   |
+| C1      | Collision       | Move into wall                | Player cannot pass through wall   | As expected   | Pass   |
+| T1      | Teleport        | Enter portal A                | Player appears at portal B        | As expected   | Pass   |
+| I1      | Item Pickup     | Touch key                     | Key is collected and disappears   | As expected   | Pass   |
+| H1      | Health          | Touch enemy                   | Health decreases                  | As expected   | Pass   |
+| S2      | Shop            | Buy item with enough coins    | Purchase succeeds, coins deducted | As expected   | Pass   |
+| S3      | Shop            | Buy item without enough coins | Purchase fails, warning shown     | As expected   | Pass   |
+| G1      | Win Condition   | Reach exit with objective     | Level completed                   | As expected   | Pass   |
+| U2      | Responsive UI   | Resize window smaller         | Text stays inside cards           | As expected   | Pass   |
