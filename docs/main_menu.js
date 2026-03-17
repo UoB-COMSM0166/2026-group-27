@@ -295,14 +295,6 @@ function drawMainMenu() {
   fill(210);
   text("Choose where to go next.", area.x + px(34), area.y + px(104));
 
-  fill(190);
-  textSize(px(15));
-  text(
-    "This hub connects Level 1, Level 2, Level 3,\ncharacter selection, rules, and the separate weapon shop page.",
-    area.x + px(34),
-    area.y + px(150)
-  );
-
   drawCharacterPortrait(getSelectedCharacter(), area.x + px(52), area.y + px(250), px(120), true);
 
   fill(255);
