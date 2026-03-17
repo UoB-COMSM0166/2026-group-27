@@ -12,7 +12,6 @@ You will be developing your game using [P5.js](https://p5js.org) a javascript li
 
 - [P5.js tutorials](https://p5js.org/tutorials/) 
 - [Coding Train P5.js](https://thecodingtrain.com/tracks/code-programming-with-p5-js) course - go here for enthusiastic video tutorials from Dan Shiffman (recommended!)
-- [game](https://main_menu.html/)
 
 ## Your Game (change to title of your game)
 
