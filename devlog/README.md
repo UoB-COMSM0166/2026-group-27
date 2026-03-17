@@ -56,7 +56,7 @@ This folder stores developer logs.
 ### Thanusha: 
 
 - Completed:
-  - Maze walls
+  - Maze walls - plain, cracked and moss growing out of walls
   - animation for bansky character (50% done)
  
 - In progress:
