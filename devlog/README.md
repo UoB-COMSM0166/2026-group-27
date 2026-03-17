@@ -50,3 +50,19 @@ This folder stores developer logs.
   - add sounds into the game
 - Next Plan:
   - rewarding system
+ 
+## week 9: 
+
+### Thanusha: 
+
+- Completed:
+  - Maze walls
+  - animation for bansky character (50% done)
+ 
+- In progress:
+  - Grafitti maze walls
+  - Animation for fox and bansky characters
+  - Final touches for character design and make them all cohesive
+
+ - Next Plan:
+   - Desig buildings for the maze
