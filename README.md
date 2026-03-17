@@ -107,6 +107,105 @@ Epics
 
 ## Week 8 SUS & NASA Data Collection
 
+# User Testing Results
+
+## 📊 SUS (System Usability Scale) Results
+
+### Overall Summary
+- **Average SUS Score**: 90.75/100 (Grade A - Excellent)
+- **Positive Questions Average**: 4.60/5.00 ⭐⭐⭐
+- **Negative Questions Average**: 1.34/5.00 ⭐⭐⭐
+
+---
+
+### Detailed Scores (1-5 Scale)
+
+| Question | P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10 | **Avg** | Type |
+|----------|----|----|----|----|----|----|----|----|----|----|---------|------|
+| Q1: Use frequently | 5 | 5 | 5 | 5 | 5 | 4 | 5 | 4 | 5 | 4 | **4.70** | + |
+| Q2: Unnecessarily complex | 1 | 1 | 2 | 1 | 1 | 2 | 1 | 1 | 2 | 2 | **1.40** | - |
+| Q3: Easy to use | 5 | 4 | 4 | 5 | 5 | 5 | 4 | 4 | 4 | 5 | **4.50** | + |
+| Q4: Need tech support | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 2 | 2 | **1.20** | - |
+| Q5: Well integrated | 5 | 4 | 5 | 5 | 5 | 5 | 5 | 5 | 4 | 4 | **4.70** | + |
+| Q6: Too much inconsistency | 2 | 1 | 1 | 1 | 1 | 1 | 2 | 2 | 2 | 1 | **1.40** | - |
+| Q7: Learn quickly | 5 | 4 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 4 | **4.80** | + |
+| Q8: Cumbersome to use | 1 | 1 | 1 | 1 | 1 | 2 | 2 | 1 | 2 | 1 | **1.30** | - |
+| Q9: Felt confident | 5 | 4 | 5 | 5 | 5 | 3 | 4 | 4 | 4 | 4 | **4.30** | + |
+| Q10: Learn a lot first | 1 | 2 | 1 | 1 | 1 | 2 | 1 | 1 | 2 | 2 | **1.40** | - |
+
+> **Legend**: Type `+` = Positive question (higher is better), Type `-` = Negative question (lower is better)
+
+---
+
+### Individual Participant SUS Scores (0-100)
+
+| Participant | P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10 |
+|-------------|----|----|----|----|----|----|----|----|----|----|
+| **SUS Score** | 97.5 | 87.5 | 95.0 | 100 | 100 | 85.0 | 90.0 | 90.0 | 80.0 | 82.5 |
+
+**Range**: 80.0 - 100.0 | **Standard Deviation**: 7.17
+
+---
+
+## 🚀 NASA TLX (Task Load Index) Results
+
+### Overall Workload
+- **Average Workload**: 40.1/100 (Low-Moderate)
+- **Assessment**: Well-balanced difficulty ✅
+
+---
+
+### Dimension Scores
+
+| Dimension | P1 | P2 | P3 | P4 | P5 | P6 | P7 | P8 | P9 | P10 | **Avg** | Assessment |
+|-----------|----|----|----|----|----|----|----|----|----|----|---------|------------|
+| Mental Demand | 60 | 50 | 30 | 20 | 29 | 60 | 50 | 60 | 60 | 65 | **48.4** | Moderate |
+| Physical Demand | 70 | 60 | 50 | 30 | 20 | 15 | 25 | 15 | 50 | 60 | **39.5** | Low-Moderate |
+| Temporal Demand | 60 | 50 | 70 | 50 | 60 | 75 | 30 | 40 | 30 | 40 | **50.5** | Moderate |
+| Performance | 65 | 70 | 50 | 90 | 90 | 95 | 65 | 80 | 75 | 80 | **76.0** | Good ✅ |
+| Effort | 60 | 60 | 50 | 50 | 40 | 60 | 40 | 50 | 50 | 50 | **51.0** | Moderate |
+| Frustration | 20 | 30 | 20 | 20 | 20 | 25 | 30 | 35 | 40 | 30 | **27.0** | Low ✅ |
+
+---
+
+## 🎯 Key Findings
+
+### ✅ Strengths
+- **Exceptional SUS score** (90.75) - well above industry average of 68
+- **Ease of learning** (Q7: 4.80/5) - users can quickly master the system
+- **Low frustration** (27.0/100) - smooth user experience
+- **High performance** (76.0/100) - users successfully complete tasks
+- **Technical independence** (Q4: 1.20/5) - no support needed
+
+### ⚠️ Areas for Improvement
+- **User confidence** (Q9: 4.30/5) - one user rated 3/5, suggesting room for improved feedback
+- **Temporal demand** (50.5/100) - moderate time pressure, could optimize pacing
+
+---
+
+## 💡 Recommendations
+
+1. **Maintain excellence** - current design is highly effective
+2. **Enhance feedback** - provide clearer success indicators to boost user confidence
+3. **Optimize pacing** - fine-tune task timing to reduce temporal pressure
+4. **Continue low frustration approach** - keep the intuitive design philosophy
+
+---
+
+## 📝 Testing Methodology
+
+- **Participants**: 10 users
+- **Questionnaires**: SUS (System Usability Scale) + NASA TLX (Task Load Index)
+- **Testing Date**: March 2026
+- **Difficulty Levels**: Two levels tested per participant
+
+---
+
+## 📈 Conclusion
+
+The system demonstrates **outstanding usability** with a SUS score of 90.75 (Grade A), significantly exceeding industry benchmarks. Users reported high satisfaction, low frustration, and successful task completion. The moderate workload (40.1/100) indicates well-balanced difficulty. Minor optimizations in feedback mechanisms and task pacing could further enhance the already excellent user experience.
+
+
 
 
 
