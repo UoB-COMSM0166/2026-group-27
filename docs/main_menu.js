@@ -753,8 +753,6 @@ function drawLevelLaunchScene() {
     yy += px(42);
   }
 
-  fill(180, 220, 255);
-
   addMenuButton(area.x + px(40), area.y + area.h - px(56), px(200), px(40), "Back to Levels", () => {
     changeScene(SCENE_LEVEL_SELECT);
   }, [85, 95, 115]);
