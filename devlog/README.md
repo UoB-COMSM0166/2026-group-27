@@ -63,8 +63,7 @@ This folder stores developer logs.
   - add sounds into the game
 - Next Plan:
   - rewarding system
-
-   ## maniza:
+  ### Maniza:
   * completed:
     - Developing an F1 driver(Lando Norris) character into the game for player selection
     
@@ -92,7 +91,7 @@ This folder stores developer logs.
  - Next Plan:
    - Desig buildings for the maze
   
-     ### Maniza
+ ### Maniza:
 * Completed:
   - animation for f1 driver(Lando Norris) with his f1 car
   - city structure and landmarks done.
