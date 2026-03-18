@@ -23,15 +23,15 @@ This folder stores developer logs.
   - creat demo3 of the third map of this game
 
   ### Maniza
-    * completed:
+    - completed:
        - Designed the user experience through user stories and playtesting
       
-    * In progess
+    - In progess
        - Observed and analysed player behaviour and difficulties during gameplay
        - Collected feedback by asking players questions while they played and noting issues such           as navigation problems and time pressure challenges
 
-   * next plan
-     -Developing an F1 driver character into the game for player selection
+   - next plan
+       -Developing an F1 driver character into the game for player selection
 
     
  
@@ -64,14 +64,14 @@ This folder stores developer logs.
 - Next Plan:
   - rewarding system
   ### Maniza:
-  * completed:
+  - completed:
     - Developing an F1 driver(Lando Norris) character into the game for player selection
     
-  * In progress
+  - In progress
     - animation for f1 driver(Lando Norris) with his f1 car.
     - Improving game aesthetics and immersion, including more city structure and landmarks
       
-  * next plan:
+  - next plan:
     - updating repo
      
  
@@ -92,10 +92,10 @@ This folder stores developer logs.
    - Desig buildings for the maze
   
  ### Maniza:
-* Completed:
+- Completed:
   - animation for f1 driver(Lando Norris) with his f1 car
   - city structure and landmarks done.
     
-* In progress
+- In progress
   - updating repo
    
