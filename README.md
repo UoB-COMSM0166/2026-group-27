@@ -212,12 +212,6 @@ The system demonstrates **outstanding usability** with a SUS score of 90.75 (Gra
 ## Project Report
 
 ### Introduction
-
-- Gemini said
-This is a great foundation for the intro. Since you are maintaining a Development Log style, the introduction should set the stage for the team’s vision and the technical scope of the project.
-
-Here is a draft of your Introduction (~250 words) that highlights the "Bristol" theme and the specific "Twists" you mentioned.
-
 1. Introduction
 -Lost in Bristol is an immersive, third-person maze-puzzle game that challenges players to navigate a stylized, labyrinthine recreation of Bristol’s iconic urban landscape. Developed as a tribute to the city’s unique cultural identity, the game tasks players with escaping a series of increasingly complex districts within a strict time limit. The project’s core objective was to blend traditional maze-solving mechanics with high-stakes survival elements and environmental storytelling.
 
