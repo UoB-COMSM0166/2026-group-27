@@ -94,8 +94,8 @@ This folder stores developer logs.
  ### Maniza:
 - Completed:
   - animation for f1 driver(Lando Norris) with his f1 car
-  - city structure and landmarks done.
+  - updated repo
     
 - In progress
-  - updating repo
+- city structure and landmarks 
    
