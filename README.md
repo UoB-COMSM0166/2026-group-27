@@ -104,7 +104,7 @@ Epics
 
 ### - Think aloud:
 
-<img src="https://github.com/user-attachments/assets/1887556b-4cfa-4070-af65-5c08ed2f0774" wide="50%">
+<img src="https://github.com/user-attachments/assets/1887556b-4cfa-4070-af65-5c08ed2f0774" width="50%">
 
 ## Week 8 SUS & NASA Data Collection
 
