@@ -37,7 +37,7 @@ characters:
 
 ## Your Group
 
-![group photo](https://github.com/user-attachments/assets/6111b7e1-721c-4433-af70-1f964db93d53)
+<img src="https://github.com/user-attachments/assets/6111b7e1-721c-4433-af70-1f964db93d53" width="50%">
 
 - Group member 1, Liz Chen, ji25241@bristol.ac.uk, TBD
 - Group member 2, Suki Dai, daisy20010313@gmail.com, role
