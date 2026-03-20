@@ -19,12 +19,7 @@ STRAPLINE. Master the hills, icons, and urban labyrinth of Bristol in a classic 
 
 [Here is our game](https://uob-comsm0166.github.io/2026-group-27/)
 
-
-
 https://github.com/user-attachments/assets/980df359-7a42-4b66-87db-1d1b2989f7b6
-
-
-<img width="1099" height="823" alt="image" src="https://github.com/user-attachments/assets/714cf088-0ab7-432a-a486-5d9f9bbc3420" />
 
 VIDEO. Include a demo video of your game here (you don't have to wait until the end, you can insert a work in progress video)
 
