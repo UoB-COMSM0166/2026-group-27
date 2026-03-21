@@ -97,5 +97,5 @@ This folder stores developer logs.
   - updated repo
     
 - In progress
-- game cover 
+ - game cover 
    
