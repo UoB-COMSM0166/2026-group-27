@@ -97,5 +97,5 @@ This folder stores developer logs.
   - updated repo
     
 - In progress
-- city structure and landmarks 
+- game cover 
    
