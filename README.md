@@ -249,33 +249,51 @@ The evaluation for "Lost in Bristol" followed an iterative design approach. This
 
 ### 1. Qualitative Evaluation: Think Aloud
 During the "Think Aloud" sessions, we asked participants to verbalize their thoughts and actions while looking for the important points on the map. This revealed several critical areas for improvement:
--Map Design: While users liked the "spacious route", many noted that the map felt empty. They suggested adding environmental landmarks like buildings or graffiti to help them navigate and orient themselves within the space.
--Technical Glitches: A major issue identified was with the "Enter" key, which would not function unless the mouse cursor was specifically positioned over the game window.
--Game Mechanics: Participants requested a reward system and immersive sound effects. They also wanted descriptions for items they found and a "hint" system to help locate the exit when the timer was running low.
--Character Identity: A common piece of feedback was that participants did not want to play as a "baby" character. They suggested a choice of three different adult characters to make the experience more relatable to the target audience.
+
+* Map Design: While users liked the "spacious route", many noted that the map felt empty. They suggested adding environmental landmarks like buildings or graffiti to help them navigate and orient themselves within the space.
+  
+* Technical Glitches: A major issue identified was with the "Enter" key, which would not function unless the mouse cursor was specifically positioned over the game window.
+  
+* Game Mechanics: Participants requested a reward system and immersive sound effects. They also wanted descriptions for items they found and a 'hint' to help locate the exit when the timer was running low.
+  
+* Character Identity: A common piece of feedback was that participants did not want to play as a "baby" character. They suggested a choice of three different adult characters to make the experience more relatable to the target audience.
 
 ### 2. Quantitative Analysis: *SUS & NASA TLX*
 We collected data from 10 participants (P1-P10) who performed tasks like finding green points on the map.
-a. System Usability Scale (SUS):
+
+## System Usability Scale (SUS):
  Our average SUS score was 90.75/100, which is an "A" grade.
- -Learning Curve: The highest score was for "Learn quickly" (Q7) at 4.80/5, meaning the game is very intuitive.
- -System Integration: Users felt the game was "Well integrated" (Q5) with a score of 4.70/5.
- -Confidence: The lowest positive score was for "Felt confident" (Q9) at 4.30/5. This tells us that even though they could play,     they might need more visual or timing feedback to feel "sure" about their actions.
-b. NASA Task Load Index (NASA TLX):
+ 
+ * Learning Curve: The highest score was for "Learn quickly" (Q7) at 4.80/5, meaning the game is very intuitive.
+ 
+ * System Integration: Users felt the game was "Well integrated" (Q5) with a score of 4.70/5.
+ 
+ * Confidence: The lowest positive score was for "Felt confident" (Q9) at 4.30/5. This tells us that even though they could play,     they might need more visual or timing feedback to feel "sure" about their actions.
+ 
+## NASA Task Load Index (NASA TLX):
 The NASA TLX measured how hard the users had to work. Our average workload was 40.1/100, which is a low-to-moderate level.
--Time Pressure: "Temporal Demand" was our highest stress factor at 50.5/100. This matches the feedback that users felt rushed or confused by the map.
--Effort vs. Performance: Users felt they did a good job (Performance: 76.0/100) but had to put in a fair amount of effort (51.0/100) to get there.
--Low Frustration: At 27.0/100, the frustration levels were very low, showing that the current prototype isn't annoying to play.
+
+* Time Pressure: "Temporal Demand" was our highest stress factor at 50.5/100. This matches the feedback that users felt rushed or confused by the map.
+
+* Effort vs. Performance: Users felt they did a good job (Performance: 76.0/100) but had to put in a fair amount of effort (51.0/100) to get there.
+
+* Low Frustration: At 27.0/100, the frustration levels were very low, showing that the current prototype isn't annoying to play.
 
 ### 4.Code Testing:
 
 To ensure the prototype remained stable during user evaluations, we performed several rounds of technical testing to verify the game logic before participants accessed the build.
--Input Handling Tests: We performed unit tests on the keyboard event listeners to ensure consistent response times. This led to the identification of the focus-handling bug regarding the "Enter" key. We subsequently modified the code to ensure the game canvas automatically captures input focus upon loading.
--Mapping and Coordinate Logic: We verified the mathematical scaling of the small map by comparing the player’s (x,y) world coordinates against the UI markers. This was done to ensure the "green points" appeared in their correct relative positions on the map without any lag or offset issues.
--Collision Detection: We conducted boundary testing by attempting to move the character through all environment assets and map borders. This ensured that players could not clip through walls or unintentionally exit the "spacious route" and fall outside of the world geometry.
--Visual Stability: We tested a "Windows pointer" implementation to address camera jitter. By running the game at various frame rates, we confirmed that camera movement remained stable across different hardware performance levels
--Integration Testing: Following the addition of "bounce pads" and the rewarding system, we re-tested the level flow to ensure these new mechanics did not interfere with existing game-state variables or exit gate triggers.
-Input and Combat Logic: We conducted extensive testing on the player’s combat mechanics. Originally, the system was restricted so the character could only shoot in the direction they were moving; however, we refactored the aiming logic to allow for omnidirectional shooting, enabling the player to defend themselves regardless of their movement vector.
+
+* Input Handling Tests: We performed unit tests on the keyboard event listeners to ensure consistent response times. This led to the identification of the focus-handling bug regarding the "Enter" key. We subsequently modified the code to ensure the game canvas automatically captures input focus upon loading.
+
+* Mapping and Coordinate Logic: We verified the mathematical scaling of the small map by comparing the player’s (x,y) world coordinates against the UI markers. This was done to ensure the "green points" appeared in their correct relative positions on the map without any lag or offset issues.
+
+* Collision Detection: We conducted boundary testing by attempting to move the character through all environment assets and map borders. This ensured that players could not clip through walls or unintentionally exit the "spacious route" and fall outside of the world geometry.
+
+* Visual Stability: We tested a "Windows pointer" implementation to address camera jitter. By running the game at various frame rates, we confirmed that camera movement remained stable across different hardware performance levels
+
+* Integration Testing: Following the addition of "bounce pads" and the rewarding system, we re-tested the level flow to ensure these new mechanics did not interfere with existing game-state variables or exit gate triggers.
+
+* Input and Combat Logic: We conducted extensive testing on the player’s combat mechanics. Originally, the system was restricted so the character could only shoot in the direction they were moving; however, we refactored the aiming logic to allow for omnidirectional shooting, enabling the player to defend themselves regardless of their movement vector.
 
 
 ### Process 
