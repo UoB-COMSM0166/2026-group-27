@@ -243,11 +243,11 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
 
 - Describe implementation of your game, in particular highlighting the TWO areas of *technical challenge* in developing your game. 
 
-### Evaluation
+# Evaluation
 
 The evaluation for "Lost in Bristol" followed an iterative design approach. This meant testing the prototype early so we could catch technical bugs and navigation issues before finalizing the game. We used a Mixed-Methods strategy, combining numerical data from the "System Usability Scale (SUS)" and NASA TLX with verbal feedback from "Think Aloud" sessions. This gave us a full picture of not just if users could finish the tasks but how they felt while doing so.
 
-### 1. Qualitative Evaluation: Think Aloud
+## 1. Qualitative Evaluation: Think Aloud
 During the "Think Aloud" sessions, we asked participants to verbalize their thoughts and actions while looking for the important points on the map. This revealed several critical areas for improvement:
 
 * Map Design: While users liked the "spacious route", many noted that the map felt empty. They suggested adding environmental landmarks like buildings or graffiti to help them navigate and orient themselves within the space.
@@ -258,10 +258,10 @@ During the "Think Aloud" sessions, we asked participants to verbalize their thou
   
 * Character Identity: A common piece of feedback was that participants did not want to play as a "baby" character. They suggested a choice of three different adult characters to make the experience more relatable to the target audience.
 
-### 2. Quantitative Analysis: *SUS & NASA TLX*
+## 2. Quantitative Analysis: *SUS & NASA TLX*
 We collected data from 10 participants (P1-P10) who performed tasks like finding green points on the map.
 
-## System Usability Scale (SUS):
+### System Usability Scale (SUS):
  Our average SUS score was 90.75/100, which is an "A" grade.
  
  * Learning Curve: The highest score was for "Learn quickly" (Q7) at 4.80/5, meaning the game is very intuitive.
@@ -270,7 +270,7 @@ We collected data from 10 participants (P1-P10) who performed tasks like finding
  
  * Confidence: The lowest positive score was for "Felt confident" (Q9) at 4.30/5. This tells us that even though they could play,     they might need more visual or timing feedback to feel "sure" about their actions.
  
-## NASA Task Load Index (NASA TLX):
+### NASA Task Load Index (NASA TLX):
 The NASA TLX measured how hard the users had to work. Our average workload was 40.1/100, which is a low-to-moderate level.
 
 * Time Pressure: "Temporal Demand" was our highest stress factor at 50.5/100. This matches the feedback that users felt rushed or confused by the map.
@@ -279,7 +279,7 @@ The NASA TLX measured how hard the users had to work. Our average workload was 4
 
 * Low Frustration: At 27.0/100, the frustration levels were very low, showing that the current prototype isn't annoying to play.
 
-### 4.Code Testing:
+## 4.Code Testing:
 
 To ensure the prototype remained stable during user evaluations, we performed several rounds of technical testing to verify the game logic before participants accessed the build.
 
