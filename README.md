@@ -39,21 +39,15 @@ characters:
 
 <img src="https://github.com/user-attachments/assets/6111b7e1-721c-4433-af70-1f964db93d53" width="50%">
 
-- Group member 1, Liz Chen, ji25241@bristol.ac.uk, TBD
-- Group member 2, Suki Dai, daisy20010313@gmail.com, role
-- Group member 3, Thanusha Gorva, jx25475@bristol.ac.uk, role
-- Group member 4, Yizhou Pan, izapan610@gmail.com, role
-- Group member 5, Maniza Singh,jq25952@bristol.ac.uk, role
-- Group member 6, Keyu Zhou,
 
 | Name | Email | Github Username |
 | :--- | :--- | :--- |
-| Liz Chen | ji25241@bristol.ac.uk | username |
-| Suki Dai | daisy20010313@gmail.com | username |
-| Thanusha Gorva | jx25475@bristol.ac.uk | thanusha170 |
-| Yizhou Pan | izapan610@gmail.com | username |
-| Maniza Singh | jq25952@bristol.ac.uk | username |
-| Keyu Zhou | email | username |
+| Liz Chen | ji25241@bristol.ac.uk | @username |
+| Suki Dai | daisy20010313@gmail.com | @username |
+| Thanusha Gorva | jx25475@bristol.ac.uk | @thanusha170 |
+| Yizhou Pan | izapan610@gmail.com | @username |
+| Maniza Singh | jq25952@bristol.ac.uk | @username |
+| Keyu Zhou | email | @username |
 
 
 
