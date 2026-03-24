@@ -46,6 +46,18 @@ characters:
 - Group member 5, Maniza Singh,jq25952@bristol.ac.uk, role
 - Group member 6, Keyu Zhou,
 
+| Name | Email | Github Username |
+| :--- | :--- | :--- | :--- |
+| Liz Chen | ji25241@bristol.ac.uk | username |
+| Suki Dai | daisy20010313@gmail.com | username |
+| Thanusha Gorva | jx25475@bristol.ac.uk | thanusha170 |
+| Yizhou Pan | izapan610@gmail.com | username |
+| Maniza Singh | jq25952@bristol.ac.uk | username |
+| Keyu Zhou | email | username |
+
+
+
+
 ## Week 2
 
 ### - Drawing App: 
