@@ -263,7 +263,7 @@ This revealed several critical areas for improvement:
 
 * Map Design:
 
-While users liked the maze's layout and its "spacious route", many noted that the environment felt empty and repetitive. This validated our design ideas, highlighting the need to make the game more visually engaging and easier to navigate. To address this, we decided to include Bristol-themed visuals and landmarks, such as university buildings and graffiti art on the maze walls. These features help players recognise their surroundings and navigate more effectively. Importantly, they also keep the players engaged during gameplay while providing a fun, interactive way to explore and learn about Bristol. 
+While users liked the maze's layout and its "spacious route", many noted that the environment felt empty and repetitive. This validated our design ideas and highlighted the need to make the maze more visually engaging. To address this, we decided to add Bristol-themed visuals and landmarks, such as university buildings and graffiti art on the maze walls. These features help players recognise their surroundings and navigate easily. Importantly, they also keep the players engaged during gameplay while providing a fun, interactive way to explore and learn about Bristol. 
   
 * Technical Glitches:
 
