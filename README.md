@@ -251,7 +251,7 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
 
 # Evaluation
 
-The evaluation for "Lost in Bristol" followed an iterative design approach. This meant testing the prototype early so we could catch technical bugs and navigation issues before finalizing the game. We used a Mixed-Methods strategy, combining numerical data from the "System Usability Scale (SUS)" and NASA TLX with verbal feedback from "Think Aloud" sessions. This gave us a full picture of not just if users could finish the tasks but how they felt while doing so.
+The evaluation for 'Lost in Bristol' followed an iterative design approach. This meant testing the prototype early so we could catch technical bugs and navigation issues before finalizing the game. We used a Mixed-Methods strategy, combining numerical data from the 'System Usability Scale (SUS)' and NASA TLX with verbal feedback from 'Think Aloud' sessions. This gave us a full picture of not just if users could finish the tasks but how they felt while doing so.
 
 ## 1. Qualitative Evaluation: Think Aloud
 During the 'Think Aloud' sessions, we asked participants to verbalise their thoughts and decision-making process while navigating the maze and looking for core objectives such as important items and the exit. 
@@ -287,7 +287,7 @@ We collected data from 10 participants (P1-P10) who performed tasks like finding
 ### NASA Task Load Index (NASA TLX):
 The NASA TLX measured how hard the users had to work. Our average workload was 40.1/100, which is a low-to-moderate level.
 
-* Time Pressure: "Temporal Demand" was our highest stress factor at 50.5/100. This matches the feedback that users felt rushed or confused by the map.
+* Time Pressure: 'Temporal Demand' was our highest stress factor at 50.5/100. This matches the feedback that users felt rushed or confused by the map.
 
 * Effort vs. Performance: Users felt they did a good job (Performance: 76.0/100) but had to put in a fair amount of effort (51.0/100) to get there.
 
