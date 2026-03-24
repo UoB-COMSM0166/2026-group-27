@@ -37,7 +37,8 @@ characters:
 
 ## Your Group
 
-<img src="https://github.com/user-attachments/assets/6111b7e1-721c-4433-af70-1f964db93d53" width="50%">
+<img src="https://github.com/UoB-COMSM0166/2026-group-27/blob/ffbe86f53cd08808ffe139176c6d5e68248c4792/IMG_2312.jpeg" width="50%">
+
 
 
 | Name | Email | Github Username |
