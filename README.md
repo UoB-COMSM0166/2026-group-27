@@ -255,8 +255,6 @@ During the "Think Aloud" sessions, we asked participants to verbalize their thou
 * Technical Glitches: A major issue identified was with the "Enter" key, which would not function unless the mouse cursor was specifically positioned over the game window.
   
 * Game Mechanics: Participants requested a reward system and immersive sound effects. They also wanted descriptions for items they found and a 'hint' to help locate the exit when the timer was running low.
-  
-* Character Identity: A common piece of feedback was that participants did not want to play as a "baby" character. They suggested a choice of three different adult characters to make the experience more relatable to the target audience.
 
 ## 2. Quantitative Analysis: *SUS & NASA TLX*
 We collected data from 10 participants (P1-P10) who performed tasks like finding green points on the map.
