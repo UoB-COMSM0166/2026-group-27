@@ -254,13 +254,25 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
 The evaluation for "Lost in Bristol" followed an iterative design approach. This meant testing the prototype early so we could catch technical bugs and navigation issues before finalizing the game. We used a Mixed-Methods strategy, combining numerical data from the "System Usability Scale (SUS)" and NASA TLX with verbal feedback from "Think Aloud" sessions. This gave us a full picture of not just if users could finish the tasks but how they felt while doing so.
 
 ## 1. Qualitative Evaluation: Think Aloud
-During the "Think Aloud" sessions, we asked participants to verbalize their thoughts and actions while looking for the important points on the map. This revealed several critical areas for improvement:
+During the 'Think Aloud' sessions, we asked participants to verbalise their thoughts and decision-making process while navigating the maze and looking for core objectives such as important items and the exit. 
 
-* Map Design: While users liked the "spacious route", many noted that the map felt empty. They suggested adding environmental landmarks like buildings or graffiti to help them navigate and orient themselves within the space.
+Although the game did not yet include the final Bristol-themed characters or visuals, this stage of testing intentionally allowed us to focus on evaluating the core gameplay mechanics and overall usability. This ensured that we could identify issues related to navigation, controls and play understanding without the influence of visual or narrative features. 
+
+This revealed several critical areas for improvement:
+
+* Map Design:
+
+While users liked the maze's layout and its "spacious route", many noted that the environment felt empty and repetitive. This validated our design ideas, highlighting the need to make the game more visually engaging and easier to navigate. To address this, we decided to include Bristol-themed visuals and landmarks, such as university buildings and graffiti art on the maze walls. 
+
+These features help players recognise their surroundings and navigate more effectively. Importantly, they also keep the players engaged during gameplay while providing a fun, interactive way to explore and learn about Bristol. 
   
-* Technical Glitches: A major issue identified was with the "Enter" key, which would not function unless the mouse cursor was specifically positioned over the game window.
+* Technical Glitches:
+
+A major issue identified was that the "Enter" key would only function if the mouse cursor was specifically positioned over the game window.
   
-* Game Mechanics: Participants requested a reward system and immersive sound effects. They also wanted descriptions for items they found and a 'hint' to help locate the exit when the timer was running low.
+* Game Mechanics:
+
+Participants requested a reward system and immersive sound effects. They also wanted descriptions for items they found and a 'hint' to help locate the exit when the timer was running low.
 
 ## 2. Quantitative Analysis: *SUS & NASA TLX*
 We collected data from 10 participants (P1-P10) who performed tasks like finding green points on the map.
