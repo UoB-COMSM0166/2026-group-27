@@ -47,7 +47,7 @@ characters:
 - Group member 6, Keyu Zhou,
 
 | Name | Email | Github Username |
-| :--- | :--- | :--- | :--- |
+| :--- | :--- | :--- |
 | Liz Chen | ji25241@bristol.ac.uk | username |
 | Suki Dai | daisy20010313@gmail.com | username |
 | Thanusha Gorva | jx25475@bristol.ac.uk | thanusha170 |
