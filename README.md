@@ -228,9 +228,9 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
 
 * Hostile Environment: The city is not empty; players must dodge active "enemies" that deplete their health upon contact. This transforms the maze from a spatial puzzle into a tactical survival challenge where health management is as critical as navigation.
 
-* Modular "Pod" Transportation: To counter the maze’s complexity, we implemented a transportation system using pods scattered throughout the map. These allow for rapid repositioning, adding a layer of strategic "risk vs. reward" as players decide whether to seek out a pod or stick to their current path.
+* Teleportation: To counter the maze’s complexity, we implemented transportation through portals scattered around the map. These allow for rapid repositioning, adding a layer of strategic "risk vs. reward" as players can decide whether to go through a portal or stick to their current path.
 
-* Dynamic Visibility: In specialized "Dark Maps," the gameplay shifts entirely. Players must find and manage a torch and physical map pick-ups to see, forcing them to rely on memory and limited visual cues rather than simple trial and error.
+* Dynamic Visibility: In specialised "Dark Maps," the gameplay shifts entirely. Players must find and manage a torch and physical map pick-ups to see, forcing them to rely on memory and limited visual cues rather than simple trial and error.
 
 
 
@@ -252,10 +252,10 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
 
 # Evaluation
 
-The evaluation for 'Lost in Bristol' followed an iterative design approach. This meant testing the prototype early so we could catch technical bugs and navigation issues before finalizing the game. We used a Mixed-Methods strategy, combining numerical data from the 'System Usability Scale (SUS)' and NASA TLX with verbal feedback from 'Think Aloud' sessions. This gave us a full picture of not just if users could finish the tasks but how they felt while doing so.
+The evaluation for 'Lost in Bristol' followed an iterative design approach. This meant testing the prototype early so we could catch technical bugs and navigation issues before finalising the game. We used a Mixed-Methods strategy, combining numerical data from the System Usability Scale (SUS) and NASA TLX with verbal feedback from Think Aloud sessions. This gave us a full picture of not just if users could finish the tasks but how they felt while doing so.
 
 ## 1. Qualitative Evaluation: Think Aloud
-During the 'Think Aloud' sessions, we asked participants to verbalise their thoughts and decision-making process while navigating the maze and looking for core objectives such as important items and the exit. 
+During the Think Aloud sessions, we asked participants to verbalise their thoughts and decision-making process while navigating the maze and looking for core objectives such as important items and the exit. 
 
 Although the game did not yet include the final Bristol-themed characters or visuals, this stage of testing intentionally allowed us to focus on evaluating the core gameplay mechanics and overall usability. This ensured that we could identify issues related to navigation, controls and play understanding without the influence of visual or narrative features. 
 
@@ -267,7 +267,7 @@ While users liked the maze's layout and its "spacious route", many noted that th
   
 * Technical Glitches:
 
-A major issue identified was that the "Enter" key would only function if the mouse cursor was specifically positioned over the game window.
+A major issue identified was that the Enter key would only function if the mouse cursor was specifically positioned over the game window.
   
 * Game Mechanics:
 
