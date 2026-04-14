@@ -1,7 +1,7 @@
 # 2026-group-27
 
 
-game set up instructions and link to play game. [Here is our game](https://uob-comsm0166.github.io/2026-group-27/)
+banner, game set up instructions and link to play game. [Here is our game](https://uob-comsm0166.github.io/2026-group-27/)
 
 # Video Demonstration
 
