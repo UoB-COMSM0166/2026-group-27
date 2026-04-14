@@ -27,11 +27,6 @@ game set up instructions and link to play game. [Here is our game](https://uob-c
 
 STRAPLINE. Master the hills, icons, and urban labyrinth of Bristol in a classic maze exploration game with a modern cultural twist.
 
-
-https://github.com/user-attachments/assets/980df359-7a42-4b66-87db-1d1b2989f7b6
-
-
-
 ## Our Group
 
 <p align="center">
