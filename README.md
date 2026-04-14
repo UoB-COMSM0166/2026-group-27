@@ -1,7 +1,5 @@
 # 2026-group-27
 
-<video src= https://github.com/UoB-COMSM0166/2026-group-27/blob/02b407a28261553ae1c5e765ffc7825ccdc7d7bc/banner.gif>
-
 
 game set up instructions and link to play game. [Here is our game](https://uob-comsm0166.github.io/2026-group-27/)
 
