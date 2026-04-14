@@ -12,10 +12,10 @@ game set up instructions and link to play game. [Here is our game](https://uob-c
 # Table of Contents: 
 
 1. [Our Group](https://github.com/UoB-COMSM0166/2026-group-27/blob/main/README.md#our-group)
-2. Introduction
-3. Requirements
-4. Design
-5. Implementation
+2. [Introduction](https://github.com/UoB-COMSM0166/2026-group-27/blob/main/README.md#introduction)
+3. [Requirements](https://github.com/UoB-COMSM0166/2026-group-27/blob/main/README.md#requirements)
+4. [Design](https://github.com/UoB-COMSM0166/2026-group-27/blob/main/README.md#design)
+5. [Implementation](https://github.com/UoB-COMSM0166/2026-group-27/blob/main/README.md#implementation)
 6. [Evaluation](https://github.com/UoB-COMSM0166/2026-group-27/blob/main/README.md#evaluation)
 7. Process
 8. Sustainability, Ethics, and Accessability
