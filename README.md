@@ -1,7 +1,7 @@
 # 2026-group-27
-2026 COMSM0166 group 27
 
-# INCLUDE GROUP BANNER HERE ! 
+
+
 
 game set up instructions and link to play game. [Here is our game](https://uob-comsm0166.github.io/2026-group-27/)
 
