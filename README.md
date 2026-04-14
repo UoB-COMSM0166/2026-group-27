@@ -34,7 +34,9 @@ https://github.com/user-attachments/assets/980df359-7a42-4b66-87db-1d1b2989f7b6
 
 ## Our Group
 
+<p align="center">
 <img src="https://github.com/UoB-COMSM0166/2026-group-27/blob/ffbe86f53cd08808ffe139176c6d5e68248c4792/IMG_2312.jpeg" width="50%">
+</p>
 
 
 
