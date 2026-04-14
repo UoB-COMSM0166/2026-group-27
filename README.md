@@ -29,19 +29,7 @@ STRAPLINE. Master the hills, icons, and urban labyrinth of Bristol in a classic 
 
 https://github.com/user-attachments/assets/980df359-7a42-4b66-87db-1d1b2989f7b6
 
-VIDEO. Include a demo video of your game here (you don't have to wait until the end, you can insert a work in progress video)
 
-
-game twist: 
-
-1. characters with different abilities - each of their abilities is time limited
-2. battle - the maze will have enemies that we have to fight, weapons and sheild etc to use.
-
-characters: 
-
-1. lando norris: f1 driver. special ability: going fast
-2. banksy (girl with the balloon). special ability: invisible
-3. maisie williams from game of thrones. special ability: ? 
 
 ## Our Group
 
