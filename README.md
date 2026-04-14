@@ -9,6 +9,19 @@ game set up instructions
 
 # TABLE OF CONTENTS: 
 
+1. Our Group
+2. Introduction
+3. Requirements
+4. Design
+5. Implementation
+6. Evaluation
+7. Process
+8. Sustainability, Ethics, and Accessability
+9. Conclusion
+10. References
+11. Contribution Statement
+12. AI Statement
+
 ## Your Game (Lost in Bristol)
 
 STRAPLINE. Master the hills, icons, and urban labyrinth of Bristol in a classic maze exploration game with a modern cultural twist.
