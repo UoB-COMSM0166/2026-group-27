@@ -317,6 +317,10 @@ To ensure the prototype remained stable during user evaluations, we performed se
 
 - Teamwork. How did you work together, what tools and methods did you use? Did you define team roles? Reflection on how you worked together. Be honest, we want to hear about what didn't work as well as what did work, and importantly how your team adapted throughout the project.
 
+
+### NEW: Sustainability, ethics and accessibility (10% 750 words)
+- Evidence of the impact of your game across the environment and two other areas: environmental + 2 of the following: Social, Economical, Technical, Individual
+
 ### Conclusion
 
 - 10% ~500 words
