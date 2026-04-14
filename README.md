@@ -1,17 +1,13 @@
 # 2026-group-27
 2026 COMSM0166 group 27
 
-# COMSM0166 Project Template
-A project template for the Software Engineering Discipline and Practice module (COMSM0166).
+# INCLUDE GROUP BANNER HERE ! 
 
-## Info
+game set up instructions
 
-This is the template for your group project repo/report. We'll be setting up your repo and assigning you to it after the group forming activity. You can delete this info section, but please keep the rest of the repo structure intact.
+# VIDEO DEMO
 
-You will be developing your game using [P5.js](https://p5js.org) a javascript library that provides you will all the tools you need to make your game. However, we won't be teaching you javascript, this is a chance for you and your team to learn a (friendly) new language and framework quickly, something you will almost certainly have to do with your summer project and in future. There is a lot of documentation online, you can start with:
-
-- [P5.js tutorials](https://p5js.org/tutorials/) 
-- [Coding Train P5.js](https://thecodingtrain.com/tracks/code-programming-with-p5-js) course - go here for enthusiastic video tutorials from Dan Shiffman (recommended!)
+# TABLE OF CONTENTS: 
 
 ## Your Game (Lost in Bristol)
 
@@ -35,7 +31,7 @@ characters:
 2. banksy (girl with the balloon). special ability: invisible
 3. maisie williams from game of thrones. special ability: ? 
 
-## Your Group
+## Our Group
 
 <img src="https://github.com/UoB-COMSM0166/2026-group-27/blob/ffbe86f53cd08808ffe139176c6d5e68248c4792/IMG_2312.jpeg" width="50%">
 
@@ -237,7 +233,10 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
 ### Requirements (Thanusha)
 
 - 15% ~750 words
-- Early stages design. Ideation process. How did you decide as a team what to develop? Use case diagrams, user stories. 
+- Early stages design. Ideation process. How did you decide as a team what to develop?
+- onion model of stakeholders
+- user stories (already done by maniza)
+- case diagrams 
 
 ### Design
 
