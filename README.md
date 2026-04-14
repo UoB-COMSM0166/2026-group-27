@@ -11,7 +11,7 @@ game set up instructions and link to play game. [Here is our game](https://uob-c
 
 # Table of Contents: 
 
-1. Our Group
+1. [Our Group](https://github.com/UoB-COMSM0166/2026-group-27/blob/main/README.md#our-group)
 2. Introduction
 3. Requirements
 4. Design
