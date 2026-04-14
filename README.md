@@ -331,6 +331,12 @@ To ensure the prototype remained stable during user evaluations, we performed se
 
 - Provide a table of everyone's contribution, which *may* be used to weight individual grades. We expect that the contribution will be split evenly across team-members in most cases. Please let us know as soon as possible if there are any issues with teamwork as soon as they are apparent and we will do our best to help your team work harmoniously together.
 
+### NEW: AI statement (250 words)
+
+- summarise your team's use of AI ao we know where to give you credit for work done
+- PLEASE WRITE THE REPO YOURSELF - NO AI USE FOR WRITING THE REPO 
+
+
 
 ### References
 
