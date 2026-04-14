@@ -227,14 +227,14 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
 - user stories (already done by maniza)
 - case diagrams
 
-| Player | Epic | User Story Summary | Acceptance Criteria |
-| :--- | :--- | :--- | :--- |
-| **Atmosphere Hunter** | Immersive Navigation | As an Atmosphere Hunter, I want to explore Bristol using stuff seen commonly in Bristol such as graffiti and popular landmarks, so that I feel immersed in the game and feel realistic like I'm in Bristol and lost irl. | Movement is restricted by "building" boundaries; spatial audio and visual shifts reflect Bristol's hilly topography. |
-| **Mastermind** | Mechanical Puzzles | Manipulate urban elements like river tides or dock machinery to reveal new paths via spatial reasoning. | Puzzles physically change the zone layout; difficulty scales as multiple environmental mechanics are combined. |
-| **Cultural Enthusiast** | Achievement System | Discover iconic landmarks like the Suspension Bridge to "unlock" map sections and fun facts. | Reaching specific coordinates triggers a high-quality pop-up and increments a "Landmarks Found" counter. |
-| **The Urban Voyager** | Customisation | As a player, I want to choose different character types so that gameplay feels unique. | Selection on the main menu assigns unique sprites and specific `moveSpeed` variables (e.g., sprinter moves 2x faster). |
-| **Interaction / UI** | Dynamic HUD | Access a clear Heads-Up Display showing location and a compass to maintain orientation. | Persistent UI bar displays "Area Name" and a "Proximity Sensor" that glows brighter as the player nears goals. |
-| **Completionist** | Game Loop | As a Completionist, I want a clear end goal so that I feel rewarded. | Random obstacles spawn every 30s; reaching the final destination triggers a Win Screen with score calculation. |
+| Epic | User Story Summary | Acceptance Criteria |
+| :--- | :--- | :--- |
+| Immersive Navigation | As an Atmosphere Hunter, I want to explore Bristol using stuff seen commonly in Bristol such as graffiti and popular landmarks, so that I feel immersed in the game and feel realistic like I'm in Bristol and lost irl. | Movement is restricted by "building" boundaries; spatial audio and visual shifts reflect Bristol's hilly topography. |
+| Mechanical Puzzles | Manipulate urban elements like river tides or dock machinery to reveal new paths via spatial reasoning. | Puzzles physically change the zone layout; difficulty scales as multiple environmental mechanics are combined. |
+| Achievement System | Discover iconic landmarks like the Suspension Bridge to "unlock" map sections and fun facts. | Reaching specific coordinates triggers a high-quality pop-up and increments a "Landmarks Found" counter. |
+| Customisation | As a player, I want to choose different character types so that gameplay feels unique. | Selection on the main menu assigns unique sprites and specific `moveSpeed` variables (e.g., sprinter moves 2x faster). |
+| Dynamic HUD | Access a clear Heads-Up Display showing location and a compass to maintain orientation. | Persistent UI bar displays "Area Name" and a "Proximity Sensor" that glows brighter as the player nears goals. |
+| Game Loop | As a Completionist, I want a clear end goal so that I feel rewarded. | Random obstacles spawn every 30s; reaching the final destination triggers a Win Screen with score calculation. |
 
 
 
