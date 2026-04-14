@@ -207,10 +207,7 @@ The system demonstrates **outstanding usability** with a SUS score of 90.75 (Gra
 
 
 
-
-## Project Report
-
-### Introduction
+# Introduction
 1. Introduction
 -Lost in Bristol is an immersive, third-person maze-puzzle game that challenges players to navigate a stylized, labyrinthine recreation of Bristol’s iconic urban landscape. Developed as a tribute to the city’s unique cultural identity, the game tasks players with escaping a series of increasingly complex districts within a strict time limit. The project’s core objective was to blend traditional maze-solving mechanics with high-stakes survival elements and environmental storytelling.
 
@@ -226,7 +223,7 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
 
 
 
-### Requirements (Thanusha)
+# Requirements (Thanusha)
 
 - 15% ~750 words
 - Early stages design. Ideation process. How did you decide as a team what to develop?
@@ -234,12 +231,12 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
 - user stories (already done by maniza)
 - case diagrams 
 
-### Design
+# Design
 
 - 15% ~750 words 
 - System architecture. Class diagrams, behavioural diagrams. 
 
-### Implementation
+# Implementation
 
 - 15% ~750 words
 
@@ -306,34 +303,34 @@ To ensure the prototype remained stable during user evaluations, we performed se
 * Input and Combat Logic: We conducted extensive testing on the player’s combat mechanics. Originally, the system was restricted so the character could only shoot in the direction they were moving; however, we refactored the aiming logic to allow for omnidirectional shooting, enabling the player to defend themselves regardless of their movement vector.
 
 
-### Process 
+# Process 
 
 - 15% ~750 words
 
 - Teamwork. How did you work together, what tools and methods did you use? Did you define team roles? Reflection on how you worked together. Be honest, we want to hear about what didn't work as well as what did work, and importantly how your team adapted throughout the project.
 
 
-### NEW: Sustainability, ethics and accessibility (10% 750 words)
+# NEW: Sustainability, ethics and accessibility (10% 750 words)
 - Evidence of the impact of your game across the environment and two other areas: environmental + 2 of the following: Social, Economical, Technical, Individual
 
-### Conclusion
+# Conclusion
 
 - 10% ~500 words
 
 - Reflect on the project as a whole. Lessons learnt. Reflect on challenges. Future work, describe both immediate next steps for your current game and also what you would potentially do if you had chance to develop a sequel.
 
-### Contribution Statement
+# Contribution Statement
 
 - Provide a table of everyone's contribution, which *may* be used to weight individual grades. We expect that the contribution will be split evenly across team-members in most cases. Please let us know as soon as possible if there are any issues with teamwork as soon as they are apparent and we will do our best to help your team work harmoniously together.
 
-### NEW: AI statement (250 words)
+# NEW: AI statement (250 words)
 
 - summarise your team's use of AI ao we know where to give you credit for work done
 - PLEASE WRITE THE REPO YOURSELF - NO AI USE FOR WRITING THE REPO 
 
 
 
-### References
+# References
 
 ### Additional Marks
 
