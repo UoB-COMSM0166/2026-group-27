@@ -5,9 +5,9 @@
 
 game set up instructions and link to play game. [Here is our game](https://uob-comsm0166.github.io/2026-group-27/)
 
-# VIDEO DEMO
+# Video Demonstration
 
-# TABLE OF CONTENTS: 
+# Table of Contents: 
 
 1. Our Group
 2. Introduction
