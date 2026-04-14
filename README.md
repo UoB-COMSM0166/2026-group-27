@@ -1,6 +1,5 @@
-<p align="center">
 # 2026-group-27
-</p>
+
 
 <p align="center">
 <img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/main/banner.gif">
