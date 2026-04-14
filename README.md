@@ -3,7 +3,7 @@
 
 # INCLUDE GROUP BANNER HERE ! 
 
-game set up instructions
+game set up instructions and link to play game. [Here is our game](https://uob-comsm0166.github.io/2026-group-27/)
 
 # VIDEO DEMO
 
@@ -26,7 +26,6 @@ game set up instructions
 
 STRAPLINE. Master the hills, icons, and urban labyrinth of Bristol in a classic maze exploration game with a modern cultural twist.
 
-[Here is our game](https://uob-comsm0166.github.io/2026-group-27/)
 
 https://github.com/user-attachments/assets/980df359-7a42-4b66-87db-1d1b2989f7b6
 
