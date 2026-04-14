@@ -31,7 +31,7 @@ STRAPLINE. Master the hills, icons, and urban labyrinth of Bristol in a classic 
 
 <p align="center">
 <img src="https://github.com/UoB-COMSM0166/2026-group-27/blob/ffbe86f53cd08808ffe139176c6d5e68248c4792/IMG_2312.jpeg" width="50%">
-</p>
+
 
 
 
@@ -45,7 +45,7 @@ STRAPLINE. Master the hills, icons, and urban labyrinth of Bristol in a classic 
 | Keyu Zhou | email | @username |
 
 
-
+</p>
 
 ## Week 2
 
