@@ -24,10 +24,6 @@ game set up instructions and link to play game. [Here is our game](https://uob-c
 11. [Contribution Statement](https://github.com/UoB-COMSM0166/2026-group-27/blob/main/README.md#contribution-statement)
 12. [AI Statement](https://github.com/UoB-COMSM0166/2026-group-27/blob/main/README.md#ai-statement)
 
-## Your Game (Lost in Bristol)
-
-STRAPLINE. Master the hills, icons, and urban labyrinth of Bristol in a classic maze exploration game with a modern cultural twist.
-
 ## Our Group
 
 <p align="center">
