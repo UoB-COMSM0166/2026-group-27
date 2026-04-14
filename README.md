@@ -227,7 +227,7 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
 - user stories (done by maniza just need to make changes)
 - case diagrams
 
-### - Game Ideas:
+## - Game Ideas:
 
 
 | Game Idea | Inspiration | Description | Possible Challenges |
@@ -236,16 +236,57 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
 Game Idea 2 | 
 Game Idea 3 |
 
-### - Epics & User Stories
+## - Epics & User Stories
 
-| Epic | User Story Summary | Acceptance Criteria |
-| :--- | :--- | :--- |
-| Immersive Navigation | As an Atmosphere Hunter, I want to explore Bristol using stuff seen commonly in Bristol such as graffiti and popular landmarks, so that I feel immersed in the game and feel realistic like I'm in Bristol and lost irl. | Movement is restricted by "building" boundaries; spatial audio and visual shifts reflect Bristol's hilly topography. |
-| Mechanical Puzzles | Manipulate urban elements like river tides or dock machinery to reveal new paths via spatial reasoning. | Puzzles physically change the zone layout; difficulty scales as multiple environmental mechanics are combined. |
-| Achievement System | Discover iconic landmarks like the Suspension Bridge to "unlock" map sections and fun facts. | Reaching specific coordinates triggers a high-quality pop-up and increments a "Landmarks Found" counter. |
-| Customisation | As a player, I want to choose different character types so that gameplay feels unique. | Selection on the main menu assigns unique sprites and specific `moveSpeed` variables (e.g., sprinter moves 2x faster). |
-| Dynamic HUD | Access a clear Heads-Up Display showing location and a compass to maintain orientation. | Persistent UI bar displays "Area Name" and a "Proximity Sensor" that glows brighter as the player nears goals. |
-| Game Loop | As a Completionist, I want a clear end goal so that I feel rewarded. | Random obstacles spawn every 30s; reaching the final destination triggers a Win Screen with score calculation. |
+Epic: Exploration & Immersion
+
+User Story As a player who enjoys exploration, I want to navigate a Bristol-inspired maze environment with local visuals so that I feel immersed in the game. 
+
+Acceptance Criteria
+* Given the player is exploring the map
+* When they move through the environment
+* Then movement is restricted by maze walls 
+* And environmental visuals reflect Bristol (examples: graffiti and brick textures)
+
+
+Epic: Difficulty & Survival System
+
+User Story As a player who enjoys increasing difficulty, I want the game to become more challenging across levels with environmental hazards and enemies, so that I feel on edge and a sense of achievement as I progress.
+
+Acceptance Criteria
+Given the player progresses to higher levels
+When a new level begins
+Then environmental difficulty increases (examples: reduced visibility, more obstacles)
+And enemies become more challenging
+And the player must avoid or overcome threats to progress
+
+
+Epic: Character Abilities
+
+User Story
+As a player, I want to use characters with different abilities, so that I can experience different approaches to playing the game. 
+
+Acceptance Criteria
+* Given the player selects a character
+* When the game begins
+* Then the  character has an assigned unique ability
+* And the ability affects strategy and movement options
+
+
+Epic: Progression & Rewards System
+
+User Story
+As a player who enjoys progression, I want to earn rewards for completing levels that I can spend on upgrades, so that I feel my abilities improve over time and I have a better chance of surviving harder levels.
+
+Acceptance Criteria
+* Given the player completes a level
+* When the level ends
+* Then the player is awarded in-game coins
+* And the coins are added to their total balance
+* Given the player enters the shop
+* When they purchase an upgrade
+* Then currency is deducted correctly
+* And the upgrade is applied to the gameplay
 
 
 
