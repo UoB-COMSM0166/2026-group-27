@@ -203,8 +203,8 @@ The system demonstrates **outstanding usability** with a SUS score of 90.75 (Gra
 
 
 
-# Introduction
-1. Introduction
+# 1. Introduction
+
 -Lost in Bristol is an immersive, third-person maze-puzzle game that challenges players to navigate a stylized, labyrinthine recreation of Bristol’s iconic urban landscape. Developed as a tribute to the city’s unique cultural identity, the game tasks players with escaping a series of increasingly complex districts within a strict time limit. The project’s core objective was to blend traditional maze-solving mechanics with high-stakes survival elements and environmental storytelling.
 
 -The "Twist": Survival and Strategy
@@ -219,7 +219,7 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
 
 
 
-# Requirements (Thanusha)
+# 2. Requirements (Thanusha)
 
 - 15% ~750 words
 - Early stages design. Ideation process. How did you decide as a team what to develop?
@@ -227,7 +227,7 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
 - user stories (done by maniza just need to make changes)
 - case diagrams
 
-## - Game Ideas:
+## 2.1 Game Ideas:
 
 
 | Game Idea | Inspiration | Description | Possible Challenges |
@@ -236,49 +236,51 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
 Game Idea 2 | 
 Game Idea 3 |
 
-## - Epics & User Stories
+## 2.? Epics & User Stories
 
-Epic: Exploration & Immersion
+### Epic: Exploration & Immersion
 
-User Story As a player who enjoys exploration, I want to navigate a Bristol-inspired maze environment with local visuals so that I feel immersed in the game. 
+**User Story**
+* As a player who enjoys exploration, I want to navigate a Bristol-inspired maze environment with local visuals so that I feel immersed in the game. 
 
-Acceptance Criteria
+**Acceptance Criteria**
 * Given the player is exploring the map
 * When they move through the environment
 * Then movement is restricted by maze walls 
 * And environmental visuals reflect Bristol (examples: graffiti and brick textures)
 
 
-Epic: Difficulty & Survival System
+### Epic: Difficulty & Survival System
 
-User Story As a player who enjoys increasing difficulty, I want the game to become more challenging across levels with environmental hazards and enemies, so that I feel on edge and a sense of achievement as I progress.
+**User Story** 
+* As a player who enjoys increasing difficulty, I want the game to become more challenging across levels with environmental hazards and enemies, so that I feel on edge and a sense of achievement as I progress.
 
-Acceptance Criteria
-Given the player progresses to higher levels
-When a new level begins
-Then environmental difficulty increases (examples: reduced visibility, more obstacles)
-And enemies become more challenging
-And the player must avoid or overcome threats to progress
+**Acceptance Criteria**
+* Given the player progresses to higher levels
+* When a new level begins
+* Then environmental difficulty increases (examples: reduced visibility, more obstacles)
+* And enemies become more challenging
+* And the player must avoid or overcome threats to progress
 
 
-Epic: Character Abilities
+### Epic: Character Abilities
 
-User Story
-As a player, I want to use characters with different abilities, so that I can experience different approaches to playing the game. 
+**User Story**
+* As a player, I want to use characters with different abilities, so that I can experience different approaches to playing the game. 
 
-Acceptance Criteria
+**Acceptance Criteria**
 * Given the player selects a character
 * When the game begins
 * Then the  character has an assigned unique ability
 * And the ability affects strategy and movement options
 
 
-Epic: Progression & Rewards System
+### Epic: Progression & Rewards System
 
-User Story
-As a player who enjoys progression, I want to earn rewards for completing levels that I can spend on upgrades, so that I feel my abilities improve over time and I have a better chance of surviving harder levels.
+**User Story**
+*As a player who enjoys progression, I want to earn rewards for completing levels that I can spend on upgrades, so that I feel my abilities improve over time and I have a better chance of surviving harder levels.
 
-Acceptance Criteria
+**Acceptance Criteria**
 * Given the player completes a level
 * When the level ends
 * Then the player is awarded in-game coins
