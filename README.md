@@ -18,7 +18,7 @@ game set up instructions and link to play game. [Here is our game](https://uob-c
 5. [Implementation](https://github.com/UoB-COMSM0166/2026-group-27/blob/main/README.md#implementation)
 6. [Evaluation](https://github.com/UoB-COMSM0166/2026-group-27/blob/main/README.md#evaluation)
 7. [Process](https://github.com/UoB-COMSM0166/2026-group-27/blob/main/README.md#process)
-8. [Sustainability, Ethics, and Accessability]((https://github.com/UoB-COMSM0166/2026-group-27/blob/main/README.md#sustainability-ethics-and-accessability))
+8. [Sustainability, Ethics, and Accessability](https://github.com/UoB-COMSM0166/2026-group-27/blob/main/README.md#sustainability-ethics-and-accessability)
 9. [Conclusion](https://github.com/UoB-COMSM0166/2026-group-27/blob/main/README.md#conclusion)
 10. [References](https://github.com/UoB-COMSM0166/2026-group-27/blob/main/README.md#references)
 11. [Contribution Statement](https://github.com/UoB-COMSM0166/2026-group-27/blob/main/README.md#contribution-statement)
