@@ -16,7 +16,7 @@ game set up instructions and link to play game. [Here is our game](https://uob-c
 3. Requirements
 4. Design
 5. Implementation
-6. Evaluation
+6. [Evaluation](https://github.com/UoB-COMSM0166/2026-group-27/blob/main/README.md#evaluation)
 7. Process
 8. Sustainability, Ethics, and Accessability
 9. Conclusion
