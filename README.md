@@ -24,7 +24,7 @@ game set up instructions and link to play game. [Here is our game](https://uob-c
 11. [AI Statement](https://github.com/UoB-COMSM0166/2026-group-27/blob/main/README.md#11-ai-statement)
 12. [References](https://github.com/UoB-COMSM0166/2026-group-27/blob/main/README.md#12-references)
 
-## 1. Our Group
+# 1. Our Group
 
 <p align="center">
 <img src="https://github.com/UoB-COMSM0166/2026-group-27/blob/ffbe86f53cd08808ffe139176c6d5e68248c4792/IMG_2312.jpeg" width="50%">
