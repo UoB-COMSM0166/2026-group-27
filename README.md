@@ -31,6 +31,7 @@ game set up instructions and link to play game. [Here is our game](https://uob-c
 </p>
 
 <p align="center">
+ 
 | Name | Email | Github Username |
 | :--- | :--- | :--- |
 | Liz Chen | ji25241@bristol.ac.uk | @username |
@@ -39,6 +40,7 @@ game set up instructions and link to play game. [Here is our game](https://uob-c
 | Yizhou Pan | izapan610@gmail.com | @username |
 | Maniza Singh | jq25952@bristol.ac.uk | @username |
 | Keyu Zhou | email | @username |
+
 </p>
 
 ## Week 2
