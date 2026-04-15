@@ -179,7 +179,7 @@ Stakeholders are individuals or groups who are involved in, affected by, or able
 
 <p align="center">
    <b>Figure ?: </b>
-  <i>Onion Model for Lost in Bristol (apadted from: Alexander & Robertson, 2004).</i> <br>
+  <i>Onion Model for Lost in Bristol (adapted from: Alexander & Robertson, 2004).</i> <br>
 <img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/b0b48e33ac387bd2e73276ba06acaeb4621912e3/readme%20docs/3.%20onion%20model.jpg" 
  width="100%">
 </p>
