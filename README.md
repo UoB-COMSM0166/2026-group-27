@@ -179,7 +179,7 @@ We have chosen to work on Lost in Bristol because...
 
 ## 3.? Identifying Stakeholders
 
-Stakeholders are individuals or groups involved in, affected by, or able to influence the product. They are essential to the success of the project. Identifying stakeholders ensures relevant groups are considered and helps define the target audience (Pirozzi, 2019). The onion model was used to identify stakeholders and their level of involvement, helping prioritise key users (Alexander & Robertson, 2004).
+Stakeholders are individuals or groups involved in, affected by, or able to influence the product. Identifying stakeholders ensures relevant groups are considered and helps define the target audience (Pirozzi, 2019). The onion model was used to identify stakeholders and their level of involvement, helping prioritise key users (Alexander & Robertson, 2004).
 
 <p align="center">
    <b>Figure ?: </b>
