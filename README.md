@@ -104,7 +104,7 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
 thanusha
 - 15% ~750 words
 - Early stages design. Ideation process. How did you decide as a team what to develop?
-✅ Stakeholders
+- ✅ Stakeholders
 - User stories and epics 
 - Case diagrams
 
