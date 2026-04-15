@@ -29,6 +29,7 @@ game set up instructions and link to play game. [Here is our game](https://uob-c
 <p align="center">
   <b>Figure 1: </b>
   <i>Group Photo!</i> <br>
+  
 <img src="https://github.com/UoB-COMSM0166/2026-group-27/blob/ffbe86f53cd08808ffe139176c6d5e68248c4792/IMG_2312.jpeg" width="75%">
 </p>
 
