@@ -11,7 +11,7 @@ game set up instructions and link to play game. [Here is our game](https://uob-c
 
 # Table of Contents: 
 
-1. [Our Group](https://github.com/UoB-COMSM0166/2026-group-27/blob/main/README.md#our-group)
+1. [Our Group](https://github.com/UoB-COMSM0166/2026-group-27/blob/main/README.md#1-our-group)
 2. [Introduction](https://github.com/UoB-COMSM0166/2026-group-27/blob/main/README.md#2-introduction)
 3. [Requirements](https://github.com/UoB-COMSM0166/2026-group-27/blob/main/README.md#3-requirements)
 4. [Design](https://github.com/UoB-COMSM0166/2026-group-27/blob/main/README.md#4-design)
@@ -252,8 +252,9 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
 
 
 
-# 3. Requirements (Thanusha)
+# 3. Requirements
 
+thanusha
 - 15% ~750 words
 - Early stages design. Ideation process. How did you decide as a team what to develop?
 - onion model of stakeholders
