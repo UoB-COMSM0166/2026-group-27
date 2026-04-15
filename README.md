@@ -9,7 +9,7 @@ game set up instructions and link to play game. [Here is our game](https://uob-c
 
 # Video Demonstration
 
-# Table of Contents: 
+# Table of Contents 
 
 1. [Our Group](https://github.com/UoB-COMSM0166/2026-group-27/blob/main/README.md#1-our-group)
 2. [Introduction](https://github.com/UoB-COMSM0166/2026-group-27/blob/main/README.md#2-introduction)
