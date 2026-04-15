@@ -188,7 +188,7 @@ Stakeholders are individuals or groups who are involved in, affected by, or able
  width="100%">
 </p>
 
-**The Product:** Lost in Bristol video game
+**The Product:** Lost in Bristol video game.
 
 **The System:** Stakeholders involved in building and maintaining the product. This includes our development team, such as frontend and backend developers, game designers and project managers.
 
