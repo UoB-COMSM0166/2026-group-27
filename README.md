@@ -150,7 +150,7 @@ We have chosen to work on Lost in Bristol because...
 ### Epic: Exploration & Immersion
 
 **User Story**
-* As a player who enjoys exploration, I want to navigate a Bristol-inspired maze environment with local visuals so that I feel immersed in the game. 
+* As a player who enjoys exploration, I want to navigate a maze with Bristol-inspired visuals so that I feel immersed in the game. 
 
 **Acceptance Criteria**
 * Given the player is exploring the map
