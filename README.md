@@ -228,7 +228,7 @@ We also included acceptance criteria for each user story to determine when a fea
 **- Acceptance Criteria**
 * Given the player progresses to higher levels
 * When a new level begins
-* Then environmental difficulty increases (examples: reduced visibility, more obstacles)
+* Then environmental difficulty increases (such as reduced visibility and more obstacles)
 * And enemies become more challenging
 * And the player must avoid or overcome threats to progress
 
