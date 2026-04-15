@@ -173,7 +173,7 @@ https://github.com/user-attachments/assets/0ca057d0-9038-4678-b6c5-b5da47b4a736
 We have chosen to work on Lost in Bristol because... 
 
 
-## 3.? Stakeholders
+## 3.? Identifying Stakeholders
 
 Stakeholders are individuals or groups who are involved in, affected by, or able to influence the product. They may contribute positively or negatively and are essential to the success of the project. Identifying stakeholders ensures that all relevant groups are considered and clarifies who the product is for and how it should be developed to meet their needs (Pirozzi, 2019). The onion model was used to identify stakeholders and understand their level of involvement, helping us prioritise the needs of key users during development (Alexander & Robertson, 2004).
 
@@ -190,10 +190,10 @@ Stakeholders are individuals or groups who are involved in, affected by, or able
 
 ### Epic: Exploration & Immersion
 
-**User Story**
+**- User Story**
 * As a player who enjoys exploration, I want to navigate a maze with Bristol-inspired visuals so that I feel immersed in the game. 
 
-**Acceptance Criteria**
+**- Acceptance Criteria**
 * Given the player is exploring the map
 * When they move through the environment
 * Then movement is restricted by maze walls 
@@ -202,10 +202,10 @@ Stakeholders are individuals or groups who are involved in, affected by, or able
 
 ### Epic: Difficulty & Survival System
 
-**User Story** 
+**- User Story** 
 * As a player who enjoys increasing difficulty, I want the game to become more challenging across levels with environmental hazards and enemies, so that I feel on edge and a sense of achievement as I progress.
 
-**Acceptance Criteria**
+**- Acceptance Criteria**
 * Given the player progresses to higher levels
 * When a new level begins
 * Then environmental difficulty increases (examples: reduced visibility, more obstacles)
@@ -215,10 +215,10 @@ Stakeholders are individuals or groups who are involved in, affected by, or able
 
 ### Epic: Character Abilities
 
-**User Story**
+**- User Story**
 * As a player, I want to use characters with different abilities, so that I can experience different approaches to playing the game. 
 
-**Acceptance Criteria**
+**- Acceptance Criteria**
 * Given the player selects a character
 * When the game begins
 * Then the  character has an assigned unique ability
@@ -227,10 +227,10 @@ Stakeholders are individuals or groups who are involved in, affected by, or able
 
 ### Epic: Progression & Rewards System
 
-**User Story**
+**- User Story**
 * As a player who enjoys progression, I want to earn rewards for completing levels that I can spend on upgrades, so that I feel my abilities improve over time and I have a better chance of surviving harder levels.
 
-**Acceptance Criteria**
+**- Acceptance Criteria**
 * Given the player completes a level
 * When the level ends
 * Then the player is awarded in-game coins
