@@ -194,7 +194,7 @@ Stakeholders are individuals or groups who are involved in, affected by, or able
 
 **The Containing System:** Stakeholders who use and benefit from the product. This represents the primary  players of the game, mentioned in the model above, who may interact with and experience the gameplay as intended.
 
-**The Wider Environment:** External stakeholders who are outside the system but can influence or be affected by it. Academic professionals and game testers are responsible for evaluating the system and providing feedback. Current and future MSc computer science students may engage with the product as part of their learning or use it as inspiration for their own work. 
+**The Wider Environment:** External stakeholders who are outside the system but can influence or be affected by it. Academic professionals and game testers are responsible for evaluating the product and providing feedback. Current and future MSc computer science students may engage with the product as part of their learning or use it as inspiration for their own work. 
 
 
 
