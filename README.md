@@ -74,60 +74,6 @@ game set up instructions and link to play game. [Here is our game](https://uob-c
   </tr>
 </table>
 
-## Week 2
-
-### - Drawing App: 
-
-### - Game Ideas:
-
-
-| Game Idea | Inspiration | Description | Possible Challenges |
-| :--- | :--- | :--- | :--- |
-| Lost In Bristol | Pac-man (1980) <br> <br> The legend of Zelda (1986) | - Maze-exploration game incorporating landmarks, culture, and people from Bristol. <br> <br> - Fight enemies, collect weapons, and find buildings/landmarks from Bristol while going through the maze. This combines the maze navigation and enemies features in Pac-Man with the equipment, combat, and exploration features in the Legend of Zelda.  <br> <br> |
-Game Idea 2 | 
-Game Idea 3 |
- 
-
-## Week 3 (Review + Paper Prototyping)
-
-### - [Kanban Board](https://github.com/orgs/UoB-COMSM0166/projects/172)
-
-### - Prototypes:
-
-**1. Lost in Bristol: Paper Prototype** 
-
-https://github.com/user-attachments/assets/0ca057d0-9038-4678-b6c5-b5da47b4a736
-
-
-**2. Second Game: Powerpoint Prototype**
-
-
-### - Final Idea: 
-
-We have chosen to work on Lost in Bristol because... 
-
-## Week 4 (Requirements)
-
-Epics
-- ### Table 1.
-*User Stories for Bristol Urban Navigator*
-
-| Stakeholder | Epic | User Story Summary | Acceptance Criteria |
-| :--- | :--- | :--- | :--- |
-| **Atmosphere Hunter** | Immersive Navigation | Navigate a maze of Bristol backstreets using graffiti fragments and landmarks to uncover the mystery of being lost. | Movement is restricted by "building" boundaries; spatial audio and visual shifts reflect Bristol's hilly topography. |
-| **Mastermind** | Mechanical Puzzles | Manipulate urban elements like river tides or dock machinery to reveal new paths via spatial reasoning. | Puzzles physically change the zone layout; difficulty scales as multiple environmental mechanics are combined. |
-| **Cultural Enthusiast** | Achievement System | Discover iconic landmarks like the Suspension Bridge to "unlock" map sections and fun facts. | Reaching specific coordinates triggers a high-quality popup and increments a "Landmarks Found" counter. |
-| **The Urban Voyager** | Customization | Choose between 'Sprinter', 'celebrity', or 'singer' to change visual sprites and movement physics. | Selection on the main menu assigns unique sprites and specific `moveSpeed` variables (e.g., sprinter moves 2x faster). |
-| **Interaction / UI** | Dynamic HUD | Access a clear Heads-Up Display showing location and a compass to maintain orientation. | Persistent UI bar displays "Area Name" and a "Proximity Sensor" that glows brighter as the player nears goals. |
-| **Completionist** | Game Loop | Overcome obstacles like 'Traffic Jams' to reach Temple Meads and trigger a final score. | Random obstacles spawn every 30s; reaching the final destination triggers a Win Screen with score calculation. |
-
-## Week 5 (Class Diagram + Sequence Diagram)
-
-### - Class Diagram
-
-### - Sequence Diagram
-
-
 # 2. Introduction
 
 -Lost in Bristol is an immersive, third-person maze-puzzle game that challenges players to navigate a stylized, labyrinthine recreation of Bristol’s iconic urban landscape. Developed as a tribute to the city’s unique cultural identity, the game tasks players with escaping a series of increasingly complex districts within a strict time limit. The project’s core objective was to blend traditional maze-solving mechanics with high-stakes survival elements and environmental storytelling.
@@ -161,6 +107,24 @@ thanusha
 | Lost In Bristol | Pac-man (1980) <br> <br> The legend of Zelda (1986) | - Maze-exploration game incorporating landmarks, culture, and people from Bristol. <br> <br> - Fight enemies, collect weapons, and find buildings/landmarks from Bristol while going through the maze. This combines the maze navigation and enemies features in Pac-Man with the equipment, combat, and exploration features in the Legend of Zelda.  <br> <br> |
 Game Idea 2 | 
 Game Idea 3 |
+
+## Week 3 (Review + Paper Prototyping)
+
+### - [Kanban Board](https://github.com/orgs/UoB-COMSM0166/projects/172)
+
+### - Prototypes:
+
+**1. Lost in Bristol: Paper Prototype** 
+
+https://github.com/user-attachments/assets/0ca057d0-9038-4678-b6c5-b5da47b4a736
+
+
+**2. Second Game: Powerpoint Prototype**
+
+
+### - Final Idea: 
+
+We have chosen to work on Lost in Bristol because... 
 
 
 ## 3.? Stakeholders
@@ -228,10 +192,16 @@ Game Idea 3 |
 
 
 
+
+
 # 4. Design
 
 - 15% ~750 words 
-- System architecture. Class diagrams, behavioural diagrams. 
+- System architecture. Class diagrams, behavioural diagrams
+
+### - Class Diagram
+
+### - Sequence Diagram
 
 # 5. Implementation
 
