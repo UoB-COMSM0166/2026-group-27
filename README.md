@@ -196,7 +196,7 @@ Stakeholders are individuals or groups who are involved in, affected by, or able
 **- Acceptance Criteria**
 * Given the player is exploring the map
 * When they move through the environment
-* Then movement is restricted by maze walls 
+* Then movement is restricted by the maze walls 
 * And environmental visuals reflect Bristol (examples: graffiti and brick textures)
 
 
@@ -237,7 +237,7 @@ Stakeholders are individuals or groups who are involved in, affected by, or able
 * And the coins are added to their total balance
 * Given the player enters the shop
 * When they purchase an upgrade
-* Then currency is deducted correctly
+* Then the coins are deducted correctly
 * And the upgrade is applied to the gameplay
 
 
