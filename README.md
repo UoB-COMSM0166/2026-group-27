@@ -186,7 +186,7 @@ Stakeholders are individuals or groups who are involved in, affected by, or able
 
 **The Product:** Lost in Bristol video game
 
-**The System:** Stakeholders involved with building and maintaining the system. This includes our development team, such as frontend and backend developers, game designers and project managers.
+**The System:** Stakeholders involved in building and maintaining the product. This includes our development team, such as frontend and backend developers, game designers and project managers.
 
 **The Containing System:** Stakeholders who use and benefit from the product. This represents the primary  players of the game, mentioned in the model above, who may interact with and experience the gameplay as intended.
 
