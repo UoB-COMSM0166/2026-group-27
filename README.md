@@ -35,42 +35,49 @@ game set up instructions and link to play game. [Here is our game](https://uob-c
     <th>Name</th>
     <th>Email</th>
     <th>GitHub Username</th>
+    <th> Contribution Points </th>
   </tr>
 
   <tr>
     <td>Liz Chen</td>
     <td>ji25241@bristol.ac.uk</td>
     <td>@username</td>
+    <td>points</td>
   </tr>
 
   <tr>
     <td>Suki Dai</td>
     <td>daisy20010313@gmail.com</td>
     <td>@username</td>
+    <td>points</td>
   </tr>
 
   <tr>
     <td>Thanusha Gorva</td>
     <td>jx25475@bristol.ac.uk</td>
     <td>@thanusha170</td>
+    <td>points</td>
   </tr>
 
   <tr>
     <td>Yizhou Pan</td>
     <td>izapan610@gmail.com</td>
     <td>@username</td>
+    <td>points</td>
   </tr>
 
   <tr>
     <td>Maniza Singh</td>
     <td>jq25952@bristol.ac.uk</td>
     <td>@username</td>
+    <td>points</td>
   </tr>
 
   <tr>
     <td>Keyu Zhou</td>
     <td>email</td>
     <td>@username</td>
+    <td>points</td>
   </tr>
 </table>
 
