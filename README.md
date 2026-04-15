@@ -24,7 +24,7 @@ game set up instructions and link to play game. [Here is our game](https://uob-c
 11. [Contribution Statement](https://github.com/UoB-COMSM0166/2026-group-27/blob/main/README.md#contribution-statement)
 12. [AI Statement](https://github.com/UoB-COMSM0166/2026-group-27/blob/main/README.md#ai-statement)
 
-## Our Group
+## 1. Our Group
 
 <p align="center">
 <img src="https://github.com/UoB-COMSM0166/2026-group-27/blob/ffbe86f53cd08808ffe139176c6d5e68248c4792/IMG_2312.jpeg" width="50%">
@@ -236,7 +236,7 @@ The system demonstrates **outstanding usability** with a SUS score of 90.75 (Gra
 
 
 
-# 1. Introduction
+# 2. Introduction
 
 -Lost in Bristol is an immersive, third-person maze-puzzle game that challenges players to navigate a stylized, labyrinthine recreation of Bristol’s iconic urban landscape. Developed as a tribute to the city’s unique cultural identity, the game tasks players with escaping a series of increasingly complex districts within a strict time limit. The project’s core objective was to blend traditional maze-solving mechanics with high-stakes survival elements and environmental storytelling.
 
@@ -252,7 +252,7 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
 
 
 
-# 2. Requirements (Thanusha)
+# 3. Requirements (Thanusha)
 
 - 15% ~750 words
 - Early stages design. Ideation process. How did you decide as a team what to develop?
@@ -260,7 +260,7 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
 - user stories and epics 
 - case diagrams
 
-## 2.1 Game Ideas:
+## 3.1 Game Ideas:
 
 
 | Game Idea | Inspiration | Description | Possible Challenges |
@@ -270,7 +270,7 @@ Game Idea 2 |
 Game Idea 3 |
 
 
-## 2.? Stakeholders
+## 3.? Stakeholders
 
 <p align="center">
    <b>Figure ?</b><br>
@@ -279,7 +279,7 @@ Game Idea 3 |
  width="75%">
 </p>
 
-## 2.? Epics & User Stories
+## 3.? Epics & User Stories
 
 ### Epic: Exploration & Immersion
 
@@ -335,18 +335,18 @@ Game Idea 3 |
 
 
 
-# Design
+# 4. Design
 
 - 15% ~750 words 
 - System architecture. Class diagrams, behavioural diagrams. 
 
-# Implementation
+# 5. Implementation
 
 - 15% ~750 words
 
 - Describe implementation of your game, in particular highlighting the TWO areas of *technical challenge* in developing your game. 
 
-# Evaluation
+# 6. Evaluation
 
 The evaluation for 'Lost in Bristol' followed an iterative design approach. This meant testing the prototype early so we could catch technical bugs and navigation issues before finalising the game. We used a Mixed-Methods strategy, combining numerical data from the System Usability Scale (SUS) and NASA TLX with verbal feedback from Think Aloud sessions. This gave us a full picture of not just if users could finish the tasks but how they felt while doing so.
 
@@ -407,34 +407,34 @@ To ensure the prototype remained stable during user evaluations, we performed se
 * Input and Combat Logic: We conducted extensive testing on the player’s combat mechanics. Originally, the system was restricted so the character could only shoot in the direction they were moving; however, we refactored the aiming logic to allow for omnidirectional shooting, enabling the player to defend themselves regardless of their movement vector.
 
 
-# Process 
+# 7. Process 
 
 - 15% ~750 words
 
 - Teamwork. How did you work together, what tools and methods did you use? Did you define team roles? Reflection on how you worked together. Be honest, we want to hear about what didn't work as well as what did work, and importantly how your team adapted throughout the project.
 
 
-# NEW: Sustainability, ethics and accessibility (10% 750 words)
+# 8. NEW: Sustainability, ethics and accessibility (10% 750 words)
 - Evidence of the impact of your game across the environment and two other areas: environmental + 2 of the following: Social, Economical, Technical, Individual
 
-# Conclusion
+# 9. Conclusion
 
 - 10% ~500 words
 
 - Reflect on the project as a whole. Lessons learnt. Reflect on challenges. Future work, describe both immediate next steps for your current game and also what you would potentially do if you had chance to develop a sequel.
 
-# Contribution Statement
+# 10. Contribution Statement
 
 - Provide a table of everyone's contribution, which *may* be used to weight individual grades. We expect that the contribution will be split evenly across team-members in most cases. Please let us know as soon as possible if there are any issues with teamwork as soon as they are apparent and we will do our best to help your team work harmoniously together.
 
-# NEW: AI statement (250 words)
+# 11. NEW: AI statement (250 words)
 
 - summarise your team's use of AI ao we know where to give you credit for work done
 - PLEASE WRITE THE REPO YOURSELF - NO AI USE FOR WRITING THE REPO 
 
 
 
-# References
+# 12. References
 apa 7 referencing style
 
 ### Additional Marks
