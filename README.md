@@ -236,6 +236,13 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
 Game Idea 2 | 
 Game Idea 3 |
 
+
+## 2.? Stakeholders
+
+<p align="center">
+<img src= https://github.com/UoB-COMSM0166/2026-group-27/blob/b0b48e33ac387bd2e73276ba06acaeb4621912e3/readme%20docs/3.%20onion%20model.jpg>
+</p>
+
 ## 2.? Epics & User Stories
 
 ### Epic: Exploration & Immersion
