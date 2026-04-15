@@ -139,7 +139,7 @@ We have chosen to work on Lost in Bristol because...
 ## 3.? Stakeholders
 
 <p align="center">
-   <b>Figure ?</b><br>
+   <b>Figure ?: </b>
   <i>Onion Model for Lost in Bristol (Alexander & Robertson, 2004).</i> <br>
 <img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/b0b48e33ac387bd2e73276ba06acaeb4621912e3/readme%20docs/3.%20onion%20model.jpg" 
  width="75%">
