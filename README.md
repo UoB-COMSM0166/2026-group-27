@@ -30,18 +30,49 @@ game set up instructions and link to play game. [Here is our game](https://uob-c
 <img src="https://github.com/UoB-COMSM0166/2026-group-27/blob/ffbe86f53cd08808ffe139176c6d5e68248c4792/IMG_2312.jpeg" width="50%">
 </p>
 
-<p align="center">
- 
-| Name | Email | Github Username |
-| :--- | :--- | :--- |
-| Liz Chen | ji25241@bristol.ac.uk | @username |
-| Suki Dai | daisy20010313@gmail.com | @username |
-| Thanusha Gorva | jx25475@bristol.ac.uk | @thanusha170 |
-| Yizhou Pan | izapan610@gmail.com | @username |
-| Maniza Singh | jq25952@bristol.ac.uk | @username |
-| Keyu Zhou | email | @username |
+<table align="center" width="100%">
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>GitHub Username</th>
+  </tr>
 
-</p>
+  <tr>
+    <td>Liz Chen</td>
+    <td>ji25241@bristol.ac.uk</td>
+    <td>@username</td>
+  </tr>
+
+  <tr>
+    <td>Suki Dai</td>
+    <td>daisy20010313@gmail.com</td>
+    <td>@username</td>
+  </tr>
+
+  <tr>
+    <td>Thanusha Gorva</td>
+    <td>jx25475@bristol.ac.uk</td>
+    <td>@thanusha170</td>
+  </tr>
+
+  <tr>
+    <td>Yizhou Pan</td>
+    <td>izapan610@gmail.com</td>
+    <td>@username</td>
+  </tr>
+
+  <tr>
+    <td>Maniza Singh</td>
+    <td>jq25952@bristol.ac.uk</td>
+    <td>@username</td>
+  </tr>
+
+  <tr>
+    <td>Keyu Zhou</td>
+    <td>email</td>
+    <td>@username</td>
+  </tr>
+</table>
 
 ## Week 2
 
