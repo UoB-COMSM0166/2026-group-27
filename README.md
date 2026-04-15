@@ -278,7 +278,7 @@ Game Idea 3 |
 ### Epic: Progression & Rewards System
 
 **User Story**
-*As a player who enjoys progression, I want to earn rewards for completing levels that I can spend on upgrades, so that I feel my abilities improve over time and I have a better chance of surviving harder levels.
+* As a player who enjoys progression, I want to earn rewards for completing levels that I can spend on upgrades, so that I feel my abilities improve over time and I have a better chance of surviving harder levels.
 
 **Acceptance Criteria**
 * Given the player completes a level
