@@ -45,12 +45,6 @@ game set up instructions and link to play game. [Here is our game](https://uob-c
   </tr>
 
   <tr>
-    <td>Liz Chen</td>
-    <td>ji25241@bristol.ac.uk</td>
-    <td>@username</td>
-  </tr>
-
-  <tr>
     <td>Suki Dai</td>
     <td>daisy20010313@gmail.com</td>
     <td>@username</td>
@@ -62,15 +56,15 @@ game set up instructions and link to play game. [Here is our game](https://uob-c
     <td>@thanusha170</td>
   </tr>
 
-  <tr>
-    <td>Yizhou Pan</td>
-    <td>izapan610@gmail.com</td>
+   <tr>
+    <td>Liz Chen</td>
+    <td>ji25241@bristol.ac.uk</td>
     <td>@username</td>
   </tr>
 
   <tr>
-    <td>Maniza Singh</td>
-    <td>jq25952@bristol.ac.uk</td>
+    <td>Yizhou Pan</td>
+    <td>izapan610@gmail.com</td>
     <td>@username</td>
   </tr>
 
@@ -79,6 +73,13 @@ game set up instructions and link to play game. [Here is our game](https://uob-c
     <td>email</td>
     <td>@username</td>
   </tr>
+
+   <tr>
+    <td>Maniza Singh</td>
+    <td>jq25952@bristol.ac.uk</td>
+    <td>@username</td>
+  </tr>
+  
 </table>
 
 # 2. Introduction
