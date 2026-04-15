@@ -111,11 +111,48 @@ thanusha
 ## 3.1 Game Ideas:
 
 
-| Game Idea | Inspiration | Description | Possible Challenges |
-| :--- | :--- | :--- | :--- |
-| Lost In Bristol | Pac-man (1980) <br> <br> The legend of Zelda (1986) | - Maze-exploration game incorporating landmarks, culture, and people from Bristol. <br> <br> - Fight enemies, collect weapons, and find buildings/landmarks from Bristol while going through the maze. This combines the maze navigation and enemies features in Pac-Man with the equipment, combat, and exploration features in the Legend of Zelda.  <br> <br> |
-Game Idea 2 | 
-Game Idea 3 |
+<table align="center" width="100%">
+  <tr>
+    <th>Game Idea</th>
+    <th>Inspiration</th>
+    <th>Description</th>
+    <th>Possible Challenges</th>
+  </tr>
+
+  <tr>
+    <td>Lost In Bristol</td>
+    <td>
+      Pac-Man (1980)<br><br>
+      The Legend of Zelda (1986)
+    </td>
+    <td>
+      Maze-exploration game incorporating landmarks, culture, and people from Bristol.<br><br>
+      Players fight enemies, collect weapons, and discover Bristol landmarks while navigating a maze.
+      This combines Pac-Man-style maze navigation with Zelda-style combat, equipment, and exploration mechanics.
+    </td>
+    <td>
+      - Balancing maze complexity and visibility<br>
+      - Designing engaging enemy AI<br>
+      - Integrating combat and exploration smoothly<br>
+      - Ensuring performance in large maze environments
+    </td>
+  </tr>
+
+  <tr>
+    <td>Game Idea 2</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+
+  <tr>
+    <td>Game Idea 3</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+
+</table>
 
 ## Week 3 (Review + Paper Prototyping)
 
