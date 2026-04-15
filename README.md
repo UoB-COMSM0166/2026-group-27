@@ -32,9 +32,10 @@ game set up instructions and link to play game. [Here is our game](https://uob-c
 <img src="https://github.com/UoB-COMSM0166/2026-group-27/blob/ffbe86f53cd08808ffe139176c6d5e68248c4792/IMG_2312.jpeg" width="75%">
 </p>
 
-
+<p align="center">
 <b>Table 1</b><br>
   <i>Team members from Left to Right of Figure 1.</i> <br>
+  <p align="center">
   
 <table align="center" width="100%">
   <tr>
