@@ -179,7 +179,7 @@ We have chosen to work on Lost in Bristol because...
 
 ## 3.? Identifying Stakeholders
 
-Stakeholders are individuals or groups who are involved in, affected by, or able to influence the product. They may contribute positively or negatively and are essential to the success of the project. Identifying stakeholders ensures that all relevant groups are considered and helps to understand who the product is for and how it should be developed to meet their needs (Pirozzi, 2019). The onion model was used to identify stakeholders and their level of involvement, helping us to prioritise the needs of key users during development (Alexander & Robertson, 2004).
+Stakeholders are individuals or groups involved in, affected by, or able to influence the product. They are essential to the success of the project. Identifying stakeholders ensures relevant groups are considered and helps define the target audience (Pirozzi, 2019). The onion model was used to identify stakeholders and their level of involvement, helping prioritise key users (Alexander & Robertson, 2004).
 
 <p align="center">
    <b>Figure ?: </b>
@@ -190,34 +190,33 @@ Stakeholders are individuals or groups who are involved in, affected by, or able
 
 **The Product:** Lost in Bristol video game.
 
-**The System:** Stakeholders involved in building and maintaining the product. This includes our development team, such as frontend and backend developers, game designers and project managers.
+**The System:** Stakeholders involved in building and maintaining the product, including developers, designers, and project managers.
 
-**The Containing System:** Stakeholders who use and benefit from the product. This represents the primary  players of the game, mentioned in the model above, who may interact with and experience the gameplay as intended.
+**The Containing System:** Stakeholders who use and benefit from the product, representing the main players of the game.
 
-**The Wider Environment:** External stakeholders who are outside the system but can influence or be affected by it. Academic professionals and game testers are responsible for evaluating the product and providing feedback. Current and future MSc computer science students may engage with the product as part of their learning or use it as inspiration for their own work. 
-
+**The Wider Environment:** External stakeholders such as assessors, testers, and Computer Science students, who evaluate, influence, or learn from the product.
 
 
 ## 3.? Epics & User Stories
 
-To map out the core features of our game, we identified epics and created user stories. 
+To define the core features of our game, epics and user stories were created. 
 
 An epic is a core feature or goal in the game that represents a major part of the gameplay and can be broken down into user stories. 
 
-A user story is a description of a feature written from the perspective of a player, explaining why they need this feature. We created the stories following Cohn’s format: “As a [user], I want [goal] so that [reason]” (Cohn, 2004). This helped us to develop features step by step while keeping the focus on the users and problem-solving, rather than creating random goals that may not benefit the overall product. This ensures that each feature is designed with purpose and improves the experience for the users and the overall quality of the game.
+A user story describes a feature from the player’s perspective, explaining what they need and why, using Cohn’s format: “As a [user], I want [goal] so that [reason]” (Cohn, 2004). This helped us to develop features step by step while keeping the focus on the users and problem-solving, rather than creating random goals that may not benefit the overall product. This ensures that each feature is designed with purpose and improves the experience for the users and the overall quality of the game.
 
-We also included acceptance criteria for each user story to determine when a feature has been successfully implemented in the game. We used the Given-When-Then format to define how each feature should work. “Given” describes the system before an action takes place, “When” is the action or event that occurs, and “Then” is the expected result after the action (“when”) occurs (de Biase et al., 2024).  
+Acceptance criteria were included to determine when a feature has been successfully implemented in the game, using the Given-When-Then format.  to define how each feature should work. “Given” describes the starting state, “When” the action, and “Then” the expected result (de Biase et al., 2024).
 
 ### Epic: Exploration & Immersion
 
 **- User Story**
-* As a player who enjoys exploration, I want to navigate a maze with Bristol-inspired visuals so that I feel immersed in the game. 
+* As a player who enjoys exploration, I want to navigate a maze with Bristol-inspired visuals so that I feel immersed. 
 
 **- Acceptance Criteria**
-* Given the player is exploring the map
-* When they move through the environment
-* Then movement is restricted by the maze walls 
-* And environmental visuals reflect Bristol (examples: graffiti and brick textures)
+* Given the player is exploring
+* When they move through the maze
+* Then movement is restricted by walls
+* And visuals reflect Bristol (e.g. graffiti, brick textures)
 
 
 ### Epic: Difficulty & Survival System
@@ -226,11 +225,10 @@ We also included acceptance criteria for each user story to determine when a fea
 * As a player who enjoys increasing difficulty, I want the game to become more challenging across levels with environmental hazards and enemies, so that I feel on edge and a sense of achievement as I progress.
 
 **- Acceptance Criteria**
-* Given the player progresses to higher levels
+* Given the player progresses
 * When a new level begins
-* Then environmental difficulty increases (such as reduced visibility and more obstacles)
+* Then the difficulty increases (e.g. reduced visibility, more obstacles)
 * And enemies become more challenging
-* And the player must avoid or overcome threats to progress
 
 
 ### Epic: Character Abilities
@@ -239,9 +237,9 @@ We also included acceptance criteria for each user story to determine when a fea
 * As a player, I want to use characters with different abilities, so that I can experience different approaches to playing the game. 
 
 **- Acceptance Criteria**
-* Given the player selects a character
+* Given a character is selected
 * When the game begins
-* Then the  character has an assigned unique ability
+* Then the character has a unique ability
 * And the ability affects strategy and movement options
 
 
@@ -259,7 +257,6 @@ We also included acceptance criteria for each user story to determine when a fea
 * When they purchase an upgrade
 * Then the coins are deducted correctly
 * And the upgrade is applied to the gameplay
-
 
 
 
