@@ -175,12 +175,16 @@ We have chosen to work on Lost in Bristol because...
 
 ## 3.? Stakeholders
 
+Stakeholders are individuals or groups who are involved in, affected by, or able to influence the product. They may contribute positively or negatively and are essential to the success of the project. Identifying stakeholders ensures that all relevant groups are considered and clarifies who the product is for and how it should be developed to meet their needs (Pirozzi, 2019). The onion model was used to identify stakeholders and understand their level of involvement, helping us prioritise the needs of key users during development (Alexander & Robertson, 2004).
+
 <p align="center">
    <b>Figure ?: </b>
   <i>Onion Model for Lost in Bristol (Alexander & Robertson, 2004).</i> <br>
 <img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/b0b48e33ac387bd2e73276ba06acaeb4621912e3/readme%20docs/3.%20onion%20model.jpg" 
  width="100%">
 </p>
+
+
 
 ## 3.? Epics & User Stories
 
