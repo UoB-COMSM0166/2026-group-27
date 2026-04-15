@@ -110,6 +110,10 @@ thanusha
 
 ## 3.1 Game Ideas:
 
+<p align="center">
+<b>Table ?: </b>
+  <i>Game ideas....</i> <br>
+  <p align="center">
 
 <table align="center" width="100%">
   <tr>
