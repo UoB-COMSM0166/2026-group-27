@@ -203,7 +203,7 @@ To define the core features of our game, epics and user stories were created.
 
 An epic is a core feature or goal in the game that represents a major part of the gameplay and can be made into user stories using Cohn’s format: “As a [user], I want [goal] so that [reason]” (Cohn, 2004). This helped us develop features step by step while keeping the focus on the users and problem-solving, rather than creating random goals that may not benefit the overall product.
 
-Acceptance criteria were included to determine when a feature has been successfully implemented in the game, using the Given-When-Then format,  to define how each feature should work. “Given” describes the starting state, “When” the action, and “Then” the expected result (de Biase et al., 2024).
+Acceptance criteria were included to determine when a feature has been successfully implemented in the game using the Given-When-Then format. “Given” describes the starting state, “When” the action, and “Then” the expected result (de Biase et al., 2024).
 
 ### Epic: Exploration & Immersion
 
