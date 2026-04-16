@@ -179,7 +179,7 @@ We have chosen to work on Lost in Bristol because...
 
 ## 3.? Identifying Stakeholders
 
-Stakeholders are individuals or groups involved in, affected by, or able to influence the product. Identifying stakeholders ensures relevant groups are considered and helps define the target audience (Pirozzi, 2019). The onion model was used to identify stakeholders and their level of involvement, helping prioritise key users (Alexander & Robertson, 2004).
+Stakeholders are individuals or groups involved in, affected by, or able to influence the product. Identifying stakeholders ensures relevant groups are considered and helps define the target audience (Pirozzi, 2019). The onion model was used to identify stakeholders and help prioritise key users (Alexander & Robertson, 2004).
 
 <p align="center">
    <b>Figure ?: </b>
@@ -201,11 +201,9 @@ Stakeholders are individuals or groups involved in, affected by, or able to infl
 
 To define the core features of our game, epics and user stories were created. 
 
-An epic is a core feature or goal in the game that represents a major part of the gameplay and can be broken down into user stories. 
+An epic is a core feature or goal in the game that represents a major part of the gameplay and can be made into user stories using Cohn’s format: “As a [user], I want [goal] so that [reason]” (Cohn, 2004). This helped us develop features step by step while keeping the focus on the users and problem-solving, rather than creating random goals that may not benefit the overall product.
 
-A user story describes a feature from the player’s perspective, explaining what they need and why, using Cohn’s format: “As a [user], I want [goal] so that [reason]” (Cohn, 2004). This helped us to develop features step by step while keeping the focus on the users and problem-solving, rather than creating random goals that may not benefit the overall product. This ensures that each feature is designed with purpose and improves the experience for the users and the overall quality of the game.
-
-Acceptance criteria were included to determine when a feature has been successfully implemented in the game, using the Given-When-Then format.  to define how each feature should work. “Given” describes the starting state, “When” the action, and “Then” the expected result (de Biase et al., 2024).
+Acceptance criteria were included to determine when a feature has been successfully implemented in the game, using the Given-When-Then format,  to define how each feature should work. “Given” describes the starting state, “When” the action, and “Then” the expected result (de Biase et al., 2024).
 
 ### Epic: Exploration & Immersion
 
