@@ -108,7 +108,7 @@ thanusha
 - ✅ User stories and epics 
 - Case diagrams
 
-## 3.1 Game Ideas:
+## 3.1 Ideation Process 
 
 <p align="center">
 <b>Table ?: </b>
