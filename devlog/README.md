@@ -97,5 +97,17 @@ This folder stores developer logs.
   - updated repo
     
 - In progress
- - game cover 
+ - game cover
+
+## week：13
+
+### liz：
+- Completed:
+  - complete the story, created background arts
+- In Progress:
+  - make story animation
+- Problems:
+  - character portrait
+- Next Plan:
+  - complete animation, design character portrait
    
