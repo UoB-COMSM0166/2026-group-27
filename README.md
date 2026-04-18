@@ -232,7 +232,7 @@ Acceptance criteria were included to determine when a feature has been successfu
       <br>
 - Then movement is restricted by walls <br>
       <br>
-- And visuals reflect Bristol (e.g. graffiti, brick textures) <br>
+- And the environment reflect Bristol (e.g. graffiti, brick textures) <br>
 </td>
   </tr>
 
@@ -246,7 +246,7 @@ Acceptance criteria were included to determine when a feature has been successfu
       <br>
 - Then the difficulty increases (e.g. reduced visibility, more obstacles) <br>
       <br>
-- And enemies become more challenging <br>
+- And the game become more challenging <br>
 </td>
   </tr>
 
@@ -261,7 +261,7 @@ Acceptance criteria were included to determine when a feature has been successfu
       <br>
 - Then the character has a unique ability <br>
       <br>
-- And the ability affects strategy and movement options <br>
+- And the ability affects gameplay strategy and movement  <br>
 </td>
   </tr>
 
@@ -278,13 +278,14 @@ Acceptance criteria were included to determine when a feature has been successfu
       <br>
 - And the coins are added to their total balance <br>
       <br>
+       <br>
 - Given the player enters the shop <br>
       <br>
 - When they purchase an upgrade <br>
       <br>
 - Then the coins are deducted correctly <br>
       <br>
-- And the upgrade is applied to the gameplay <br>
+- And the upgrade changes gameplay <br>
 </td>
   </tr>
 
