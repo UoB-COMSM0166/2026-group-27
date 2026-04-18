@@ -260,7 +260,68 @@ Acceptance criteria were included to determine when a feature has been successfu
 * Then the coins are deducted correctly
 * And the upgrade is applied to the gameplay
 
+<p align="center">
+<b>Table ?: </b>
+  <i>Epics, User stories and Acceptance Criteria.</I> <br>
+  <p align="center">
+  
+<table align="center" width="100%">
+  <tr>
+    <th>Epic</th>
+    <th>User Story</th>
+    <th>Acceptance criteria</th>
+  </tr>
 
+  <tr>
+    <td>Exploration & Immersion</td>
+    <td>As a player who enjoys exploration, I want to navigate a maze with Bristol-inspired visuals so that I feel immersed.</td>
+    <td>
+* Given the player is exploring
+* When they move through the maze
+* Then movement is restricted by walls
+* And visuals reflect Bristol (e.g. graffiti, brick textures)
+</td>
+  </tr>
+
+  <tr>
+    <td>Difficulty & Survival System</td>
+    <td>As a player who enjoys increasing difficulty, I want the game to become more challenging across levels with environmental hazards and enemies, so that I feel on edge and a sense of achievement as I progress. </td>
+    <td>
+* Given the player progresses
+* When a new level begins
+* Then the difficulty increases (e.g. reduced visibility, more obstacles)
+* And enemies become more challenging
+</td>
+  </tr>
+
+  <tr>
+    <td>Character Abilities</td>
+    <td>As a player, I want to use characters with different abilities, so that I can experience different approaches to playing the game. </td>
+    <td>
+* Given a character is selected
+* When the game begins
+* Then the character has a unique ability
+* And the ability affects strategy and movement options
+</td>
+  </tr>
+
+  <tr>
+    <td>Progression & Rewards System</td>
+    <td>As a player who enjoys progression, I want to earn rewards for completing levels that I can spend on upgrades, so that I feel my abilities improve over time and I have a better chance of surviving harder levels.
+ </td>
+    <td>
+* Given the player completes a level
+* When the level ends
+* Then the player is awarded in-game coins
+* And the coins are added to their total balance
+* Given the player enters the shop
+* When they purchase an upgrade
+* Then the coins are deducted correctly
+* And the upgrade is applied to the gameplay
+</td>
+  </tr>
+
+</table>
 
 
 # 4. Design
