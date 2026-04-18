@@ -275,7 +275,7 @@ Acceptance criteria were included to determine when a feature has been successfu
 
   <tr>
     <td>Exploration & Immersion</td>
-    <td>"As a player who enjoys exploration, I want to navigate a maze with Bristol-inspired visuals so that I feel immersed."</td>
+    <td>"As a player, I want to explore an immersive maze, so that I feel engaged while navigating the environment.”</td>
     <td>
 - Given the player is exploring <br>
       <br>
@@ -289,7 +289,7 @@ Acceptance criteria were included to determine when a feature has been successfu
 
   <tr>
     <td>Difficulty & Survival System</td>
-    <td>"As a player who enjoys increasing difficulty, I want the game to become more challenging across levels with environmental hazards and enemies, so that I feel on edge and a sense of achievement as I progress." </td>
+    <td>"As a player, I want the game to become more challenging across levels, so that I feel on edge and a sense of achievement as I progress." </td>
     <td>
 - Given the player progresses <br>
       <br>
@@ -303,7 +303,8 @@ Acceptance criteria were included to determine when a feature has been successfu
 
   <tr>
     <td>Character Abilities</td>
-    <td>"As a player, I want to use characters with different abilities, so that I can experience different approaches to playing the game." </td>
+    <td>"As a player, I want to use characters with different abilities, so that I can experience different approaches to playing the game." 
+    </td>
     <td>
 - Given a character is selected <br>
       <br>
@@ -317,7 +318,7 @@ Acceptance criteria were included to determine when a feature has been successfu
 
   <tr>
     <td>Progression & Rewards System</td>
-    <td>"As a player who enjoys progression, I want to earn rewards for completing levels that I can spend on upgrades, so that I feel my abilities improve over time and I have a better chance of surviving harder levels."
+    <td>"As a player, I want to earn rewards and buy upgrades, so that I feel my abilities improve as I progress."
  </td>
     <td>
 - Given the player completes a level <br>
