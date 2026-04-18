@@ -215,10 +215,10 @@ Acceptance criteria were included to determine when a feature has been successfu
 * As a player who enjoys exploration, I want to navigate a maze with Bristol-inspired visuals so that I feel immersed. 
 
 **- Acceptance Criteria**
-* Given the player is exploring
-* When they move through the maze
-* Then movement is restricted by walls
-* And visuals reflect Bristol (e.g. graffiti, brick textures)
+* Given the player is exploring<br>
+* When they move through the maze<br>
+* Then movement is restricted by walls<br>
+* And visuals reflect Bristol (e.g. graffiti, brick textures)<br>
 
 
 ### Epic: Difficulty & Survival System
@@ -227,10 +227,10 @@ Acceptance criteria were included to determine when a feature has been successfu
 * As a player who enjoys increasing difficulty, I want the game to become more challenging across levels with environmental hazards and enemies, so that I feel on edge and a sense of achievement as I progress.
 
 **- Acceptance Criteria**
-* Given the player progresses
-* When a new level begins
-* Then the difficulty increases (e.g. reduced visibility, more obstacles)
-* And enemies become more challenging
+* Given the player progresses<br>
+* When a new level begins<br>
+* Then the difficulty increases (e.g. reduced visibility, more obstacles)<br>
+* And enemies become more challenging<br>
 
 
 ### Epic: Character Abilities
@@ -239,10 +239,10 @@ Acceptance criteria were included to determine when a feature has been successfu
 * As a player, I want to use characters with different abilities, so that I can experience different approaches to playing the game. 
 
 **- Acceptance Criteria**
-* Given a character is selected
-* When the game begins
-* Then the character has a unique ability
-* And the ability affects strategy and movement options
+* Given a character is selected<br>
+* When the game begins<br>
+* Then the character has a unique ability<br>
+* And the ability affects strategy and movement options<br>
 
 
 ### Epic: Progression & Rewards System
@@ -251,14 +251,14 @@ Acceptance criteria were included to determine when a feature has been successfu
 * As a player who enjoys progression, I want to earn rewards for completing levels that I can spend on upgrades, so that I feel my abilities improve over time and I have a better chance of surviving harder levels.
 
 **- Acceptance Criteria**
-* Given the player completes a level
-* When the level ends
-* Then the player is awarded in-game coins
-* And the coins are added to their total balance
-* Given the player enters the shop
-* When they purchase an upgrade
-* Then the coins are deducted correctly
-* And the upgrade is applied to the gameplay
+* Given the player completes a level <br>
+* When the level ends<br>
+* Then the player is awarded in-game coins<br>
+* And the coins are added to their total balance<br>
+* Given the player enters the shop<br>
+* When they purchase an upgrade<br>
+* Then the coins are deducted correctly<br>
+* And the upgrade is applied to the gameplay<br>
 
 <p align="center">
 <b>Table ?: </b>
