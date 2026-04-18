@@ -262,7 +262,7 @@ Acceptance criteria were included to determine when a feature has been successfu
 - Then the character has a unique ability <br>
       <br>
 - And the ability affects gameplay strategy and movement  <br>
-</td>
+</td> 
   </tr>
 
   <tr>
