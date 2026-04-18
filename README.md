@@ -170,7 +170,7 @@ thanusha
 
 **1. Lost in Bristol: Paper Prototype** 
 
-<img src= "" width= "150%">
+<img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/06c6934e5e1d4dcb1cc9abdb86003831452de443/readme%20docs/3.%20paper%20prototype%201.mp4" width= "150%">
 
 
 **2. Second Game: Powerpoint Prototype**
