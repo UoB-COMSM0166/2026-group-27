@@ -278,8 +278,11 @@ Acceptance criteria were included to determine when a feature has been successfu
     <td>As a player who enjoys exploration, I want to navigate a maze with Bristol-inspired visuals so that I feel immersed.</td>
     <td>
 - Given the player is exploring <br>
+      <br>
 - When they move through the maze <br>
+      <br>
 - Then movement is restricted by walls <br>
+      <br>
 - And visuals reflect Bristol (e.g. graffiti, brick textures) <br>
 </td>
   </tr>
@@ -289,8 +292,11 @@ Acceptance criteria were included to determine when a feature has been successfu
     <td>As a player who enjoys increasing difficulty, I want the game to become more challenging across levels with environmental hazards and enemies, so that I feel on edge and a sense of achievement as I progress. </td>
     <td>
 - Given the player progresses <br>
+      <br>
 - When a new level begins <br>
+      <br>
 - Then the difficulty increases (e.g. reduced visibility, more obstacles) <br>
+      <br>
 - And enemies become more challenging <br>
 </td>
   </tr>
@@ -300,8 +306,11 @@ Acceptance criteria were included to determine when a feature has been successfu
     <td>As a player, I want to use characters with different abilities, so that I can experience different approaches to playing the game. </td>
     <td>
 - Given a character is selected <br>
+      <br>
 - When the game begins <br>
+      <br>
 - Then the character has a unique ability <br>
+      <br>
 - And the ability affects strategy and movement options <br>
 </td>
   </tr>
@@ -312,12 +321,19 @@ Acceptance criteria were included to determine when a feature has been successfu
  </td>
     <td>
 - Given the player completes a level <br>
+      <br>
 - When the level ends <br>
+      <br>
 - Then the player is awarded in-game coins <br>
+      <br>
 - And the coins are added to their total balance <br>
+      <br>
 - Given the player enters the shop <br>
+      <br>
 - When they purchase an upgrade <br>
+      <br>
 - Then the coins are deducted correctly <br>
+      <br>
 - And the upgrade is applied to the gameplay <br>
 </td>
   </tr>
