@@ -40,7 +40,7 @@ game set up instructions and link to play game. [Here is our game](https://uob-c
   
 <table align="center" width="100%">
   <tr>
-    <th>Name</th>
+    <th style="width=25%"> Name</th>
     <th>Email</th>
     <th>GitHub Username</th>
   </tr>
