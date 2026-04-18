@@ -143,7 +143,7 @@ thanusha
   </tr>
 
 <tr>
-  <td>Game Idea 2 | Court Clash</td>
+  <td> Court Clash</td>
   <td>Inspired by Stick Tennis Gameplay</td>
   <td>A fast-paced tennis-style game where players control a paddle to keep the ball in play. Difficulty increases over time with faster speeds, power-ups, and dynamic elements to create an addictive, replayable experience.</td>
   <td>
