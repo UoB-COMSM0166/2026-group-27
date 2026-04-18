@@ -40,7 +40,7 @@ game set up instructions and link to play game. [Here is our game](https://uob-c
   
 <table align="center" width="100%">
   <tr>
-    <th style="width=25%"> Name</th>
+    <th> Name</th>
     <th>Email</th>
     <th>GitHub Username</th>
   </tr>
@@ -267,9 +267,9 @@ Acceptance criteria were included to determine when a feature has been successfu
   
 <table align="center" width="25%">
   <tr>
-    <th>Epic</th>
-    <th>User Story</th>
-    <th>Acceptance criteria</th>
+    <th style= "25%"> Epic</th>
+    <th style = "50%"> User Story</th>
+    <th style = "50%"> Acceptance criteria</th>
   </tr>
 
   <tr>
