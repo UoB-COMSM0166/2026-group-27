@@ -276,7 +276,50 @@ Acceptance criteria were included to determine when a feature has been successfu
 
 - 15% ~750 words
 
-- Describe implementation of your game, in particular highlighting the TWO areas of *technical challenge* in developing your game. 
+- Describe implementation of your game, in particular highlighting the TWO areas of *technical challenge* in developing your game.
+
+
+  # 5. Implementation
+
+## 5.1 System Architecture & Technical Product Ownership
+
+The implementation of Lost in Bristol is built on a state-driven architecture using the p5.js library. As a team, we orchestrated the game flow through a centralized set of global boolean flags (start, pause, gameover, end) that regulate the render loop. To ensure technical consistency across different development environments, we implemented a Delta-Time Physics Layer. By scaling all movement logic—such as playerSpeed (120) and enemySpeed (52)—against deltaTime, we decoupled the gameplay experience from the browser’s frame rate. As the Technical Product Owner, I ensured that these foundational systems remained modular, allowing for the integration of complex features like the localStorage gun upgrade path without disrupting the core loop.
+
+## 5.2 Challenge 1: Atmospheric Vision Masking & Combat Syncing
+
+-The team aimed to deliver an "Atmosphere Hunter" experience where navigation is restricted by environmental "fog." The primary engineering bottleneck was creating a performant, non-blocking visual mask that could dynamically update in real-time without the overhead of per-tile lighting calculations, while simultaneously ensuring that the combat auto-lock remained logically consistent with the player's actual field of view.
+
+Solutions & Implementation Examples:
+
+Graphics Buffer Masking (Fog-of-War): We implemented a secondary off-screen buffer, fogLayer, to handle transparency independently of the main game canvas.
+
+For e.g.: In drawFog(), the buffer is filled with a specific fogAlpha (185). When hasLamp is true, the engine invokes fogLayer.erase() to "punch" a dynamic hole in the overlay. This provides a O(1) performance cost, as the GPU renders one single image rather than calculating lighting for hundreds of individual maze blocks.
+
+Distance-Capped Target Hydration: To prevent the player from shooting enemies hidden in the fog, we tightly coupled the combat engine to the vision radius.
+
+For e.g.: The findAutoTarget() function serves as a logic gate. It calculates a Euclidean distance check between player and enemies. By capping this at a range of 220, the system ensures the "Gun" only locks onto targets physically revealed by the Lamp’s circle, preventing mechanical exploitation of the visual fog.
+
+## 5.3 Challenge 2: Procedural Constraint-Based Spawning & Fairness
+
+Generating a maze procedurally introduced the risk of "Illegal Spawns"—scenarios where critical progression items (lampItem, gunItem) or the Boss would overlap with wall objects or spawn directly on the player. This threatened game fairness and the "Mastermind" design philosophy, as a blocked exit or an immediate boss-spawn would result in an unavoidable failure state.
+
+Solutions & Implementation Examples:
+
+Recursive Spatial Validation (Try-and-Verify): We developed a suite of helper functions that utilize a "Recursive Validation" pattern to transform raw randomness into safe gameplay.
+
+For E.g.: In createItemInMidArea(), the engine runs up to 400 iterations to find a valid coordinate. Each iteration triggers intersectsWall(item); if the item's Rect collides with any object in the wall[] array, the coordinate is discarded and recalculated. This guarantees that items are always placed in "traversable" space.
+
+Zoning & Grid-Snapping Logic: To maintain a fair difficulty curve, we implemented coordinate-based zoning.
+
+for eg: We utilized snapToGrid()—calculated as floor(value / blockSize) * blockSize—to ensure every entity aligns perfectly with the 32px world grid. Furthermore, the isInStartView() check was integrated into createEnemies() to effectively "blacklist" the player's initial screen area from hostile spawns, ensuring the team's intended pacing is respected from the first frame of movement.
+
+Four-Way Portal Network Stability: We implemented a "safe-destination" algorithm for the usePortal function.
+
+for eg: When a player intersects a portal, the engine tests four cardinal destinations (blockSize offsets) using intersectsWall(testRect). By validating these locations before the teleport occurs, the system eliminates the risk of the player being permanently trapped inside a wall during a scene transition.
+
+## 5.4 Team Integration of Combat Physics
+
+The final implementation phase focused on the Boss class, where we moved beyond simple random movement to Trigonometric Patterning. By utilizing atan2() to calculate the vector between the boss and player, we enabled the fireFanShot() method to project multiple enemyProjectiles at radians(18) intervals. This combined our team’s work on collision detection, spatial math, and atmospheric rendering into a single, cohesive final challenge.
 
 # 6. Evaluation
 
