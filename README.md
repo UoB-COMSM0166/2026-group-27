@@ -35,7 +35,7 @@ game set up instructions and link to play game. [Here is our game](https://uob-c
 
 <p align="center">
 <b>Table 1: </b>
-  <i>Group members from left to tight of Figure 1.</i> <br>
+  <i>Group members from left to right of Figure 1.</i> <br>
   <p align="center">
   
 <table align="center" width="100%">
