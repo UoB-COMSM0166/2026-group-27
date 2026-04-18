@@ -269,7 +269,7 @@ Acceptance criteria were included to determine when a feature has been successfu
   <tr>
     <th style= "25%"> Epic</th>
     <th style = "50%"> User Story</th>
-    <th style = "50%"> Acceptance criteria</th>
+    <th style = "25%"> Acceptance criteria</th>
   </tr>
 
   <tr>
