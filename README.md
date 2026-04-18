@@ -265,11 +265,11 @@ Acceptance criteria were included to determine when a feature has been successfu
   <i>Epics, User stories and Acceptance Criteria.</I> <br>
   <p align="center">
   
-<table align="center" width="75%">
+<table align="center" width="100%">
   <tr>
-    <th width= "25%"> Epic</th>
-    <th width = "25%"> User Story</th>
-    <th width = "25%"> Acceptance criteria</th>
+    <th width= "10%"> Epic</th>
+    <th width = "30%"> User Story</th>
+    <th width = "60%"> Acceptance criteria</th>
   </tr>
 
   <tr>
