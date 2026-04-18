@@ -266,7 +266,7 @@ Acceptance criteria were included to determine when a feature has been successfu
 </p>
 
   
-<table width = "75%" align="center">
+<table width = "100%" align="center">
   <tr>
     <th width = "20%"> Epic</th>
     <th width = "30"> User Story</th>
