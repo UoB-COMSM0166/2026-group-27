@@ -189,7 +189,7 @@ thanusha
 We have chosen to work on Lost in Bristol because... 
 
 
-## 3.? Identifying Stakeholders
+## 3.2 Identifying Stakeholders
 
 Stakeholders are individuals or groups involved in, affected by, or able to influence the product. Identifying stakeholders ensures relevant groups are considered and helps define the target audience (Pirozzi, 2019). The onion model was used to identify stakeholders and help prioritise key users (Alexander & Robertson, 2004).
 
@@ -209,7 +209,7 @@ Stakeholders are individuals or groups involved in, affected by, or able to infl
 **The Wider Environment:** External stakeholders such as assessors, testers, and Computer Science students, who evaluate or learn from the product, and influence the development of the project.
 
 
-## 3.? Epics & User Stories
+## 3.3 Epics & User Stories
 
 To define the core features of our game, epics and user stories were created. 
 
@@ -299,6 +299,7 @@ Acceptance criteria were included to determine when a feature has been successfu
 
 </table>
 
+## 3.4 Use-case Specification
 
 # 4. Design
 
