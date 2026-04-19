@@ -333,7 +333,7 @@ For e.g.: In drawFog(), the buffer is filled with a specific fogAlpha (185). Whe
 
 Distance-Capped Target Hydration: To prevent the player from shooting enemies hidden in the fog, we tightly coupled the combat engine to the vision radius.
 
-For e.g.: The findAutoTarget() function serves as a logic gate. It calculates a Euclidean distance check between player and enemies. By capping this at a range of 220, the system ensures the "Gun" only locks onto targets physically revealed by the Lamp’s circle, preventing mechanical exploitation of the visual fog.
+For e.g.: 
 
 ## 5.3 Challenge 2: Procedural Constraint-Based Spawning & Fairness
 
@@ -442,6 +442,26 @@ To ensure the prototype remained stable during user evaluations, we performed se
 
 # 8. NEW: Sustainability, ethics and accessibility (10% 750 words)
 - Evidence of the impact of your game across the environment and two other areas: environmental + 2 of the following: Social, Economical, Technical, Individual
+
+When we were developing Lost in Bristol, we didn't just want to focus on the "fun" factor but also wanted to think about the footprint a game like this leaves behind. Balancing the intensity of our "Twists" with the responsibility of creating a modern project meant looking at how we impact the environment, the individual players and the technical landscape.
+
+## Environmental Impact: Digital Efficiency
+As student developers, we realised that even if our game is digital, there are actual environmental costs associated with it, mostly due to player device usage and energy consumption during production.
+
+-Optimisation as Sustainability: To make sure the game doesn't require expensive, power-hungry GPUs to run, we gave priority to asset optimisation and efficient programming. We have decreased the wattage needed for a typical play session by lowering the computational load required to render our "Dark Maps" and urban districts.
+
+-Cloud & Storage: We also maintained small file sizes. A tiny but significant step toward lowering the carbon footprint of digital distribution, smaller builds result in less energy being consumed during downloads and less server space being needed on hosting platforms.
+
+## Individual Impact: Cognitive Load & Accessibility
+We also focused on the player's mental and physical experience, especially given our high-stress mechanics like the Hostile Environment and Dynamic Visibility.
+
+-Accessibility in Navigation: We realized that "Dark Maps" could be frustrating or even for players with visual impairments or high anxiety. To mitigate this, we implemented adjustable "Flashlight" intensity and high-contrast map pick-ups.
+
+-The Stress Balance: While the game is designed to be high-stakes, we wanted the Individual experience to be one of tactics and growth, not genuine distress. We included clear safe zones portals to give players a mental breather, ensuring that the difficulty feels like a fair challenge rather than an overwhelming burden on their well-being and they actually enjoy.
+
+
+## technical 
+## social
 
 # 9. Conclusion
 
