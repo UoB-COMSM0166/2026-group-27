@@ -162,8 +162,6 @@ thanusha
 
 </table>
 
-## Week 3 (Review + Paper Prototyping)
-
 ### - [Kanban Board](https://github.com/orgs/UoB-COMSM0166/projects/172)
 
 ### - Prototypes:
