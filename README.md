@@ -202,11 +202,11 @@ From this, we focused on key stakeholders such as players, developers, and teste
 
 **The Product:** Lost in Bristol video game.
 
-**The System:** Stakeholders involved in building and maintaining the product, including developers, designers, and project managers.
+**The System:** Stakeholders involved in developing the game, including developers, designers, and project managers.
 
-**The Containing System:** Stakeholders who use and benefit from the product, representing the main players of the game.
+**The Containing System:** The main users of the game, such as players, who interact with and experience the gameplay.
 
-**The Wider Environment:** External stakeholders such as assessors, testers, and Computer Science students, who evaluate or learn from the product, and influence the development of the project.
+**The Wider Environment:** External stakeholders such as assessors, testers, and Computer Science students, who evaluate or learn from the product, and influence its development. 
 
 
 ## 3.3 Epics & User Stories
