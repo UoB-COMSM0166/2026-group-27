@@ -316,8 +316,7 @@ Acceptance criteria were included to determine when a feature has been successfu
 - Describe implementation of your game, in particular highlighting the TWO areas of *technical challenge* in developing your game.
 
 
-## 5.1 System Architecture & Technical Product Ownership
-
+## 5.1 System Architecture 
 The implementation of Lost in Bristol is built on a state-driven architecture using the p5.js library. As a team, we orchestrated the game flow through a centralized set of global boolean flags (start, pause, gameover, end) that regulate the render loop. To ensure technical consistency across different development environments, we implemented a Delta-Time Physics Layer. By scaling all movement logic—such as playerSpeed (120) and enemySpeed (52)—against deltaTime, we decoupled the gameplay experience from the browser’s frame rate. As the Technical Product Owner, I ensured that these foundational systems remained modular, allowing for the integration of complex features like the localStorage gun upgrade path without disrupting the core loop.
 
 ## 5.2 Challenge 1: Atmospheric Vision Masking & Combat Syncing
