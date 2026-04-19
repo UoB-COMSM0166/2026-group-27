@@ -111,7 +111,7 @@ This folder stores developer logs.
 - Next Plan:
   - complete animation, design character portrait
    
-### liz：
+### maniza：
 - Completed:
   - Evaluation
   - IMPLEMENTATION
