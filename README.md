@@ -364,7 +364,7 @@ The evaluation of Lost in Bristol followed an iterative design approach. The gam
 
 Although the game did not yet include the final Bristol-themed visuals, this allowed us to focus on evaluating the core gameplay mechanics without the influence of visual or narrative elements.
 
-We used a mixed-methods approach, combining quantitative data from the System Usability Scale (SUS) and NASA TLX with qualitative feedback from Think Aloud sessions. This allowed us to understand how well users could complete tasks and their overall experience during gameplay.
+We used a mixed-methods approach, combining quantitative data from the System Usability Scale (SUS) with qualitative feedback from Think Aloud sessions. This allowed us to understand how well users could complete tasks and their overall experience during gameplay.
 
 
 ## 1. Qualitative Evaluation: Think Aloud
@@ -395,7 +395,7 @@ Participants suggested several improvements to the game mechanics, some of which
 Participants also suggested adding a hint system to help locate the exit when time is running low, as well as a warning when you are about to run out of time (e.g. 10–20 seconds remaining). These suggestions showed that the players needed clearer timing feedback, especially when players are under pressure. 
 
 
-## 2. Quantitative Analysis: *SUS & NASA TLX*
+## 2. Quantitative Analysis: *System Usability Scale (SUS)*
 We collected data from 10 participants (P1-P10) who performed tasks like finding green points on the map.
 
 ### System Usability Scale (SUS):
