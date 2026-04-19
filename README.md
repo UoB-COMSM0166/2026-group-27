@@ -359,26 +359,43 @@ The final implementation phase focused on the Boss class, where we moved beyond 
 
 # 6. Evaluation
 
-The evaluation for 'Lost in Bristol' followed an iterative design approach. This meant testing the prototype early so we could catch technical bugs and navigation issues before finalising the game. We used a Mixed-Methods strategy, combining numerical data from the System Usability Scale (SUS) and NASA TLX with verbal feedback from Think Aloud sessions. This gave us a full picture of not just if users could finish the tasks but how they felt while doing so.
+# 6. Evaluation
+
+The evaluation of Lost in Bristol followed an iterative design approach. The game was tested in a prototype stage, allowing us to identify and fix usability issues, navigation problems, and technical bugs during development before releasing the game. 
+
+
+Although the game did not yet include the final Bristol-themed visuals, this allowed us to focus on evaluating the core gameplay mechanics without the influence of visual or narrative elements.
+
+We used a mixed-methods approach, combining quantitative data from the System Usability Scale (SUS) and NASA TLX with qualitative feedback from Think Aloud sessions. This allowed us to understand how well users could complete tasks and their overall experience during gameplay.
+
 
 ## 1. Qualitative Evaluation: Think Aloud
-During the Think Aloud sessions, we asked participants to verbalise their thoughts and decision-making process while navigating the maze and looking for core objectives such as important items and the exit. 
 
-Although the game did not yet include the final Bristol-themed characters or visuals, this stage of testing intentionally allowed us to focus on evaluating the core gameplay mechanics and overall usability. This ensured that we could identify issues related to navigation, controls and play understanding without the influence of visual or narrative features. 
+During the Think Aloud (TA) sessions, we asked participants to verbalise their thoughts and decision-making process while navigating the maze and completing tasks such as finding items and reaching the exit. This method helps us understand what users are thinking during gameplay, allowing us to identify misunderstandings, and unclear game elements (Pellicone et al., 2022). 
 
-This revealed several critical areas for improvement:
+Ten participants were recruited using convenience sampling from our weekly workshops. This was suitable for early-stage testing, allowing us to receive quick feedback during development without needing a formal controlled study.
+
+We grouped the feedback into common themes to identify repeated issues across different users. The main themes were map design, technical issues, and game mechanics.
 
 * Map Design:
 
-While users liked the maze's layout and its "spacious route", many noted that the environment felt empty and repetitive. This validated our design ideas and highlighted the need to make the maze more visually engaging. To address this, we decided to add Bristol-themed visuals and landmarks, such as university buildings and graffiti art on the maze walls. These features help players recognise their surroundings and navigate easily. Importantly, they also keep the players engaged during gameplay while providing a fun, interactive way to explore and learn about Bristol. 
-  
+Most users liked the maze's layout and its "spacious route", suggesting that the navigation structure was clear and easy to understand. However, many noted that the environment felt empty and repetitive. 
+
+This indicated that while the layout supported navigation effectively, the prototype lacked visual detail. This reduced engagement and made spatial awareness less intuitive. This supported our planned use of Bristol-themed visual elements, including landmarks and graffiti-style textures, to improve visual engagement and help players recognise different areas of the map.
+
+ 
 * Technical Glitches:
 
-A major issue identified was that the Enter key would only function if the mouse cursor was specifically positioned over the game window.
-  
+A key issue was identified with input handling. The Enter key, used to start the game, only worked when the mouse cursor was positioned over the game window. This reduced usability and made input behaviour unreliable. 
+
+This was fixed by improving input focus handling so keyboard controls are always active during gameplay, improving control reliability.
+   
 * Game Mechanics:
 
-Participants requested a reward system and immersive sound effects. They also wanted descriptions for items they found and a 'hint' to help locate the exit when the timer was running low.
+Participants suggested several improvements to the game mechanics, some of which matched features we already planned to implement, such as a reward system and item descriptions to improve feedback and engagement.
+
+Participants also suggested adding a hint system to help locate the exit when time is running low, as well as a warning when you are about to run out of time (e.g. 10–20 seconds remaining). These suggestions showed that the players needed clearer timing feedback, especially when players are under pressure. 
+
 
 ## 2. Quantitative Analysis: *SUS & NASA TLX*
 We collected data from 10 participants (P1-P10) who performed tasks like finding green points on the map.
