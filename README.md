@@ -78,7 +78,7 @@ game set up instructions and link to play game. [Here is our game](https://uob-c
    <tr>
     <td>Maniza Singh</td>
     <td>jq25952@bristol.ac.uk</td>
-    <td>@username</td>
+    <td>ManizaS17</td>
   </tr>
   
 </table>
