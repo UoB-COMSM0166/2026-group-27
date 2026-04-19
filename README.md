@@ -359,8 +359,6 @@ The final implementation phase focused on the Boss class, where we moved beyond 
 
 # 6. Evaluation
 
-# 6. Evaluation
-
 The evaluation of Lost in Bristol followed an iterative design approach. The game was tested in a prototype stage, allowing us to identify and fix usability issues, navigation problems, and technical bugs during development before releasing the game. 
 
 
