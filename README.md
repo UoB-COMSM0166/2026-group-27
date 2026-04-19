@@ -171,8 +171,8 @@ thanusha
 **1. Lost in Bristol: Paper Prototype** 
 
 <p align="center">
-  <b>Figure 1: </b>
-  <i>Group Photo!</i> <br>
+  <b>Figure ?: </b>
+  <i>Paper Prototype for Lost in Bristol developed during Workshop 3 </i> <br>
   </p>
 
 <p align="center">
