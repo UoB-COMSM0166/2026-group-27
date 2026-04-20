@@ -15,7 +15,7 @@ const mazeW = 16;
 const mazeH = 16;
 
 // 时间限制（分钟） / Time limit (minutes)
-const timeLimit = 5; // 5-minute time limit
+const timeLimit = 5;
 
 
 // ==================== 图片素材 / Image assets ====================
@@ -31,6 +31,12 @@ let wallImg;
 
 // 出口传送阵
 let exitPortalImg;
+
+// 宝箱
+let boxImg;
+
+// 弩箭
+let crossbowImg;
 
 
 // ==================== 游戏变量 / Game variables ====================
@@ -92,11 +98,8 @@ let exitTiles = [];
 // 宝箱 / Chest
 let box;
 
-// 脚蹼 / Flipper
-let flipper;
-
-// 呼吸管 / Snorkel
-let snorkel;
+// 弩箭 / Crossbow
+let crossbow;
 
 // 玩家 / Player
 let player;
@@ -110,11 +113,8 @@ let dir = 0;
 // 是否拿到小地图 / Whether the mini-map has been collected
 let hasMiniMap = false;
 
-// 是否拿到脚蹼 / Whether the flipper has been collected
-let hasFlipper = false;
-
-// 是否拿到呼吸管 / Whether the snorkel has been collected
-let hasSnorkel = false;
+// 是否拿到弩箭 / Whether the crossbow has been collected
+let hasCrossbow = false;
 
 // 是否显示小地图 / Whether to show the mini-map
 let showMiniMap = true;
@@ -139,6 +139,8 @@ function preload() {
     floorCrackedGlowImg = loadImage('assets/floor_cracked_glow.png');
     wallImg = loadImage('assets/wall_column_tall.png');
     exitPortalImg = loadImage('assets/exit.png');
+    boxImg = loadImage('assets/box.png');
+    crossbowImg = loadImage('assets/crossbow.png');
 }
 
 
@@ -153,52 +155,41 @@ function setup() {
 
     setMap();
 
-    // 创建宝箱
-    let x = floor(random(64, (mazeMap.gridH - 4) * blockSize));
-    let y = floor(random(96, (mazeMap.gridW - 4) * blockSize));
-    box = new Rect(x, y, blockSize, blockSize, true);
+    // ==================== 宝箱：入口附近随机生成 ====================
+    // 不是固定点，但保证大致在开局视野附近
+    let boxMinX = blockSize * 5;
+    let boxMaxX = blockSize * 20;
+    let boxMinY = blockSize * 5;
+    let boxMaxY = blockSize * 12;
+
+    let boxX = floor(random(boxMinX, boxMaxX));
+    let boxY = floor(random(boxMinY, boxMaxY));
+    box = new Rect(boxX, boxY, blockSize, blockSize, true);
 
     while (
-        x % blockSize !== 0 ||
-        y % blockSize !== 0 ||
+        boxX % blockSize !== 0 ||
+        boxY % blockSize !== 0 ||
         intersectsWall(box)
     ) {
-        x = floor(random(64, (mazeMap.gridH - 4) * blockSize));
-        y = floor(random(96, (mazeMap.gridW - 4) * blockSize));
-        box = new Rect(x, y, blockSize, blockSize, true);
+        boxX = floor(random(boxMinX, boxMaxX));
+        boxY = floor(random(boxMinY, boxMaxY));
+        box = new Rect(boxX, boxY, blockSize, blockSize, true);
     }
 
-    // 创建呼吸管
-    x = floor(random(64, (mazeMap.gridH - 4) * blockSize));
-    y = floor(random(96, (mazeMap.gridW - 4) * blockSize));
-    snorkel = new Rect(x, y, blockSize, blockSize, true);
+    // ==================== 弩箭：地图随机位置 ====================
+    let crossbowX = floor(random(64, (mazeMap.gridH - 4) * blockSize));
+    let crossbowY = floor(random(96, (mazeMap.gridW - 4) * blockSize));
+    crossbow = new Rect(crossbowX, crossbowY, blockSize, blockSize, true);
 
     while (
-        x % blockSize !== 0 ||
-        y % blockSize !== 0 ||
-        intersectsWall(snorkel) ||
-        snorkel.intersects(box)
+        crossbowX % blockSize !== 0 ||
+        crossbowY % blockSize !== 0 ||
+        intersectsWall(crossbow) ||
+        crossbow.intersects(box)
     ) {
-        x = floor(random(64, (mazeMap.gridH - 4) * blockSize));
-        y = floor(random(96, (mazeMap.gridW - 4) * blockSize));
-        snorkel = new Rect(x, y, blockSize, blockSize, true);
-    }
-
-    // 创建脚蹼
-    x = floor(random(64, (mazeMap.gridH - 4) * blockSize));
-    y = floor(random(96, (mazeMap.gridW - 4) * blockSize));
-    flipper = new Rect(x, y, blockSize, blockSize, true);
-
-    while (
-        x % blockSize !== 0 ||
-        y % blockSize !== 0 ||
-        intersectsWall(flipper) ||
-        flipper.intersects(box) ||
-        flipper.intersects(snorkel)
-    ) {
-        x = floor(random(64, (mazeMap.gridH - 4) * blockSize));
-        y = floor(random(96, (mazeMap.gridW - 4) * blockSize));
-        flipper = new Rect(x, y, blockSize, blockSize, true);
+        crossbowX = floor(random(64, (mazeMap.gridH - 4) * blockSize));
+        crossbowY = floor(random(96, (mazeMap.gridW - 4) * blockSize));
+        crossbow = new Rect(crossbowX, crossbowY, blockSize, blockSize, true);
     }
 
     cam.focus(player.left, player.top);
@@ -225,16 +216,14 @@ function drawGame() {
     drawMaze();
     drawPlayer();
 
+    // 绘制宝箱
     if (!hasMiniMap) {
         drawBox(box.left - cam.x, box.top - cam.y);
     }
 
-    if (!hasSnorkel && hasMiniMap) {
-        drawSnorkel(snorkel.left - cam.x, snorkel.top - cam.y);
-    }
-
-    if (!hasFlipper && hasMiniMap) {
-        drawFlipper(flipper.left - cam.x, flipper.top - cam.y);
+    // 绘制弩箭
+    if (!hasCrossbow && hasMiniMap) {
+        drawCrossbow(crossbow.left - cam.x, crossbow.top - cam.y);
     }
 
     if (endTimePopUp > elapsedTime) {
@@ -356,7 +345,6 @@ function act(deltaTime) {
 function keyPressed() {
     lastKeyPress = keyCode;
 
-    // 开始游戏
     if (keyCode === ENTER && start) {
         pause = false;
         start = false;
@@ -364,23 +352,19 @@ function keyPressed() {
         return;
     }
 
-    // 关闭说明面板
     if (keyCode === ENTER && showInstructions) {
         showInstructions = false;
         return;
     }
 
-    // 暂停/继续
     if (!start && !showInstructions && keyCode === KEY_PAUSE) {
         pause = !pause;
     }
 
-    // 重新开始
     if (keyCode === ESCAPE && (end || gameover)) {
         resetGame();
     }
 
-    // 显示/隐藏小地图
     if (keyCode === KEY_M) {
         showMiniMap = !showMiniMap;
     }
@@ -393,7 +377,6 @@ function keyReleased() {
 
 // ==================== 绘制图形函数 / Drawing functions ====================
 
-// 绘制玩家
 function drawPlayer() {
     push();
 
@@ -430,69 +413,60 @@ function drawPlayer() {
 }
 
 
-// 绘制宝箱
+// 绘制宝箱图片
 function drawBox(x, y) {
     push();
 
-    fill(139, 69, 19);
-    rect(x + 4, y + 12, 24, 16, 3);
+    imageMode(CORNER);
 
-    fill(160, 82, 45);
-    rect(x + 4, y + 8, 24, 6, 3);
+    if (boxImg) {
+        image(boxImg, x + 1, y + 1, blockSize - 2, blockSize - 2);
+    } else {
+        fill(139, 69, 19);
+        noStroke();
+        rect(x + 4, y + 12, 24, 16, 3);
 
-    fill(255, 215, 0);
-    rect(x + 14, y + 16, 4, 8, 2);
-    ellipse(x + 16, y + 18, 6, 6);
+        fill(160, 82, 45);
+        rect(x + 4, y + 8, 24, 6, 3);
+
+        fill(255, 215, 0);
+        rect(x + 14, y + 16, 4, 8, 2);
+        ellipse(x + 16, y + 18, 6, 6);
+    }
 
     pop();
 }
 
 
-// 绘制呼吸管
-function drawSnorkel(x, y) {
+// 绘制弩箭图片
+function drawCrossbow(x, y) {
     push();
 
-    stroke(255, 200, 0);
-    strokeWeight(3);
-    noFill();
-    arc(x + 16, y + 20, 12, 20, PI, TWO_PI);
-    line(x + 22, y + 20, x + 22, y + 8);
+    imageMode(CORNER);
 
-    fill(255, 200, 0);
-    noStroke();
-    ellipse(x + 22, y + 8, 6, 6);
-
-    fill(255, 100, 100);
-    ellipse(x + 10, y + 20, 8, 6);
-
-    pop();
-}
-
-
-// 绘制脚蹼
-function drawFlipper(x, y) {
-    push();
-
-    fill(0, 200, 200);
-    noStroke();
-
-    ellipse(x + 12, y + 20, 10, 20);
-    triangle(x + 7, y + 28, x + 17, y + 28, x + 12, y + 32);
-
-    ellipse(x + 20, y + 20, 10, 20);
-    triangle(x + 15, y + 28, x + 25, y + 28, x + 20, y + 32);
+    if (crossbowImg) {
+        image(crossbowImg, x, y, blockSize, blockSize);
+    } else {
+        fill(120, 80, 40);
+        noStroke();
+        rect(x + 8, y + 12, 16, 6, 2);
+        stroke(90, 60, 30);
+        strokeWeight(2);
+        line(x + 6, y + 10, x + 26, y + 10);
+        line(x + 6, y + 22, x + 26, y + 22);
+        line(x + 24, y + 10, x + 28, y + 16);
+        line(x + 24, y + 22, x + 28, y + 16);
+    }
 
     pop();
 }
 
 
-// 检查指定网格坐标是否有墙
 function hasWallAt(gridX, gridY) {
     return wallLookup.has(`${gridX},${gridY}`);
 }
 
 
-// 旋转图片后再绘制
 function drawRotatedImage(img, x, y, angle) {
     push();
     translate(x + blockSize / 2, y + blockSize / 2);
@@ -504,7 +478,6 @@ function drawRotatedImage(img, x, y, angle) {
 }
 
 
-// 绘制墙壁
 function drawWall(tile) {
     let x = tile.left - cam.x;
     let y = tile.top - cam.y;
@@ -519,7 +492,6 @@ function drawWall(tile) {
 }
 
 
-// 绘制地面
 function drawTerrain(tile) {
     push();
 
@@ -554,7 +526,6 @@ function drawTerrain(tile) {
 }
 
 
-// 绘制出口传送阵（上下浮动）
 function drawExitPortal() {
     if (!exitTiles || exitTiles.length === 0) return;
 
@@ -607,7 +578,6 @@ function drawExitPortal() {
 
 // ==================== 工具函数 / Utility functions ====================
 
-// 时间转为 mm:ss
 function convertTime(time) {
     let seconds = floor(time % 60);
     let minutes = floor((time / 60) % 60);
@@ -619,7 +589,6 @@ function convertTime(time) {
 }
 
 
-// 多行文本绘制
 function fillTextMultiLine(txt, x, y) {
     let lineHeight = 16;
     let lines = txt.split("\n");
@@ -855,7 +824,6 @@ function setMap() {
         }
     }
 
-    // 右下角出口传送阵区域
     exitTiles.push(new Rect((col - 2) * blockSize, (row - 2) * blockSize, blockSize, blockSize, true, 1));
     exitTiles.push(new Rect((col - 2) * blockSize, (row - 3) * blockSize, blockSize, blockSize, true, 3));
     exitTiles.push(new Rect((col - 3) * blockSize, (row - 2) * blockSize, blockSize, blockSize, true, 0));
@@ -996,9 +964,9 @@ function drawInformation() {
 
     text('To become an explorer you should find the exit of the maze,',
          width / 2 - 185, 140);
-    text('but before you should search some objects that will help',
+    text('but before that you should find the chest to unlock the mini-map,',
          width / 2 - 185, 157);
-    text('you to escape.',
+    text('and then search for the crossbow.',
          width / 2 - 185, 174);
 
     text('Be careful! You are lost in a big maze and have a limited',
@@ -1045,7 +1013,6 @@ function drawInformation() {
 }
 
 
-// 绘制地图
 function drawMaze() {
     for (let t of terrain) {
         drawTerrain(t);
@@ -1059,7 +1026,6 @@ function drawMaze() {
 }
 
 
-// 绘制小地图
 function drawMiniMap() {
     let miniMapBorder = 5;
     let miniMapLeft = 10;
@@ -1093,6 +1059,7 @@ function drawMiniMap() {
         );
     }
 
+    // 出口
     let exitTile = exitTiles[0];
     fill(255, 200, 50);
     circle(
@@ -1101,6 +1068,7 @@ function drawMiniMap() {
         5
     );
 
+    // 玩家
     fill(255, 0, 0);
     noStroke();
     circle(
@@ -1109,27 +1077,18 @@ function drawMiniMap() {
         4
     );
 
-    if (!hasSnorkel) {
+    // 弩箭
+    if (!hasCrossbow) {
         fill(60, 140, 255);
         circle(
-            (snorkel.left / blockSize) * miniMapScale + miniMapLeft + miniMapBorder + 1,
-            (snorkel.top / blockSize) * miniMapScale + miniMapTop + miniMapBorder + 1,
-            4
-        );
-    }
-
-    if (!hasFlipper) {
-        fill(60, 140, 255);
-        circle(
-            (flipper.left / blockSize) * miniMapScale + miniMapLeft + miniMapBorder + 1,
-            (flipper.top / blockSize) * miniMapScale + miniMapTop + miniMapBorder + 1,
+            (crossbow.left / blockSize) * miniMapScale + miniMapLeft + miniMapBorder + 1,
+            (crossbow.top / blockSize) * miniMapScale + miniMapTop + miniMapBorder + 1,
             4
         );
     }
 }
 
 
-// 绘制时间
 function drawElapsedTime() {
     fill(0);
     noStroke();
@@ -1169,22 +1128,13 @@ function checkItemCollisions(direction) {
         if (direction === 'left') player.left = box.right;
     }
 
-    if (!hasSnorkel && hasMiniMap && player.intersects(snorkel)) {
-        snorkelIntersects();
+    if (!hasCrossbow && hasMiniMap && player.intersects(crossbow)) {
+        crossbowIntersects();
 
-        if (direction === 'up') player.top = snorkel.bottom;
-        if (direction === 'right') player.right = snorkel.left;
-        if (direction === 'down') player.bottom = snorkel.top;
-        if (direction === 'left') player.left = snorkel.right;
-    }
-
-    if (!hasFlipper && hasMiniMap && player.intersects(flipper)) {
-        flipperIntersects();
-
-        if (direction === 'up') player.top = flipper.bottom;
-        if (direction === 'right') player.right = flipper.left;
-        if (direction === 'down') player.bottom = flipper.top;
-        if (direction === 'left') player.left = flipper.right;
+        if (direction === 'up') player.top = crossbow.bottom;
+        if (direction === 'right') player.right = crossbow.left;
+        if (direction === 'down') player.bottom = crossbow.top;
+        if (direction === 'left') player.left = crossbow.right;
     }
 
     exitIntersects();
@@ -1195,34 +1145,21 @@ function checkItemCollisions(direction) {
 function boxIntersects() {
     triggerPopUp(
         "Mini Map found!",
-        "You can show/hide the Map pressing 'M' \n \n Now, you should search a snorkel and a flipper",
+        "You can show/hide the Map pressing 'M' \n \n Now, you should search for the crossbow",
         3
     );
     hasMiniMap = true;
 }
 
 
-// 呼吸管碰撞逻辑
-function snorkelIntersects() {
-    let msg = "Now, you should search the exit portal.";
-    if (!hasFlipper) {
-        msg = "Now, you should search a flipper.";
-    }
-
-    triggerPopUp("Snorkel found!", msg, 3);
-    hasSnorkel = true;
-}
-
-
-// 脚蹼碰撞逻辑
-function flipperIntersects() {
-    let msg = "Now, you should search the exit portal.";
-    if (!hasSnorkel) {
-        msg = "Now, you should search a snorkel.";
-    }
-
-    triggerPopUp("Flipper found!", msg, 3);
-    hasFlipper = true;
+// 弩箭碰撞逻辑
+function crossbowIntersects() {
+    triggerPopUp(
+        "Crossbow found!",
+        "Now, you should search the exit portal.",
+        3
+    );
+    hasCrossbow = true;
 }
 
 
@@ -1238,19 +1175,18 @@ function exitIntersects() {
     }
 
     if (touchingExit) {
-        if (hasSnorkel && hasFlipper) {
+        if (hasCrossbow) {
             end = true;
             pause = true;
         } else {
             gameover = true;
-            gameoverMsg = "You need a snorkel and a flipper, to become an Explorer!";
+            gameoverMsg = "You need the crossbow before leaving the maze!";
             pause = true;
         }
     }
 }
 
 
-// 触发弹窗
 function triggerPopUp(title, message, time) {
     endTimePopUp = elapsedTime + time;
     popUpTitle = title;
@@ -1279,8 +1215,7 @@ function resetGame() {
     wallLookup = new Set();
 
     hasMiniMap = false;
-    hasFlipper = false;
-    hasSnorkel = false;
+    hasCrossbow = false;
     showMiniMap = true;
     endTimePopUp = 0;
     popUpTitle = '';
