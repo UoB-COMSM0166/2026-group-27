@@ -380,9 +380,9 @@ This was fixed by improving input focus handling so keyboard controls are always
    
 * Game Mechanics:
 
-Participants suggested several improvements to the game mechanics, some of which matched features we already planned to implement, such as a reward system and item descriptions to improve feedback and engagement.
+Participants suggested several improvements to the game mechanics, some of which matched features we already planned to implement, such as adding item descriptions to improve understanding and engagement.
 
-Participants also suggested adding a hint system to help locate the exit when time is running low, as well as a warning when you are about to run out of time (e.g. 10–20 seconds remaining). These suggestions showed that the players needed clearer timing feedback, especially when players are under pressure. 
+Participants also suggested adding a hint system to help locate the exit when time is running low, as well as a warning when you are about to run out of time (e.g. 10–20 seconds remaining). This indicated that players needed clearer feedback when they are under pressure. 
 
 
 ## 6.2 Quantitative Analysis: *System Usability Scale (SUS)*
