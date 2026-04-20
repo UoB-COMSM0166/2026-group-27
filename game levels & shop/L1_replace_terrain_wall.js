@@ -2,6 +2,7 @@
 
 // 暂停键和小地图键 / Pause key and mini-map key
 const KEY_PAUSE = 80, KEY_M = 77;
+const KEY_W = 87, KEY_A = 65, KEY_S = 83, KEY_D = 68;
 
 // 单个方块大小 / Single tile size
 const blockSize = 32;
@@ -14,7 +15,8 @@ const mazeW = 16;
 const mazeH = 16;
 
 // 时间限制（分钟） / Time limit (minutes)
-const timeLimit = 5; // 5分钟时间限制 / 5-minute time limit
+const timeLimit = 5; // 5-minute time limit
+
 
 // ==================== 图片素材 / Image assets ====================
 
@@ -26,6 +28,9 @@ let floorCrackedGlowImg;
 
 // 墙
 let wallImg;
+
+// 出口传送阵
+let exitPortalImg;
 
 
 // ==================== 游戏变量 / Game variables ====================
@@ -60,11 +65,11 @@ let end = false;
 // 是否正在移动 / Whether the player is moving
 let moving = false;
 
-//建立墙体查询表 / Create a wall serch table
-let wallLookup = new Set();
+// 是否显示说明面板
+let showInstructions = false;
 
-// 竖向墙贴图 / Vertical wall texture
-let wallColumnTallImg;
+// 建立墙体查询表 / Create a wall search table
+let wallLookup = new Set();
 
 
 // ==================== 游戏对象 / Game objects ====================
@@ -81,8 +86,8 @@ let wall = [];
 // 地面数组 / Terrain tiles
 let terrain = [];
 
-// 水域数组 / Water tiles
-let water = [];
+// 出口区域数组 / Exit portal tiles
+let exitTiles = [];
 
 // 宝箱 / Chest
 let box;
@@ -126,48 +131,44 @@ let popUpMessage = '';
 // 游戏结束提示 / Game over message
 let gameoverMsg = '';
 
-// 说明面板结束时间 / Instruction panel end time
-let endTimeInformation = 0;
 
 function preload() {
-    // 地板
     floorPlain01Img = loadImage('assets/floor_plain_01.png');
     floorPlain03Img = loadImage('assets/floor_plain_03.png');
     floorPlain04Img = loadImage('assets/floor_plain_04.png');
     floorCrackedGlowImg = loadImage('assets/floor_cracked_glow.png');
-
-    // 墙
     wallImg = loadImage('assets/wall_column_tall.png');
+    exitPortalImg = loadImage('assets/exit.png');
 }
+
+
 // ==================== 初始化 / Setup ====================
 
 function setup() {
     createCanvas(800, 600);
 
-    // 创建迷宫 / Create maze
     mazeMap = new Maze(mazeW, mazeH, 'random', 1, 1);
-
-    // 创建玩家 / Create player
     player = new Rect(32, 32, 32, 48, true);
-
-    // 创建相机 / Create camera
     cam = new Camera();
 
-    // 设置地图 / Set map
     setMap();
 
-    // 创建宝箱（随机位置） / Create chest (random position)
-    let x = floor(random(64, width - blockSize));
-    let y = floor(random(96, height - blockSize));
+    // 创建宝箱
+    let x = floor(random(64, (mazeMap.gridH - 4) * blockSize));
+    let y = floor(random(96, (mazeMap.gridW - 4) * blockSize));
     box = new Rect(x, y, blockSize, blockSize, true);
 
-    while (x % blockSize !== 0 || y % blockSize !== 0 || intersectsWall(box)) {
-        x = floor(random(64, width - blockSize));
-        y = floor(random(96, height - blockSize));
+    while (
+        x % blockSize !== 0 ||
+        y % blockSize !== 0 ||
+        intersectsWall(box)
+    ) {
+        x = floor(random(64, (mazeMap.gridH - 4) * blockSize));
+        y = floor(random(96, (mazeMap.gridW - 4) * blockSize));
         box = new Rect(x, y, blockSize, blockSize, true);
     }
 
-    // 创建呼吸管 / Create snorkel
+    // 创建呼吸管
     x = floor(random(64, (mazeMap.gridH - 4) * blockSize));
     y = floor(random(96, (mazeMap.gridW - 4) * blockSize));
     snorkel = new Rect(x, y, blockSize, blockSize, true);
@@ -183,7 +184,7 @@ function setup() {
         snorkel = new Rect(x, y, blockSize, blockSize, true);
     }
 
-    // 创建脚蹼 / Create flipper
+    // 创建脚蹼
     x = floor(random(64, (mazeMap.gridH - 4) * blockSize));
     y = floor(random(96, (mazeMap.gridW - 4) * blockSize));
     flipper = new Rect(x, y, blockSize, blockSize, true);
@@ -199,16 +200,16 @@ function setup() {
         y = floor(random(96, (mazeMap.gridW - 4) * blockSize));
         flipper = new Rect(x, y, blockSize, blockSize, true);
     }
+
+    cam.focus(player.left, player.top);
 }
 
 
 // ==================== 主循环 / Main loop ====================
 
 function draw() {
-    // p5.js 自带 deltaTime 是毫秒 / p5.js built-in deltaTime is in milliseconds
     let dt = window.deltaTime / 1000;
 
-    // 防止切屏后时间突变 / Prevent huge time jumps after tab switching
     if (dt > 1) dt = 0;
 
     act(dt);
@@ -219,46 +220,31 @@ function draw() {
 // ==================== 游戏绘制 / Game rendering ====================
 
 function drawGame() {
-    // 黑色背景 / Black background
     background(0);
 
-    // 绘制地图 / Draw map
     drawMaze();
-
-    // 绘制玩家 / Draw player
     drawPlayer();
 
-    // 绘制宝箱 / Draw chest
     if (!hasMiniMap) {
         drawBox(box.left - cam.x, box.top - cam.y);
     }
 
-    // 绘制呼吸管 / Draw snorkel
     if (!hasSnorkel && hasMiniMap) {
         drawSnorkel(snorkel.left - cam.x, snorkel.top - cam.y);
     }
 
-    // 绘制脚蹼 / Draw flipper
     if (!hasFlipper && hasMiniMap) {
         drawFlipper(flipper.left - cam.x, flipper.top - cam.y);
     }
 
-    // 绘制说明面板 / Draw instruction panel
-    if (endTimeInformation > elapsedTime) {
-        drawInformation();
-    }
-
-    // 绘制弹窗 / Draw popup
     if (endTimePopUp > elapsedTime) {
         drawPopUp();
     }
 
-    // 绘制小地图 / Draw mini-map
     if (hasMiniMap && showMiniMap) {
         drawMiniMap();
     }
 
-    // 绘制开始/暂停/胜利/失败界面 / Draw start/pause/win/game over screen
     if (pause) {
         if (start) {
             drawStart();
@@ -271,7 +257,10 @@ function drawGame() {
         }
     }
 
-    // 绘制计时器 / Draw timer
+    if (showInstructions) {
+        drawInformation();
+    }
+
     drawElapsedTime();
 }
 
@@ -281,19 +270,23 @@ function drawGame() {
 function act(deltaTime) {
     gTime += deltaTime;
 
+    if (showInstructions) return;
+
     if (!pause) {
-        // 检查时间限制 / Check time limit
         if (elapsedTime > timeLimit * 60) {
             gameover = true;
             gameoverMsg = "You have run out of time!";
             pause = true;
         }
 
-        // 增加经过时间 / Increase elapsed time
         elapsedTime += deltaTime;
 
-        // 向上移动 / Move up
-        if (keyIsDown(UP_ARROW)) {
+        let moveUp = keyIsDown(UP_ARROW) || keyIsDown(KEY_W);
+        let moveRight = keyIsDown(RIGHT_ARROW) || keyIsDown(KEY_D);
+        let moveDown = keyIsDown(DOWN_ARROW) || keyIsDown(KEY_S);
+        let moveLeft = keyIsDown(LEFT_ARROW) || keyIsDown(KEY_A);
+
+        if (moveUp) {
             dir = 2;
             moving = true;
             player.top -= 120 * deltaTime;
@@ -304,26 +297,10 @@ function act(deltaTime) {
                 }
             }
 
-            if (!hasMiniMap && player.intersects(box)) {
-                boxIntersects();
-                player.top = box.bottom;
-            }
-
-            if (!hasSnorkel && hasMiniMap && player.intersects(snorkel)) {
-                snorkelIntersects();
-                player.top = snorkel.bottom;
-            }
-
-            if (!hasFlipper && hasMiniMap && player.intersects(flipper)) {
-                flipperIntersects();
-                player.top = flipper.bottom;
-            }
-
-            waterIntersects();
+            checkItemCollisions('up');
         }
 
-        // 向右移动 / Move right
-        if (keyIsDown(RIGHT_ARROW)) {
+        if (moveRight) {
             dir = 1;
             moving = true;
             player.left += 120 * deltaTime;
@@ -334,26 +311,10 @@ function act(deltaTime) {
                 }
             }
 
-            if (!hasMiniMap && player.intersects(box)) {
-                boxIntersects();
-                player.right = box.left;
-            }
-
-            if (!hasSnorkel && hasMiniMap && player.intersects(snorkel)) {
-                snorkelIntersects();
-                player.right = snorkel.left;
-            }
-
-            if (!hasFlipper && hasMiniMap && player.intersects(flipper)) {
-                flipperIntersects();
-                player.right = flipper.left;
-            }
-
-            waterIntersects();
+            checkItemCollisions('right');
         }
 
-        // 向下移动 / Move down
-        if (keyIsDown(DOWN_ARROW)) {
+        if (moveDown) {
             dir = 0;
             moving = true;
             player.top += 120 * deltaTime;
@@ -364,26 +325,10 @@ function act(deltaTime) {
                 }
             }
 
-            if (!hasMiniMap && player.intersects(box)) {
-                boxIntersects();
-                player.bottom = box.top;
-            }
-
-            if (!hasSnorkel && hasMiniMap && player.intersects(snorkel)) {
-                snorkelIntersects();
-                player.bottom = snorkel.top;
-            }
-
-            if (!hasFlipper && hasMiniMap && player.intersects(flipper)) {
-                flipperIntersects();
-                player.bottom = flipper.top;
-            }
-
-            waterIntersects();
+            checkItemCollisions('down');
         }
 
-        // 向左移动 / Move left
-        if (keyIsDown(LEFT_ARROW)) {
+        if (moveLeft) {
             dir = 3;
             moving = true;
             player.left -= 120 * deltaTime;
@@ -394,35 +339,13 @@ function act(deltaTime) {
                 }
             }
 
-            if (!hasMiniMap && player.intersects(box)) {
-                boxIntersects();
-                player.left = box.right;
-            }
-
-            if (!hasSnorkel && hasMiniMap && player.intersects(snorkel)) {
-                snorkelIntersects();
-                player.left = snorkel.right;
-            }
-
-            if (!hasFlipper && hasMiniMap && player.intersects(flipper)) {
-                flipperIntersects();
-                player.left = flipper.right;
-            }
-
-            waterIntersects();
+            checkItemCollisions('left');
         }
 
-        // 如果没有按移动键，恢复静止状态 / If no movement key is pressed, stop moving animation
-        if (
-            !keyIsDown(UP_ARROW) &&
-            !keyIsDown(RIGHT_ARROW) &&
-            !keyIsDown(DOWN_ARROW) &&
-            !keyIsDown(LEFT_ARROW)
-        ) {
+        if (!moveUp && !moveRight && !moveDown && !moveLeft) {
             moving = false;
         }
 
-        // 相机跟随玩家 / Focus camera on player
         cam.focus(player.left, player.top);
     }
 }
@@ -433,24 +356,31 @@ function act(deltaTime) {
 function keyPressed() {
     lastKeyPress = keyCode;
 
-    // 暂停/继续 / Pause/Resume
-    if (!start && keyCode === KEY_PAUSE) {
+    // 开始游戏
+    if (keyCode === ENTER && start) {
+        pause = false;
+        start = false;
+        showInstructions = true;
+        return;
+    }
+
+    // 关闭说明面板
+    if (keyCode === ENTER && showInstructions) {
+        showInstructions = false;
+        return;
+    }
+
+    // 暂停/继续
+    if (!start && !showInstructions && keyCode === KEY_PAUSE) {
         pause = !pause;
     }
 
-    // 开始游戏 / Start game
-    if (keyCode === ENTER) {
-        pause = false;
-        start = false;
-        triggerInformation(1);
-    }
-
-    // 重新开始 / Restart game
+    // 重新开始
     if (keyCode === ESCAPE && (end || gameover)) {
         resetGame();
     }
 
-    // 显示/隐藏小地图 / Show/Hide mini-map
+    // 显示/隐藏小地图
     if (keyCode === KEY_M) {
         showMiniMap = !showMiniMap;
     }
@@ -463,11 +393,10 @@ function keyReleased() {
 
 // ==================== 绘制图形函数 / Drawing functions ====================
 
-// 绘制玩家 / Draw player
+// 绘制玩家
 function drawPlayer() {
     push();
 
-    // 先处理移动动画偏移，再画角色 / Apply movement bobbing before drawing the player
     let bob = 0;
     if (moving) {
         bob = sin(elapsedTime * 10) * 2;
@@ -475,49 +404,42 @@ function drawPlayer() {
 
     translate(player.left - cam.x, player.top - cam.y + bob);
 
-    // 身体 / Body
     fill(50, 150, 255);
     noStroke();
     ellipse(blockSize / 2, 24, 28, 36);
 
-    // 头部 / Head
     fill(255, 220, 177);
     ellipse(blockSize / 2, 12, 20, 20);
 
-    // 眼睛 / Eyes
     fill(0);
     ellipse(blockSize / 2 - 4, 10, 3, 3);
     ellipse(blockSize / 2 + 4, 10, 3, 3);
 
-    // 朝向标记 / Direction indicator
     fill(255);
     if (dir === 0) {
-        ellipse(blockSize / 2, 16, 2, 4); // 下 / Down
+        ellipse(blockSize / 2, 16, 2, 4);
     } else if (dir === 1) {
-        ellipse(blockSize / 2 + 2, 12, 4, 2); // 右 / Right
+        ellipse(blockSize / 2 + 2, 12, 4, 2);
     } else if (dir === 2) {
-        ellipse(blockSize / 2, 8, 2, 4); // 上 / Up
+        ellipse(blockSize / 2, 8, 2, 4);
     } else {
-        ellipse(blockSize / 2 - 2, 12, 4, 2); // 左 / Left
+        ellipse(blockSize / 2 - 2, 12, 4, 2);
     }
 
     pop();
 }
 
 
-// 绘制宝箱 / Draw chest
+// 绘制宝箱
 function drawBox(x, y) {
     push();
 
-    // 箱体 / Chest body
     fill(139, 69, 19);
     rect(x + 4, y + 12, 24, 16, 3);
 
-    // 箱盖 / Chest lid
     fill(160, 82, 45);
     rect(x + 4, y + 8, 24, 6, 3);
 
-    // 锁 / Lock
     fill(255, 215, 0);
     rect(x + 14, y + 16, 4, 8, 2);
     ellipse(x + 16, y + 18, 6, 6);
@@ -526,23 +448,20 @@ function drawBox(x, y) {
 }
 
 
-// 绘制呼吸管 / Draw snorkel
+// 绘制呼吸管
 function drawSnorkel(x, y) {
     push();
 
-    // 管子 / Tube
     stroke(255, 200, 0);
     strokeWeight(3);
     noFill();
     arc(x + 16, y + 20, 12, 20, PI, TWO_PI);
     line(x + 22, y + 20, x + 22, y + 8);
 
-    // 顶端 / Top piece
     fill(255, 200, 0);
     noStroke();
     ellipse(x + 22, y + 8, 6, 6);
 
-    // 咬嘴 / Mouthpiece
     fill(255, 100, 100);
     ellipse(x + 10, y + 20, 8, 6);
 
@@ -550,18 +469,16 @@ function drawSnorkel(x, y) {
 }
 
 
-// 绘制脚蹼 / Draw flipper
+// 绘制脚蹼
 function drawFlipper(x, y) {
     push();
 
     fill(0, 200, 200);
     noStroke();
 
-    // 左脚蹼 / Left flipper
     ellipse(x + 12, y + 20, 10, 20);
     triangle(x + 7, y + 28, x + 17, y + 28, x + 12, y + 32);
 
-    // 右脚蹼 / Right flipper
     ellipse(x + 20, y + 20, 10, 20);
     triangle(x + 15, y + 28, x + 25, y + 28, x + 20, y + 32);
 
@@ -569,69 +486,25 @@ function drawFlipper(x, y) {
 }
 
 
-// 绘制水域 / Draw water
-function drawWater(x, y) {
-    push();
-
-    // 水面底色 / Water base color
-    fill(30, 144, 255, 150);
-    noStroke();
-    rect(x, y, blockSize, blockSize);
-
-    // 水波纹 / Water ripples
-    stroke(100, 200, 255, 100);
-    strokeWeight(2);
-    noFill();
-
-    let offset = (frameCount * 0.1) % 10;
-
-    for (let i = 0; i < 3; i++) {
-        let waveY = y + 10 + i * 8 + offset;
-        bezier(
-            x, waveY,
-            x + 8, waveY - 3,
-            x + 16, waveY + 3,
-            x + 24, waveY
-        );
-    }
-
-    pop();
-}
-
 // 检查指定网格坐标是否有墙
-// Check whether there is a wall at the given grid coordinate
 function hasWallAt(gridX, gridY) {
     return wallLookup.has(`${gridX},${gridY}`);
 }
 
 
 // 旋转图片后再绘制
-// Draw an image after rotating it by a given angle
 function drawRotatedImage(img, x, y, angle) {
     push();
-
-    // 把坐标原点移动到当前方块中心
-    // Move the origin to the center of the current tile
     translate(x + blockSize / 2, y + blockSize / 2);
-
-    // 旋转画布
-    // Rotate the canvas
     rotate(angle);
-
-    // 以图片中心作为绘制基准
-    // Draw the image using its center as the reference point
     imageMode(CENTER);
     image(img, 0, 0, blockSize, blockSize);
-
-    // 恢复默认的左上角绘制模式
-    // Restore the default CORNER image mode
     imageMode(CORNER);
-
     pop();
 }
 
-// 绘制墙壁（统一素材）
-// Draw wall using one single texture
+
+// 绘制墙壁
 function drawWall(tile) {
     let x = tile.left - cam.x;
     let y = tile.top - cam.y;
@@ -645,7 +518,8 @@ function drawWall(tile) {
     }
 }
 
-// 绘制地面（已去闪烁） / Draw terrain (de-flickered)
+
+// 绘制地面
 function drawTerrain(tile) {
     push();
 
@@ -658,7 +532,6 @@ function drawTerrain(tile) {
 
     let img = floorPlain01Img;
 
-    // 大部分是普通地板，少量变化，极少数发光裂纹
     if (seed <= 8 && floorPlain01Img) {
         img = floorPlain01Img;
     } else if (seed <= 14 && floorPlain03Img) {
@@ -680,9 +553,61 @@ function drawTerrain(tile) {
     pop();
 }
 
+
+// 绘制出口传送阵（上下浮动）
+function drawExitPortal() {
+    if (!exitTiles || exitTiles.length === 0) return;
+
+    let minLeft = Infinity;
+    let minTop = Infinity;
+
+    for (let tile of exitTiles) {
+        if (tile.left < minLeft) minLeft = tile.left;
+        if (tile.top < minTop) minTop = tile.top;
+    }
+
+    let centerX = minLeft - cam.x + blockSize;
+    let baseY = minTop - cam.y + blockSize;
+
+    let floatOffset = sin(gTime * 2.2) * 3;
+    let portalSize = blockSize * 1.65;
+
+    push();
+
+    noStroke();
+    fill(0, 0, 0, 45);
+    ellipse(centerX, baseY + 10, portalSize * 0.9, portalSize * 0.35);
+
+    translate(centerX, baseY + floatOffset);
+
+    let glow = 14 + sin(gTime * 3) * 5;
+    drawingContext.shadowBlur = glow;
+    drawingContext.shadowColor = 'rgba(255, 210, 80, 0.85)';
+
+    imageMode(CENTER);
+
+    if (exitPortalImg) {
+        image(exitPortalImg, 0, 0, portalSize, portalSize);
+    } else {
+        noStroke();
+        fill(255, 210, 80, 180);
+        ellipse(0, 0, blockSize * 1.5, blockSize * 1.5);
+
+        stroke(255, 240, 120);
+        strokeWeight(3);
+        noFill();
+        ellipse(0, 0, blockSize * 1.25, blockSize * 1.25);
+        ellipse(0, 0, blockSize * 0.9, blockSize * 0.9);
+    }
+
+    imageMode(CORNER);
+    pop();
+}
+
+
 // ==================== 工具函数 / Utility functions ====================
 
-// 时间转为 mm:ss / Convert time to mm:ss
+// 时间转为 mm:ss
 function convertTime(time) {
     let seconds = floor(time % 60);
     let minutes = floor((time / 60) % 60);
@@ -694,7 +619,7 @@ function convertTime(time) {
 }
 
 
-// 多行文本绘制 / Draw multi-line text
+// 多行文本绘制
 function fillTextMultiLine(txt, x, y) {
     let lineHeight = 16;
     let lines = txt.split("\n");
@@ -708,7 +633,6 @@ function fillTextMultiLine(txt, x, y) {
 
 // ==================== 类定义 / Class definitions ====================
 
-// 相机类 / Camera class
 class Camera {
     constructor() {
         this.x = 0;
@@ -734,7 +658,6 @@ class Camera {
 }
 
 
-// 矩形类 / Rectangle class
 class Rect {
     constructor(x, y, w, h, createFromTopLeft, type) {
         this.width = (w === undefined) ? 0 : w;
@@ -797,7 +720,6 @@ class Rect {
 }
 
 
-// 迷宫类 / Maze class
 class Maze {
     constructor(w, h, nextCell, startX, startY) {
         this.w = (isNaN(w) || w < 5 || w > 999) ? 20 : w;
@@ -915,15 +837,6 @@ class Maze {
 
 // ==================== 地图设置 / Map setup ====================
 
-function checkRowColLimits(row, col) {
-    return (
-        col > 1 &&
-        col < mazeMap.gridH - 1 &&
-        row > 1 &&
-        row < mazeMap.gridW - 1
-    );
-}
-
 function setMap() {
     let col = 0, row = 0;
 
@@ -933,21 +846,20 @@ function setMap() {
                 terrain.push(
                     new Rect(col * blockSize, row * blockSize, blockSize, blockSize, true)
                 );
-            } else {               
-              wall.push(
-    new Rect(col * blockSize, row * blockSize, blockSize, blockSize, true, 0)
-);
-wallLookup.add(`${col},${row}`);
-            
+            } else {
+                wall.push(
+                    new Rect(col * blockSize, row * blockSize, blockSize, blockSize, true, 0)
+                );
+                wallLookup.add(`${col},${row}`);
             }
         }
     }
 
-    // 右下角湖泊出口 / Bottom-right lake exit
-    water.push(new Rect((col - 2) * blockSize, (row - 2) * blockSize, blockSize, blockSize, true, 1));
-    water.push(new Rect((col - 2) * blockSize, (row - 3) * blockSize, blockSize, blockSize, true, 3));
-    water.push(new Rect((col - 3) * blockSize, (row - 2) * blockSize, blockSize, blockSize, true, 0));
-    water.push(new Rect((col - 3) * blockSize, (row - 3) * blockSize, blockSize, blockSize, true, 2));
+    // 右下角出口传送阵区域
+    exitTiles.push(new Rect((col - 2) * blockSize, (row - 2) * blockSize, blockSize, blockSize, true, 1));
+    exitTiles.push(new Rect((col - 2) * blockSize, (row - 3) * blockSize, blockSize, blockSize, true, 3));
+    exitTiles.push(new Rect((col - 3) * blockSize, (row - 2) * blockSize, blockSize, blockSize, true, 0));
+    exitTiles.push(new Rect((col - 3) * blockSize, (row - 3) * blockSize, blockSize, blockSize, true, 2));
 
     worldWidth = mazeMap.gridH * blockSize;
     worldHeight = mazeMap.gridW * blockSize;
@@ -969,15 +881,15 @@ function drawStart() {
 
     if (floor(gTime * 3) % 2 === 1) {
         textSize(12);
-        textFont('Verdana');
+        textFont('Arial');
         text("Press 'Enter' to start the game", width / 2, height / 2 + 20);
     }
 
     textAlign(LEFT);
 }
 
+
 function drawEnd() {
-    // 胜利使用绿色面板 / Use green panel for victory
     fill(46, 160, 85);
     noStroke();
     rect(width / 2 - 150, height / 2 - 60, 300, 120, 12);
@@ -989,7 +901,7 @@ function drawEnd() {
     text('WIN', width / 2, height / 2 - 30);
 
     textSize(10);
-    textFont('Verdana');
+    textFont('Arial');
     text("Congratulations, you have become an Explorer!", width / 2, height / 2 - 10);
 
     if (floor(gTime * 3) % 2 === 1) {
@@ -999,6 +911,7 @@ function drawEnd() {
 
     textAlign(LEFT);
 }
+
 
 function drawPause() {
     fill(162, 44, 41);
@@ -1013,15 +926,15 @@ function drawPause() {
 
     if (floor(gTime * 3) % 2 === 1) {
         textSize(12);
-        textFont('Verdana');
+        textFont('Arial');
         text("Press 'P' to pause/resume the game", width / 2, height / 2 + 20);
     }
 
     textAlign(LEFT);
 }
 
+
 function drawGameOver() {
-    // 失败使用红色面板 / Use red panel for failure
     fill(182, 52, 52);
     noStroke();
     rect(width / 2 - 150, height / 2 - 60, 300, 120, 12);
@@ -1033,7 +946,7 @@ function drawGameOver() {
     text('GAME OVER', width / 2, height / 2 - 30);
 
     textSize(10);
-    textFont('Verdana');
+    textFont('Arial');
     text(gameoverMsg, width / 2, height / 2 - 10);
 
     if (floor(gTime * 3) % 2 === 1) {
@@ -1044,6 +957,7 @@ function drawGameOver() {
     textAlign(LEFT);
 }
 
+
 function drawPopUp() {
     fill(128, 161, 193);
     noStroke();
@@ -1052,7 +966,7 @@ function drawPopUp() {
     textAlign(CENTER);
     fill(255);
     textSize(16);
-    textFont('Verdana');
+    textFont('Arial');
     text(popUpTitle, width / 2, 100);
 
     textSize(12);
@@ -1060,6 +974,7 @@ function drawPopUp() {
 
     textAlign(LEFT);
 }
+
 
 function drawInformation() {
     fill(128, 161, 193);
@@ -1069,11 +984,16 @@ function drawInformation() {
     textAlign(CENTER);
     fill(255);
     textSize(16);
-    textFont('Verdana');
+    textFont('Arial');
+    textStyle(NORMAL);
     text('Instructions', width / 2, 100);
 
     textAlign(LEFT);
     textSize(12);
+    textFont('Arial');
+    textStyle(NORMAL);
+    noStroke();
+
     text('To become an explorer you should find the exit of the maze,',
          width / 2 - 185, 140);
     text('but before you should search some objects that will help',
@@ -1086,7 +1006,7 @@ function drawInformation() {
     text('time to escape.',
          width / 2 - 185, 225);
 
-    text("Use arrow keys to move around, and press 'P' to pause.",
+    text("Use Arrow Keys or WASD to move. Press 'P' to pause.",
          width / 2 - 185, 260);
 
     textAlign(CENTER);
@@ -1107,11 +1027,25 @@ function drawInformation() {
     text('Right', width / 2 + 50, 356);
     rect(width / 2 + 27.5, 330, 45, 45, 10);
 
+    push();
+    textAlign(CENTER, CENTER);
+    textFont('Arial');
+    textStyle(NORMAL);
+    textSize(12);
+    fill(255);
+    noStroke();
+    strokeWeight(0);
+
+    if (floor(gTime * 3) % 2 === 1) {
+        text("Press 'Enter' to continue", width / 2, 405);
+    }
+    pop();
+
     textAlign(LEFT);
 }
 
 
-// 绘制地图 / Draw maze
+// 绘制地图
 function drawMaze() {
     for (let t of terrain) {
         drawTerrain(t);
@@ -1121,18 +1055,16 @@ function drawMaze() {
         drawWall(w);
     }
 
-    for (let w of water) {
-        drawWater(w.left - cam.x, w.top - cam.y);
-    }
+    drawExitPortal();
 }
 
-// 绘制小地图 / Draw mini-map
+
+// 绘制小地图
 function drawMiniMap() {
     let miniMapBorder = 5;
     let miniMapLeft = 10;
     let miniMapTop = height - mazeMap.gridW * miniMapScale - 10 - miniMapBorder;
 
-    // 小地图外框 / Mini-map border
     fill(255);
     noStroke();
     rect(
@@ -1143,7 +1075,6 @@ function drawMiniMap() {
         6
     );
 
-    // 小地图底色 / Mini-map background
     fill(232, 224, 160);
     rect(
         miniMapLeft + miniMapBorder,
@@ -1152,7 +1083,6 @@ function drawMiniMap() {
         mazeMap.gridW * miniMapScale
     );
 
-    // 墙体 / Walls
     fill(0);
     for (let w of wall) {
         rect(
@@ -1163,16 +1093,14 @@ function drawMiniMap() {
         );
     }
 
-    // 出口标记（绿色） / Exit marker (green)
-    let exitTile = water[0];
-    fill(0, 200, 80);
+    let exitTile = exitTiles[0];
+    fill(255, 200, 50);
     circle(
         (exitTile.left / blockSize) * miniMapScale + miniMapLeft + miniMapBorder + 1,
         (exitTile.top / blockSize) * miniMapScale + miniMapTop + miniMapBorder + 1,
         5
     );
 
-    // 玩家（红色） / Player (red)
     fill(255, 0, 0);
     noStroke();
     circle(
@@ -1181,7 +1109,6 @@ function drawMiniMap() {
         4
     );
 
-    // 呼吸管（蓝色，拿到后消失） / Snorkel (blue, disappears after collection)
     if (!hasSnorkel) {
         fill(60, 140, 255);
         circle(
@@ -1191,7 +1118,6 @@ function drawMiniMap() {
         );
     }
 
-    // 脚蹼（蓝色，拿到后消失） / Flipper (blue, disappears after collection)
     if (!hasFlipper) {
         fill(60, 140, 255);
         circle(
@@ -1203,7 +1129,7 @@ function drawMiniMap() {
 }
 
 
-// 绘制时间 / Draw elapsed time
+// 绘制时间
 function drawElapsedTime() {
     fill(0);
     noStroke();
@@ -1223,7 +1149,6 @@ function drawElapsedTime() {
 
 // ==================== 碰撞检测 / Collision detection ====================
 
-// 检查是否碰墙 / Check whether an object intersects a wall
 function intersectsWall(object) {
     for (let w of wall) {
         if (object.intersects(w)) {
@@ -1234,7 +1159,39 @@ function intersectsWall(object) {
 }
 
 
-// 宝箱碰撞逻辑 / Chest collision logic
+function checkItemCollisions(direction) {
+    if (!hasMiniMap && player.intersects(box)) {
+        boxIntersects();
+
+        if (direction === 'up') player.top = box.bottom;
+        if (direction === 'right') player.right = box.left;
+        if (direction === 'down') player.bottom = box.top;
+        if (direction === 'left') player.left = box.right;
+    }
+
+    if (!hasSnorkel && hasMiniMap && player.intersects(snorkel)) {
+        snorkelIntersects();
+
+        if (direction === 'up') player.top = snorkel.bottom;
+        if (direction === 'right') player.right = snorkel.left;
+        if (direction === 'down') player.bottom = snorkel.top;
+        if (direction === 'left') player.left = snorkel.right;
+    }
+
+    if (!hasFlipper && hasMiniMap && player.intersects(flipper)) {
+        flipperIntersects();
+
+        if (direction === 'up') player.top = flipper.bottom;
+        if (direction === 'right') player.right = flipper.left;
+        if (direction === 'down') player.bottom = flipper.top;
+        if (direction === 'left') player.left = flipper.right;
+    }
+
+    exitIntersects();
+}
+
+
+// 宝箱碰撞逻辑
 function boxIntersects() {
     triggerPopUp(
         "Mini Map found!",
@@ -1245,9 +1202,9 @@ function boxIntersects() {
 }
 
 
-// 呼吸管碰撞逻辑 / Snorkel collision logic
+// 呼吸管碰撞逻辑
 function snorkelIntersects() {
-    let msg = "Now, you should search the exit, a small lake.";
+    let msg = "Now, you should search the exit portal.";
     if (!hasFlipper) {
         msg = "Now, you should search a flipper.";
     }
@@ -1257,9 +1214,9 @@ function snorkelIntersects() {
 }
 
 
-// 脚蹼碰撞逻辑 / Flipper collision logic
+// 脚蹼碰撞逻辑
 function flipperIntersects() {
-    let msg = "Now, you should search the exit, a small lake.";
+    let msg = "Now, you should search the exit portal.";
     if (!hasSnorkel) {
         msg = "Now, you should search a snorkel.";
     }
@@ -1269,10 +1226,18 @@ function flipperIntersects() {
 }
 
 
-// 水域碰撞逻辑 / Water collision logic
-function waterIntersects() {
-    // 只检测主出口块 / Only check the main exit tile
-    if (player.intersects(water[0])) {
+// 出口碰撞逻辑
+function exitIntersects() {
+    let touchingExit = false;
+
+    for (let tile of exitTiles) {
+        if (player.intersects(tile)) {
+            touchingExit = true;
+            break;
+        }
+    }
+
+    if (touchingExit) {
         if (hasSnorkel && hasFlipper) {
             end = true;
             pause = true;
@@ -1285,13 +1250,7 @@ function waterIntersects() {
 }
 
 
-// 触发说明面板 / Trigger instruction panel
-function triggerInformation(time) {
-    endTimeInformation = elapsedTime + time;
-}
-
-
-// 触发弹窗 / Trigger popup
+// 触发弹窗
 function triggerPopUp(title, message, time) {
     endTimePopUp = elapsedTime + time;
     popUpTitle = title;
@@ -1310,12 +1269,13 @@ function resetGame() {
     start = true;
     end = false;
     moving = false;
+    showInstructions = false;
 
     wall = [];
     terrain = [];
-    water = [];
+    exitTiles = [];
     dir = 0;
-    //把墙坐标查询表清空
+
     wallLookup = new Set();
 
     hasMiniMap = false;
@@ -1326,7 +1286,6 @@ function resetGame() {
     popUpTitle = '';
     popUpMessage = '';
     gameoverMsg = '';
-    endTimeInformation = 0;
 
     setup();
 }
