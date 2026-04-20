@@ -364,13 +364,13 @@ During the Think Aloud (TA) sessions, we asked participants to verbalise their t
 
 Ten participants were recruited using convenience sampling from our weekly workshops, allowing us to receive quick feedback during development without requiring a controlled experiment.
 
-We grouped the feedback into common themes to identify repeated issues across different users. The main themes were map design, technical issues, and game mechanics.
+The main issues were related to map design, controls, and game mechanics.
 
 * **Map Design:**
 
   Most users liked the maze's layout and its "spacious route", suggesting that the navigation structure was clear and easy to understand.         However, many noted that the environment felt empty and repetitive, resulting in reduced user engagement. This supported our planned use of     Bristol-themed visual elements, including landmarks and graffiti-style textures, to help players recognise different areas of the map.
  
-* **Technical Glitches:**
+* **Controls:**
 
   A key issue was identified with input handling. The Enter key, used to start the game, only worked when the mouse cursor was positioned over    the game window. This made the controls unreliable and harder to use.
 
