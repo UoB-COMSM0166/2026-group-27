@@ -392,7 +392,7 @@ To ensure the game was engaging, it was important that usability did not negativ
 
 We used the System Usability Scale (SUS) to measure how easily the players could learn and interact with the game. Ten participants (P1-P10), recruited using convenience sampling, completed gameplay tasks such as collecting items and finding the exit before filling out the SUS questionnaire. 
 
-The average SUS score was 90.75/100, indicating a high level of usability. This suggests that participants were able to understand and interact with the game with minimal difficulty during early prototype testing.
+The average SUS score was 90.75/100, indicating a high level of usability.
 
 Positive usability statements scored highly, such as “Learn quickly” (Q7 = 4.8/5), and “Well integrated”  (Q5 = 4.7/5), suggesting that the game was intuitive. 
  
