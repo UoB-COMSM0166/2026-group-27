@@ -131,4 +131,17 @@ This folder stores developer logs.
   - designs
 - Next Plan:
   - 
-   
+
+### Thanusha 
+- Completed :
+  - Made onion Model
+  - Stakeholder, User Stories and Epics section
+  - Edited qualitative and quantitative sections of the Evaluation
+  - Made a bar graph for the Quantitative section in the evaluation
+  - Made table of contents
+  - Added Lost in Bristol Banner at the start of the repo
+  - Cropped and adjusted the lost in Bristol Paper prototype video to 8 seconds and turned it into a GIF
+  - Finished designing the fox character and uploaded onto repo
+ 
+- In progress:
+  - Editing Code testing section of Evaluation 
