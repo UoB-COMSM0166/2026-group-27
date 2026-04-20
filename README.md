@@ -367,23 +367,23 @@ Ten participants were recruited using convenience sampling from our weekly works
 
 We grouped the feedback into common themes to identify repeated issues across different users. The main themes were map design, technical issues, and game mechanics.
 
-* Map Design:
+* **Map Design:**
 
-Most users liked the maze's layout and its "spacious route", suggesting that the navigation structure was clear and easy to understand. However, many noted that the environment felt empty and repetitive, indicating a lack of visual detail in the prototype, which led to reduced user engagement. This supported our planned use of Bristol-themed visual elements, including landmarks and graffiti-style textures, to improve visual engagement and help players recognise different areas of the map.
+  Most users liked the maze's layout and its "spacious route", suggesting that the navigation structure was clear and easy to understand.         However, many noted that the environment felt empty and repetitive, indicating a lack of visual detail in the prototype, which led to reduced   user engagement. This supported our planned use of Bristol-themed visual elements, including landmarks and graffiti-style textures, to          improve visual engagement and help players recognise different areas of the map.
 
  
-* Technical Glitches:
+* **Technical Glitches:**
 
-A key issue was identified with input handling. The Enter key, used to start the game, only worked when the mouse cursor was positioned over the game window. This made the controls unreliable and harder to use.
+  A key issue was identified with input handling. The Enter key, used to start the game, only worked when the mouse cursor was positioned over    the game window. This made the controls unreliable and harder to use.
 
-This was fixed by ensuring the game window automatically captures keyboard input, meaning that the keyboard controls remain active during gameplay.
+  This was fixed by ensuring the game window automatically captures keyboard input, meaning that the keyboard controls remain active during       gameplay.
 
    
-* Game Mechanics:
+* **Game Mechanics:**
 
-Participants suggested several improvements to the game mechanics, some of which matched features we already planned to implement, such as adding item descriptions to improve understanding and engagement.
+  Participants suggested several improvements to the game mechanics, some of which matched features we already planned to implement, such as      adding item descriptions to improve understanding and engagement.
 
-Participants also suggested adding a hint system to help locate the exit when time is running low, as well as a warning when you are about to run out of time (e.g. 10–20 seconds remaining). This indicated that players needed clearer feedback when they are under pressure. 
+  Participants also suggested adding a hint system to help locate the exit when time is running low, as well as a warning when you are about to   run out of time (e.g. 10–20 seconds remaining). This indicated that players needed clearer feedback when they are under pressure. 
 
 
 ## 6.2 Quantitative Analysis: System Usability Scale (SUS)
