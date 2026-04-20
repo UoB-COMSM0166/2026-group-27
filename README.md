@@ -353,10 +353,8 @@ For the final BOSS encounter, we moved away from simple random movement.To make 
 
 # 6. Evaluation
 
-The game was evaluated during its prototype stage, enabling us to identify and fix usability issues, navigation problems, and technical bugs during development before adding more complex features that could be affected if these core systems were not working properly.
+The game was evaluated during its prototype stage, enabling us to identify and fix usability issues, navigation problems, and technical bugs during development. Since the game did not yet include the final Bristol-themed visuals, this allowed us to focus on evaluating the core gameplay mechanics without the influence of visual or narrative elements. 
 
-Since the game did not yet include the final Bristol-themed visuals, this allowed us to focus on evaluating the core gameplay mechanics without the influence of visual or narrative elements.
- 
 We used a mixed-methods approach, combining quantitative data from the System Usability Scale (SUS) with qualitative feedback from Think Aloud sessions. This helped us understand how well users could complete tasks and their overall experience during gameplay.
 
 
@@ -389,7 +387,7 @@ We grouped the feedback into common themes to identify repeated issues across di
 
 To ensure the game was engaging, it was important that usability did not negatively affect player experience. If a game is too easy, it can become uninteresting, while unnecessary difficulty or frustration can reduce replayability (Sweetser & Wyeth, 2005; Lazzaro, 2004). Therefore, we evaluated whether the game was easy to use and appropriately challenging. 
 
-We used the System Usability Scale (SUS) to measure how easily the players could learn and interact with the game. Ten participants (P1-P10), recruited using convenience sampling, completed gameplay tasks such as collecting items and finding the exit before filling out the SUS questionnaire. 
+We used SUS to measure how easily the players could learn and interact with the game. Ten participants (P1-P10), recruited using convenience sampling, completed gameplay tasks such as collecting items and finding the exit before filling out the SUS questionnaire. 
 
 
 <p align="center">
