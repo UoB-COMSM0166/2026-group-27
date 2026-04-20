@@ -360,7 +360,7 @@ Although the game did not yet include the final Bristol-themed visuals, this all
 We used a mixed-methods approach, combining quantitative data from the System Usability Scale (SUS) with qualitative feedback from Think Aloud sessions. This allowed us to understand how well users could complete tasks and their overall experience during gameplay.
 
 
-## 1. Qualitative Evaluation: Think Aloud
+## 6.1 Qualitative Evaluation: Think Aloud
 
 During the Think Aloud (TA) sessions, we asked participants to verbalise their thoughts and decision-making process while navigating the maze and completing tasks such as finding items and reaching the exit. This method helps us understand what users are thinking during gameplay, allowing us to identify misunderstandings, and unclear game elements (Pellicone et al., 2022). 
 
@@ -388,7 +388,7 @@ Participants suggested several improvements to the game mechanics, some of which
 Participants also suggested adding a hint system to help locate the exit when time is running low, as well as a warning when you are about to run out of time (e.g. 10–20 seconds remaining). These suggestions showed that the players needed clearer timing feedback, especially when players are under pressure. 
 
 
-## 2. Quantitative Analysis: *System Usability Scale (SUS)*
+## 6.2 Quantitative Analysis: *System Usability Scale (SUS)*
 We collected data from 10 participants (P1-P10) who performed tasks like finding green points on the map.
 
 ### System Usability Scale (SUS):
@@ -399,15 +399,6 @@ We collected data from 10 participants (P1-P10) who performed tasks like finding
  * System Integration: Users felt the game was "Well integrated" (Q5) with a score of 4.70/5.
  
  * Confidence: The lowest positive score was for "Felt confident" (Q9) at 4.30/5. This tells us that even though they could play,     they might need more visual or timing feedback to feel "sure" about their actions.
- 
-### NASA Task Load Index (NASA TLX):
-The NASA TLX measured how hard the users had to work. Our average workload was 40.1/100, which is a low-to-moderate level.
-
-* Time Pressure: 'Temporal Demand' was our highest stress factor at 50.5/100. This matches the feedback that users felt rushed or confused by the map.
-
-* Effort vs. Performance: Users felt they did a good job (Performance: 76.0/100) but had to put in a fair amount of effort (51.0/100) to get there.
-
-* Low Frustration: At 27.0/100, the frustration levels were very low, showing that the current prototype isn't annoying to play.
 
 ## 4.Code Testing:
 
