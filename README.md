@@ -362,15 +362,14 @@ We used a mixed-methods approach, combining quantitative data from the System Us
 
 ## 6.1 Qualitative Evaluation: Think Aloud
 
-During the Think Aloud (TA) sessions, we asked participants to verbalise their thoughts and decision-making process while navigating the maze and completing tasks such as finding items and reaching the exit. This method helps us understand what users are thinking during gameplay, allowing us to identify misunderstandings, and unclear game elements (Pellicone et al., 2022). 
+During the Think Aloud (TA) sessions, we asked participants to verbalise their thoughts and decision-making process while navigating the maze and completing tasks such as finding items and reaching the exit. This method helps us understand what users are thinking during gameplay, allowing us to identify misunderstandings and unclear game elements (Pellicone et al., 2022). 
 
 Ten participants were recruited using convenience sampling from our weekly workshops, allowing us to receive quick feedback during development without requiring a controlled experiment.
 
 We grouped the feedback into common themes to identify repeated issues across different users. The main themes were map design, technical issues, and game mechanics.
 
 * **Map Design:**
- Players enjoyed the maze layout and found it easy to navigate.But a few students find the game/map a little boring because of lack of aesthetic components and empty environment. To fix this, we are adding Bristol-themed landmarks and graffiti textures. This will make the map more exciting and help players identify exactly where they are. 
-
+  Most users liked the maze's layout and its "spacious route", suggesting that the navigation structure was clear and easy to understand.         However, many noted that the environment felt empty and repetitive, resulting in reduced user engagement. This supported our planned use of     Bristol-themed visual elements, including landmarks and graffiti-style textures, to improve visual engagement and help players recognise        different areas of the map.
  
 * **Technical Glitches:**
 
@@ -378,7 +377,6 @@ We grouped the feedback into common themes to identify repeated issues across di
 
   This was fixed by ensuring the game window automatically captures keyboard input, meaning that the keyboard controls remain active during       gameplay.
 
-   
 * **Game Mechanics:**
 
   Participants suggested several improvements to the game mechanics, some of which matched features we already planned to implement, such as      adding item descriptions to improve understanding and engagement.
