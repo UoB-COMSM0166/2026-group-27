@@ -318,44 +318,37 @@ Acceptance criteria were included to determine when a feature has been successfu
 - Describe implementation of your game, in particular highlighting the TWO areas of *technical challenge* in developing your game.
 
 
-## 5.1 System Architecture 
-The implementation of Lost in Bristol is built on a state-driven architecture using the p5.js library. As a team, we orchestrated the game flow through a centralized set of global boolean flags (start, pause, gameover, end) that regulate the render loop. To ensure technical consistency across different development environments, we implemented a Delta-Time Physics Layer. By scaling all movement logic—such as playerSpeed (120) and enemySpeed (52)—against deltaTime, we decoupled the gameplay experience from the browser’s frame rate. As the Technical Product Owner, I ensured that these foundational systems remained modular, allowing for the integration of complex features like the localStorage gun upgrade path without disrupting the core loop.
+## 5.1 System Architecture:
+
+The flow between the menu, active gameplay and game-over screens is controlled by the state-driven structure used in the game's construction. We used a Delta-Time technique to make sure the game runs at the same speed on all computers. This determines how much time has passed between frames and scales movement appropriately. Without it, the game would run too quickly on powerful computers and too slowly on slower laptops; our technique guarantees that every player has an equal and constant experience.
 
 ## 5.2 Challenge 1: Atmospheric Vision Masking & Combat Syncing
 
--The team aimed to deliver an "Atmosphere Hunter" experience where navigation is restricted by environmental "fog." The primary engineering bottleneck was creating a performant, non-blocking visual mask that could dynamically update in real-time without the overhead of per-tile lighting calculations, while simultaneously ensuring that the combat auto-lock remained logically consistent with the player's actual field of view.
+-A major goal was to create an "Atmospheric" feel where the player’s vision is restricted by fog. The technical challenge was creating this visual effect without slowing down the game’s performance.
 
-Solutions & Implementation Examples:
+- The Solution: Overlay Masking
+  Instead of calculating light for every single tile in the maze (which is very tough on a browser), we used a        "top-  down overlay" method. We created a dark layer that covers the entire screen except the circle around the     player.
+  
+  Impact: Because the computer only needs to render one image instead of hundreds of separate light sources, this     method is extremely efficient. Even in a challenging maze, it enabled us to keep up a fluid 60 frames per second.
 
-Graphics Buffer Masking (Fog-of-War): We implemented a secondary off-screen buffer, fogLayer, to handle transparency independently of the main game canvas.
+- The Solution: Distance-Based Targeting
+  We also had to ensure the combat mechanics felt fair. If the player's gun could auto-target enemies hidden deep     in the fog, the "scary" atmosphere would be ruined. We restricted the combat engine so it only detects enemies      once they enter the player's lit area. This kept the gameplay balanced and logically consistent with what the       player can actually see.
 
-For e.g.: In drawFog(), the buffer is filled with a specific fogAlpha (185). When hasLamp is true, the engine invokes fogLayer.erase() to "punch" a dynamic hole in the overlay. This provides a O(1) performance cost, as the GPU renders one single image rather than calculating lighting for hundreds of individual maze blocks.
 
-Distance-Capped Target Hydration: To prevent the player from shooting enemies hidden in the fog, we tightly coupled the combat engine to the vision radius.
+## 5.3 Challenge 2: Fair Spawning in a Random Maze
+Because our maze is created at random each time you play, there was a significant chance that an essential object (like the torch) would emerge in an inaccessible location or that the player would become trapped behind a wall.
 
-For e.g.: 
+-The Solution: Spatial Validation
+We developed a "Check-and-Repeat" system for placing items.The game initially determines whether a coordinate overlaps a wall before attempting to place an object. If it happens, the game immediately attempts another location until it locates a clean, traversable area, discarding the previous one.
 
-## 5.3 Challenge 2: Procedural Constraint-Based Spawning & Fairness
+Impact: This avoids "broken" game seeds, in which the player can become irritated by an important item missing or an unattainable exit.
 
-Generating a maze procedurally introduced the risk of "Illegal Spawns"—scenarios where critical progression items (lampItem, gunItem) or the Boss would overlap with wall objects or spawn directly on the player. This threatened game fairness and the "Mastermind" design philosophy, as a blocked exit or an immediate boss-spawn would result in an unavoidable failure state.
+-The Solution: Safe Zones and Grid Alignment
+We built a "Safe Zone" around the starting position to keep the player from dying right away. In the player's first view, enemies are prohibited from spawning. Additionally, we made all objects "snap" to a 32-pixel grid so that neither the player nor the adversary would ever be trapped on a wall's corner while traveling.
 
-Solutions & Implementation Examples:
+## 5.4 Team Integration: Boss Mechanics
+For the final BOSS encounter, we moved away from simple random movement. We used mathematical patterns to allow the boss to "aim" at the player. By calculating the angle between the boss and the player’s position, we created a "fan-shot" attack where multiple projectiles are fired in a arc. This created a challenging finale that required the player to use all the movement and combat skills they learned throughout the game.
 
-Recursive Spatial Validation (Try-and-Verify): We developed a suite of helper functions that utilize a "Recursive Validation" pattern to transform raw randomness into safe gameplay.
-
-For E.g.: In createItemInMidArea(), the engine runs up to 400 iterations to find a valid coordinate. Each iteration triggers intersectsWall(item); if the item's Rect collides with any object in the wall[] array, the coordinate is discarded and recalculated. This guarantees that items are always placed in "traversable" space.
-
-Zoning & Grid-Snapping Logic: To maintain a fair difficulty curve, we implemented coordinate-based zoning.
-
-for eg: We utilized snapToGrid()—calculated as floor(value / blockSize) * blockSize—to ensure every entity aligns perfectly with the 32px world grid. Furthermore, the isInStartView() check was integrated into createEnemies() to effectively "blacklist" the player's initial screen area from hostile spawns, ensuring the team's intended pacing is respected from the first frame of movement.
-
-Four-Way Portal Network Stability: We implemented a "safe-destination" algorithm for the usePortal function.
-
-for eg: When a player intersects a portal, the engine tests four cardinal destinations (blockSize offsets) using intersectsWall(testRect). By validating these locations before the teleport occurs, the system eliminates the risk of the player being permanently trapped inside a wall during a scene transition.
-
-## 5.4 Team Integration of Combat Physics
-
-The final implementation phase focused on the Boss class, where we moved beyond simple random movement to Trigonometric Patterning. By utilizing atan2() to calculate the vector between the boss and player, we enabled the fireFanShot() method to project multiple enemyProjectiles at radians(18) intervals. This combined our team’s work on collision detection, spatial math, and atmospheric rendering into a single, cohesive final challenge.
 
 # 6. Evaluation
 
