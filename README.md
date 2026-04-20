@@ -352,12 +352,11 @@ For the final BOSS encounter, we moved away from simple random movement.To make 
 
 # 6. Evaluation
 
-The evaluation of Lost in Bristol followed an iterative design approach. The game was tested in a prototype stage, allowing us to identify and fix usability issues, navigation problems, and technical bugs during development before releasing the game. 
+The game was evaluated during its prototype stage, enabling us to identify and fix usability issues, navigation problems, and technical bugs during development before releasing the game. 
 
-
-Although the game did not yet include the final Bristol-themed visuals, this allowed us to focus on evaluating the core gameplay mechanics without the influence of visual or narrative elements.
-
-We used a mixed-methods approach, combining quantitative data from the System Usability Scale (SUS) with qualitative feedback from Think Aloud sessions. This allowed us to understand how well users could complete tasks and their overall experience during gameplay.
+Since the game did not yet include the final Bristol-themed visuals, this allowed us to focus on evaluating the core gameplay mechanics without the influence of visual or narrative elements.
+ 
+We used a mixed-methods approach, combining quantitative data from the System Usability Scale (SUS) with qualitative feedback from Think Aloud sessions. This helped us understand how well users could complete tasks and their overall experience during gameplay.
 
 
 ## 6.1 Qualitative Evaluation: Think Aloud
