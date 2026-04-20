@@ -99,6 +99,16 @@ This folder stores developer logs.
 - In progress
  - game cover
 
+### Iza:
+
+- Completed:
+  - integrating all game parts into one complete build
+  - preparing the final GitHub Pages version for public viewing
+
+• Next Plan:
+  - test the complete game flow and fix transition issues
+  - upload the final playable version to GitHub Pages
+
 ## week：13
 
 ### liz：
