@@ -360,7 +360,7 @@ We used a mixed-methods approach, combining quantitative data from the System Us
 
 ## 6.1 Qualitative Evaluation: Think Aloud
 
-During the Think Aloud (TA) sessions, we asked participants to verbalise their thoughts and decision-making process while navigating the maze and completing tasks such as finding items and reaching the exit. This method helps us understand what users are thinking during gameplay, allowing us to identify misunderstandings and unclear game elements (Pellicone et al., 2022). 
+During the Think Aloud (TA) sessions, we asked participants to verbalise their thoughts and decision-making process while navigating the maze and completing tasks such as finding items and reaching the exit. This method helps us understand what users are thinking during gameplay, allowing us to identify misunderstandings and unclear game concepts (Pellicone et al., 2022). 
 
 Ten participants were recruited using convenience sampling from our weekly workshops, allowing us to receive quick feedback during development without requiring a controlled experiment.
 
