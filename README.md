@@ -184,7 +184,8 @@ Maniza
  
 
 <p align="center">
-https://github.com/user-attachments/assets/4c6caff6-faa9-473d-8f24-c0fe11965f0b 
+<video src= "https://github.com/user-attachments/assets/4c6caff6-faa9-473d-8f24-c0fe11965f0b" width= "25%" controls >
+</video>
 </p>
 
 
