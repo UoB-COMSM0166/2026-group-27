@@ -1,0 +1,249 @@
+[
+  {
+    "file": "wall_wide_straight.png",
+    "box": [
+      789,
+      67,
+      1105,
+      257
+    ],
+    "size": [
+      316,
+      190
+    ]
+  },
+  {
+    "file": "wall_column_tall.png",
+    "box": [
+      476,
+      95,
+      586,
+      247
+    ],
+    "size": [
+      110,
+      152
+    ]
+  },
+  {
+    "file": "wall_inner_corner.png",
+    "box": [
+      67,
+      96,
+      463,
+      240
+    ],
+    "size": [
+      396,
+      144
+    ]
+  },
+  {
+    "file": "wall_window_large.png",
+    "box": [
+      614,
+      96,
+      773,
+      252
+    ],
+    "size": [
+      159,
+      156
+    ]
+  },
+  {
+    "file": "wall_block_small.png",
+    "box": [
+      1125,
+      127,
+      1272,
+      254
+    ],
+    "size": [
+      147,
+      127
+    ]
+  },
+  {
+    "file": "wall_rubble_small.png",
+    "box": [
+      1290,
+      127,
+      1477,
+      278
+    ],
+    "size": [
+      187,
+      151
+    ]
+  },
+  {
+    "file": "wall_arch_large.png",
+    "box": [
+      224,
+      285,
+      490,
+      458
+    ],
+    "size": [
+      266,
+      173
+    ]
+  },
+  {
+    "file": "wall_window_narrow.png",
+    "box": [
+      493,
+      285,
+      723,
+      458
+    ],
+    "size": [
+      230,
+      173
+    ]
+  },
+  {
+    "file": "wall_rubble_large.png",
+    "box": [
+      730,
+      285,
+      1007,
+      475
+    ],
+    "size": [
+      277,
+      190
+    ]
+  },
+  {
+    "file": "wall_arch_ruined.png",
+    "box": [
+      1008,
+      285,
+      1349,
+      479
+    ],
+    "size": [
+      341,
+      194
+    ]
+  },
+  {
+    "file": "floor_plain_01.png",
+    "box": [
+      740,
+      508,
+      944,
+      647
+    ],
+    "size": [
+      204,
+      139
+    ]
+  },
+  {
+    "file": "floor_plain_02.png",
+    "box": [
+      62,
+      509,
+      267,
+      647
+    ],
+    "size": [
+      205,
+      138
+    ]
+  },
+  {
+    "file": "floor_plain_03.png",
+    "box": [
+      291,
+      509,
+      486,
+      647
+    ],
+    "size": [
+      195,
+      138
+    ]
+  },
+  {
+    "file": "floor_plain_04.png",
+    "box": [
+      510,
+      509,
+      716,
+      646
+    ],
+    "size": [
+      206,
+      137
+    ]
+  },
+  {
+    "file": "floor_plain_05.png",
+    "box": [
+      711,
+      670,
+      900,
+      824
+    ],
+    "size": [
+      189,
+      154
+    ]
+  },
+  {
+    "file": "floor_plain_06.png",
+    "box": [
+      510,
+      671,
+      697,
+      827
+    ],
+    "size": [
+      187,
+      156
+    ]
+  },
+  {
+    "file": "floor_symbol_cross.png",
+    "box": [
+      918,
+      672,
+      1153,
+      821
+    ],
+    "size": [
+      235,
+      149
+    ]
+  },
+  {
+    "file": "floor_symbol_round.png",
+    "box": [
+      1171,
+      672,
+      1482,
+      826
+    ],
+    "size": [
+      311,
+      154
+    ]
+  },
+  {
+    "file": "floor_cracked_glow.png",
+    "box": [
+      62,
+      673,
+      267,
+      825
+    ],
+    "size": [
+      205,
+      152
+    ]
+  }
+]
