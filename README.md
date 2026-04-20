@@ -192,7 +192,7 @@ We have chosen to work on Lost in Bristol because...
 
 Stakeholders for Lost in Bristol were identified using the Onion Model to ensure all relevant groups were considered (Alexander & Robertson, 2004). This helped us define our target audience and understand how different users would interact with the game.
 
-From this, we focused on key stakeholders such as players, developers, and testers, which influenced our design decisions throughout development and ensured the game remained aligned with user needs (Pirozzi, 2019). 
+From this, we focused on key stakeholders such as players, developers, and testers, which influenced our decisions throughout development and ensured the game remained aligned with user needs (Pirozzi, 2019). 
 
 <p align="center">
    <b>Figure ?: </b>
