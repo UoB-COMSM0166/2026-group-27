@@ -385,7 +385,7 @@ The main issues were related to map design, controls, and game mechanics.
 
 ## 6.2 Quantitative Analysis: System Usability Scale (SUS)
 
-To ensure the game was engaging, it was important that usability did not negatively affect player experience. If a game is too easy, it can become uninteresting, while unnecessary difficulty or frustration can reduce replayability (Sweetser & Wyeth, 2005; Lazzaro, 2004). Therefore, we evaluated whether the game was easy to use and appropriately challenging. 
+To ensure the game was engaging, it was important that usability did not negatively affect player experience. If a game is too easy or unnecessarily difficult, it can reduce replayability by causing players to lose interest or become frustrated (Sweetser & Wyeth, 2005; Lazzaro, 2004). Therefore, we evaluated whether the game was easy to use and appropriately challenging. 
 
 We used SUS to measure how easily the players could learn and interact with the game. Ten participants (P1-P10), recruited using convenience sampling, completed gameplay tasks such as collecting items and finding the exit before filling out the SUS questionnaire. 
 
