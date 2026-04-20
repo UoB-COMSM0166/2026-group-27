@@ -395,14 +395,14 @@ We used the System Usability Scale (SUS) to measure how easily the players could
 
 The average SUS score was 90.75/100, indicating a high level of usability.
 
-Positive usability statements scored highly, such as “Learn quickly” (Q7 = 4.8/5), and “Well integrated”  (Q5 = 4.7/5), suggesting that the game was intuitive. 
+  * Positive usability statements scored highly, such as “Learn quickly” (Q7 = 4.8/5) and “Well integrated” (Q5 = 4.7/5), suggesting that the     game was intuitive. 
  
-Negative usability statements, such as “Unnecessarily complex” (Q2 = 1.4) and “Need technical support” (Q4 = 1.2), received low scores, indicating that users did not find the game too difficult or confusing.
+  * Negative usability statements, such as “Unnecessarily complex” (Q2 = 1.4) and “Need technical support” (Q4 = 1.2), received low scores,         indicating that users did not find the game too difficult or confusing.
 
-The lowest positive score was for “Felt confident”  (Q9 = 4.3/5). While still high, this indicates that some players may require clearer in-game feedback to feel fully confident in their gameplay decisions. 
+  * The lowest positive score was for “Felt confident” (Q9 = 4.3/5). While still high, this indicates that some players may require clearer
+    in-game feedback to feel fully confident in their gameplay decisions. 
 
 Overall, these results suggest that usability is unlikely to negatively impact the gameplay experience. 
-
 
 ## 6.3 Code Testing
 
