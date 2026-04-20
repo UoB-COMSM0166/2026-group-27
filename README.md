@@ -363,7 +363,7 @@ We used a mixed-methods approach, combining quantitative data from the System Us
 
 During the Think Aloud (TA) sessions, we asked participants to verbalise their thoughts and decision-making process while navigating the maze and completing tasks such as finding items and reaching the exit. This method helps us understand what users are thinking during gameplay, allowing us to identify misunderstandings, and unclear game elements (Pellicone et al., 2022). 
 
-Ten participants were recruited using convenience sampling from our weekly workshops. This was suitable for early-stage testing, allowing us to receive quick feedback during development without needing a formal controlled study.
+Ten participants were recruited using convenience sampling from our weekly workshops, allowing us to receive quick feedback during development without requiring a controlled experiment.
 
 We grouped the feedback into common themes to identify repeated issues across different users. The main themes were map design, technical issues, and game mechanics.
 
