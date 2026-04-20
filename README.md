@@ -160,8 +160,9 @@ thanusha
     <td></td>
   </tr>
 
-</table>
+</table> 
 
+Maniza
 ### - [Kanban Board](https://github.com/orgs/UoB-COMSM0166/projects/172)
 
 ### - Prototypes:
