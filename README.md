@@ -328,12 +328,12 @@ The flow between the menu, active gameplay and game-over screens is controlled b
 -A major goal was to create an "Atmospheric" feel where the player’s vision is restricted by fog. The technical challenge was creating this visual effect without slowing down the game’s performance.
 
 - The Solution: Overlay Masking
-  Instead of calculating light for every single tile in the maze (which is very tough on a browser), we used a        "top-  down overlay" method. We created a dark layer that covers the entire screen except the circle around the     player.
+  Instead of calculating light for every single tile in the maze (which is very tough on a browser), we used a "top-  down overlay" method. We created a dark layer that covers the entire screen except the circle around the player.
   
-  Impact: Because the computer only needs to render one image instead of hundreds of separate light sources, this     method is extremely efficient. Even in a challenging maze, it enabled us to keep up a fluid 60 frames per second.
+  Impact: Because the computer only needs to render one image instead of hundreds of separate light sources, this method is extremely efficient. Even in a challenging maze, it enabled us to keep up a fluid 60 frames per second.
 
 - The Solution: Distance-Based Targeting
-  We also had to ensure the combat mechanics felt fair. If the player's gun could auto-target enemies hidden deep     in the fog, the "scary" atmosphere would be ruined. We restricted the combat engine so it only detects enemies      once they enter the player's lit area. This kept the gameplay balanced and logically consistent with what the       player can actually see.
+  We also had to ensure the combat mechanics felt fair. If the player's gun could auto-target enemies hidden deep in the fog, the "scary" atmosphere would be ruined. We restricted the combat engine so it only detects enemies once they enter the player's lit area. This kept the gameplay balanced and logically consistent with what the player can actually see.
 
 
 ## 5.3 Challenge 2: Fair Spawning in a Random Maze
@@ -369,8 +369,7 @@ Ten participants were recruited using convenience sampling from our weekly works
 We grouped the feedback into common themes to identify repeated issues across different users. The main themes were map design, technical issues, and game mechanics.
 
 * **Map Design:**
-
-  Most users liked the maze's layout and its "spacious route", suggesting that the navigation structure was clear and easy to understand.         However, many noted that the environment felt empty and repetitive, indicating a lack of visual detail in the prototype, which led to reduced   user engagement. This supported our planned use of Bristol-themed visual elements, including landmarks and graffiti-style textures, to          improve visual engagement and help players recognise different areas of the map.
+ Players enjoyed the maze layout and found it easy to navigate.But a few students find the game/map a little boring because of lack of aesthetic components and empty environment. To fix this, we are adding Bristol-themed landmarks and graffiti textures. This will make the map more exciting and help players identify exactly where they are. 
 
  
 * **Technical Glitches:**
