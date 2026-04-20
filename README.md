@@ -393,9 +393,9 @@ We used the System Usability Scale (SUS) to measure how easily the players could
 
 <p align="center">
   <b>Figure ?: </b>
-  <i>Bar Graph displaying the System Usability Scale (SUS) results </i> <br>
+  <i>Bar graph displaying the System Usability Scale (SUS) results </i> <br>
 
-<img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/b2d580e4e40cc95ca773bf0637cdd362cdd939ca/readme%20docs/6.%20SUS%20graph.png" width = "75%">
+<img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/b2d580e4e40cc95ca773bf0637cdd362cdd939ca/readme%20docs/6.%20SUS%20graph.png" width = "100%">
 
 </p>
 
