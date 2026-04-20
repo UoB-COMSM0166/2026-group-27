@@ -181,6 +181,12 @@ Maniza
 
 
 **2. Second Game: Powerpoint Prototype**
+ 
+
+<p align="center">
+https://github.com/user-attachments/assets/4c6caff6-faa9-473d-8f24-c0fe11965f0b 
+</p>
+
 
 
 ### - Final Idea: 
