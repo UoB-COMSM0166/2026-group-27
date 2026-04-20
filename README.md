@@ -369,7 +369,7 @@ Ten participants were recruited using convenience sampling from our weekly works
 We grouped the feedback into common themes to identify repeated issues across different users. The main themes were map design, technical issues, and game mechanics.
 
 * **Map Design:**
-  Most users liked the maze's layout and its "spacious route", suggesting that the navigation structure was clear and easy to understand.         However, many noted that the environment felt empty and repetitive, resulting in reduced user engagement. This supported our planned use of     Bristol-themed visual elements, including landmarks and graffiti-style textures, to help players recognise        different areas of the map.
+  Most users liked the maze's layout and its "spacious route", suggesting that the navigation structure was clear and easy to understand.         However, many noted that the environment felt empty and repetitive, resulting in reduced user engagement. This supported our planned use of     Bristol-themed visual elements, including landmarks and graffiti-style textures, to help players recognise different areas of the map.
  
 * **Technical Glitches:**
 
