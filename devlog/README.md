@@ -105,7 +105,7 @@ This folder stores developer logs.
   - integrating all game parts into one complete build
   - preparing the final GitHub Pages version for public viewing
 
-• Next Plan:
+- Next Plan:
   - test the complete game flow and fix transition issues
   - upload the final playable version to GitHub Pages
 
