@@ -347,7 +347,7 @@ Impact: This avoids "broken" game seeds, in which the player can become irritate
 We built a "Safe Zone" around the starting position to keep the player from dying right away. In the player's first view, enemies are prohibited from spawning. Additionally, we made all objects "snap" to a 32-pixel grid so that neither the player nor the adversary would ever be trapped on a wall's corner while traveling.
 
 ## 5.4 Team Integration: Boss Mechanics
-For the final BOSS encounter, we moved away from simple random movement. We used mathematical patterns to allow the boss to "aim" at the player. By calculating the angle between the boss and the player’s position, we created a "fan-shot" attack where multiple projectiles are fired in a arc. This created a challenging finale that required the player to use all the movement and combat skills they learned throughout the game.
+For the final BOSS encounter, we moved away from simple random movement.To make the endgame more challenging,the BOSS employs a targeted fan-shaped strike that fires a spread of projectiles in a 45-degree arc centered directly on the player. This means the player cannot simply stand still. This implementation required combining our work on player-tracking math with our projectile physics system.
 
 
 # 6. Evaluation
