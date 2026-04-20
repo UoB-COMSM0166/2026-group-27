@@ -386,19 +386,24 @@ Participants suggested several improvements to the game mechanics, some of which
 Participants also suggested adding a hint system to help locate the exit when time is running low, as well as a warning when you are about to run out of time (e.g. 10–20 seconds remaining). This indicated that players needed clearer feedback when they are under pressure. 
 
 
-## 6.2 Quantitative Analysis: *System Usability Scale (SUS)*
-We collected data from 10 participants (P1-P10) who performed tasks like finding green points on the map.
+## 6.2 Quantitative Analysis: System Usability Scale (SUS)
 
-### System Usability Scale (SUS):
- Our average SUS score was 90.75/100, which is an "A" grade.
- 
- * Learning Curve: The highest score was for "Learn quickly" (Q7) at 4.80/5, meaning the game is very intuitive.
- 
- * System Integration: Users felt the game was "Well integrated" (Q5) with a score of 4.70/5.
- 
- * Confidence: The lowest positive score was for "Felt confident" (Q9) at 4.30/5. This tells us that even though they could play,     they might need more visual or timing feedback to feel "sure" about their actions.
+To ensure the game was engaging, it was important that usability did not negatively affect player experience. If a game is too easy, it can become uninteresting, while unnecessary difficulty or frustration can reduce replayability (Sweetser & Wyeth, 2005; Lazzaro, 2004). Therefore, we evaluated whether the game was easy to use and appropriately challenging. 
 
-## 4.Code Testing:
+We used the System Usability Scale (SUS) to measure how easily the players could learn and interact with the game. Ten participants (P1-P10), recruited using convenience sampling, completed gameplay tasks such as collecting items and finding the exit before filling out the SUS questionnaire. 
+
+The average SUS score was 90.75/100, indicating a high level of usability. This suggests that participants were able to understand and interact with the game with minimal difficulty during early prototype testing.
+
+Positive usability statements scored highly, such as “Learn quickly” (Q7 = 4.8/5), and “Well integrated”  (Q5 = 4.7/5), suggesting that the game was intuitive. 
+ 
+Negative usability statements, such as “Unnecessarily complex” (Q2 = 1.4) and “Need technical support” (Q4 = 1.2), received low scores, indicating that users did not find the game too difficult or confusing.
+
+The lowest positive score was for “Felt confident”  (Q9 = 4.3/5). While still high, this indicates that some players may require clearer in-game feedback to feel fully confident in their gameplay decisions. 
+
+Overall, these results suggest that usability is unlikely to negatively impact the gameplay experience. 
+
+
+## 6.3 Code Testing
 
 To ensure the prototype remained stable during user evaluations, we performed several rounds of technical testing to verify the game logic before participants accessed the build.
 
