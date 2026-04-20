@@ -353,7 +353,7 @@ For the final BOSS encounter, we moved away from simple random movement.To make 
 
 # 6. Evaluation
 
-The game was evaluated during its prototype stage, enabling us to identify and fix usability issues, navigation problems, and technical bugs during development before releasing the game. 
+The game was evaluated during its prototype stage, enabling us to identify and fix usability issues, navigation problems, and technical bugs during development before adding more complex features that could be affected if these core systems were not working properly.
 
 Since the game did not yet include the final Bristol-themed visuals, this allowed us to focus on evaluating the core gameplay mechanics without the influence of visual or narrative elements.
  
