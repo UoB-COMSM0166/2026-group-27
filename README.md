@@ -374,9 +374,10 @@ Most users liked the maze's layout and its "spacious route", suggesting that the
  
 * Technical Glitches:
 
-A key issue was identified with input handling. The Enter key, used to start the game, only worked when the mouse cursor was positioned over the game window. This reduced usability and made input behaviour unreliable. 
+A key issue was identified with input handling. The Enter key, used to start the game, only worked when the mouse cursor was positioned over the game window. This made the controls unreliable and harder to use.
 
-This was fixed by improving input focus handling so keyboard controls are always active during gameplay, improving control reliability.
+This was fixed by ensuring the game window automatically captures keyboard input, meaning that the keyboard controls remain active during gameplay.
+
    
 * Game Mechanics:
 
