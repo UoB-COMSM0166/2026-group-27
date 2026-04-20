@@ -141,6 +141,7 @@ function preload() {
     exitPortalImg = loadImage('assets/exit.png');
     boxImg = loadImage('assets/box.png');
     crossbowImg = loadImage('assets/crossbow.png');
+    preloadSelectedCharacterSprites();
 }
 
 
@@ -378,38 +379,7 @@ function keyReleased() {
 // ==================== 绘制图形函数 / Drawing functions ====================
 
 function drawPlayer() {
-    push();
-
-    let bob = 0;
-    if (moving) {
-        bob = sin(elapsedTime * 10) * 2;
-    }
-
-    translate(player.left - cam.x, player.top - cam.y + bob);
-
-    fill(50, 150, 255);
-    noStroke();
-    ellipse(blockSize / 2, 24, 28, 36);
-
-    fill(255, 220, 177);
-    ellipse(blockSize / 2, 12, 20, 20);
-
-    fill(0);
-    ellipse(blockSize / 2 - 4, 10, 3, 3);
-    ellipse(blockSize / 2 + 4, 10, 3, 3);
-
-    fill(255);
-    if (dir === 0) {
-        ellipse(blockSize / 2, 16, 2, 4);
-    } else if (dir === 1) {
-        ellipse(blockSize / 2 + 2, 12, 4, 2);
-    } else if (dir === 2) {
-        ellipse(blockSize / 2, 8, 2, 4);
-    } else {
-        ellipse(blockSize / 2 - 2, 12, 4, 2);
-    }
-
-    pop();
+    drawSelectedCharacter(player, cam, dir, moving, elapsedTime);
 }
 
 
