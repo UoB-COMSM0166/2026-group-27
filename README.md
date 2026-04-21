@@ -145,21 +145,21 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
 
   <tr>
     <td>Lando Norris (F1 World Champion 2025)</td>
-    <td> <img src="https://github.com/user-attachments/assets/cfd07d29-5951-449d-acb2-edc0f07ade99" width= "50%"> </td>
+    <td> <img src="https://github.com/user-attachments/assets/cfd07d29-5951-449d-acb2-edc0f07ade99" width= "150%"> </td>
     <td>Speed</td>
   </tr>
 
   
  <tr>
     <td>Banksy: Girl with Balloon</td>
-    <td> <img src="https://github.com/UoB-COMSM0166/2026-group-27/blob/fe87d0ea5a65c3124ccb310d3222938153103899/pixel%20art%20characters/Banksy%20girl%20with%20balloon.gif" width= "50%"> </td>
+    <td> <img src="https://github.com/UoB-COMSM0166/2026-group-27/blob/fe87d0ea5a65c3124ccb310d3222938153103899/pixel%20art%20characters/Banksy%20girl%20with%20balloon.gif" width= "150%"> </td>
     <td>Invisibility</td>
   </tr>
 
 
  <tr>
     <td>Vixen</td>
-    <td> <img src="https://github.com/user-attachments/assets/61f8f43b-5456-4492-b894-52d8f3be8dba" width= "50%"> </td>
+    <td> <img src="https://github.com/user-attachments/assets/61f8f43b-5456-4492-b894-52d8f3be8dba" width= "150%"> </td>
     <td>Sly & Quick</td>
   </tr>
 
