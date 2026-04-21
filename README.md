@@ -85,9 +85,9 @@ game set up instructions and link to play game. [Here is our game](https://uob-c
 
 # 2. Introduction
 
--Lost in Bristol is an immersive, third-person maze-puzzle game that challenges players to navigate a stylized, labyrinthine recreation of Bristol’s iconic urban landscape. Developed as a tribute to the city’s unique cultural identity, the game tasks players with escaping a series of increasingly complex districts within a strict time limit. The project’s core objective was to blend traditional maze-solving mechanics with high-stakes survival elements and environmental storytelling.
+Lost in Bristol is an immersive, third-person maze-puzzle game that challenges players to navigate a stylized, labyrinthine recreation of Bristol’s iconic urban landscape. Developed as a tribute to the city’s unique cultural identity, the game tasks players with escaping a series of increasingly complex districts within a strict time limit. The project’s core objective was to blend traditional maze-solving mechanics with high-stakes survival elements and environmental storytelling.
 
--The "Twist": Survival and Strategy
+## The "Twist": Survival and Strategy
 
 What makes Lost in Bristol novel is its departure from passive exploration. While most maze games focus solely on pathfinding, our implementation introduces three "Twists" that heighten the difficulty:
 
@@ -145,12 +145,12 @@ thanusha
 <tr>
   <td> Court Clash</td>
   <td> Stick Tennis Gameplay</td>
-  <td>A fast-paced tennis-style game where players control a paddle to keep the ball in play. Difficulty increases over time with faster speeds, power-ups, and dynamic elements to create an addictive, replayable experience.</td>
+  <td>A fast-paced tennis-style game where players control a tennis bat to keep the ball in play. Difficulty increases over time with faster speeds, power-ups and dynamic elements to create an addictive, replayable experience.</td>
   <td>
       -Balancing game speed and difficulty progression
-      -designing engaging AI
       -integrating power-ups smoothly
       -ensuring performance at high speeds
+      -making experience challenging and enjoyable 
   </td>
 </tr>
   <tr>
