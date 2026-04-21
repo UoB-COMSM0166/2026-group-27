@@ -159,7 +159,7 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
 
  <tr>
     <td>Vixen</td>
-    <td> <img src="https://github.com/user-attachments/assets/09f2ea22-d075-4565-a076-960e3522bca9"> </td>
+    <td> <<img src="https://github.com/user-attachments/assets/61f8f43b-5456-4492-b894-52d8f3be8dba"> </td>
     <td>Sly & Quick</td>
   </tr>
 
