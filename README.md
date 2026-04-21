@@ -583,11 +583,6 @@ We also focused on the player's mental and physical experience, especially given
   </tr>
 
   <tr>
-  <td>Liz Chen</td>
-  <td>1.0</td>
-  </tr>
-
-  <tr>
   <td>Yizhou Pan</td>
   <td>1.0</td>
   </tr>
