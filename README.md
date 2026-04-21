@@ -475,7 +475,7 @@ The main issues were related to map design, controls, and game mechanics.
 
   Participants suggested several improvements to the game mechanics, some of which matched features we already planned to implement, such as      adding item descriptions to improve understanding and engagement.
 
-  Participants also suggested adding a hint system to help locate the exit when time is running low, as well as a warning when you are about to   run out of time (e.g. 10–20 seconds remaining). This indicated that players needed clearer feedback when they are under pressure. 
+  Participants struggled to see when they were running out of time and needed assistance when they were under pressure, meaning the clock at      the top of the screen alone was not sufficient. Hence, we decided to add a hint system to help locate the exit when time is running low, as     well as a warning sign when 10–20 seconds remain. 
 
 
 ## 6.2 Quantitative Analysis: System Usability Scale (SUS)
