@@ -144,7 +144,7 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
   </tr>
 
   <tr>
-    <td> <img src="https://github.com/user-attachments/assets/cfd07d29-5951-449d-acb2-edc0f07ade99" width= "250%"> </td>
+    <td> <img src="https://github.com/user-attachments/assets/cfd07d29-5951-449d-acb2-edc0f07ade99" width= "50%"> </td>
     <td>Lando Norris (F1 World Champion 2025)</td>
     <td>Speed</td>
   </tr>
@@ -158,7 +158,7 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
 
 
  <tr>
-   <td> <img src="https://github.com/user-attachments/assets/61f8f43b-5456-4492-b894-52d8f3be8dba" width= "250%"> </td>
+   <td> <img src="https://github.com/user-attachments/assets/61f8f43b-5456-4492-b894-52d8f3be8dba" width= "50%"> </td>
     <td>Vixen</td>
     <td>Sly & Quick</td>
   </tr>
