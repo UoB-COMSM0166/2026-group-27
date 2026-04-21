@@ -122,14 +122,20 @@ This folder stores developer logs.
   - complete animation, design character portrait
    
 ### maniza：
-- Completed:
-  - Evaluation
-  - IMPLEMENTATION
-- In Progress:
-  - designs
-- Problems:
-  - designs
-- Next Plan:
+**Completed:**
+
+* Worked on Kanban board and synced it with GitHub
+* Moved multiple tasks to Done
+* Updated repository
+* Added characters and game objects to the Introduction section
+* describe the added game components 
+* worked on implementation and challenges in README content
+
+**In progress:**
+
+* Refining documentation
+* add more objects to the document once it is all finalised 
+
   - 
 
 ### Thanusha 
