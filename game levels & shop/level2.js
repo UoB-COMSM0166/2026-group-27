@@ -2,6 +2,11 @@
 const KEY_PAUSE = 80;
 const KEY_M = 77;
 const KEY_SPACE = 32;
+const KEY_SHIFT = 16;
+const KEY_W = 87;
+const KEY_A = 65;
+const KEY_S = 83;
+const KEY_D = 68;
 
 const blockSize = 32;
 const miniMapScale = 3;
@@ -12,16 +17,27 @@ const timeLimit = 5;
 const playerSpeed = 120;
 const enemyCount = 8;
 
-// 迷雾亮度 / fog 
-const fogRadiusNoLamp = 0;
-const fogRadiusWithLamp = 165;
+// 迷雾亮度 / Fog
+const fogRadiusWithLight = 165;
 
-// 商城枪支配置 / Shop gun configs
-const gunConfigs = {
-    1: { name: "Pistol", damage: 10, bulletSpeed: 320, cooldown: 0.22, color: [40, 40, 40] },
-    2: { name: "Rifle", damage: 14, bulletSpeed: 380, cooldown: 0.16, color: [20, 70, 130] },
-    3: { name: "Heavy Gun", damage: 20, bulletSpeed: 410, cooldown: 0.26, color: [120, 70, 20] }
+// 武器配置 / Weapon configs
+const weaponConfigs = {
+    crossbow: {
+        name: "Crossbow",
+        damage: 10,
+        projectileSpeed: 320,
+        cooldown: 0.22
+    },
+    ring: {
+        name: "Magic Ring",
+        damage: 10,
+        projectileSpeed: 320,
+        cooldown: 0.22
+    }
 };
+
+// 图鉴存储键 / Codex storage key
+const ITEM_CODEX_KEY = "itemCodex";
 
 // ==================== 游戏变量 / Game Variables ====================
 let worldWidth = 0;
@@ -34,6 +50,7 @@ let gameover = false;
 let start = true;
 let end = false;
 let moving = false;
+let showInstructions = false;
 
 // ==================== 游戏对象 / Game Objects ====================
 let mazeMap;
@@ -44,11 +61,11 @@ let player;
 let dir = 0;
 
 let box;
-let lampItem;
-let gunItem;
+let lightItem;
+let ringItem;
 let exitDoor;
 
-let bullets = [];
+let projectiles = [];
 let enemies = [];
 
 let mazeLayer;
@@ -56,29 +73,68 @@ let fogLayer;
 
 // ==================== 状态 / States ====================
 let hasMiniMap = false;
-let hasLamp = false;
-let hasGun = false;
-let showMiniMap = true;
+let hasLight = false;
+let hasRing = false;
 
-let currentGunLevel = 1;
-let currentGunStats = gunConfigs[1];
-let shootCooldownTimer = 0;
+// 第二关默认已拥有弩箭 / Level 2 starts with crossbow
+let hasCrossbow = true;
+let currentWeapon = "crossbow";
+let currentWeaponStats = weaponConfigs.crossbow;
+
+let showMiniMap = true;
+let attackCooldownTimer = 0;
 
 let smallKillCount = 0;
-let coinsEarnedThisRun = 0;
 
 let endTimePopUp = 0;
 let popUpTitle = '';
 let popUpMessage = '';
 let gameoverMsg = '';
-let endTimeInformation = 0;
+
+// ==================== 图片素材 / Image Assets ====================
+let floorPlain01Img;
+let floorPlain03Img;
+let floorPlain04Img;
+let floorCrackedGlowImg;
+let wallImg;
+
+let lightImg;
+let ringImg;
+let littleGhostImg;
+let boxImg;
+
+// ==================== 预加载 / Preload ====================
+function preload() {
+    // 地板 / Floor
+    floorPlain01Img = loadImage('assets/floor_plain_01.png');
+    floorPlain03Img = loadImage('assets/floor_plain_03.png');
+    floorPlain04Img = loadImage('assets/floor_plain_04.png');
+    floorCrackedGlowImg = loadImage('assets/floor_cracked_glow.png');
+
+    // 墙 / Wall
+    wallImg = loadImage('assets/wall_column_tall.png');
+
+    // 道具 / Items
+    boxImg = loadImage('assets/box.png');
+    lightImg = loadImage('assets/light.png');
+    ringImg = loadImage('assets/ring.png');
+
+    // 敌人 / Enemy
+    littleGhostImg = loadImage('assets/little ghost.png');
+
+    // 人物四视图 / Character sprites from shared renderer
+    preloadSelectedCharacterSprites();
+}
 
 // ==================== p5 入口 / p5 Entry ====================
 function setup() {
     createCanvas(800, 600);
 
-    currentGunLevel = getStoredGunLevel();
-    currentGunStats = gunConfigs[currentGunLevel] || gunConfigs[1];
+    // 第二关默认图鉴里有弩箭
+    unlockCodexItem('crossbow');
+
+    currentWeapon = "crossbow";
+    currentWeaponStats = weaponConfigs[currentWeapon];
 
     mazeMap = new Maze(mazeW, mazeH, 'random', 1, 1);
     player = new Rect(32, 32, 32, 48, true);
@@ -90,10 +146,12 @@ function setup() {
     fogLayer = createGraphics(width, height);
 
     createBox();
-    createLamp();
-    createGun();
+    createLight();
+    createRing();
     createExitDoor();
     createEnemies();
+
+    cam.focus(player.left, player.top);
 }
 
 function draw() {
@@ -115,26 +173,25 @@ function drawGame() {
         drawBox(box.left - cam.x, box.top - cam.y);
     }
 
-    if (!hasLamp && hasMiniMap) {
-        drawLamp(lampItem.left - cam.x, lampItem.top - cam.y);
+    if (!hasLight && hasMiniMap) {
+        drawLightPickup(lightItem.left - cam.x, lightItem.top - cam.y);
     }
 
-    if (!hasGun && hasMiniMap) {
-        drawGunPickup(gunItem.left - cam.x, gunItem.top - cam.y);
+    if (!hasRing && hasMiniMap) {
+        drawRingPickup(ringItem.left - cam.x, ringItem.top - cam.y);
     }
 
     for (let e of enemies) {
         e.draw();
     }
 
-    for (let b of bullets) {
-        b.draw();
+    for (let p of projectiles) {
+        p.draw();
     }
 
     drawPlayer();
     drawFog();
 
-    if (endTimeInformation > elapsedTime) drawInformation();
     if (endTimePopUp > elapsedTime) drawPopUp();
 
     if (hasMiniMap && showMiniMap) drawMiniMap();
@@ -146,13 +203,22 @@ function drawGame() {
         else drawPause();
     }
 
+    if (showInstructions) {
+        drawInformation();
+    }
+
     drawElapsedTime();
     drawHud();
+    
 }
+
+
 
 function act(dt) {
     gTime += dt;
-    if (shootCooldownTimer > 0) shootCooldownTimer -= dt;
+    if (attackCooldownTimer > 0) attackCooldownTimer -= dt;
+
+    if (showInstructions) return;
 
     if (!pause) {
         if (elapsedTime > timeLimit * 60) {
@@ -166,7 +232,7 @@ function act(dt) {
 
         handlePlayerMovement(dt);
         handlePickupsAndGoal();
-        updateBullets(dt);
+        updateProjectiles(dt);
         updateEnemies(dt);
 
         cam.focus(player.left, player.top);
@@ -177,14 +243,22 @@ function act(dt) {
 function keyPressed() {
     lastKeyPress = keyCode;
 
-    if (!start && keyCode === KEY_PAUSE) {
-        pause = !pause;
-    }
-
-    if (keyCode === ENTER) {
+    // 开始游戏：先显示说明
+    if (keyCode === ENTER && start) {
         pause = false;
         start = false;
-        triggerInformation(1.5);
+        showInstructions = true;
+        return;
+    }
+
+    // 关闭说明
+    if (keyCode === ENTER && showInstructions) {
+        showInstructions = false;
+        return;
+    }
+
+    if (!start && !showInstructions && keyCode === KEY_PAUSE) {
+        pause = !pause;
     }
 
     if (keyCode === ESCAPE && (end || gameover)) {
@@ -195,8 +269,12 @@ function keyPressed() {
         showMiniMap = !showMiniMap;
     }
 
-    if (keyCode === KEY_SPACE && hasGun && !pause) {
-        shootBullet();
+    if (keyCode === KEY_SPACE && hasCrossbow && !pause && !showInstructions) {
+        shootProjectile();
+    }
+
+    if (keyCode === KEY_SHIFT && hasRing && !pause && !showInstructions) {
+        toggleWeapon();
     }
 }
 
@@ -208,28 +286,33 @@ function keyReleased() {
 function handlePlayerMovement(dt) {
     moving = false;
 
-    if (keyIsDown(UP_ARROW)) {
+    let moveUp = keyIsDown(UP_ARROW) || keyIsDown(KEY_W);
+    let moveRight = keyIsDown(RIGHT_ARROW) || keyIsDown(KEY_D);
+    let moveDown = keyIsDown(DOWN_ARROW) || keyIsDown(KEY_S);
+    let moveLeft = keyIsDown(LEFT_ARROW) || keyIsDown(KEY_A);
+
+    if (moveUp) {
         dir = 2;
         moving = true;
         player.top -= playerSpeed * dt;
         solveWallCollision('up');
     }
 
-    if (keyIsDown(RIGHT_ARROW)) {
+    if (moveRight) {
         dir = 1;
         moving = true;
         player.left += playerSpeed * dt;
         solveWallCollision('right');
     }
 
-    if (keyIsDown(DOWN_ARROW)) {
+    if (moveDown) {
         dir = 0;
         moving = true;
         player.top += playerSpeed * dt;
         solveWallCollision('down');
     }
 
-    if (keyIsDown(LEFT_ARROW)) {
+    if (moveLeft) {
         dir = 3;
         moving = true;
         player.left -= playerSpeed * dt;
@@ -254,51 +337,78 @@ function handlePickupsAndGoal() {
         boxIntersects();
     }
 
-    if (!hasLamp && hasMiniMap && player.intersects(lampItem)) {
-        lampIntersects();
+    if (!hasLight && hasMiniMap && player.intersects(lightItem)) {
+        lightIntersects();
     }
 
-    if (!hasGun && hasMiniMap && player.intersects(gunItem)) {
-        gunIntersects();
+    if (!hasRing && hasMiniMap && player.intersects(ringItem)) {
+        ringIntersects();
     }
 
     if (player.intersects(exitDoor)) {
-        if (hasLamp && hasGun) {
+        if (hasLight && hasRing) {
             end = true;
             pause = true;
         } else {
             triggerPopUp(
                 "Door locked!",
-                "You should first find the lamp and the gun.",
+                "You should first find the light and the ring.",
                 2.5
             );
         }
     }
 }
 
-function shootBullet() {
-    if (shootCooldownTimer > 0) return;
+function toggleWeapon() {
+    if (!hasRing) return;
+
+    currentWeapon = (currentWeapon === "crossbow") ? "ring" : "crossbow";
+    currentWeaponStats = weaponConfigs[currentWeapon];
+
+    triggerPopUp(
+        "Weapon switched!",
+        `Current weapon: ${currentWeaponStats.name}`,
+        1.2
+    );
+}
+
+function shootProjectile() {
+    if (attackCooldownTimer > 0) return;
 
     let startX = player.left + player.width / 2;
     let startY = player.top + player.height / 2;
 
     let target = null;
-    if (hasLamp) {
+    if (hasLight) {
         target = findAutoTarget(startX, startY, 210);
     }
+
+    let vx = null;
+    let vy = null;
 
     if (target) {
         let dx = target.x - startX;
         let dy = target.y - startY;
         let d = sqrt(dx * dx + dy * dy);
-        let vx = (dx / max(d, 1)) * currentGunStats.bulletSpeed;
-        let vy = (dy / max(d, 1)) * currentGunStats.bulletSpeed;
-        bullets.push(new Bullet(startX, startY, -1, vx, vy, currentGunStats.damage));
-    } else {
-        bullets.push(new Bullet(startX, startY, dir, null, null, currentGunStats.damage));
+        vx = (dx / max(d, 1)) * currentWeaponStats.projectileSpeed;
+        vy = (dy / max(d, 1)) * currentWeaponStats.projectileSpeed;
     }
 
-    shootCooldownTimer = currentGunStats.cooldown;
+    let kind = (currentWeapon === "crossbow") ? "arrow" : "orb";
+
+    projectiles.push(
+        new Projectile(
+            startX,
+            startY,
+            dir,
+            kind,
+            vx,
+            vy,
+            currentWeaponStats.damage
+        )
+    );
+
+    attackCooldownTimer = currentWeaponStats.cooldown;
 }
 
 function findAutoTarget(px, py, range) {
@@ -321,29 +431,27 @@ function findAutoTarget(px, py, range) {
     return best;
 }
 
-function addCoins(amount) {
-    coinsEarnedThisRun += amount;
-    let total = Number(localStorage.getItem('gameCoins') || '0');
-    localStorage.setItem('gameCoins', String(total + amount));
-}
+function updateProjectiles(dt) {
+    for (let p of projectiles) {
+        p.update(dt);
 
-function updateBullets(dt) {
-    for (let b of bullets) {
-        b.update(dt);
-
-        let bRect = new Rect(b.x - b.r, b.y - b.r, b.r * 2, b.r * 2, true);
+        let pRect;
+        if (p.kind === 'arrow') {
+            pRect = new Rect(p.x - 8, p.y - 8, 16, 16, true);
+        } else {
+            pRect = new Rect(p.x - p.r, p.y - p.r, p.r * 2, p.r * 2, true);
+        }
 
         for (let e of enemies) {
-            if (e.alive && b.alive && bRect.intersects(e.rect)) {
+            if (e.alive && p.alive && pRect.intersects(e.rect)) {
                 e.alive = false;
-                b.alive = false;
+                p.alive = false;
                 smallKillCount += 1;
-                addCoins(1);
             }
         }
     }
 
-    bullets = bullets.filter(b => b.alive);
+    projectiles = projectiles.filter(p => p.alive);
     enemies = enemies.filter(e => e.alive);
 }
 
@@ -351,6 +459,39 @@ function updateEnemies(dt) {
     for (let e of enemies) {
         e.update(dt);
     }
+}
+
+// ==================== 图鉴 / Item Codex ====================
+function getCodexItems() {
+    try {
+        const raw = localStorage.getItem(ITEM_CODEX_KEY);
+        if (!raw) return [];
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed : [];
+    } catch (err) {
+        return [];
+    }
+}
+
+function unlockCodexItem(itemId) {
+    const items = getCodexItems();
+    if (!items.includes(itemId)) {
+        items.push(itemId);
+        localStorage.setItem(ITEM_CODEX_KEY, JSON.stringify(items));
+    }
+}
+
+function hasCodexItem(itemId) {
+    return getCodexItems().includes(itemId);
+}
+
+function getCodexDisplayText() {
+    const names = [];
+    if (hasCodexItem('crossbow')) names.push('Crossbow');
+    if (hasCodexItem('light')) names.push('Light');
+    if (hasCodexItem('ring')) names.push('Ring');
+    if (names.length === 0) return 'None';
+    return names.join(', ');
 }
 
 // ==================== 生成位置工具 / Spawn Helpers ====================
@@ -419,12 +560,12 @@ function createBox() {
     box = createItemInStartView([]);
 }
 
-function createLamp() {
-    lampItem = createItemInStartView([box]);
+function createLight() {
+    lightItem = createItemInStartView([box]);
 }
 
-function createGun() {
-    gunItem = createItemInMidArea([box, lampItem]);
+function createRing() {
+    ringItem = createItemInMidArea([box, lightItem]);
 }
 
 function createExitDoor() {
@@ -451,8 +592,8 @@ function createEnemies() {
             intersectsWall(e.rect) ||
             e.rect.intersects(player) ||
             e.rect.intersects(box) ||
-            e.rect.intersects(lampItem) ||
-            e.rect.intersects(gunItem) ||
+            e.rect.intersects(lightItem) ||
+            e.rect.intersects(ringItem) ||
             e.rect.intersects(exitDoor)
         ) {
             x = floor(random(64, worldWidth - blockSize * 2));
@@ -469,117 +610,94 @@ function boxIntersects() {
     hasMiniMap = true;
     triggerPopUp(
         "Mini Map found!",
-        "You can show/hide the map by pressing 'M'.\nNow search for a lamp and a gun.",
+        "You can show/hide the map by pressing 'M'.\nNow search for the light and the ring.",
         3
     );
 }
 
-function lampIntersects() {
-    hasLamp = true;
+function lightIntersects() {
+    hasLight = true;
+    unlockCodexItem('light');
     triggerPopUp(
-        "Lamp found!",
+        "Light found!",
         "The fog clears around you now.\nAuto-lock is enabled in the lit area.",
         3
     );
 }
 
-function gunIntersects() {
-    hasGun = true;
+function ringIntersects() {
+    hasRing = true;
+    unlockCodexItem('ring');
     triggerPopUp(
-        "Gun found!",
-        "Press SPACE to shoot.",
+        "Ring found!",
+        "Press SHIFT to switch weapons.\nCrossbow ↔ Magic Ring",
         3
     );
 }
 
 // ==================== 绘制 / Draw ====================
 function drawPlayer() {
-    push();
-    translate(player.left - cam.x, player.top - cam.y);
-
-    if (moving) {
-        let offset = sin(elapsedTime * 10) * 2;
-        translate(0, offset);
-    }
-
-    noStroke();
-
-    fill(0, 0, 0, 70);
-    ellipse(blockSize / 2, 42, 18, 8);
-
-    fill(50, 150, 255);
-    ellipse(blockSize / 2, 24, 28, 36);
-
-    fill(255, 220, 177);
-    ellipse(blockSize / 2, 12, 20, 20);
-
-    fill(0);
-    ellipse(blockSize / 2 - 4, 10, 3, 3);
-    ellipse(blockSize / 2 + 4, 10, 3, 3);
-
-    fill(255);
-    if (dir === 0) ellipse(blockSize / 2, 16, 2, 4);
-    else if (dir === 1) ellipse(blockSize / 2 + 2, 12, 4, 2);
-    else if (dir === 2) ellipse(blockSize / 2, 8, 2, 4);
-    else ellipse(blockSize / 2 - 2, 12, 4, 2);
-
-    if (hasGun) {
-        let c = currentGunStats.color;
-        fill(c[0], c[1], c[2]);
-
-        if (dir === 0) rect(13, 24, 6, 10, 2);
-        else if (dir === 1) rect(18, 20, 12, 5, 2);
-        else if (dir === 2) rect(13, 10, 6, 10, 2);
-        else rect(2, 20, 12, 5, 2);
-    }
-
-    pop();
+    drawSelectedCharacter(player, cam, dir, moving, elapsedTime);
 }
 
 function drawBox(x, y) {
     push();
-    noStroke();
+    imageMode(CORNER);
 
-    fill(90, 50, 15, 80);
-    ellipse(x + 16, y + 28, 18, 6);
+    if (boxImg) {
+        image(boxImg, x + 1, y + 1, blockSize - 2, blockSize - 2);
+    } else {
+        noStroke();
+        fill(90, 50, 15, 80);
+        ellipse(x + 16, y + 28, 18, 6);
 
-    fill(139, 69, 19);
-    rect(x + 4, y + 12, 24, 16, 3);
+        fill(139, 69, 19);
+        rect(x + 4, y + 12, 24, 16, 3);
 
-    fill(160, 82, 45);
-    rect(x + 4, y + 8, 24, 7, 3);
+        fill(160, 82, 45);
+        rect(x + 4, y + 8, 24, 7, 3);
 
-    fill(255, 215, 0);
-    rect(x + 14, y + 16, 4, 8, 2);
-    ellipse(x + 16, y + 18, 6, 6);
-
-    pop();
-}
-
-function drawLamp(x, y) {
-    push();
-    noStroke();
-
-    fill(80, 60, 40);
-    rect(x + 12, y + 18, 8, 10, 2);
-
-    fill(255, 220, 100);
-    ellipse(x + 16, y + 14, 14, 14);
-
-    fill(255, 220, 100, 80);
-    ellipse(x + 16, y + 14, 24, 24);
+        fill(255, 215, 0);
+        rect(x + 14, y + 16, 4, 8, 2);
+        ellipse(x + 16, y + 18, 6, 6);
+    }
 
     pop();
 }
 
-function drawGunPickup(x, y) {
+function drawLightPickup(x, y) {
     push();
-    noStroke();
+    imageMode(CORNER);
 
-    fill(40);
-    rect(x + 8, y + 14, 16, 6, 2);
-    rect(x + 20, y + 12, 6, 4, 1);
-    rect(x + 10, y + 18, 5, 10, 2);
+    if (lightImg) {
+        image(lightImg, x, y, blockSize, blockSize);
+    } else {
+        noStroke();
+        fill(80, 60, 40);
+        rect(x + 12, y + 18, 8, 10, 2);
+
+        fill(255, 220, 100);
+        ellipse(x + 16, y + 14, 14, 14);
+
+        fill(255, 220, 100, 80);
+        ellipse(x + 16, y + 14, 24, 24);
+    }
+
+    pop();
+}
+
+function drawRingPickup(x, y) {
+    push();
+    imageMode(CORNER);
+
+    if (ringImg) {
+        image(ringImg, x, y, blockSize, blockSize);
+    } else {
+        noFill();
+        stroke(255, 215, 120);
+        strokeWeight(3);
+        ellipse(x + 16, y + 16, 14, 14);
+    }
 
     pop();
 }
@@ -609,33 +727,38 @@ function drawHud() {
     let y = 20;
     text("Level 2 Demo", 15, y);
     y += 16;
-    text("Gun: " + currentGunStats.name, 15, y);
+    text("Character: " + getSelectedCharacterName(), 15, y);
+    y += 16;
+    text("Weapon: " + currentWeaponStats.name, 15, y);
     y += 16;
     text("Map: " + (hasMiniMap ? "Yes" : "No"), 15, y);
     y += 16;
-    text("Lamp: " + (hasLamp ? "Yes" : "No"), 15, y);
+    text("Light: " + (hasLight ? "Yes" : "No"), 15, y);
+    y += 16;
+    text("Ring: " + (hasRing ? "Yes" : "No"), 15, y);
     y += 16;
     text("Enemies: " + enemies.length, 15, y);
     y += 16;
     text("Kills: " + smallKillCount, 15, y);
-    y += 16;
-    text("Coins this run: £" + coinsEarnedThisRun, 15, y);
+
+    textAlign(RIGHT);
+    text("Item Codex: " + getCodexDisplayText(), width - 15, 20);
+    textAlign(LEFT);
 }
 
 function drawFog() {
     fogLayer.clear();
     fogLayer.noStroke();
 
-    // 比以前亮一点，但比第三关更暗 / Slightly brighter than before, but darker than level 3
     fogLayer.fill(10, 12, 18, 185);
     fogLayer.rect(0, 0, width, height);
 
-    if (hasLamp) {
+    if (hasLight) {
         fogLayer.erase();
         fogLayer.circle(
             player.left - cam.x + player.width / 2,
             player.top - cam.y + player.height / 2,
-            fogRadiusWithLamp * 2
+            fogRadiusWithLight * 2
         );
         fogLayer.noErase();
     }
@@ -643,33 +766,42 @@ function drawFog() {
     image(fogLayer, 0, 0);
 }
 
-class Bullet {
-    constructor(x, y, dir, vx = null, vy = null, damage = 10) {
+class Projectile {
+    constructor(x, y, dir, kind, vx = null, vy = null, damage = 10) {
         this.x = x;
         this.y = y;
-        this.r = 4;
         this.dir = dir;
+        this.kind = kind; // arrow / orb
         this.vx = vx;
         this.vy = vy;
         this.damage = damage;
         this.alive = true;
+        this.r = 4;
+        this.arrowLength = 16;
     }
 
     update(dt) {
+        const speed = currentWeaponStats.projectileSpeed;
+
         if (this.vx !== null && this.vy !== null) {
             this.x += this.vx * dt;
             this.y += this.vy * dt;
         } else {
-            if (this.dir === 0) this.y += currentGunStats.bulletSpeed * dt;
-            if (this.dir === 1) this.x += currentGunStats.bulletSpeed * dt;
-            if (this.dir === 2) this.y -= currentGunStats.bulletSpeed * dt;
-            if (this.dir === 3) this.x -= currentGunStats.bulletSpeed * dt;
+            if (this.dir === 0) this.y += speed * dt;
+            if (this.dir === 1) this.x += speed * dt;
+            if (this.dir === 2) this.y -= speed * dt;
+            if (this.dir === 3) this.x -= speed * dt;
         }
 
-        let bRect = new Rect(this.x - this.r, this.y - this.r, this.r * 2, this.r * 2, true);
+        let pRect;
+        if (this.kind === 'arrow') {
+            pRect = new Rect(this.x - 8, this.y - 8, 16, 16, true);
+        } else {
+            pRect = new Rect(this.x - this.r, this.y - this.r, this.r * 2, this.r * 2, true);
+        }
 
         for (let w of wall) {
-            if (bRect.intersects(w)) {
+            if (pRect.intersects(w)) {
                 this.alive = false;
                 return;
             }
@@ -682,20 +814,52 @@ class Bullet {
 
     draw() {
         push();
-        noStroke();
-        fill(255, 220, 80);
-        circle(this.x - cam.x, this.y - cam.y, this.r * 2);
+
+        if (this.kind === 'arrow') {
+            let dx = 0;
+            let dy = 0;
+
+            if (this.vx !== null && this.vy !== null) {
+                let len = sqrt(this.vx * this.vx + this.vy * this.vy);
+                dx = this.vx / max(len, 1);
+                dy = this.vy / max(len, 1);
+            } else {
+                if (this.dir === 0) dy = 1;
+                if (this.dir === 1) dx = 1;
+                if (this.dir === 2) dy = -1;
+                if (this.dir === 3) dx = -1;
+            }
+
+            let x1 = this.x - cam.x;
+            let y1 = this.y - cam.y;
+            let x2 = x1 - dx * this.arrowLength;
+            let y2 = y1 - dy * this.arrowLength;
+
+            stroke(92, 60, 32);
+            strokeWeight(3);
+            line(x1, y1, x2, y2);
+
+            noStroke();
+            fill(120, 85, 45);
+            circle(x1, y1, 4);
+        } else {
+            noStroke();
+            fill(140, 210, 255);
+            circle(this.x - cam.x, this.y - cam.y, this.r * 2);
+        }
+
         pop();
     }
 }
 
 class Enemy {
     constructor(x, y) {
-        this.rect = new Rect(x, y, 28, 28, true);
+        this.rect = new Rect(x, y, 32, 48, true);
         this.dir = floor(random(4));
         this.speed = 60;
         this.alive = true;
         this.changeTimer = random(1, 3);
+        this.floatPhase = random(TWO_PI);
     }
 
     update(dt) {
@@ -726,44 +890,46 @@ class Enemy {
 
         if (this.rect.intersects(player)) {
             gameover = true;
-            gameoverMsg = "An enemy caught you!";
+            gameoverMsg = "A little ghost caught you!";
             pause = true;
         }
     }
 
     draw() {
         push();
-        translate(this.rect.left - cam.x, this.rect.top - cam.y);
 
-        noStroke();
-        fill(130, 40, 40);
-        ellipse(14, 18, 22, 20);
+        let bob = sin(gTime * 2.8 + this.floatPhase) * 2.5;
 
-        fill(170, 55, 55);
-        ellipse(14, 11, 18, 18);
+        let drawW = this.rect.width * 1.6;
+        let drawH = this.rect.height * 1.1;
 
-        fill(255);
-        ellipse(10, 10, 4, 4);
-        ellipse(18, 10, 4, 4);
+        let drawX = this.rect.left - cam.x - (drawW - this.rect.width) / 2;
+        let drawY = this.rect.top - cam.y + this.rect.height - drawH + bob;
 
-        fill(0);
-        ellipse(10, 10, 2, 2);
-        ellipse(18, 10, 2, 2);
+        imageMode(CORNER);
 
-        fill(255, 255, 255, 70);
-        ellipse(14, 11, 8, 5);
+        if (littleGhostImg) {
+
+            // 幽灵透明
+            tint(255, 200);
+
+            // 发光效果
+            drawingContext.shadowBlur = 12;
+            drawingContext.shadowColor = "rgba(180,220,255,0.6)";
+
+            image(littleGhostImg, drawX, drawY, drawW, drawH);
+
+            noTint();
+
+            // 关闭发光避免影响其他物体
+            drawingContext.shadowBlur = 0;
+        }
 
         pop();
     }
 }
 
 // ==================== 工具函数 / Utility Functions ====================
-function getStoredGunLevel() {
-    let level = Number(localStorage.getItem('shopGunLevel') || '1');
-    if (!gunConfigs[level]) level = 1;
-    return level;
-}
-
 function convertTime(time) {
     let seconds = floor(time % 60);
     let minutes = floor((time / 60) % 60);
@@ -788,10 +954,6 @@ function snapToGrid(value) {
     return floor(value / blockSize) * blockSize;
 }
 
-function tileSeed(x, y) {
-    return abs((x * 73856093) ^ (y * 19349663)) % 1000;
-}
-
 function intersectsWall(object) {
     for (let w of wall) {
         if (object.intersects(w)) {
@@ -799,10 +961,6 @@ function intersectsWall(object) {
         }
     }
     return false;
-}
-
-function triggerInformation(time) {
-    endTimeInformation = elapsedTime + time;
 }
 
 function triggerPopUp(title, message, time) {
@@ -1016,70 +1174,44 @@ function drawMaze() {
     image(mazeLayer, -cam.x, -cam.y);
 }
 
-function isWallTile(gridX, gridY) {
-    if (gridX < 0 || gridY < 0 || gridY >= mazeMap.gridH || gridX >= mazeMap.gridW) return false;
-    return mazeMap.gridMap[gridY][gridX] === 0;
-}
-
 function drawTerrainToLayer(g, x, y) {
     const gx = floor(x / blockSize);
     const gy = floor(y / blockSize);
-    const seed = tileSeed(gx, gy);
+    const seed = abs(gx * 17 + gy * 23) % 20;
 
-    g.push();
-    g.noStroke();
+    let img = floorPlain01Img;
 
-    g.fill(100, 108, 120);
-    g.rect(x, y, blockSize, blockSize);
+    if (seed <= 8 && floorPlain01Img) {
+        img = floorPlain01Img;
+    } else if (seed <= 14 && floorPlain03Img) {
+        img = floorPlain03Img;
+    } else if (seed <= 18 && floorPlain04Img) {
+        img = floorPlain04Img;
+    } else if (floorCrackedGlowImg) {
+        img = floorCrackedGlowImg;
+    }
 
-    g.fill(112, 120, 132);
-    g.rect(x + 2, y + 2, blockSize - 4, 8, 2);
-
-    g.stroke(86, 92, 103);
-    g.strokeWeight(1);
-    g.line(x + 5 + (seed % 3), y + 8, x + 12 + (seed % 2), y + 10);
-    g.line(x + 18, y + 18 + (seed % 2), x + 26, y + 21);
-    g.line(x + 9, y + 24, x + 15, y + 26);
-
-    g.noStroke();
-    g.fill(140, 148, 160, 70);
-    g.circle(x + 7 + (seed % 4), y + 13, 2);
-    g.circle(x + 23, y + 9 + (seed % 3), 2);
-    g.circle(x + 18, y + 27, 2);
-
-    g.pop();
+    if (img) {
+        g.image(img, x, y, blockSize, blockSize);
+    } else {
+        g.push();
+        g.noStroke();
+        g.fill(100, 108, 120);
+        g.rect(x, y, blockSize, blockSize);
+        g.pop();
+    }
 }
 
 function drawWallToLayer(g, x, y) {
-    const gx = floor(x / blockSize);
-    const gy = floor(y / blockSize);
-
-    const up = isWallTile(gx, gy - 1);
-    const down = isWallTile(gx, gy + 1);
-    const left = isWallTile(gx - 1, gy);
-    const right = isWallTile(gx + 1, gy);
-    const seed = tileSeed(gx, gy);
-
-    g.push();
-    g.noStroke();
-
-    g.fill(42, 50, 62);
-    g.rect(x, y, blockSize, blockSize);
-
-    g.fill(58, 68, 82);
-    g.rect(x + 2, y + 2, blockSize - 4, blockSize - 4, 4);
-
-    if (!up) g.fill(88, 102, 120), g.rect(x + 2, y + 2, blockSize - 4, 5, 3);
-    if (!left) g.fill(76, 88, 104), g.rect(x + 2, y + 2, 5, blockSize - 4, 3);
-    if (!down) g.fill(18, 24, 32, 160), g.rect(x + 2, y + blockSize - 7, blockSize - 4, 5, 3);
-    if (!right) g.fill(18, 24, 32, 130), g.rect(x + blockSize - 7, y + 2, 5, blockSize - 4, 3);
-
-    g.fill(92, 105, 122, 120);
-    g.rect(x + 6, y + 8, 8, 5, 2);
-    g.rect(x + 18, y + 7 + (seed % 2), 7, 5, 2);
-    g.rect(x + 10, y + 19, 10, 6, 2);
-
-    g.pop();
+    if (wallImg) {
+        g.image(wallImg, x, y, blockSize, blockSize);
+    } else {
+        g.push();
+        g.noStroke();
+        g.fill(42, 50, 62);
+        g.rect(x, y, blockSize, blockSize);
+        g.pop();
+    }
 }
 
 // ==================== UI / Screens ====================
@@ -1095,9 +1227,9 @@ function drawStart() {
     text('Explorer Camp - Level 2', width / 2, height / 2 - 18);
 
     textSize(12);
-    textFont('Verdana');
-    text("Find the map, lamp, gun and reach the door.", width / 2, height / 2 + 10);
-    text(`Current gun: ${currentGunStats.name}`, width / 2, height / 2 + 28);
+    textFont('Arial');
+    text("Find the map, light, ring and reach the door.", width / 2, height / 2 + 10);
+    text("Start weapon: Crossbow", width / 2, height / 2 + 28);
 
     if (floor(gTime * 3) % 2 === 1) {
         text("Press ENTER to start", width / 2, height / 2 + 50);
@@ -1118,13 +1250,12 @@ function drawEnd() {
     text('LEVEL 2 COMPLETE', width / 2, height / 2 - 24);
 
     textSize(12);
-    textFont('Verdana');
-    text(`Kills: ${smallKillCount}`, width / 2, height / 2 + 4);
-    text(`Coins earned this run: £${coinsEarnedThisRun}`, width / 2, height / 2 + 24);
-    text(`Total coins: £${localStorage.getItem('gameCoins') || '0'}`, width / 2, height / 2 + 44);
+    textFont('Arial');
+    text(`Kills: ${smallKillCount}`, width / 2, height / 2 + 8);
+    text(`Item Codex: ${getCodexDisplayText()}`, width / 2, height / 2 + 30);
 
     if (floor(gTime * 3) % 2 === 1) {
-        text("Press ESC to restart demo", width / 2, height / 2 + 66);
+        text("Press ESC to restart demo", width / 2, height / 2 + 58);
     }
 
     textAlign(LEFT);
@@ -1143,7 +1274,7 @@ function drawPause() {
 
     if (floor(gTime * 3) % 2 === 1) {
         textSize(12);
-        textFont('Verdana');
+        textFont('Arial');
         text("Press 'P' to pause/resume the game", width / 2, height / 2 + 20);
     }
 
@@ -1162,13 +1293,13 @@ function drawGameOver() {
     text('GAME OVER', width / 2, height / 2 - 28);
 
     textSize(11);
-    textFont('Verdana');
+    textFont('Arial');
     text(gameoverMsg, width / 2, height / 2 - 6);
-    text(`Kills: ${smallKillCount}`, width / 2, height / 2 + 18);
-    text(`Coins earned this run: £${coinsEarnedThisRun}`, width / 2, height / 2 + 36);
+    text(`Kills: ${smallKillCount}`, width / 2, height / 2 + 20);
+    text(`Item Codex: ${getCodexDisplayText()}`, width / 2, height / 2 + 40);
 
     if (floor(gTime * 3) % 2 === 1) {
-        text("Press ESC to restart", width / 2, height / 2 + 60);
+        text("Press ESC to restart", width / 2, height / 2 + 62);
     }
 
     textAlign(LEFT);
@@ -1182,7 +1313,7 @@ function drawPopUp() {
     textAlign(CENTER);
     fill(255);
     textSize(16);
-    textFont('Verdana');
+    textFont('Arial');
     text(popUpTitle, width / 2, 100);
 
     textSize(12);
@@ -1193,23 +1324,26 @@ function drawPopUp() {
 function drawInformation() {
     fill(80, 105, 140);
     noStroke();
-    rect(width / 2 - 210, 70, 420, 350, 8);
+    rect(width / 2 - 210, 70, 420, 360, 8);
 
     textAlign(CENTER);
     fill(255);
     textSize(16);
-    textFont('Verdana');
+    textFont('Arial');
     text('Instructions', width / 2, 100);
 
     textAlign(LEFT);
     textSize(12);
+    noStroke();
+
     text('Find the chest first to unlock the mini map.', width / 2 - 190, 140);
-    text('Then search for the lamp and the gun.', width / 2 - 190, 160);
-    text('The lamp clears the fog around you.', width / 2 - 190, 180);
-    text('Inside the lit area, auto-lock can help aiming.', width / 2 - 190, 200);
-    text('Defeat enemies to earn £1 each.', width / 2 - 190, 220);
-    text("Use SPACE to shoot, 'M' to toggle mini map.", width / 2 - 190, 250);
-    text("Press 'P' to pause.", width / 2 - 190, 270);
+    text('Then search for the light and the magic ring.', width / 2 - 190, 160);
+    text('You already start with the crossbow equipped.', width / 2 - 190, 180);
+    text('The light clears the fog and enables auto-lock nearby.', width / 2 - 190, 200);
+    text("Press SPACE to attack.", width / 2 - 190, 230);
+    text("After finding the ring, press SHIFT to switch weapons.", width / 2 - 190, 250);
+    text("Use Arrow Keys or WASD to move.", width / 2 - 190, 280);
+    text("Press 'M' to toggle the mini map and 'P' to pause.", width / 2 - 190, 300);
 
     textAlign(CENTER);
     textSize(10);
@@ -1217,17 +1351,30 @@ function drawInformation() {
     strokeWeight(2);
     noFill();
 
-    text('Up', width / 2, 305);
-    rect(width / 2 - 22.5, 280, 45, 45, 10);
+    text('Up', width / 2, 325);
+    rect(width / 2 - 22.5, 300, 45, 45, 10);
 
-    text('Left', width / 2 - 50, 356);
-    rect(width / 2 - 72.5, 330, 45, 45, 10);
+    text('Left', width / 2 - 50, 376);
+    rect(width / 2 - 72.5, 350, 45, 45, 10);
 
-    text('Down', width / 2, 356);
-    rect(width / 2 - 22.5, 330, 45, 45, 10);
+    text('Down', width / 2, 376);
+    rect(width / 2 - 22.5, 350, 45, 45, 10);
 
-    text('Right', width / 2 + 50, 356);
-    rect(width / 2 + 27.5, 330, 45, 45, 10);
+    text('Right', width / 2 + 50, 376);
+    rect(width / 2 + 27.5, 350, 45, 45, 10);
+
+    push();
+    textAlign(CENTER, CENTER);
+    textFont('Arial');
+    textSize(12);
+    fill(255);
+    noStroke();
+    strokeWeight(0);
+
+    if (floor(gTime * 3) % 2 === 1) {
+        text("Press 'Enter' to continue", width / 2, 410);
+    }
+    pop();
 
     textAlign(LEFT);
 }
@@ -1262,20 +1409,20 @@ function drawMiniMap() {
         miniMapScale
     );
 
-    if (!hasLamp) {
+    if (!hasLight) {
         fill(255, 220, 0);
         circle(
-            (lampItem.left / blockSize) * miniMapScale + miniMapLeft + miniMapBorder + 1,
-            (lampItem.top / blockSize) * miniMapScale + miniMapTop + miniMapBorder + 1,
+            (lightItem.left / blockSize) * miniMapScale + miniMapLeft + miniMapBorder + 1,
+            (lightItem.top / blockSize) * miniMapScale + miniMapTop + miniMapBorder + 1,
             4
         );
     }
 
-    if (!hasGun) {
-        fill(0, 120, 255);
+    if (!hasRing) {
+        fill(120, 220, 255);
         circle(
-            (gunItem.left / blockSize) * miniMapScale + miniMapLeft + miniMapBorder + 1,
-            (gunItem.top / blockSize) * miniMapScale + miniMapTop + miniMapBorder + 1,
+            (ringItem.left / blockSize) * miniMapScale + miniMapLeft + miniMapBorder + 1,
+            (ringItem.top / blockSize) * miniMapScale + miniMapTop + miniMapBorder + 1,
             4
         );
     }
@@ -1323,33 +1470,35 @@ function resetGame() {
     start = true;
     end = false;
     moving = false;
+    showInstructions = false;
 
     wall = [];
     terrain = [];
     dir = 0;
 
     box = null;
-    lampItem = null;
-    gunItem = null;
+    lightItem = null;
+    ringItem = null;
     exitDoor = null;
 
-    bullets = [];
+    projectiles = [];
     enemies = [];
 
     hasMiniMap = false;
-    hasLamp = false;
-    hasGun = false;
+    hasLight = false;
+    hasRing = false;
+    hasCrossbow = true;
+    currentWeapon = "crossbow";
+    currentWeaponStats = weaponConfigs.crossbow;
     showMiniMap = true;
 
-    shootCooldownTimer = 0;
+    attackCooldownTimer = 0;
     smallKillCount = 0;
-    coinsEarnedThisRun = 0;
 
     endTimePopUp = 0;
     popUpTitle = '';
     popUpMessage = '';
     gameoverMsg = '';
-    endTimeInformation = 0;
 
     setup();
 }
