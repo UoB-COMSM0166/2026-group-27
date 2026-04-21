@@ -113,7 +113,7 @@ This folder stores developer logs.
 
 ### liz：
 - Completed:
-  - complete the story, created background arts
+  - completed the story, created background arts
 - In Progress:
   - make story animation
 - Problems:
@@ -150,4 +150,31 @@ This folder stores developer logs.
   - Finished designing the fox character and uploaded onto repo
  
 - In progress:
-  - Editing Code testing section of Evaluation 
+  - Editing Code testing section of Evaluation
+ 
+ ## week：14
+ ### liz：
+- Completed:
+  - Created arts: multi-view images of main characters，boss, arrow, prison
+  - Updated terrain and wall of all levels
+  - Created character portrait: boss, Fernando, Eliza
+- In Progress:
+  - 
+- Problems:
+  - 
+- Next Plan:
+- 
+ ### Iza
+ - Completed:
+  - Updated UI: main hub, instruction, weapon switching
+  - Created art: teleportation array
+  - Replaced arts of game: main characters, normal enemy, boss, key items, weapons, attack effect
+  - Optimised game mechanics: weapon/item pickup, attack mechanics
+- In Progress:
+  - 
+- Problems:
+  - 
+- Next Plan:
+  - 
+  
+  
