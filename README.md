@@ -440,10 +440,10 @@ We developed a "Check-and-Repeat" system for placing items.The game initially de
 Impact: This avoids "broken" game seeds, in which the player can become irritated by an important item missing or an unattainable exit.
 
 -The Solution: Safe Zones and Grid Alignment
-We built a "Safe Zone" around the starting position to keep the player from dying right away. In the player's first view, enemies are prohibited from spawning. Additionally, we made all objects "snap" to a 32-pixel grid so that neither the player nor the adversary would ever be trapped on a wall's corner while traveling.
+We built a "Safe Zone" around the starting position to keep the player from dying right away. In the player's first view, enemies are prohibited from spawning. Additionally, we made all objects "snap" to a 32-pixel grid so that neither the player nor the adversary would ever be trapped on a wall's corner while travelling.
 
 ## 5.4 Team Integration: Boss Mechanics
-For the final BOSS encounter, we moved away from simple random movement.To make the endgame more challenging,the BOSS employs a targeted fan-shaped strike that fires a spread of projectiles in a 45-degree arc centered directly on the player. This means the player cannot simply stand still. This implementation required combining our work on player-tracking math with our projectile physics system.
+For the final BOSS encounter, we moved away from simple random movement. To make the endgame more challenging, the BOSS employs a targeted fan-shaped strike that fires a spread of projectiles in a 45-degree arc centred directly on the player. This means the player cannot simply stand still. This implementation required combining our work on player-tracking math with our projectile physics system.
 
 
 # 6. Evaluation
@@ -525,7 +525,7 @@ To ensure the prototype remained stable during user evaluations, we performed se
 
 - 15% ~750 words
 
-- Teamwork. How did you work together, what tools and methods did you use? Did you define team roles? Reflection on how you worked together. Be honest, we want to hear about what didn't work as well as what did work, and importantly how your team adapted throughout the project.
+- Teamwork. How did you work together? What tools and methods did you use? Did you define team roles? Reflection on how you worked together. Be honest, we want to hear about what didn't work as well as what did work, and importantly, how your team adapted throughout the project.
 
 
 # 8. NEW: Sustainability, ethics and accessibility (10% 750 words)
