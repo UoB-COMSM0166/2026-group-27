@@ -559,6 +559,53 @@ We also focused on the player's mental and physical experience, especially given
 
 # 10. Contribution Statement
 
+
+
+<table align="center" width="100%">
+  <tr>
+    <th>Contributor</th>
+    <th>Contribution</th>
+  </tr>
+
+  <tr>
+    <td>Suki Dai</td>
+    <td>1.0</td>
+  </tr>
+
+  <tr>
+    <td>Thanusha Gorva</td>
+    <td>1.0</td>
+  </tr>
+
+  <tr>
+  <td>Liz Chen</td>
+  <td>1.0</td>
+  </tr>
+
+  <tr>
+  <td>Liz Chen</td>
+  <td>1.0</td>
+  </tr>
+
+  <tr>
+  <td>Yizhou Pan</td>
+  <td>1.0</td>
+  </tr>
+
+  <tr>
+  <td>Keyu Zhou</td>
+  <td>1.0</td>
+  </tr>
+
+  <tr>
+  <td>Maniza Singh</td>
+  <td>1.0</td>
+  </tr>
+
+  </table>
+
+  
+
 - Provide a table of everyone's contribution, which *may* be used to weight individual grades. We expect that the contribution will be split evenly across team-members in most cases. Please let us know as soon as possible if there are any issues with teamwork as soon as they are apparent and we will do our best to help your team work harmoniously together.
 
 # 11. NEW: AI statement (250 words)
