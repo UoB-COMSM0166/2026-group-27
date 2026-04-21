@@ -131,7 +131,30 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
       <td> A powerful monster that attacks and is the final barrier to victory.</td>
     </tr>
   </tbody>
+</table> 
+
+## Meet our Characters:
+
+<table style="width: 100%; text-align: center; border-collapse: collapse;">
+  <tr>
+    <td style="border: 1px solid #30363d; padding: 10px; width: 33%;">
+     <img width="47" height="47" alt="f1 driver" src="https://github.com/user-attachments/assets/cfd07d29-5951-449d-acb2-edc0f07ade99" width="85"><br>
+      <span style="font-size: 1.4em; font-weight: bold; display: block; margin-top: 10px;">
+      <strong>F1 driver </strong><br>
+      <em>Speed</em>
+ <td style="border: 1px solid #30363d; padding: 15px; width: 33%;">
+      <img src="https://github.com/user-attachments/assets/61f8f43b-5456-4492-b894-52d8f3be8dba" width="75" style="image-rendering: pixelated;"><br>
+      <span style="font-size: 1.4em; font-weight: bold; display: block; margin-top: 10px;"> <strong>The Vixen</strong> </span> <br>
+      <em style="color: #8b949e;">Sly & Quick</em>
+    </td>
+ <td style="border: 1px solid #30363d; padding: 20px; width: 33%;">
+      <img src="https://github.com/user-attachments/assets/09f2ea22-d075-4565-a076-960e3522bca9" width="80" style="image-rendering: pixelated;"><br>
+      <span style="font-size: 1.4em; font-weight: bold; display: block; margin-top: 10px;"><strong>Banksy </strong></span> <br>
+      <em style="color: #8b949e;">Invisible Girl</em>
+    </td>
+  </tr>
 </table>
+
 
 # 3. Requirements
 
