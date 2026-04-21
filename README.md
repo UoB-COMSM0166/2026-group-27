@@ -135,6 +135,35 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
 
 ## Meet our Characters:
 
+
+<table align="center" width="100%">
+  <tr>
+    <th>Name</th>
+    <th>Avatar</th>
+    <th>Special Ability</th>
+  </tr>
+
+  <tr>
+    <td>Lando Norris (F1 World Champion 2025)</td>
+    <td> <img src="https://github.com/user-attachments/assets/cfd07d29-5951-449d-acb2-edc0f07ade99"> </td>
+    <td>Speed</td>
+  </tr>
+
+  
+ <tr>
+    <td>Banksy: Girl with Balloon</td>
+    <td> <img src="https://github.com/user-attachments/assets/cfd07d29-5951-449d-acb2-edc0f07ade99"> </td>
+    <td>Invisibility</td>
+  </tr>
+
+
+ <tr>
+    <td>Vixen</td>
+    <td> <img src="https://github.com/user-attachments/assets/cfd07d29-5951-449d-acb2-edc0f07ade99"> </td>
+    <td>Sly & Quick</td>
+  </tr>
+
+  
 <table style="width: 100%; text-align: center; border-collapse: collapse;">
   <tr>
     <td style="border: 1px solid #30363d; padding: 10px; width: 33%;">
