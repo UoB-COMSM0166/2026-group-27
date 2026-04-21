@@ -158,23 +158,23 @@ This folder stores developer logs.
   - Created arts: multi-view images of main characters，boss, arrow, prison
   - Updated terrain and wall of all levels
   - Created character portrait: boss, Fernando, Eliza
-- In Progress:
+  - In Progress:
   - 
-- Problems:
+  - Problems:
   - 
-- Next Plan:
-- 
+  - Next Plan:
+  - 
  ### Iza
  - Completed:
   - Updated UI: main hub, instruction, weapon switching
   - Created art: teleportation array
   - Replaced arts of game: main characters, normal enemy, boss, key items, weapons, attack effect
   - Optimised game mechanics: weapon/item pickup, attack mechanics
-- In Progress:
+  - In Progress:
   - 
-- Problems:
+  - Problems:
   - 
-- Next Plan:
+  - Next Plan:
   - 
   
   
