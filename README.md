@@ -97,7 +97,41 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
 
 * Dynamic Visibility: In specialised "Dark Maps," the gameplay shifts entirely. Players must find and manage a torch and physical map pick-ups to see, forcing them to rely on memory and limited visual cues rather than simple trial and error.
 
+<h2>Game Objects</h2>
 
+<table border="1" cellspacing="0" cellpadding="10">
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Image</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Portal</td>
+      <td> <img width="32" height="32" alt="portal" src="https://github.com/user-attachments/assets/db1fd37f-90f4-474f-9620-929f83d76f55" width= "100%"/>
+</td>
+      <td>Act as portals to Teleport to safer spaces.</td>
+    </tr>
+    <tr>
+      <td>Guns</td>
+      <td> <img width="77" height="74" alt="Screenshot 2026-04-21 at 01 58 36" src="https://github.com/user-attachments/assets/5ad002e0-31a1-4d8f-bb69-68dc8a98b87a" width="50"></td>
+      <td>To shoot enemies.</td>
+    </tr>
+    <tr>
+      <td>Gulls</td>
+      <td> <img width="45" height="45" alt="seagull" src="https://github.com/user-attachments/assets/9558e8cf-eea2-4f0f-97ec-d86c77909644" width="80"> </td>
+      <td>Mini cursed hurdles to distract and steal lives until the curse is lifted.</td>
+    </tr>
+    <tr>
+      <td> The Boss </td>
+      <td> <img width="54" height="64" alt="boss-3" src="https://github.com/user-attachments/assets/85e52399-c6be-4009-8328-f3b349153988" />
+</td>
+      <td> A powerful monster that attacks and is the final barrier to victory.</td>
+    </tr>
+  </tbody>
+</table>
 
 # 3. Requirements
 
