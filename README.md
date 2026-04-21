@@ -151,7 +151,7 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
 
   
  <tr>
-   <td> <img src="https://github.com/UoB-COMSM0166/2026-group-27/blob/fe87d0ea5a65c3124ccb310d3222938153103899/pixel%20art%20characters/Banksy%20girl%20with%20balloon.gif" width= "250%"> </td>
+   <td> <img src="https://github.com/UoB-COMSM0166/2026-group-27/blob/766d8e707f5d440de77d4fab74e682d93f8d769e/pixel%20art%20characters/Banksy%20Character%20for%20repo.png"> </td>
     <td>Banksy: Girl with Balloon</td>
     <td>Invisibility</td>
   </tr>
