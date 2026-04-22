@@ -509,7 +509,7 @@ The main issues were related to map design, controls, and game mechanics.
 
 ## 6.2 Quantitative Analysis: System Usability Scale (SUS)
 
-To ensure the game was engaging, it was important that usability did not negatively affect player experience. If a game is too easy or unnecessarily difficult, it can reduce replayability by causing players to lose interest or become frustrated (Sweetser & Wyeth, 2005; Lazzaro, 2004). Therefore, we evaluated whether the game was easy to use while being appropriately challenging. 
+To ensure the game was engaging, we made sure that usability did not negatively affect player experience. If a game is too easy or unnecessarily difficult, it can reduce replayability as players can lose interest or become frustrated (Sweetser & Wyeth, 2005; Lazzaro, 2004). Therefore, we evaluated whether the game was easy to use while being appropriately challenging. 
 
 We used SUS to measure how easily the participants could learn and interact with the game. Ten participants (P1-P10), recruited using convenience sampling, completed gameplay tasks such as collecting items and finding the exit before filling out the SUS questionnaire. 
 
@@ -529,13 +529,13 @@ The average SUS score was 90.75/100, indicating a high level of usability.
   * Negative usability statements, such as “Too complex” (Q2 = 1.4) and “Need technical support” (Q4 = 1.2), received low scores, indicating        that users did not find the game too difficult or confusing.
 
   * The lowest positive score was for “Felt confident” (Q9 = 4.3/5). While still high, this indicates that some players may require clearer
-    in-game feedback to feel fully confident in their gameplay decisions. 
+    in-game feedback to feel fully confident during gameplay. 
 
 Overall, these results suggest that usability is unlikely to negatively impact the gameplay experience. 
 
 ## 6.3 Code Testing
 
-To ensure the prototype remained stable during user evaluations, we performed several rounds of technical testing to verify the game logic before participants accessed the build.
+To ensure the prototype was stable during user evaluations, performed several rounds of technical testing to verify the game logic before participants played the game to ensure we get more accurate results with the model being as close to being done as we want it to be, closer to the end product.
 
 * Input Handling Tests: We performed unit tests on the keyboard event listeners to ensure consistent response times. This led to the identification of the focus-handling bug regarding the "Enter" key. We subsequently modified the code to ensure the game canvas automatically captures input focus upon loading.
 
