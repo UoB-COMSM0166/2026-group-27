@@ -486,9 +486,7 @@ We used a mixed-methods approach, combining quantitative data from the System Us
 
 ## 6.1 Qualitative Evaluation: Think Aloud
 
-During the Think Aloud (TA) sessions, we asked participants to verbalise their thoughts and decision-making process while navigating the maze and completing tasks such as finding items and reaching the exit. This method helps us understand what users are thinking during gameplay, allowing us to identify misunderstandings and unclear game concepts (Pellicone et al., 2022). 
-
-Ten participants were recruited using convenience sampling from our weekly workshops, allowing us to receive quick feedback during development without requiring a controlled experiment.
+To explore how players understood the game and identify misunderstandings or unclear game concepts, we conducted Think Aloud (TA) sessions (Pellicone et al., 2022). Ten participants were recruited using convenience sampling from our weekly workshops, allowing us to receive quick feedback during development without requiring a controlled experiment. We asked participants to verbalise their thoughts and decision-making process while navigating the maze and completing tasks such as finding items and reaching the exit.
 
 The main issues were related to map design, controls, and game mechanics.
 
@@ -511,9 +509,9 @@ The main issues were related to map design, controls, and game mechanics.
 
 ## 6.2 Quantitative Analysis: System Usability Scale (SUS)
 
-To ensure the game was engaging, it was important that usability did not negatively affect player experience. If a game is too easy or unnecessarily difficult, it can reduce replayability by causing players to lose interest or become frustrated (Sweetser & Wyeth, 2005; Lazzaro, 2004). Therefore, we evaluated whether the game was easy to use and appropriately challenging. 
+To ensure the game was engaging, it was important that usability did not negatively affect player experience. If a game is too easy or unnecessarily difficult, it can reduce replayability by causing players to lose interest or become frustrated (Sweetser & Wyeth, 2005; Lazzaro, 2004). Therefore, we evaluated whether the game was easy to use while being appropriately challenging. 
 
-We used SUS to measure how easily the players could learn and interact with the game. Ten participants (P1-P10), recruited using convenience sampling, completed gameplay tasks such as collecting items and finding the exit before filling out the SUS questionnaire. 
+We used SUS to measure how easily the participants could learn and interact with the game. Ten participants (P1-P10), recruited using convenience sampling, completed gameplay tasks such as collecting items and finding the exit before filling out the SUS questionnaire. 
 
 
 <p align="center">
