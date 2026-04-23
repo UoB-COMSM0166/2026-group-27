@@ -102,6 +102,10 @@ let lightImg;
 let ringImg;
 let littleGhostImg;
 let boxImg;
+let mapUIImg;
+let timeUIImg;
+let exitPortalImg;
+let arrowImg;
 
 // ==================== 预加载 / Preload ====================
 function preload() {
@@ -111,6 +115,11 @@ function preload() {
     floorPlain04Img = loadImage('assets/floor_plain_04.png');
     floorCrackedGlowImg = loadImage('assets/floor_cracked_glow.png');
 
+    // UI
+    mapUIImg = loadImage('assets/map.png');
+    timeUIImg = loadImage('assets/time.png');
+    exitPortalImg = loadImage('assets/exit.png');
+
     // 墙 / Wall
     wallImg = loadImage('assets/wall_column_tall.png');
 
@@ -118,6 +127,7 @@ function preload() {
     boxImg = loadImage('assets/box.png');
     lightImg = loadImage('assets/light.png');
     ringImg = loadImage('assets/ring.png');
+    arrowImg = loadImage('assets/arrow.png');
 
     // 敌人 / Enemy
     littleGhostImg = loadImage('assets/little ghost.png');
@@ -167,7 +177,7 @@ function drawGame() {
     background(0);
 
     drawMaze();
-    drawDoor(exitDoor.left - cam.x, exitDoor.top - cam.y);
+    drawExitPortal();
 
     if (!hasMiniMap) {
         drawBox(box.left - cam.x, box.top - cam.y);
@@ -209,10 +219,7 @@ function drawGame() {
 
     drawElapsedTime();
     drawHud();
-    
 }
-
-
 
 function act(dt) {
     gTime += dt;
@@ -569,14 +576,15 @@ function createRing() {
 }
 
 function createExitDoor() {
-    let x = (mazeMap.gridW - 3) * blockSize;
-    let y = (mazeMap.gridH - 4) * blockSize;
+    let x = worldWidth - blockSize * 3;
+    let y = worldHeight - blockSize * 3;
 
-    exitDoor = new Rect(x, y, blockSize, 40, true);
+    exitDoor = new Rect(x, y, blockSize * 2, blockSize * 2, true);
 
     while (intersectsWall(exitDoor)) {
         x -= blockSize;
-        exitDoor = new Rect(x, y, blockSize, 40, true);
+        y -= blockSize;
+        exitDoor = new Rect(x, y, blockSize * 2, blockSize * 2, true);
     }
 }
 
@@ -702,47 +710,72 @@ function drawRingPickup(x, y) {
     pop();
 }
 
-function drawDoor(x, y) {
+function drawExitPortal() {
+    if (!exitDoor) return;
+
+    let centerX = exitDoor.left - cam.x + exitDoor.width / 2;
+    let baseY = exitDoor.top - cam.y + exitDoor.height / 2;
+
+    let floatOffset = sin(gTime * 2.2) * 3;
+    let portalSize = blockSize * 1.65;
+
     push();
+
     noStroke();
+    fill(0, 0, 0, 45);
+    ellipse(centerX, baseY + 10, portalSize * 0.9, portalSize * 0.35);
 
-    fill(70, 40, 20);
-    rect(x + 3, y, 26, 40, 4);
+    translate(centerX, baseY + floatOffset);
 
-    fill(120, 80, 40);
-    rect(x + 7, y + 4, 18, 32, 3);
+    let glow = 14 + sin(gTime * 3) * 5;
+    drawingContext.shadowBlur = glow;
+    drawingContext.shadowColor = 'rgba(255, 210, 80, 0.85)';
 
-    fill(255, 215, 0);
-    circle(x + 22, y + 20, 4);
+    imageMode(CENTER);
 
+    if (exitPortalImg) {
+        image(exitPortalImg, 0, 0, portalSize, portalSize);
+    } else {
+        noStroke();
+        fill(255, 210, 80, 180);
+        ellipse(0, 0, blockSize * 1.5, blockSize * 1.5);
+
+        stroke(255, 240, 120);
+        strokeWeight(3);
+        noFill();
+        ellipse(0, 0, blockSize * 1.25, blockSize * 1.25);
+        ellipse(0, 0, blockSize * 0.9, blockSize * 0.9);
+    }
+
+    imageMode(CORNER);
     pop();
 }
 
 function drawHud() {
+    // 开始界面 / 说明界面时不显示，避免挡住画面
+    if (start || showInstructions) return;
+
     fill(255);
     textSize(12);
     textFont('Arial');
     textAlign(LEFT);
 
-    let y = 20;
-    text("Level 2 Demo", 15, y);
-    y += 16;
-    text("Character: " + getSelectedCharacterName(), 15, y);
-    y += 16;
-    text("Weapon: " + currentWeaponStats.name, 15, y);
-    y += 16;
-    text("Map: " + (hasMiniMap ? "Yes" : "No"), 15, y);
-    y += 16;
-    text("Light: " + (hasLight ? "Yes" : "No"), 15, y);
-    y += 16;
-    text("Ring: " + (hasRing ? "Yes" : "No"), 15, y);
-    y += 16;
-    text("Enemies: " + enemies.length, 15, y);
-    y += 16;
-    text("Kills: " + smallKillCount, 15, y);
+    let x = 14;
+    let y = 22;
 
-    textAlign(RIGHT);
-    text("Item Codex: " + getCodexDisplayText(), width - 15, 20);
+    text(`Weapon: ${currentWeaponStats.name}`, x, y);
+    y += 18;
+
+    let itemText = [];
+    if (hasMiniMap) itemText.push("Map");
+    if (hasLight) itemText.push("Light");
+    if (hasRing) itemText.push("Ring");
+
+    text(`Items: ${itemText.length ? itemText.join(", ") : "None"}`, x, y);
+    y += 18;
+
+    text(`Enemies: ${enemies.length}`, x, y);
+
     textAlign(LEFT);
 }
 
@@ -777,7 +810,6 @@ class Projectile {
         this.damage = damage;
         this.alive = true;
         this.r = 4;
-        this.arrowLength = 16;
     }
 
     update(dt) {
@@ -816,32 +848,29 @@ class Projectile {
         push();
 
         if (this.kind === 'arrow') {
-            let dx = 0;
-            let dy = 0;
+            let angle = 0;
 
             if (this.vx !== null && this.vy !== null) {
-                let len = sqrt(this.vx * this.vx + this.vy * this.vy);
-                dx = this.vx / max(len, 1);
-                dy = this.vy / max(len, 1);
+                angle = atan2(this.vy, this.vx);
             } else {
-                if (this.dir === 0) dy = 1;
-                if (this.dir === 1) dx = 1;
-                if (this.dir === 2) dy = -1;
-                if (this.dir === 3) dx = -1;
+                if (this.dir === 0) angle = HALF_PI;
+                else if (this.dir === 1) angle = 0;
+                else if (this.dir === 2) angle = -HALF_PI;
+                else angle = PI;
             }
 
-            let x1 = this.x - cam.x;
-            let y1 = this.y - cam.y;
-            let x2 = x1 - dx * this.arrowLength;
-            let y2 = y1 - dy * this.arrowLength;
+            translate(this.x - cam.x, this.y - cam.y);
+            rotate(angle);
 
-            stroke(92, 60, 32);
-            strokeWeight(3);
-            line(x1, y1, x2, y2);
-
-            noStroke();
-            fill(120, 85, 45);
-            circle(x1, y1, 4);
+            imageMode(CENTER);
+            if (arrowImg) {
+                image(arrowImg, 0, 0, 28, 12
+                );
+            } else {
+                stroke(92, 60, 32);
+                strokeWeight(3);
+                line(-8, 0, 8, 0);
+            }
         } else {
             noStroke();
             fill(140, 210, 255);
@@ -851,7 +880,6 @@ class Projectile {
         pop();
     }
 }
-
 class Enemy {
     constructor(x, y) {
         this.rect = new Rect(x, y, 32, 48, true);
@@ -1255,7 +1283,7 @@ function drawEnd() {
     text(`Item Codex: ${getCodexDisplayText()}`, width / 2, height / 2 + 30);
 
     if (floor(gTime * 3) % 2 === 1) {
-        text("Press ESC to restart demo", width / 2, height / 2 + 58);
+        text("Press ESC to restart the game", width / 2, height / 2 + 58);
     }
 
     textAlign(LEFT);
@@ -1380,84 +1408,121 @@ function drawInformation() {
 }
 
 function drawMiniMap() {
-    let miniMapBorder = 5;
-    let miniMapLeft = 10;
-    let miniMapTop = height - mazeMap.gridH * miniMapScale - 10 - miniMapBorder;
+    let frameW = 215;
+    let frameH = 200;
 
-    fill(255);
+    let frameX = -5;
+    let frameY = height - frameH + 15;
+
+    // ===== 内部区域 =====
+    let innerX = frameX + 51;
+    let innerY = frameY + 43.5;
+    let innerW = 108;
+    let innerH = 112;
+
+    let scaleX = innerW / mazeMap.gridW;
+    let scaleY = innerH / mazeMap.gridH;
+    let scale = min(scaleX, scaleY);
+
+    // ===== 背景（羊皮纸色）=====
+    fill(230, 210, 160);
     noStroke();
-    rect(miniMapLeft, miniMapTop, mazeMap.gridW * miniMapScale + 10, mazeMap.gridH * miniMapScale + 10);
+    rect(innerX, innerY, innerW, innerH, 4);
 
-    fill(210);
-    rect(miniMapLeft + miniMapBorder, miniMapTop + miniMapBorder, mazeMap.gridW * miniMapScale, mazeMap.gridH * miniMapScale);
-
-    fill(0);
+    // ===== 墙 =====
+    fill(60, 40, 20);
     for (let w of wall) {
         rect(
-            (w.left / blockSize) * miniMapScale + miniMapLeft + miniMapBorder,
-            (w.top / blockSize) * miniMapScale + miniMapTop + miniMapBorder,
-            miniMapScale,
-            miniMapScale
+            (w.left / blockSize) * scale + innerX,
+            (w.top / blockSize) * scale + innerY,
+            scale,
+            scale
         );
     }
 
+    // ===== 出口 =====
     fill(0, 200, 0);
-    rect(
-        (exitDoor.left / blockSize) * miniMapScale + miniMapLeft + miniMapBorder,
-        (exitDoor.top / blockSize) * miniMapScale + miniMapTop + miniMapBorder,
-        miniMapScale,
-        miniMapScale
+    circle(
+        (exitDoor.left / blockSize) * scale + innerX + scale,
+        (exitDoor.top / blockSize) * scale + innerY + scale,
+        6
     );
 
+    // ===== light =====
     if (!hasLight) {
         fill(255, 220, 0);
         circle(
-            (lightItem.left / blockSize) * miniMapScale + miniMapLeft + miniMapBorder + 1,
-            (lightItem.top / blockSize) * miniMapScale + miniMapTop + miniMapBorder + 1,
+            (lightItem.left / blockSize) * scale + innerX + 1,
+            (lightItem.top / blockSize) * scale + innerY + 1,
             4
         );
     }
 
+    // ===== ring =====
     if (!hasRing) {
         fill(120, 220, 255);
         circle(
-            (ringItem.left / blockSize) * miniMapScale + miniMapLeft + miniMapBorder + 1,
-            (ringItem.top / blockSize) * miniMapScale + miniMapTop + miniMapBorder + 1,
+            (ringItem.left / blockSize) * scale + innerX + 1,
+            (ringItem.top / blockSize) * scale + innerY + 1,
             4
         );
     }
 
-    fill(180, 0, 180);
+    // ===== 敌人 =====
+    fill(120, 0, 120);
     for (let e of enemies) {
         circle(
-            (e.rect.left / blockSize) * miniMapScale + miniMapLeft + miniMapBorder + 1,
-            (e.rect.top / blockSize) * miniMapScale + miniMapTop + miniMapBorder + 1,
+            (e.rect.left / blockSize) * scale + innerX + 1,
+            (e.rect.top / blockSize) * scale + innerY + 1,
             3
         );
     }
 
-    fill(255, 0, 0);
+    // ===== 玩家 =====
+    fill(200, 30, 30);
     circle(
-        (player.left / blockSize) * miniMapScale + miniMapLeft + miniMapBorder + 1,
-        (player.top / blockSize) * miniMapScale + miniMapTop + miniMapBorder + 1,
+        (player.left / blockSize) * scale + innerX + 1,
+        (player.top / blockSize) * scale + innerY + 1,
         4
     );
+
+    // ===== 金框盖上 =====
+    if (mapUIImg) {
+        image(mapUIImg, frameX, frameY, frameW, frameH);
+    }
 }
 
 function drawElapsedTime() {
-    fill(0);
+    let frameW = 120;
+    let frameH = 100;
+
+    let frameX = width / 2 - frameW / 2;
+    let frameY = -20;
+
+    let innerW = 76;
+    let innerH = 35;
+
+    let innerX = frameX + (frameW - innerW) / 2;
+    let innerY = frameY + (frameH - innerH) / 1.8;
+
+    // ===== 背景（羊皮纸色）=====
+    fill(230, 210, 160);
     noStroke();
-    rect(width / 2 - 37, 5, 74, 42);
+    rect(innerX, innerY, innerW, innerH, 6);
 
-    fill(255);
-    rect(width / 2 - 32, 10, 64, 32);
-
-    fill(0);
-    textAlign(CENTER);
+    // ===== 文字（深棕）=====
+    fill(60, 40, 20);
+    textAlign(CENTER, CENTER);
     textSize(20);
-    textFont('Arial');
-    text(convertTime(elapsedTime), width / 2, 32);
-    textAlign(LEFT);
+    textFont('Georgia');
+    text(convertTime(elapsedTime), innerX + innerW / 2, innerY + innerH / 2 + 1);
+
+    // ===== 金框盖上 =====
+    if (timeUIImg) {
+        image(timeUIImg, frameX, frameY, frameW, frameH);
+    }
+
+    textAlign(LEFT, BASELINE);
 }
 
 // ==================== 重置 / Reset ====================
