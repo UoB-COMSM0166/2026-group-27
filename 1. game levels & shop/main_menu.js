@@ -1,148 +1,130 @@
-// ==================== 场景常量 / Scene constants ====================
+// ==================== Scene Constants ====================
 const SCENE_MAIN_MENU = "main_menu";
 const SCENE_LEVEL_SELECT = "level_select";
 const SCENE_CHARACTER_SELECT = "character_select";
+const SCENE_CODEX = "codex";
 const SCENE_GUIDE = "guide";
 const SCENE_LEVEL_LAUNCH = "level_launch";
 
-// ==================== 路由配置 / Route configuration ====================
-// 页面对应的 HTML 文件名
-// Put page HTML filenames
+// ==================== Routes ====================
 const pageRoutes = {
   level1: "level1.html",
   level2: "level2.html",
-  level3: "level3.html",
-  shop: "shop.html"
+  level3: "level3.html"
 };
 
-// ==================== 全局变量 / Global variables ====================
+// ==================== Storage Keys ====================
+const CHARACTER_KEY = "selectedCharacterId";
+const ITEM_CODEX_KEY = "itemCodex";
+
+// ==================== Global Variables ====================
 let currentScene = SCENE_MAIN_MENU;
 let currentButtons = [];
 let hoveredButtonIndex = -1;
-
 let uiTime = 0;
 let flashText = "";
 let flashTimer = 0;
 let flashGood = true;
-
 let selectedLevel = 1;
-
-let coins = 0;
-let ownedGunLevel = 1;
-let equippedGunLevel = 1;
-let selectedCharacterId = 1;
-
+let selectedCharacterId = "fox";
 let audioCtx = null;
 
-// ==================== 角色数据 / Character data ====================
-// 目前先用颜色区分角色，之后可以替换成画好的角色图片
-// Characters are currently color-coded placeholders and can be replaced with real art later
+// ==================== Image Assets ====================
+let bgImg;
+let mapUIImg;
+let timeUIImg;
+
+let fernandoImg;
+let elizaImg;
+let foxImg;
+
+let codexImgs = {};
+
+// ==================== Character Data ====================
 const characterOptions = [
   {
-    id: 1,
-    name: "Scout Blue",
-    body: [70, 150, 255],
-    accent: [200, 230, 255],
-    desc: "Balanced explorer with a calm style."
+    id: "fernando",
+    name: "Fernando",
+    desc: "A brave racer lost inside the underground maze.",
+    imgKey: "fernando"
   },
   {
-    id: 2,
-    name: "Blaze Red",
-    body: [230, 90, 90],
-    accent: [255, 220, 220],
-    desc: "Bold adventurer with a strong visual style."
+    id: "eliza",
+    name: "Eliza",
+    desc: "A calm explorer with sharp instincts.",
+    imgKey: "eliza"
   },
   {
-    id: 3,
-    name: "Moss Green",
-    body: [90, 180, 110],
-    accent: [220, 255, 220],
-    desc: "Steady traveler with a natural look."
+    id: "fox",
+    name: "Fox",
+    desc: "A quick little fox with mysterious luck.",
+    imgKey: "fox"
   }
 ];
 
-// ==================== 武器数据 / Weapon data ====================
-// 用于读取当前已装备武器，仅作展示
-// Used only to display the currently equipped weapon
-const shopItems = [
-  {
-    level: 1,
-    name: "Pistol",
-    price: 0,
-    damage: 10,
-    speed: 340,
-    cooldown: 0.22,
-    color: [70, 70, 80],
-    accent: [180, 180, 190],
-    desc: "Balanced starter weapon"
-  },
-  {
-    level: 2,
-    name: "Rifle",
-    price: 8,
-    damage: 14,
-    speed: 390,
-    cooldown: 0.16,
-    color: [40, 90, 150],
-    accent: [170, 220, 255],
-    desc: "Fast and accurate"
-  },
-  {
-    level: 3,
-    name: "Heavy Gun",
-    price: 15,
-    damage: 20,
-    speed: 420,
-    cooldown: 0.26,
-    color: [140, 90, 35],
-    accent: [255, 220, 140],
-    desc: "High damage, slower fire"
-  }
+// ==================== Codex Data ====================
+const codexData = [
+  { id: "crossbow", name: "Crossbow", img: "assets/crossbow.png", desc: "A ranged weapon found in Level 1." },
+  { id: "light", name: "Light", img: "assets/light.png", desc: "Clears fog and enables auto-lock." },
+  { id: "ring", name: "Magic Ring", img: "assets/ring.png", desc: "A magical weapon collected in Level 2." },
+  { id: "lock", name: "Lock", img: "assets/lock.png", desc: "Part of the sealing tool." },
+  { id: "key", name: "Key", img: "assets/key.png", desc: "Completes the boss seal." }
 ];
 
-// ==================== 关卡信息 / Level data ====================
+// ==================== Level Data ====================
 const levelData = [
   {
     level: 1,
     title: "Level 1 - Maze Escape",
-    subtitle: "Find tools and escape the maze.",
-    accent: [70, 130, 220],
+    subtitle: "Find the map, crossbow, and escape.",
     goals: [
       "Open the chest to unlock the mini map.",
-      "Find the snorkel and the flipper.",
-      "Reach the lake exit before time runs out."
+      "Find the crossbow.",
+      "Reach the exit portal before time runs out."
     ]
   },
   {
     level: 2,
-    title: "Level 2 - Fog and Creatures",
-    subtitle: "Fight through fog and unlock the door.",
-    accent: [100, 90, 220],
+    title: "Level 2 - Fog and Ring",
+    subtitle: "Search through fog and reach the portal.",
     goals: [
-      "Find the chest to unlock the mini map.",
-      "Find the lamp to clear your vision area.",
-      "Find the gun and defeat enemies for coins.",
-      "Reach the exit door."
+      "Find the map first.",
+      "Find the light to clear your vision.",
+      "Find the magic ring.",
+      "Reach the exit portal."
     ]
   },
   {
     level: 3,
-    title: "Level 3 - Portals and Boss",
-    subtitle: "Survive the portal maze and defeat the boss.",
-    accent: [160, 80, 220],
+    title: "Level 3 - Seal the Boss",
+    subtitle: "Survive portals and seal the boss.",
     goals: [
-      "Find the mini map, lamp and gun.",
-      "Use portals carefully to move around the maze.",
-      "Recover health by defeating small enemies.",
-      "Defeat the boss to open the exit."
+      "Find the map, light, lock and key.",
+      "Use portals carefully.",
+      "Weaken the boss.",
+      "Switch to Seal and finish the boss."
     ]
   }
 ];
 
-// ==================== p5 入口 / p5 entry ====================
+// ==================== Preload ====================
+function preload() {
+  mapUIImg = loadImage("assets/map.png");
+  timeUIImg = loadImage("assets/time.png");
+
+  fernandoImg = loadImage("assets/characters/Fernando/F-front1.png");
+  elizaImg = loadImage("assets/characters/Eliza/E-front1.png");
+  foxImg = loadImage("assets/characters/Fox/fox_front.png");
+
+  for (let item of codexData) {
+    codexImgs[item.id] = loadImage(item.img);
+  }
+}
+
+// ==================== p5 Entry ====================
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  textFont("Arial");
+  textFont("Georgia");
 
   initStorage();
   loadPersistentState();
@@ -157,17 +139,12 @@ function draw() {
   currentButtons = [];
   hoveredButtonIndex = -1;
 
-  if (currentScene === SCENE_MAIN_MENU) {
-    drawMainMenu();
-  } else if (currentScene === SCENE_LEVEL_SELECT) {
-    drawLevelSelect();
-  } else if (currentScene === SCENE_CHARACTER_SELECT) {
-    drawCharacterSelect();
-  } else if (currentScene === SCENE_GUIDE) {
-    drawGuideScene();
-  } else if (currentScene === SCENE_LEVEL_LAUNCH) {
-    drawLevelLaunchScene();
-  }
+  if (currentScene === SCENE_MAIN_MENU) drawMainMenu();
+  else if (currentScene === SCENE_LEVEL_SELECT) drawLevelSelect();
+  else if (currentScene === SCENE_CHARACTER_SELECT) drawCharacterSelect();
+  else if (currentScene === SCENE_CODEX) drawCodexScene();
+  else if (currentScene === SCENE_GUIDE) drawGuideScene();
+  else if (currentScene === SCENE_LEVEL_LAUNCH) drawLevelLaunchScene();
 
   drawTopBar();
   drawFlashMessage();
@@ -177,44 +154,49 @@ function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
 
-// ==================== 初始化存档 / Initialize storage ====================
+// ==================== Storage ====================
 function initStorage() {
-  if (localStorage.getItem("gameCoins") === null) {
-    localStorage.setItem("gameCoins", "0");
+  if (localStorage.getItem(CHARACTER_KEY) === null) {
+    localStorage.setItem(CHARACTER_KEY, "fox");
   }
-  if (localStorage.getItem("ownedGunLevel") === null) {
-    localStorage.setItem("ownedGunLevel", "1");
-  }
-  if (localStorage.getItem("shopGunLevel") === null) {
-    localStorage.setItem("shopGunLevel", "1");
-  }
-  if (localStorage.getItem("selectedCharacterId") === null) {
-    localStorage.setItem("selectedCharacterId", "1");
+
+  if (localStorage.getItem(ITEM_CODEX_KEY) === null) {
+    localStorage.setItem(ITEM_CODEX_KEY, JSON.stringify([]));
   }
 }
 
 function loadPersistentState() {
-  coins = Number(localStorage.getItem("gameCoins") || "0");
-  ownedGunLevel = Number(localStorage.getItem("ownedGunLevel") || "1");
-  equippedGunLevel = Number(localStorage.getItem("shopGunLevel") || "1");
-  selectedCharacterId = Number(localStorage.getItem("selectedCharacterId") || "1");
+  selectedCharacterId = localStorage.getItem(CHARACTER_KEY) || "fox";
 
-  if (ownedGunLevel < 1) ownedGunLevel = 1;
-  if (equippedGunLevel < 1) equippedGunLevel = 1;
-  if (equippedGunLevel > ownedGunLevel) equippedGunLevel = ownedGunLevel;
-  if (selectedCharacterId < 1 || selectedCharacterId > 3) selectedCharacterId = 1;
+  if (!characterOptions.some(c => c.id === selectedCharacterId)) {
+    selectedCharacterId = "fox";
+    localStorage.setItem(CHARACTER_KEY, selectedCharacterId);
+  }
 }
 
-function savePersistentState() {
-  localStorage.setItem("gameCoins", String(coins));
-  localStorage.setItem("ownedGunLevel", String(ownedGunLevel));
-  localStorage.setItem("shopGunLevel", String(equippedGunLevel));
-  localStorage.setItem("selectedCharacterId", String(selectedCharacterId));
+function saveCharacter(id) {
+  selectedCharacterId = id;
+  localStorage.setItem(CHARACTER_KEY, id);
 }
 
-// ==================== 自适应尺寸工具 / Responsive layout helpers ====================
+function getCodexItems() {
+  try {
+    const raw = localStorage.getItem(ITEM_CODEX_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (err) {
+    return [];
+  }
+}
+
+function hasCodexItem(id) {
+  return getCodexItems().includes(id);
+}
+
+// ==================== Layout Helpers ====================
 function getScale() {
-  return constrain(min(width / 1360, height / 820), 0.78, 1.15);
+  return constrain(min(width / 1360, height / 820), 0.76, 1.15);
 }
 
 function px(v) {
@@ -230,163 +212,177 @@ function pageContentRect() {
   };
 }
 
-// ==================== 全局背景 / Global background ====================
+// ==================== Background ====================
 function drawBackground() {
-  background(14, 18, 28);
+  background(10, 10, 12);
+
+  let tile = px(54);
+
+  for (let y = 0; y < height + tile; y += tile) {
+    for (let x = 0; x < width + tile; x += tile) {
+      let seed = abs(floor(x) * 17 + floor(y) * 23) % 40;
+
+      if (seed < 22) fill(30, 32, 38);
+      else if (seed < 33) fill(24, 26, 32);
+      else fill(38, 38, 44);
+
+      stroke(8, 8, 10);
+      strokeWeight(1);
+      rect(x, y, tile, tile);
+
+      noStroke();
+      fill(255, 255, 255, 8);
+      rect(x + 2, y + 2, tile - 4, 4);
+    }
+  }
 
   noStroke();
-  fill(40, 60, 120, 30);
-  circle(width * 0.15, height * 0.18, min(width, height) * 0.34);
+  fill(0, 0, 0, 120);
+  rect(0, 0, width, height);
 
-  fill(100, 60, 160, 26);
-  circle(width * 0.82, height * 0.20, min(width, height) * 0.38);
+  fill(160, 90, 30, 18);
+  circle(width * 0.18, height * 0.2, min(width, height) * 0.35);
 
-  fill(30, 120, 90, 22);
-  circle(width * 0.75, height * 0.82, min(width, height) * 0.30);
-
-  fill(200, 120, 30, 16);
-  circle(width * 0.28, height * 0.78, min(width, height) * 0.24);
+  fill(120, 70, 170, 16);
+  circle(width * 0.82, height * 0.2, min(width, height) * 0.38);
 }
 
-// ==================== 顶栏 / Top bar ====================
+// ==================== Top Bar ====================
 function drawTopBar() {
-  const s = getScale();
-  drawPanel(px(18), px(14), width - px(36), px(82));
+  drawGoldenPanel(px(18), px(14), width - px(36), px(82));
 
-  fill(255);
+  fill(240, 215, 150);
   textAlign(LEFT, CENTER);
   textStyle(BOLD);
-  textSize(px(30));
-  text("LOST IN BRISTOL", px(38), px(48));
+  textSize(px(31));
+  text("LOST IN BRISTOL", px(42), px(46));
 
   textStyle(NORMAL);
   textSize(px(13));
-  fill(200);
-  text("Main Hub", px(40), px(76));
+  fill(210, 190, 145);
+  text("Underground Explorer Hub", px(44), px(74));
 
-  fill(255, 220, 120);
+  fill(240, 215, 150);
   textAlign(RIGHT, CENTER);
-  textSize(px(18));
-  text(`Coins: £${coins}`, width - px(34), px(42));
+  textSize(px(15));
+  text(`Character: ${getSelectedCharacter().name}`, width - px(40), px(45));
 
-  fill(180, 220, 255);
-  textSize(px(13));
-  text(`Character: ${getSelectedCharacter().name}`, width - px(34), px(68));
+  fill(210, 190, 145);
+  textSize(px(12));
+  text(`Codex: ${getCodexItems().length}/${codexData.length}`, width - px(40), px(70));
 }
 
-// ==================== 主菜单 / Main menu ====================
+// ==================== Main Menu ====================
 function drawMainMenu() {
   const area = pageContentRect();
   const gap = px(28);
   const leftW = area.w * 0.42;
   const rightW = area.w - leftW - gap;
 
-  drawPanel(area.x, area.y, leftW, area.h);
-  drawPanel(area.x + leftW + gap, area.y, rightW, area.h);
+  drawGoldenPanel(area.x, area.y, leftW, area.h);
+  drawGoldenPanel(area.x + leftW + gap, area.y, rightW, area.h);
 
-  fill(255);
+  fill(245, 220, 160);
   textAlign(LEFT, TOP);
   textStyle(BOLD);
   textSize(px(42));
-  text("MAIN MENU", area.x + px(32), area.y + px(36));
+  text("MAIN MENU", area.x + px(34), area.y + px(36));
 
   textStyle(NORMAL);
   textSize(px(18));
-  fill(210);
-  text("Choose where to go next.", area.x + px(34), area.y + px(104));
+  fill(220, 200, 160);
+  text("Choose your path through the maze.", area.x + px(36), area.y + px(104));
 
-  drawCharacterPortrait(getSelectedCharacter(), area.x + px(52), area.y + px(250), px(120), true);
+  drawCharacterPortrait(getSelectedCharacter(), area.x + px(62), area.y + px(210), px(130), true);
 
-  fill(255);
-  textSize(px(20));
+  fill(245, 220, 160);
+  textSize(px(22));
   textStyle(BOLD);
-  text(getSelectedCharacter().name, area.x + px(210), area.y + px(290));
+  text(getSelectedCharacter().name, area.x + px(230), area.y + px(255));
 
   textStyle(NORMAL);
   textSize(px(15));
-  fill(205);
+  fill(220, 205, 170);
   textBox(
     getSelectedCharacter().desc,
-    area.x + px(210),
-    area.y + px(324),
-    leftW - px(250),
-    px(54)
+    area.x + px(230),
+    area.y + px(295),
+    leftW - px(270),
+    px(80)
   );
 
-  fill(180, 220, 255);
-  text(`Equipped Weapon: ${shopItems[equippedGunLevel - 1].name}`, area.x + px(210), area.y + px(402));
-
-  fill(220);
-  text("Tip: Visit the weapon shop before harder levels.", area.x + px(210), area.y + px(442));
+  fill(230, 210, 160);
+  textSize(px(14));
+  text(`Unlocked items: ${getCodexItems().length}/${codexData.length}`, area.x + px(230), area.y + px(400));
 
   const bx = area.x + leftW + gap + px(42);
   const bw = rightW - px(84);
-  const bh = px(58);
-  const by = area.y + px(52);
-  const rowGap = px(18);
+  const bh = px(60);
+  const by = area.y + px(60);
+  const rowGap = px(20);
 
   addMenuButton(bx, by + 0 * (bh + rowGap), bw, bh, "Start Adventure", () => {
     changeScene(SCENE_LEVEL_SELECT);
-  }, [60, 110, 220]);
+  });
 
   addMenuButton(bx, by + 1 * (bh + rowGap), bw, bh, "Choose Character", () => {
     changeScene(SCENE_CHARACTER_SELECT);
-  }, [50, 150, 100]);
+  });
 
-  addMenuButton(bx, by + 2 * (bh + rowGap), bw, bh, "Open Weapon Shop", () => {
-    openExternalPage(pageRoutes.shop, "shop page");
-  }, [110, 90, 220]);
+  addMenuButton(bx, by + 2 * (bh + rowGap), bw, bh, "Item Codex", () => {
+    changeScene(SCENE_CODEX);
+  });
 
   addMenuButton(bx, by + 3 * (bh + rowGap), bw, bh, "Game Guide", () => {
     changeScene(SCENE_GUIDE);
-  }, [170, 110, 50]);
+  });
 
-  addMenuButton(bx, by + 4 * (bh + rowGap), bw, bh, "Refresh Saved Data", () => {
+  addMenuButton(bx, by + 4 * (bh + rowGap), bw, bh, "Reload Save", () => {
     loadPersistentState();
     showFlash("Saved data reloaded", true);
-  }, [80, 90, 110]);
+  });
 
-  fill(215);
+  fill(210, 190, 145);
   textAlign(LEFT, TOP);
-  textSize(px(15));
+  textSize(px(14));
   text(
-    "Recommended order:\n1. Choose Character\n2. Open Weapon Shop\n3. Level Select\n4. Play the stages",
+    "Recommended order:\n1. Choose Character\n2. Start Adventure\n3. Check Item Codex after collecting items",
     bx,
-    area.y + area.h - px(120)
+    area.y + area.h - px(112)
   );
 }
 
-// ==================== 关卡选择页 / Level select ====================
+// ==================== Level Select ====================
 function drawLevelSelect() {
   const area = pageContentRect();
-  drawPanel(area.x, area.y, area.w, area.h);
+  drawGoldenPanel(area.x, area.y, area.w, area.h);
 
-  fill(255);
+  fill(245, 220, 160);
   textAlign(LEFT, TOP);
   textStyle(BOLD);
   textSize(px(38));
-  text("LEVEL SELECT", area.x + px(34), area.y + px(34));
+  text("LEVEL SELECT", area.x + px(36), area.y + px(34));
 
   textStyle(NORMAL);
   textSize(px(17));
-  fill(210);
-  text("Pick a stage to launch.", area.x + px(36), area.y + px(100));
+  fill(220, 200, 160);
+  text("Pick a stage to launch.", area.x + px(38), area.y + px(96));
 
   const cardGap = px(22);
   const innerX = area.x + px(34);
-  const innerY = area.y + px(160);
+  const innerY = area.y + px(150);
   const innerW = area.w - px(68);
   const cardW = (innerW - cardGap * 2) / 3;
-  const cardH = min(px(410), area.h - px(230));
+  const cardH = min(px(410), area.h - px(225));
 
   for (let i = 0; i < levelData.length; i++) {
     const x = innerX + i * (cardW + cardGap);
     drawLevelCard(levelData[i], x, innerY, cardW, cardH);
   }
 
-  addMenuButton(area.x + px(36), area.y + area.h - px(58), px(220), px(42), "Back to Main Menu", () => {
+  addMenuButton(area.x + px(36), area.y + area.h - px(58), px(220), px(42), "Back", () => {
     changeScene(SCENE_MAIN_MENU);
-  }, [85, 95, 115]);
+  });
 }
 
 function drawLevelCard(levelInfo, x, y, w, h) {
@@ -396,40 +392,40 @@ function drawLevelCard(levelInfo, x, y, w, h) {
   push();
   translate(0, lift);
 
-  drawCardGlow(x, y, w, h, levelInfo.accent, hovering ? 1 : 0.45);
-  drawPanel(x, y, w, h);
+  drawParchmentPanel(x, y, w, h);
 
-  fill(255);
+  fill(80, 45, 20);
   textAlign(LEFT, TOP);
   textStyle(BOLD);
-  textSize(px(23));
+  textSize(px(22));
   textBox(levelInfo.title, x + px(22), y + px(22), w - px(44), px(56));
 
   textStyle(NORMAL);
   textSize(px(14));
-  fill(205);
-  textBox(levelInfo.subtitle, x + px(22), y + px(84), w - px(44), px(42));
+  fill(90, 60, 35);
+  textBox(levelInfo.subtitle, x + px(22), y + px(86), w - px(44), px(42));
 
   drawLevelPreview(levelInfo.level, x + px(22), y + px(138), w - px(44), px(118));
 
-  fill(240);
+  fill(80, 45, 20);
   textSize(px(15));
-  textAlign(LEFT, TOP);
+  textStyle(BOLD);
   text("Main Goals:", x + px(22), y + px(280));
 
-  fill(205);
+  fill(80, 55, 35);
+  textStyle(NORMAL);
   textSize(px(13));
-  const goalsTop = y + px(314);
-  const lineGap = px(24);
 
-  for (let i = 0; i < levelInfo.goals.length; i++) {
-    textBox("• " + levelInfo.goals[i], x + px(22), goalsTop + i * lineGap, w - px(44), px(24));
+  let yy = y + px(314);
+  for (let goal of levelInfo.goals) {
+    textBox("• " + goal, x + px(22), yy, w - px(44), px(24));
+    yy += px(25);
   }
 
-  addMenuButton(x + px(22), y + h - px(48), w - px(44), px(34), "Launch " + levelInfo.title, () => {
+  addMenuButton(x + px(22), y + h - px(48), w - px(44), px(34), "Launch Level " + levelInfo.level, () => {
     selectedLevel = levelInfo.level;
     changeScene(SCENE_LEVEL_LAUNCH);
-  }, levelInfo.accent);
+  });
 
   pop();
 }
@@ -437,409 +433,398 @@ function drawLevelCard(levelInfo, x, y, w, h) {
 function drawLevelPreview(levelNumber, x, y, w, h) {
   push();
   noStroke();
-  fill(20, 24, 36);
-  rect(x, y, w, h, px(12));
+
+  fill(35, 35, 38);
+  rect(x, y, w, h, px(10));
+
+  for (let i = 0; i < 12; i++) {
+    fill(i % 2 === 0 ? 65 : 45);
+    rect(x + px(12 + i * 22), y + px(12), px(14), h - px(24));
+  }
 
   if (levelNumber === 1) {
-    fill(40, 60, 80);
-    rect(x + px(12), y + px(12), w - px(24), h - px(24), px(8));
-
-    fill(200, 180, 120);
-    rect(x + px(28), y + px(22), px(32), h - px(44));
-    rect(x + px(92), y + px(16), px(38), h - px(32));
-    rect(x + px(168), y + px(24), px(28), h - px(50));
-    rect(x + px(240), y + px(14), px(36), h - px(28));
-
-    fill(255, 220, 70);
-    rect(x + px(48), y + px(46), px(16), px(16), px(3));
-
-    fill(0, 180, 120);
-    circle(x + w - px(36), y + h - px(28), px(22));
+    fill(230, 200, 80);
+    rect(x + px(45), y + px(42), px(18), px(18), px(4));
+    fill(120, 220, 255);
+    rect(x + px(105), y + px(64), px(20), px(15), px(4));
+    fill(255, 210, 80);
+    circle(x + w - px(42), y + h - px(32), px(24));
   } else if (levelNumber === 2) {
-    fill(55, 62, 78);
-    rect(x + px(12), y + px(12), w - px(24), h - px(24), px(8));
-
-    fill(120, 120, 140);
-    rect(x + px(26), y + px(16), px(30), h - px(32));
-    rect(x + px(88), y + px(22), px(38), h - px(44));
-    rect(x + px(170), y + px(18), px(30), h - px(36));
-    rect(x + px(246), y + px(32), px(34), h - px(64));
-
-    fill(15, 18, 25, 170);
-    rect(x + px(12), y + px(12), w - px(24), h - px(24), px(8));
-
-    fill(255, 220, 90, 120);
-    circle(x + px(118), y + h * 0.55, px(86));
-
-    fill(230, 80, 80);
-    circle(x + w - px(70), y + h * 0.62, px(14));
-
-    fill(0, 200, 90);
-    rect(x + w - px(48), y + px(26), px(18), px(30), px(3));
+    fill(255, 230, 120, 90);
+    circle(x + w / 2, y + h / 2, px(85));
+    fill(120, 220, 255);
+    circle(x + px(84), y + px(46), px(16));
+    fill(180, 120, 255);
+    circle(x + w - px(55), y + px(72), px(18));
   } else {
-    fill(50, 55, 70);
-    rect(x + px(12), y + px(12), w - px(24), h - px(24), px(8));
-
-    fill(120, 90, 240);
-    circle(x + px(52), y + px(40), px(20));
-    circle(x + px(174), y + px(84), px(20));
-    circle(x + w - px(34), y + px(36), px(20));
-
-    fill(230, 80, 80);
-    circle(x + px(134), y + px(44), px(14));
-    circle(x + px(214), y + px(66), px(14));
-
-    fill(160, 0, 190);
-    circle(x + w - px(92), y + h - px(30), px(36));
-
-    fill(0, 200, 90);
-    rect(x + w - px(74), y + px(22), px(18), px(30), px(3));
+    fill(150, 80, 255);
+    circle(x + px(60), y + px(44), px(20));
+    circle(x + w - px(80), y + px(76), px(20));
+    fill(120, 0, 120);
+    circle(x + w - px(48), y + h - px(38), px(34));
+    fill(255, 220, 100);
+    rect(x + px(110), y + px(40), px(18), px(18), px(4));
   }
 
   pop();
 }
 
-// ==================== 角色选择页 / Character select ====================
+// ==================== Character Select ====================
 function drawCharacterSelect() {
   const area = pageContentRect();
-  drawPanel(area.x, area.y, area.w, area.h);
+  drawGoldenPanel(area.x, area.y, area.w, area.h);
 
-  fill(255);
+  fill(245, 220, 160);
   textAlign(LEFT, TOP);
   textStyle(BOLD);
   textSize(px(38));
-  text("CHARACTER SELECT", area.x + px(34), area.y + px(34));
+  text("CHARACTER SELECT", area.x + px(36), area.y + px(34));
 
   textStyle(NORMAL);
   textSize(px(17));
-  fill(210);
-  text("Choose a hero style. Art images can be added later.", area.x + px(36), area.y + px(100));
+  fill(220, 200, 160);
+  text("Choose your explorer. This choice is saved for all levels.", area.x + px(38), area.y + px(96));
 
   const cardGap = px(22);
   const innerX = area.x + px(34);
-  const innerY = area.y + px(160);
+  const innerY = area.y + px(150);
   const innerW = area.w - px(68);
   const cardW = (innerW - cardGap * 2) / 3;
-  const cardH = min(px(390), area.h - px(230));
+  const cardH = min(px(390), area.h - px(225));
 
   for (let i = 0; i < characterOptions.length; i++) {
     const x = innerX + i * (cardW + cardGap);
     drawCharacterCard(characterOptions[i], x, innerY, cardW, cardH);
   }
 
-  addMenuButton(area.x + px(36), area.y + area.h - px(58), px(220), px(42), "Back to Main Menu", () => {
+  addMenuButton(area.x + px(36), area.y + area.h - px(58), px(220), px(42), "Back", () => {
     changeScene(SCENE_MAIN_MENU);
-  }, [85, 95, 115]);
+  });
 }
 
 function drawCharacterCard(charData, x, y, w, h) {
   const selected = selectedCharacterId === charData.id;
-  const hovering = mouseOverRect(x, y, w, h);
 
-  drawCardGlow(x, y, w, h, charData.accent, selected ? 1 : (hovering ? 0.7 : 0.35));
-  drawPanel(x, y, w, h);
+  drawParchmentPanel(x, y, w, h);
 
   if (selected) {
     noFill();
-    stroke(charData.accent[0], charData.accent[1], charData.accent[2], 220);
-    strokeWeight(2);
-    rect(x + px(3), y + px(3), w - px(6), h - px(6), px(14));
+    stroke(170, 100, 35);
+    strokeWeight(4);
+    rect(x + px(5), y + px(5), w - px(10), h - px(10), px(12));
   }
 
-  drawCharacterPortrait(charData, x + (w - px(110)) / 2, y + px(34), px(110), false);
+  drawCharacterPortrait(charData, x + w / 2 - px(58), y + px(30), px(116), false);
 
-  fill(255);
-  textAlign(LEFT, TOP);
+  fill(80, 45, 20);
+  textAlign(CENTER, TOP);
   textStyle(BOLD);
-  textSize(px(22));
-  textBox(charData.name, x + px(24), y + px(180), w - px(48), px(34));
+  textSize(px(24));
+  text(charData.name, x + w / 2, y + px(172));
 
   textStyle(NORMAL);
   textSize(px(14));
-  fill(205);
-  textBox(charData.desc, x + px(24), y + px(218), w - px(48), px(48));
+  fill(90, 60, 35);
+  textBox(charData.desc, x + px(24), y + px(220), w - px(48), px(70));
 
-  fill(190);
-  textSize(px(13));
-  textBox(
-    "Reserved for future art replacement. This version uses simple color coding.",
-    x + px(24),
-    y + px(276),
-    w - px(48),
-    px(54)
-  );
-
-  const label = selected ? "Selected" : "Select Character";
-  const enabled = !selected;
-
-  addMenuButton(x + px(24), y + h - px(44), w - px(48), px(34), label, () => {
-    selectedCharacterId = charData.id;
-    savePersistentState();
+  addMenuButton(x + px(24), y + h - px(48), w - px(48), px(36), selected ? "Selected" : "Select", () => {
+    saveCharacter(charData.id);
     showFlash(`${charData.name} selected`, true);
     playEquipTone();
-  }, [50, 150, 100], enabled);
+  }, !selected);
+}
+
+// ==================== Codex ====================
+function drawCodexScene() {
+  const area = pageContentRect();
+  drawGoldenPanel(area.x, area.y, area.w, area.h);
+
+  fill(245, 220, 160);
+  textAlign(LEFT, TOP);
+  textStyle(BOLD);
+  textSize(px(38));
+  text("ITEM CODEX", area.x + px(36), area.y + px(34));
+
+  textStyle(NORMAL);
+  textSize(px(17));
+  fill(220, 200, 160);
+  text("Collected items are saved here. Locked items stay hidden.", area.x + px(38), area.y + px(96));
+
+  const startX = area.x + px(42);
+  const startY = area.y + px(160);
+  const cardW = px(210);
+  const cardH = px(230);
+  const gap = px(24);
+
+  for (let i = 0; i < codexData.length; i++) {
+    let item = codexData[i];
+    let col = i % 5;
+    let row = floor(i / 5);
+    let x = startX + col * (cardW + gap);
+    let y = startY + row * (cardH + gap);
+    drawCodexCard(item, x, y, cardW, cardH);
+  }
+
+  addMenuButton(area.x + px(36), area.y + area.h - px(58), px(220), px(42), "Back", () => {
+    changeScene(SCENE_MAIN_MENU);
+  });
+}
+
+function drawCodexCard(item, x, y, w, h) {
+  const unlocked = hasCodexItem(item.id);
+
+  drawParchmentPanel(x, y, w, h);
+
+  push();
+  imageMode(CENTER);
+
+  let img = codexImgs[item.id];
+
+  if (img) {
+    if (!unlocked) tint(50, 50, 50, 190);
+    image(img, x + w / 2, y + px(72), px(64), px(64));
+    noTint();
+  }
+
+  textAlign(CENTER, TOP);
+  textStyle(BOLD);
+  textSize(px(18));
+  fill(80, 45, 20);
+  text(unlocked ? item.name : "???", x + w / 2, y + px(122));
+
+  textStyle(NORMAL);
+  textSize(px(12));
+  fill(90, 60, 35);
+  textBox(
+    unlocked ? item.desc : "Not discovered yet.",
+    x + px(18),
+    y + px(158),
+    w - px(36),
+    px(52)
+  );
+
+  pop();
+}
+
+// ==================== Guide ====================
+function drawGuideScene() {
+  const area = pageContentRect();
+  drawGoldenPanel(area.x, area.y, area.w, area.h);
+
+  fill(245, 220, 160);
+  textAlign(LEFT, TOP);
+  textStyle(BOLD);
+  textSize(px(38));
+  text("GAME GUIDE", area.x + px(36), area.y + px(34));
+
+  textStyle(NORMAL);
+  textSize(px(16));
+  fill(220, 200, 160);
+
+  let lines = [
+    "Level 1: Find the map, collect the crossbow, and escape through the portal.",
+    "Level 2: Start with the crossbow, find the light and magic ring, then reach the exit portal.",
+    "Level 3: Find the light, lock, and key. Weaken the boss, switch to Seal, and finish it.",
+    "Controls: Arrow Keys / WASD to move. M toggles mini map. P pauses. SPACE attacks in combat levels. SHIFT switches weapons."
+  ];
+
+  let y = area.y + px(145);
+  for (let line of lines) {
+    drawParchmentPanel(area.x + px(40), y, area.w - px(80), px(78));
+    fill(75, 45, 25);
+    textStyle(NORMAL);
+    textSize(px(15));
+    textBox(line, area.x + px(62), y + px(22), area.w - px(124), px(40));
+    y += px(96);
+  }
+
+  addMenuButton(area.x + px(36), area.y + area.h - px(58), px(220), px(42), "Back", () => {
+    changeScene(SCENE_MAIN_MENU);
+  });
+}
+
+// ==================== Level Launch ====================
+function drawLevelLaunchScene() {
+  const area = pageContentRect();
+  const lv = levelData[selectedLevel - 1];
+
+  drawGoldenPanel(area.x, area.y, area.w, area.h);
+
+  fill(245, 220, 160);
+  textAlign(LEFT, TOP);
+  textStyle(BOLD);
+  textSize(px(38));
+  text(lv.title, area.x + px(42), area.y + px(42));
+
+  textStyle(NORMAL);
+  textSize(px(16));
+  fill(220, 200, 160);
+  text(lv.subtitle, area.x + px(44), area.y + px(100));
+
+  drawParchmentPanel(area.x + px(42), area.y + px(150), area.w * 0.34, area.h - px(235));
+  drawParchmentPanel(area.x + area.w * 0.39, area.y + px(150), area.w * 0.55, area.h - px(235));
+
+  const hero = getSelectedCharacter();
+
+  fill(80, 45, 20);
+  textStyle(BOLD);
+  textSize(px(24));
+  text("Loadout", area.x + px(66), area.y + px(176));
+
+  drawCharacterPortrait(hero, area.x + px(82), area.y + px(230), px(110), false);
+
+  fill(90, 60, 35);
+  textStyle(NORMAL);
+  textSize(px(15));
+  text(`Character: ${hero.name}`, area.x + px(220), area.y + px(250));
+  text(`Codex: ${getCodexItems().length}/${codexData.length}`, area.x + px(220), area.y + px(286));
+
+  fill(80, 45, 20);
+  textStyle(BOLD);
+  textSize(px(24));
+  text("Mission Goals", area.x + area.w * 0.39 + px(24), area.y + px(176));
+
+  fill(90, 60, 35);
+  textStyle(NORMAL);
+  textSize(px(15));
+
+  let yy = area.y + px(230);
+  for (let goal of lv.goals) {
+    textBox("• " + goal, area.x + area.w * 0.39 + px(24), yy, area.w * 0.5, px(34));
+    yy += px(42);
+  }
+
+  addMenuButton(area.x + px(42), area.y + area.h - px(58), px(200), px(42), "Back", () => {
+    changeScene(SCENE_LEVEL_SELECT);
+  });
+
+  addMenuButton(area.x + px(270), area.y + area.h - px(58), px(230), px(42), "Start Level " + selectedLevel, () => {
+    launchLevel(selectedLevel);
+  });
+}
+
+function launchLevel(levelNumber) {
+  if (levelNumber === 1) window.location.href = pageRoutes.level1;
+  if (levelNumber === 2) window.location.href = pageRoutes.level2;
+  if (levelNumber === 3) window.location.href = pageRoutes.level3;
+}
+
+// ==================== Drawing Helpers ====================
+function drawGoldenPanel(x, y, w, h) {
+  noStroke();
+  fill(22, 18, 14, 235);
+  rect(x, y, w, h, px(14));
+
+  stroke(160, 105, 35);
+  strokeWeight(px(3));
+  noFill();
+  rect(x + px(4), y + px(4), w - px(8), h - px(8), px(12));
+
+  stroke(235, 190, 90);
+  strokeWeight(px(1));
+  rect(x + px(10), y + px(10), w - px(20), h - px(20), px(8));
+
+  noStroke();
+  fill(255, 230, 150, 12);
+  rect(x + px(12), y + px(12), w - px(24), px(22), px(8));
+}
+
+function drawParchmentPanel(x, y, w, h) {
+  noStroke();
+  fill(230, 210, 160);
+  rect(x, y, w, h, px(12));
+
+  stroke(80, 45, 20, 170);
+  strokeWeight(px(2));
+  noFill();
+  rect(x + px(5), y + px(5), w - px(10), h - px(10), px(9));
+
+  noStroke();
+  fill(255, 245, 200, 70);
+  rect(x + px(8), y + px(8), w - px(16), px(16), px(8));
 }
 
 function drawCharacterPortrait(charData, x, y, size, highlight) {
   push();
 
-  const pulse = highlight ? sin(uiTime * 1.6) * px(4) : 0;
+  let img = null;
+  if (charData.id === "fernando") img = fernandoImg;
+  if (charData.id === "eliza") img = elizaImg;
+  if (charData.id === "fox") img = foxImg;
 
   noStroke();
-  fill(0, 0, 0, 45);
-  ellipse(x + size / 2, y + size + px(18), size * 0.56, px(16));
+  fill(0, 0, 0, 60);
+  ellipse(x + size / 2, y + size + px(10), size * 0.55, px(16));
 
-  fill(charData.accent[0], charData.accent[1], charData.accent[2], 30);
-  circle(x + size / 2, y + size / 2, size + px(28) + pulse);
+  if (highlight) {
+    fill(255, 220, 120, 24 + sin(uiTime * 2) * 8);
+    circle(x + size / 2, y + size / 2, size * 1.4);
+  }
 
-  fill(charData.body[0], charData.body[1], charData.body[2]);
-  ellipse(x + size / 2, y + px(72), px(50), px(62));
+  imageMode(CENTER);
 
-  fill(255, 220, 177);
-  ellipse(x + size / 2, y + px(35), px(38), px(38));
+  if (img) {
+    let drawW = size;
+    let drawH = size;
 
-  fill(0);
-  ellipse(x + size / 2 - px(7), y + px(33), px(4), px(4));
-  ellipse(x + size / 2 + px(7), y + px(33), px(4), px(4));
+    if (charData.id === "fox") {
+      drawW = size * 1.15;
+      drawH = size * 0.9;
+    }
 
-  fill(charData.accent[0], charData.accent[1], charData.accent[2]);
-  rect(x + size / 2 - px(12), y + px(58), px(24), px(8), px(4));
+    image(img, x + size / 2, y + size / 2, drawW, drawH);
+  } else {
+    fill(200, 120, 80);
+    ellipse(x + size / 2, y + size / 2, size * 0.6, size * 0.9);
+  }
 
+  imageMode(CORNER);
   pop();
 }
 
-// ==================== 规则页 / Guide scene ====================
-function drawGuideScene() {
-  const area = pageContentRect();
-  drawPanel(area.x, area.y, area.w, area.h);
-
-  fill(255);
-  textAlign(LEFT, TOP);
-  textStyle(BOLD);
-  textSize(px(38));
-  text("GAME GUIDE", area.x + px(34), area.y + px(34));
-
-  textStyle(NORMAL);
-  textSize(px(17));
-  fill(210);
-  text("Read the main mechanics before starting a stage.", area.x + px(36), area.y + px(100));
-
-  const gap = px(26);
-  const blockY = area.y + px(156);
-  const blockW = (area.w - px(68) - gap) / 2;
-  const blockH = area.h - px(250);
-
-  drawGuideBlock(
-    area.x + px(34), blockY, blockW, blockH,
-    "Core Rules",
-    [
-      "• Chest: unlocks the mini map and important markers.",
-      "• Lamp: clears the fog and expands vision.",
-      "• Gun: allows you to attack enemies.",
-      "• Timer: every level has a time limit.",
-      "• Mini Map: can be shown or hidden with M.",
-      "• Pause: press P during gameplay."
-    ]
-  );
-
-  drawGuideBlock(
-    area.x + px(34) + blockW + gap, blockY, blockW, blockH,
-    "Advanced Rules",
-    [
-      "• Level 1: find the needed tools and escape through the lake exit.",
-      "• Level 2: defeat enemies for coins and unlock the final door.",
-      "• Level 3: survive portals, enemy shots and the boss.",
-      "• Small enemies in Level 3 need several hits.",
-      "• Defeating a small enemy in Level 3 restores 20 HP.",
-      "• The boss must be defeated before the exit opens."
-    ]
-  );
-
-  addMenuButton(area.x + px(36), area.y + area.h - px(58), px(220), px(42), "Back to Main Menu", () => {
-    changeScene(SCENE_MAIN_MENU);
-  }, [85, 95, 115]);
-
-  addMenuButton(area.x + area.w - px(256), area.y + area.h - px(58), px(220), px(42), "Open Weapon Shop", () => {
-    openExternalPage(pageRoutes.shop, "shop page");
-  }, [110, 90, 220]);
-}
-
-function drawGuideBlock(x, y, w, h, title, lines) {
-  drawPanel(x, y, w, h);
-
-  fill(255);
-  textAlign(LEFT, TOP);
-  textStyle(BOLD);
-  textSize(px(24));
-  text(title, x + px(20), y + px(20));
-
-  fill(220);
-  textStyle(NORMAL);
-  textSize(px(14));
-
-  let yy = y + px(70);
-  for (let line of lines) {
-    textBox(line, x + px(20), yy, w - px(40), px(42));
-    yy += px(46);
-  }
-}
-
-// ==================== 关卡启动页 / Level launch scene ====================
-function drawLevelLaunchScene() {
-  const area = pageContentRect();
-  drawPanel(area.x, area.y, area.w, area.h);
-
-  const lv = levelData[selectedLevel - 1];
-  const weapon = shopItems[equippedGunLevel - 1];
-  const hero = getSelectedCharacter();
-
-  fill(255);
-  textAlign(LEFT, TOP);
-  textStyle(BOLD);
-  textSize(px(38));
-  text(lv.title, area.x + px(40), area.y + px(42));
-
-  textStyle(NORMAL);
-  textSize(px(16));
-  fill(210);
-  text(lv.subtitle, area.x + px(42), area.y + px(100));
-
-  const leftX = area.x + px(40);
-  const topY = area.y + px(150);
-  const gap = px(28);
-  const leftW = area.w * 0.33;
-  const rightW = area.w - leftW - gap - px(80);
-  const boxH = area.h - px(250);
-
-  drawPanel(leftX, topY, leftW, boxH);
-  fill(255);
-  textStyle(BOLD);
-  textSize(px(24));
-  text("Loadout", leftX + px(20), topY + px(20));
-
-  drawCharacterPortrait(hero, leftX + px(34), topY + px(82), px(96), false);
-
-  fill(235);
-  textStyle(NORMAL);
-  textSize(px(15));
-  text(`Character: ${hero.name}`, leftX + px(156), topY + px(92));
-  text(`Weapon: ${weapon.name}`, leftX + px(156), topY + px(126));
-  text(`Damage: ${weapon.damage}`, leftX + px(156), topY + px(160));
-  text(`Bullet Speed: ${weapon.speed}`, leftX + px(156), topY + px(194));
-  text(`Cooldown: ${weapon.cooldown}s`, leftX + px(156), topY + px(228));
-  text(`Coins: £${coins}`, leftX + px(156), topY + px(262));
-
-  drawPanel(leftX + leftW + gap, topY, rightW, boxH);
-  fill(255);
-  textStyle(BOLD);
-  textSize(px(24));
-  text("Mission Goals", leftX + leftW + gap + px(20), topY + px(20));
-
-  fill(220);
-  textStyle(NORMAL);
-  textSize(px(14));
-
-  let yy = topY + px(76);
-  for (let goal of lv.goals) {
-    textBox("• " + goal, leftX + leftW + gap + px(20), yy, rightW - px(40), px(34));
-    yy += px(42);
-  }
-
-  addMenuButton(area.x + px(40), area.y + area.h - px(56), px(200), px(40), "Back to Levels", () => {
-    changeScene(SCENE_LEVEL_SELECT);
-  }, [85, 95, 115]);
-
-  addMenuButton(area.x + px(260), area.y + area.h - px(56), px(240), px(40), `Start ${lv.title}`, () => {
-    launchLevel(selectedLevel);
-  }, lv.accent);
-
-  addMenuButton(area.x + px(520), area.y + area.h - px(56), px(220), px(40), "Open Weapon Shop", () => {
-    openExternalPage(pageRoutes.shop, "shop page");
-  }, [110, 90, 220]);
-}
-
-function launchLevel(levelNumber) {
-  if (levelNumber === 1) {
-    openExternalPage(pageRoutes.level1, "Level 1 page");
-  } else if (levelNumber === 2) {
-    openExternalPage(pageRoutes.level2, "Level 2 page");
-  } else if (levelNumber === 3) {
-    openExternalPage(pageRoutes.level3, "Level 3 page");
-  }
-}
-
-function openExternalPage(route, label) {
-  if (!route) {
-    showFlash(`Missing ${label} route`, false);
-    playFailTone();
-    return;
-  }
-
-  window.location.href = route;
-}
-
-// ==================== 通用按钮 / Generic buttons ====================
-function addMenuButton(x, y, w, h, label, action, colorArr, enabled = true) {
+function addMenuButton(x, y, w, h, label, action, enabled = true) {
   const hovered = mouseOverRect(x, y, w, h);
 
-  currentButtons.push({ x, y, w, h, label, action, colorArr, enabled });
+  currentButtons.push({ x, y, w, h, label, action, enabled });
 
-  if (hovered) {
-    hoveredButtonIndex = currentButtons.length - 1;
-  }
-
-  drawButton(x, y, w, h, label, enabled, hovered, colorArr);
+  drawButton(x, y, w, h, label, enabled, hovered);
 }
 
-function drawButton(x, y, w, h, label, enabled, hovered, baseColor) {
-  let c = enabled ? baseColor : [90, 95, 110];
-  let brighten = hovered && enabled ? 24 : 0;
-
+function drawButton(x, y, w, h, label, enabled, hovered) {
   noStroke();
-  fill(c[0] + brighten, c[1] + brighten, c[2] + brighten);
+
+  if (enabled) {
+    if (hovered) fill(170, 95, 35);
+    else fill(120, 65, 28);
+  } else {
+    fill(80, 70, 60);
+  }
+
   rect(x, y, w, h, px(10));
 
-  fill(255, 255, 255, hovered ? 28 : 16);
-  rect(x + px(2), y + px(2), w - px(4), px(10), px(8));
+  stroke(240, 200, 110, enabled ? 210 : 80);
+  strokeWeight(px(2));
+  noFill();
+  rect(x + px(3), y + px(3), w - px(6), h - px(6), px(8));
 
-  fill(255);
+  noStroke();
+  fill(245, 220, 160);
   textAlign(CENTER, CENTER);
-  textStyle(NORMAL);
-  textSize(px(14));
+  textStyle(BOLD);
+  textSize(px(15));
   text(label, x + w / 2, y + h / 2);
 }
 
-function drawPanel(x, y, w, h) {
-  noStroke();
-  fill(24, 30, 45, 235);
-  rect(x, y, w, h, px(14));
-
-  fill(255, 255, 255, 10);
-  rect(x + px(2), y + px(2), w - px(4), px(20), px(12));
-}
-
-function drawCardGlow(x, y, w, h, accent, strength) {
-  if (strength <= 0) return;
-
-  noStroke();
-  fill(accent[0], accent[1], accent[2], 18 * strength);
-  rect(x - px(6), y - px(6), w + px(12), h + px(12), px(18));
-}
-
-// ==================== 文本盒子 / Text box helper ====================
-// 使用固定宽高文本框，避免文字挤压和越界
-// Use fixed text boxes to avoid overflow and uneven alignment
 function textBox(str, x, y, w, h) {
   text(str, x, y, w, h);
 }
 
-// ==================== 场景切换 / Scene switching ====================
+// ==================== Scene / Flash / Input ====================
 function changeScene(sceneName) {
   currentScene = sceneName;
   playHoverTone();
 }
 
-// ==================== 提示消息 / Flash message ====================
 function showFlash(msg, good) {
   flashText = msg;
   flashGood = good;
@@ -849,10 +834,10 @@ function showFlash(msg, good) {
 function drawFlashMessage() {
   if (flashTimer <= 0) return;
 
-  let alpha = map(flashTimer, 0, 60, 0, 220);
+  let alpha = map(flashTimer, 0, 60, 0, 230);
 
   noStroke();
-  fill(flashGood ? color(40, 170, 90, alpha) : color(180, 70, 70, alpha));
+  fill(flashGood ? color(65, 120, 60, alpha) : color(160, 60, 50, alpha));
   rect(width / 2 - px(190), px(102), px(380), px(42), px(10));
 
   fill(255, alpha);
@@ -861,7 +846,6 @@ function drawFlashMessage() {
   text(flashText, width / 2, px(123));
 }
 
-// ==================== 输入 / Input ====================
 function mousePressed() {
   ensureAudio();
 
@@ -889,14 +873,14 @@ function keyPressed() {
   if (currentScene === SCENE_MAIN_MENU) {
     if (key === '1') changeScene(SCENE_LEVEL_SELECT);
     if (key === '2') changeScene(SCENE_CHARACTER_SELECT);
-    if (key === '3') openExternalPage(pageRoutes.shop, "shop page");
+    if (key === '3') changeScene(SCENE_CODEX);
     if (key === '4') changeScene(SCENE_GUIDE);
   }
 
   if (currentScene === SCENE_CHARACTER_SELECT) {
-    if (key === '1') selectCharacterById(1);
-    if (key === '2') selectCharacterById(2);
-    if (key === '3') selectCharacterById(3);
+    if (key === '1') selectCharacterById("fernando");
+    if (key === '2') selectCharacterById("eliza");
+    if (key === '3') selectCharacterById("fox");
   }
 
   if (currentScene === SCENE_LEVEL_SELECT) {
@@ -916,13 +900,11 @@ function keyPressed() {
 }
 
 function selectCharacterById(id) {
-  selectedCharacterId = id;
-  savePersistentState();
+  saveCharacter(id);
   showFlash(`${getSelectedCharacter().name} selected`, true);
   playEquipTone();
 }
 
-// ==================== 小工具 / Helpers ====================
 function mouseOverRect(x, y, w, h) {
   return mouseX >= x && mouseX <= x + w && mouseY >= y && mouseY <= y + h;
 }
@@ -931,10 +913,10 @@ function getSelectedCharacter() {
   for (let c of characterOptions) {
     if (c.id === selectedCharacterId) return c;
   }
-  return characterOptions[0];
+  return characterOptions[2];
 }
 
-// ==================== 音效 / Audio ====================
+// ==================== Audio ====================
 function ensureAudio() {
   if (!audioCtx) {
     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -969,10 +951,6 @@ function playTone(freq, duration, type = "sine", volume = 0.03) {
 function playEquipTone() {
   playTone(480, 0.07, "sine", 0.04);
   setTimeout(() => playTone(620, 0.09, "sine", 0.04), 50);
-}
-
-function playFailTone() {
-  playTone(220, 0.10, "sawtooth", 0.04);
 }
 
 function playHoverTone() {
