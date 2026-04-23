@@ -2158,7 +2158,6 @@ function drawMiniMap() {
     let frameX = -5;
     let frameY = height - frameH + 15;
 
-    // ===== 内部区域 =====
     let innerX = frameX + 51;
     let innerY = frameY + 43.5;
     let innerW = 108;
@@ -2168,12 +2167,10 @@ function drawMiniMap() {
     let scaleY = innerH / mazeMap.gridH;
     let scale = min(scaleX, scaleY);
 
-    // ===== 背景（羊皮纸色）=====
     fill(230, 210, 160);
     noStroke();
     rect(innerX, innerY, innerW, innerH, 4);
 
-    // ===== 墙 =====
     fill(60, 40, 20);
     for (let w of wall) {
         rect(
@@ -2184,7 +2181,47 @@ function drawMiniMap() {
         );
     }
 
-    // ===== 敌人 =====
+    // 传送点
+    fill(150, 80, 255);
+    for (let p of portals) {
+        circle(
+            (p.left / blockSize) * scale + innerX + 1,
+            (p.top / blockSize) * scale + innerY + 1,
+            4
+        );
+    }
+
+    // light
+    if (!hasLight) {
+        fill(255, 220, 0);
+        circle(
+            (lightItem.left / blockSize) * scale + innerX + 1,
+            (lightItem.top / blockSize) * scale + innerY + 1,
+            4
+        );
+    }
+
+    // lock
+    if (!hasLock) {
+        fill(220, 190, 120);
+        circle(
+            (lockItem.left / blockSize) * scale + innerX + 1,
+            (lockItem.top / blockSize) * scale + innerY + 1,
+            4
+        );
+    }
+
+    // key
+    if (!hasKey) {
+        fill(120, 220, 120);
+        circle(
+            (keyItem.left / blockSize) * scale + innerX + 1,
+            (keyItem.top / blockSize) * scale + innerY + 1,
+            4
+        );
+    }
+
+    // 小怪
     fill(120, 0, 120);
     for (let e of enemies) {
         circle(
@@ -2194,7 +2231,17 @@ function drawMiniMap() {
         );
     }
 
-    // ===== 玩家 =====
+    // boss
+    if (boss && boss.alive) {
+        fill(boss.lockedState ? 255 : 90, boss.lockedState ? 90 : 0, 150);
+        circle(
+            (boss.rect.left / blockSize) * scale + innerX + 1,
+            (boss.rect.top / blockSize) * scale + innerY + 1,
+            6
+        );
+    }
+
+    // 玩家
     fill(200, 30, 30);
     circle(
         (player.left / blockSize) * scale + innerX + 1,
@@ -2202,7 +2249,6 @@ function drawMiniMap() {
         4
     );
 
-    // ===== 金框盖上 =====
     if (mapUIImg) {
         image(mapUIImg, frameX, frameY, frameW, frameH);
     }
