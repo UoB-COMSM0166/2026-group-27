@@ -1,5 +1,3 @@
-let currentCharacterConfig = null;
-
 let playerSprites = {
     front: [],
     back: [],
