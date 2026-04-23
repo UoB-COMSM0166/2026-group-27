@@ -38,6 +38,9 @@ let boxImg;
 // 弩箭
 let crossbowImg;
 
+// UI
+let mapUIImg;
+let timeUIImg;
 
 // ==================== 游戏变量 / Game variables ====================
 
@@ -141,6 +144,8 @@ function preload() {
     exitPortalImg = loadImage('assets/exit.png');
     boxImg = loadImage('assets/box.png');
     crossbowImg = loadImage('assets/crossbow.png');
+    mapUIImg = loadImage('assets/map.png');
+    timeUIImg = loadImage('assets/time.png');
     preloadSelectedCharacterSprites();
 }
 
@@ -157,7 +162,6 @@ function setup() {
     setMap();
 
     // ==================== 宝箱：入口附近随机生成 ====================
-    // 不是固定点，但保证大致在开局视野附近
     let boxMinX = blockSize * 5;
     let boxMaxX = blockSize * 20;
     let boxMinY = blockSize * 5;
@@ -997,82 +1001,104 @@ function drawMaze() {
 
 
 function drawMiniMap() {
-    let miniMapBorder = 5;
-    let miniMapLeft = 10;
-    let miniMapTop = height - mazeMap.gridW * miniMapScale - 10 - miniMapBorder;
+    let frameW = 215;
+    let frameH = 200;
 
-    fill(255);
+    let frameX = -5;
+    let frameY = height - frameH + 15;
+
+    // ===== 内部区域 =====
+    let innerX = frameX + 51;
+    let innerY = frameY + 43.5;
+    let innerW = 108;
+    let innerH = 112;
+
+    let scaleX = innerW / mazeMap.gridW;
+    let scaleY = innerH / mazeMap.gridH;
+    let scale = min(scaleX, scaleY);
+
+    // ===== 背景（羊皮纸色）=====
+    fill(230, 210, 160);
     noStroke();
-    rect(
-        miniMapLeft,
-        miniMapTop,
-        mazeMap.gridH * miniMapScale + 10,
-        mazeMap.gridW * miniMapScale + 10,
-        6
-    );
+    rect(innerX, innerY, innerW, innerH, 4);
 
-    fill(232, 224, 160);
-    rect(
-        miniMapLeft + miniMapBorder,
-        miniMapTop + miniMapBorder,
-        mazeMap.gridH * miniMapScale,
-        mazeMap.gridW * miniMapScale
-    );
-
-    fill(0);
+    // ===== 墙 =====
+    fill(60, 40, 20);
     for (let w of wall) {
         rect(
-            (w.left / blockSize) * miniMapScale + miniMapLeft + miniMapBorder,
-            (w.top / blockSize) * miniMapScale + miniMapTop + miniMapBorder,
-            miniMapScale,
-            miniMapScale
+            (w.left / blockSize) * scale + innerX,
+            (w.top / blockSize) * scale + innerY,
+            scale,
+            scale
         );
     }
 
-    // 出口
+    // ===== 出口 =====
     let exitTile = exitTiles[0];
-    fill(255, 200, 50);
-    circle(
-        (exitTile.left / blockSize) * miniMapScale + miniMapLeft + miniMapBorder + 1,
-        (exitTile.top / blockSize) * miniMapScale + miniMapTop + miniMapBorder + 1,
-        5
+    fill(0, 200, 0);
+    rect(
+        (exitTile.left / blockSize) * scale + innerX,
+        (exitTile.top / blockSize) * scale + innerY,
+        scale,
+        scale
     );
 
-    // 玩家
-    fill(255, 0, 0);
-    noStroke();
+    // ===== 弩箭 =====
+    if (!hasCrossbow) {
+        fill(120, 220, 255);
+        circle(
+            (crossbow.left / blockSize) * scale + innerX + 1,
+            (crossbow.top / blockSize) * scale + innerY + 1,
+            4
+        );
+    }
+
+    // ===== 玩家 =====
+    fill(200, 30, 30);
     circle(
-        (player.left / blockSize) * miniMapScale + miniMapLeft + miniMapBorder + 1,
-        (player.top / blockSize) * miniMapScale + miniMapTop + miniMapBorder + 1,
+        (player.left / blockSize) * scale + innerX + 1,
+        (player.top / blockSize) * scale + innerY + 1,
         4
     );
 
-    // 弩箭
-    if (!hasCrossbow) {
-        fill(60, 140, 255);
-        circle(
-            (crossbow.left / blockSize) * miniMapScale + miniMapLeft + miniMapBorder + 1,
-            (crossbow.top / blockSize) * miniMapScale + miniMapTop + miniMapBorder + 1,
-            4
-        );
+    // ===== 金框盖上 =====
+    if (mapUIImg) {
+        image(mapUIImg, frameX, frameY, frameW, frameH);
     }
 }
 
 
 function drawElapsedTime() {
-    fill(0);
+    let frameW = 120;
+    let frameH = 100;
+
+    let frameX = width / 2 - frameW / 2;
+    let frameY = -20;
+
+    let innerW = 76;
+    let innerH = 35;
+
+    let innerX = frameX + (frameW - innerW) / 2;
+    let innerY = frameY + (frameH - innerH) / 1.8;
+
+    // ===== 背景（羊皮纸色）=====
+    fill(230, 210, 160);
     noStroke();
-    rect(width / 2 - 37, 5, 74, 42, 6);
+    rect(innerX, innerY, innerW, innerH, 6);
 
-    fill(255);
-    rect(width / 2 - 32, 10, 64, 32, 4);
-
-    fill(0);
-    textAlign(CENTER);
+    // ===== 文字（深棕）=====
+    fill(60, 40, 20);
+    textAlign(CENTER, CENTER);
     textSize(20);
-    textFont('Arial');
-    text(convertTime(elapsedTime), width / 2, 32);
-    textAlign(LEFT);
+    textFont('Georgia');
+    text(convertTime(elapsedTime), innerX + innerW / 2, innerY + innerH / 2 + 1);
+
+    // ===== 金框盖上 =====
+    if (timeUIImg) {
+        image(timeUIImg, frameX, frameY, frameW, frameH);
+    }
+
+    textAlign(LEFT, BASELINE);
 }
 
 
