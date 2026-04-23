@@ -2,6 +2,11 @@
 const KEY_PAUSE = 80;
 const KEY_M = 77;
 const KEY_SPACE = 32;
+const KEY_SHIFT = 16;
+const KEY_W = 87;
+const KEY_A = 65;
+const KEY_S = 83;
+const KEY_D = 68;
 
 const blockSize = 32;
 const miniMapScale = 3;
@@ -26,14 +31,17 @@ const bossProjectileDamage = 14;
 const bossSpeed = 36;
 const bossShootCooldown = 1.6;
 
-// 迷雾亮度 / Fog brightness
 const fogAlpha = 185;
 const fogRevealRadius = 165;
 
-const gunConfigs = {
-    1: { name: "Pistol", damage: 10, bulletSpeed: 340, cooldown: 0.22, color: [40, 40, 40] },
-    2: { name: "Rifle", damage: 14, bulletSpeed: 390, cooldown: 0.16, color: [20, 70, 130] },
-    3: { name: "Heavy Gun", damage: 20, bulletSpeed: 420, cooldown: 0.26, color: [120, 70, 20] }
+const ITEM_CODEX_KEY = "itemCodex";
+const EQUIPPED_WEAPON_KEY = "equippedWeapon";
+
+// 武器配置 / Weapon configs
+const weaponConfigs = {
+    crossbow: { name: "Crossbow", damage: 16, speed: 360, cooldown: 0.22 },
+    ring:     { name: "Magic Ring", damage: 12, speed: 320, cooldown: 0.22 },
+    seal:     { name: "Seal", damage: 0,  speed: 0,   cooldown: 0.35 }
 };
 
 // ==================== 游戏变量 / Game Variables ====================
@@ -47,6 +55,7 @@ let gameover = false;
 let start = true;
 let end = false;
 let moving = false;
+let showInstructions = false;
 
 // ==================== 游戏对象 / Game Objects ====================
 let mazeMap;
@@ -57,12 +66,12 @@ let player;
 let dir = 0;
 
 let box;
-let lampItem;
-let gunItem;
-let exitDoor;
+let lightItem;
+let lockItem;
+let keyItem;
 
 let portals = [];
-let bullets = [];
+let projectiles = [];
 let enemyProjectiles = [];
 let enemies = [];
 let boss = null;
@@ -70,37 +79,170 @@ let boss = null;
 let mazeLayer;
 let fogLayer;
 
+// ==================== 图片素材 / Image Assets ====================
+let floorPlain01Img;
+let floorPlain02Img;
+let floorPlain03Img;
+let floorCrackedGlowImg;
+let wallLevel3Img;
+
+let boxImg;
+let lightImg;
+let lockImg;
+let keyImg;
+let arrowImg;
+let ringImg;
+let portalImg;
+let cageImg;
+let littleGhostImg;
+let bossImg;
+
 // ==================== 状态 / States ====================
 let hasMiniMap = false;
-let hasLamp = false;
-let hasGun = false;
-let showMiniMap = true;
-let bossDefeated = false;
+let hasLight = false;
+let hasCrossbow = true;   // 默认已有第一关弩箭
+let hasRing = false;      // 从第二关图鉴记忆读取
+let hasLock = false;
+let hasKey = false;
+
+let bossSealed = false;
 
 let playerHp = playerMaxHp;
 let playerInvulnTimer = 0;
-let shootCooldownTimer = 0;
+let attackCooldownTimer = 0;
 let teleportCooldownTimer = 0;
 
-let currentGunLevel = 1;
-let currentGunStats = gunConfigs[1];
+let currentWeapon = "crossbow";
+let currentWeaponStats = weaponConfigs.crossbow;
 
 let smallKillCount = 0;
-let bossKillCount = 0;
-let coinsEarnedThisRun = 0;
 
 let endTimePopUp = 0;
 let popUpTitle = '';
 let popUpMessage = '';
 let gameoverMsg = '';
-let endTimeInformation = 0;
+
+let popupRequiresEnter = false;
+
+let bossSealAnimating = false;
+let bossSealAnimTime = 0;
+let bossSealDuration = 0.55;
+
+
+// ==================== 图鉴 / Item Codex ====================
+function getCodexItems() {
+    try {
+        const raw = localStorage.getItem(ITEM_CODEX_KEY);
+        if (!raw) return [];
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed : [];
+    } catch (err) {
+        return [];
+    }
+}
+
+function unlockCodexItem(itemId) {
+    const items = getCodexItems();
+    if (!items.includes(itemId)) {
+        items.push(itemId);
+        localStorage.setItem(ITEM_CODEX_KEY, JSON.stringify(items));
+    }
+}
+
+function hasCodexItem(itemId) {
+    return getCodexItems().includes(itemId);
+}
+
+function getCodexDisplayText() {
+    const names = [];
+    if (hasCodexItem('crossbow')) names.push('Crossbow');
+    if (hasCodexItem('ring')) names.push('Ring');
+    if (hasCodexItem('light')) names.push('Light');
+    if (hasCodexItem('lock')) names.push('Lock');
+    if (hasCodexItem('key')) names.push('Key');
+    if (names.length === 0) return 'None';
+    return names.join(', ');
+}
+
+
+// ==================== 武器记忆 / Weapon Memory ====================
+function getStoredEquippedWeapon() {
+    return localStorage.getItem(EQUIPPED_WEAPON_KEY) || "crossbow";
+}
+
+function saveEquippedWeapon(weaponId) {
+    localStorage.setItem(EQUIPPED_WEAPON_KEY, weaponId);
+}
+
+function getAvailableWeapons() {
+    let weapons = ["crossbow"];
+    if (hasRing) weapons.push("ring");
+    if (hasLock && hasKey) weapons.push("seal");
+    return weapons;
+}
+
+function setCurrentWeapon(weaponId) {
+    const available = getAvailableWeapons();
+    if (!available.includes(weaponId)) {
+        weaponId = available[0];
+    }
+
+    currentWeapon = weaponId;
+    currentWeaponStats = weaponConfigs[weaponId];
+    saveEquippedWeapon(weaponId);
+}
+
+function cycleWeapon() {
+    const available = getAvailableWeapons();
+    let index = available.indexOf(currentWeapon);
+    if (index === -1) index = 0;
+    index = (index + 1) % available.length;
+    setCurrentWeapon(available[index]);
+
+    triggerPopUp(
+        "Weapon switched!",
+        `Current weapon: ${currentWeaponStats.name}`,
+        1.2
+    );
+}
+
+
+// ==================== 预加载 / Preload ====================
+function preload() {
+    floorPlain01Img = loadImage('assets/floor_plain_1.png');
+    floorPlain02Img = loadImage('assets/floor_plain_2.png');
+    floorPlain03Img = loadImage('assets/floor_plain_3.png');
+    floorCrackedGlowImg = loadImage('assets/floor_cracked_glow3.png');
+    wallLevel3Img = loadImage('assets/wall_level_3.png');
+
+    boxImg = loadImage('assets/box.png');
+    lightImg = loadImage('assets/light.png');
+    lockImg = loadImage('assets/lock.png');
+    keyImg = loadImage('assets/key.png');
+    arrowImg = loadImage('assets/arrow.png');
+    ringImg = loadImage('assets/ring.png');
+    portalImg = loadImage('assets/portal.png');
+    cageImg = loadImage('assets/cage.png');
+    littleGhostImg = loadImage('assets/little ghost.png');
+    bossImg = loadImage('assets/boss.png');
+
+    preloadSelectedCharacterSprites();
+}
+
 
 // ==================== p5 入口 / p5 Entry ====================
 function setup() {
     createCanvas(800, 600);
 
-    currentGunLevel = getStoredGunLevel();
-    currentGunStats = gunConfigs[currentGunLevel] || gunConfigs[1];
+    unlockCodexItem('crossbow');
+    hasRing = hasCodexItem('ring');
+
+    const storedWeapon = getStoredEquippedWeapon();
+    if (storedWeapon === "ring" && hasRing) {
+        setCurrentWeapon("ring");
+    } else {
+        setCurrentWeapon("crossbow");
+    }
 
     mazeMap = new Maze(mazeW, mazeH, 'random', 1, 1);
     player = new Rect(32, 32, 32, 48, true);
@@ -113,12 +255,14 @@ function setup() {
     fogLayer = createGraphics(width, height);
 
     createBox();
-    createLamp();
-    createGun();
-    createExitDoor();
+    createLight();
+    createLock();
+    createKey();
     createBoss();
     createPortals();
     createEnemies();
+
+    cam.focus(player.left, player.top);
 }
 
 function draw() {
@@ -129,6 +273,7 @@ function draw() {
     drawGame();
 }
 
+
 // ==================== 游戏主流程 / Main Game Flow ====================
 function drawGame() {
     background(8, 10, 14);
@@ -136,21 +281,23 @@ function drawGame() {
     drawMaze();
 
     for (let p of portals) {
-        drawPortal(p.left - cam.x, p.top - cam.y);
+        drawPortal(p.left - cam.x, p.top - cam.y, p);
     }
-
-    drawDoor(exitDoor.left - cam.x, exitDoor.top - cam.y);
 
     if (!hasMiniMap) {
         drawBox(box.left - cam.x, box.top - cam.y);
     }
 
-    if (!hasLamp && hasMiniMap) {
-        drawLamp(lampItem.left - cam.x, lampItem.top - cam.y);
+    if (!hasLight && hasMiniMap) {
+        drawLightPickup(lightItem.left - cam.x, lightItem.top - cam.y);
     }
 
-    if (!hasGun && hasMiniMap) {
-        drawGunPickup(gunItem.left - cam.x, gunItem.top - cam.y);
+    if (!hasLock && hasMiniMap) {
+        drawLockPickup(lockItem.left - cam.x, lockItem.top - cam.y);
+    }
+
+    if (!hasKey && hasMiniMap) {
+        drawKeyPickup(keyItem.left - cam.x, keyItem.top - cam.y);
     }
 
     for (let e of enemies) {
@@ -161,21 +308,28 @@ function drawGame() {
         boss.draw();
     }
 
+    if (boss && bossSealAnimating) {
+        drawBossCage();
+    }
+
     for (let p of enemyProjectiles) {
         p.draw();
     }
 
-    for (let b of bullets) {
-        b.draw();
+    for (let p of projectiles) {
+        p.draw();
     }
 
     drawPlayer();
     drawFog();
 
-    if (endTimeInformation > elapsedTime) drawInformation();
-    if (endTimePopUp > elapsedTime) drawPopUp();
+    if (endTimePopUp > elapsedTime || popupRequiresEnter) {
+        drawPopUp();
+    }
 
-    if (hasMiniMap && showMiniMap) drawMiniMap();
+    if (hasMiniMap && showMiniMap) {
+        drawMiniMap();
+    }
 
     if (pause) {
         if (start) drawStart();
@@ -183,6 +337,8 @@ function drawGame() {
         else if (gameover) drawGameOver();
         else drawPause();
     }
+
+    if (showInstructions) drawInformation();
 
     drawElapsedTime();
     drawHud();
@@ -192,9 +348,24 @@ function drawGame() {
 function act(dt) {
     gTime += dt;
 
+    if (bossSealAnimating) {
+        bossSealAnimTime += dt;
+
+        if (bossSealAnimTime >= bossSealDuration) {
+            bossSealAnimating = false;
+            if (boss) boss.alive = false;
+            bossSealed = true;
+            end = true;
+            pause = true;
+        }
+        return;
+    }
+
     if (playerInvulnTimer > 0) playerInvulnTimer -= dt;
-    if (shootCooldownTimer > 0) shootCooldownTimer -= dt;
+    if (attackCooldownTimer > 0) attackCooldownTimer -= dt;
     if (teleportCooldownTimer > 0) teleportCooldownTimer -= dt;
+
+    if (showInstructions) return;
 
     if (!pause) {
         if (elapsedTime > timeLimit * 60) {
@@ -207,9 +378,9 @@ function act(dt) {
         elapsedTime += dt;
 
         handlePlayerMovement(dt);
-        handlePickupsAndGoal();
+        handlePickups();
         handlePortals();
-        updateBullets(dt);
+        updateProjectiles(dt);
         updateEnemies(dt);
         updateBoss(dt);
         updateEnemyProjectiles(dt);
@@ -218,55 +389,90 @@ function act(dt) {
     }
 }
 
+
 // ==================== 输入 / Input ====================
 function keyPressed() {
     lastKeyPress = keyCode;
 
-    if (!start && keyCode === KEY_PAUSE) pause = !pause;
-
-    if (keyCode === ENTER) {
+    if (keyCode === ENTER && start) {
         pause = false;
         start = false;
-        triggerInformation(1.8);
+        showInstructions = true;
+        return;
     }
 
-    if (keyCode === ESCAPE && (end || gameover)) resetGame();
+    if (keyCode === ENTER && showInstructions) {
+        showInstructions = false;
+        return;
+    }
 
-    if (keyCode === KEY_M) showMiniMap = !showMiniMap;
+    if (keyCode === ENTER && popupRequiresEnter) {
+        endTimePopUp = 0;
+        popupRequiresEnter = false;
+        return;
+    }
 
-    if (keyCode === KEY_SPACE && hasGun && !pause) shootBullet();
+    if (!start && !showInstructions && keyCode === KEY_PAUSE) {
+        pause = !pause;
+    }
+
+    if (keyCode === ESCAPE && (end || gameover)) {
+        resetGame();
+    }
+
+    if (keyCode === KEY_M) {
+        showMiniMap = !showMiniMap;
+    }
+
+    if (keyCode === KEY_SHIFT && !pause && !showInstructions) {
+        cycleWeapon();
+    }
+
+    if (keyCode === KEY_SPACE && !pause && !showInstructions) {
+        if (currentWeapon === "seal") {
+            attemptSealBoss();
+        } else {
+            shootProjectile();
+        }
+    }
 }
 
 function keyReleased() {
     moving = false;
 }
 
+
 // ==================== 玩家移动 / Player Movement ====================
 function handlePlayerMovement(dt) {
     moving = false;
 
-    if (keyIsDown(UP_ARROW)) {
+    let moveUp = keyIsDown(UP_ARROW) || keyIsDown(KEY_W);
+    let moveRight = keyIsDown(RIGHT_ARROW) || keyIsDown(KEY_D);
+    let moveDown = keyIsDown(DOWN_ARROW) || keyIsDown(KEY_S);
+    let moveLeft = keyIsDown(LEFT_ARROW) || keyIsDown(KEY_A);
+
+    if (moveUp) {
         dir = 2;
         moving = true;
         player.top -= playerSpeed * dt;
         solveWallCollision('up');
     }
 
-    if (keyIsDown(RIGHT_ARROW)) {
+    if (moveRight) {
         dir = 1;
         moving = true;
         player.left += playerSpeed * dt;
         solveWallCollision('right');
     }
 
-    if (keyIsDown(DOWN_ARROW)) {
+    if (moveDown) {
         dir = 0;
         moving = true;
         player.top += playerSpeed * dt;
         solveWallCollision('down');
     }
 
-    if (keyIsDown(LEFT_ARROW)) {
+    if (moveLeft) {
         dir = 3;
         moving = true;
         player.left -= playerSpeed * dt;
@@ -285,22 +491,13 @@ function solveWallCollision(direction) {
     }
 }
 
-// ==================== 第三关逻辑 / Level 3 Logic ====================
-function handlePickupsAndGoal() {
-    if (!hasMiniMap && player.intersects(box)) boxIntersects();
-    if (!hasLamp && hasMiniMap && player.intersects(lampItem)) lampIntersects();
-    if (!hasGun && hasMiniMap && player.intersects(gunItem)) gunIntersects();
 
-    if (player.intersects(exitDoor)) {
-        if (!hasLamp || !hasGun) {
-            triggerPopUp("Door locked!", "You still need the lamp and the gun.", 2.2);
-        } else if (!bossDefeated) {
-            triggerPopUp("Door sealed!", "Defeat the boss first.", 2.2);
-        } else {
-            end = true;
-            pause = true;
-        }
-    }
+// ==================== 第三关逻辑 / Level 3 Logic ====================
+function handlePickups() {
+    if (!hasMiniMap && player.intersects(box)) boxIntersects();
+    if (!hasLight && hasMiniMap && player.intersects(lightItem)) lightIntersects();
+    if (!hasLock && hasMiniMap && player.intersects(lockItem)) lockIntersects();
+    if (!hasKey && hasMiniMap && player.intersects(keyItem)) keyIntersects();
 }
 
 function handlePortals() {
@@ -314,7 +511,6 @@ function handlePortals() {
     }
 }
 
-// 四门互传 / Four-way portal network
 function usePortal(fromIndex) {
     let candidates = [];
     for (let i = 0; i < portals.length; i++) {
@@ -326,7 +522,6 @@ function usePortal(fromIndex) {
     let toIndex = random(candidates);
     let target = portals[toIndex];
 
-    // 传送到目标门旁边，不是门中心 / Move near target portal, not inside it
     let destinations = [
         { x: target.left + blockSize, y: target.top },
         { x: target.left - blockSize, y: target.top },
@@ -354,7 +549,6 @@ function usePortal(fromIndex) {
         }
     }
 
-    // 兜底 / Fallback
     if (!placed) {
         player.left = target.left + blockSize;
         player.top = target.top;
@@ -367,27 +561,82 @@ function usePortal(fromIndex) {
     triggerPopUp("Warped!", "The portal dragged you elsewhere.", 1.2);
 }
 
-function shootBullet() {
-    if (shootCooldownTimer > 0) return;
+function shootProjectile() {
+    if (attackCooldownTimer > 0) return;
+    if (currentWeapon === "seal") return;
 
     let startX = player.left + player.width / 2;
     let startY = player.top + player.height / 2;
 
     let target = null;
-    if (hasLamp) target = findAutoTarget(startX, startY, 220);
+    if (hasLight) target = findAutoTarget(startX, startY, 220);
+
+    let vx = null;
+    let vy = null;
 
     if (target) {
         let dx = target.x - startX;
         let dy = target.y - startY;
         let d = sqrt(dx * dx + dy * dy);
-        let vx = (dx / max(d, 1)) * currentGunStats.bulletSpeed;
-        let vy = (dy / max(d, 1)) * currentGunStats.bulletSpeed;
-        bullets.push(new Bullet(startX, startY, -1, vx, vy, currentGunStats.damage));
-    } else {
-        bullets.push(new Bullet(startX, startY, dir, null, null, currentGunStats.damage));
+        vx = (dx / max(d, 1)) * currentWeaponStats.speed;
+        vy = (dy / max(d, 1)) * currentWeaponStats.speed;
     }
 
-    shootCooldownTimer = currentGunStats.cooldown;
+    let kind = (currentWeapon === "crossbow") ? "arrow" : "orb";
+
+    projectiles.push(
+        new Projectile(
+            startX,
+            startY,
+            dir,
+            kind,
+            vx,
+            vy,
+            currentWeaponStats.damage
+        )
+    );
+
+    attackCooldownTimer = currentWeaponStats.cooldown;
+}
+
+function attemptSealBoss() {
+    if (!(hasLock && hasKey)) {
+        triggerPopUp("Seal unavailable!", "You still need both the lock and the key.", 1.8);
+        return;
+    }
+
+    if (currentWeapon !== "seal") {
+        triggerPopUp("Wrong equipment!", "Switch to Seal first with SHIFT.", 1.5);
+        return;
+    }
+
+    if (!boss || !boss.alive) return;
+
+    if (!boss.lockedState) {
+        triggerPopUp("Seal not ready!", "Weaken the boss first.", 1.5);
+        return;
+    }
+
+    let px = player.left + player.width / 2;
+    let py = player.top + player.height / 2;
+    let bx = boss.rect.left + boss.rect.width / 2;
+    let by = boss.rect.top + boss.rect.height / 2;
+    let dx = bx - px;
+    let dy = by - py;
+    let dist = sqrt(dx * dx + dy * dy);
+
+    if (dist > 95) {
+        triggerPopUp("Too far away!", "Get closer to seal the boss.", 1.2);
+        return;
+    }
+
+    startBossSeal();
+}
+
+function startBossSeal() {
+    bossSealAnimating = true;
+    bossSealAnimTime = 0;
+    pause = true;
 }
 
 function findAutoTarget(px, py, range) {
@@ -436,53 +685,60 @@ function damagePlayer(amount, sourceText = "Something hurt you!") {
     }
 }
 
-function healPlayer(amount) {
-    playerHp = min(playerMaxHp, playerHp + amount);
-}
+function updateProjectiles(dt) {
+    for (let p of projectiles) {
+        p.update(dt);
 
-function addCoins(amount) {
-    coinsEarnedThisRun += amount;
-    let total = Number(localStorage.getItem('gameCoins') || '0');
-    localStorage.setItem('gameCoins', String(total + amount));
-}
-
-function updateBullets(dt) {
-    for (let b of bullets) {
-        b.update(dt);
-
-        let bRect = new Rect(b.x - b.r, b.y - b.r, b.r * 2, b.r * 2, true);
+        let pRect = new Rect(p.x - 10, p.y - 10, 20, 20, true);
 
         for (let e of enemies) {
-            if (e.alive && b.alive && bRect.intersects(e.rect)) {
-                e.hp -= b.damage;
-                b.alive = false;
+            if (e.alive && p.alive && pRect.intersects(e.rect)) {
+                e.hp -= p.damage;
+                p.alive = false;
 
                 if (e.hp <= 0) {
                     e.hp = 0;
                     e.alive = false;
                     smallKillCount += 1;
-                    addCoins(1);
-                    healPlayer(5);//回复血量/restore hp
                 }
             }
         }
 
-        if (boss && boss.alive && b.alive && bRect.intersects(boss.rect)) {
-            boss.hp -= b.damage;
-            b.alive = false;
-
-            if (boss.hp <= 0) {
-                boss.hp = 0;
-                boss.alive = false;
-                bossDefeated = true;
-                bossKillCount += 1;
-                addCoins(3);
-                triggerPopUp("Boss defeated!", "The door is open now.", 3);
+        if (boss && boss.alive && p.alive && pRect.intersects(boss.rect)) {
+            if (!(hasLock && hasKey)) {
+                boss.hp = 1;
+                if (!boss.lockedState) {
+                    boss.lockedState = true;
+                    triggerPopUp(
+                        "Boss locked!",
+                        "You need both the lock and the key to seal it.",
+                        2.2
+                    );
+                }
+                p.alive = false;
+                continue;
             }
+
+            if (hasLock && hasKey && currentWeapon !== "seal") {
+                boss.hp = max(1, boss.hp - p.damage);
+                if (boss.hp <= 1) {
+                    boss.hp = 1;
+                    boss.lockedState = true;
+                    triggerPopUp(
+                        "Boss weakened!",
+                        "Switch to Seal and press SPACE near the boss.",
+                        2.5
+                    );
+                }
+                p.alive = false;
+                continue;
+            }
+
+            p.alive = false;
         }
     }
 
-    bullets = bullets.filter(b => b.alive);
+    projectiles = projectiles.filter(p => p.alive);
     enemies = enemies.filter(e => e.alive);
 }
 
@@ -507,6 +763,7 @@ function updateEnemyProjectiles(dt) {
 
     enemyProjectiles = enemyProjectiles.filter(p => p.alive);
 }
+
 
 // ==================== 生成位置工具 / Spawn Helpers ====================
 function createItemInStartView(avoidList = []) {
@@ -561,44 +818,60 @@ function createItemInMidArea(avoidList = []) {
     return new Rect(416, 256, blockSize, blockSize, true);
 }
 
+function createItemInBossSide(avoidList = []) {
+    let minX = worldWidth - blockSize * 10;
+    let minY = worldHeight - blockSize * 9;
+    let maxX = worldWidth - blockSize * 3;
+    let maxY = worldHeight - blockSize * 3;
+
+    let item;
+    for (let i = 0; i < 500; i++) {
+        let x = snapToGrid(random(minX, maxX));
+        let y = snapToGrid(random(minY, maxY));
+
+        item = new Rect(x, y, blockSize, blockSize, true);
+
+        if (intersectsWall(item)) continue;
+        if (item.intersects(player)) continue;
+
+        let overlap = false;
+        for (let other of avoidList) {
+            if (other && item.intersects(other)) overlap = true;
+        }
+        if (!overlap) return item;
+    }
+
+    return new Rect(worldWidth - 6 * blockSize, worldHeight - 6 * blockSize, blockSize, blockSize, true);
+}
+
 function isInStartView(x, y) {
     return x < width - blockSize * 2 && y < height - blockSize * 2;
 }
+
 
 // ==================== 创建对象 / Create Objects ====================
 function createBox() {
     box = createItemInStartView([]);
 }
 
-function createLamp() {
-    lampItem = createItemInStartView([box]);
+function createLight() {
+    lightItem = createItemInStartView([box]);
 }
 
-function createGun() {
-    gunItem = createItemInMidArea([box, lampItem]);
+function createLock() {
+    lockItem = createItemInMidArea([box, lightItem]);
 }
 
-function createExitDoor() {
-    let x = worldWidth - 4 * blockSize;
-    let y = 2 * blockSize;
-
-    exitDoor = new Rect(x, y, blockSize, 40, true);
-
-    while (intersectsWall(exitDoor)) {
-        y += blockSize;
-        exitDoor = new Rect(x, y, blockSize, 40, true);
-    }
-
-    exitDoor.left = snapToGrid(exitDoor.left);
-    exitDoor.top = snapToGrid(exitDoor.top);
+function createKey() {
+    keyItem = createItemInBossSide([box, lightItem, lockItem]);
 }
 
 function canPlacePortal(r) {
     if (intersectsWall(r)) return false;
     if (r.intersects(box)) return false;
-    if (r.intersects(lampItem)) return false;
-    if (r.intersects(gunItem)) return false;
-    if (r.intersects(exitDoor)) return false;
+    if (r.intersects(lightItem)) return false;
+    if (r.intersects(lockItem)) return false;
+    if (r.intersects(keyItem)) return false;
     if (boss && r.intersects(boss.rect)) return false;
     return true;
 }
@@ -606,12 +879,11 @@ function canPlacePortal(r) {
 function createPortals() {
     portals = [];
 
-    // 固定四门，不挡关键点 / Fixed four-door network, avoiding key spots
     const desired = [
         { x: worldWidth * 0.35, y: blockSize * 3 },
         { x: blockSize * 3, y: worldHeight * 0.55 },
         { x: worldWidth * 0.55, y: worldHeight - blockSize * 4 },
-        { x: worldWidth - blockSize * 6, y: worldHeight - blockSize * 7 } // Boss 房附近 / Near boss arena
+        { x: worldWidth - blockSize * 6, y: worldHeight - blockSize * 7 }
     ];
 
     for (let pos of desired) {
@@ -631,7 +903,6 @@ function createPortals() {
         }
 
         if (!placed) {
-            // 兜底随机放一个，但仍避开关键点 / Fallback placement still avoids key spots
             for (let tries = 0; tries < 200; tries++) {
                 let px = snapToGrid(random(3 * blockSize, worldWidth - 3 * blockSize));
                 let py = snapToGrid(random(3 * blockSize, worldHeight - 3 * blockSize));
@@ -665,9 +936,9 @@ function createEnemies() {
                 intersectsWall(e.rect) ||
                 e.rect.intersects(player) ||
                 e.rect.intersects(box) ||
-                e.rect.intersects(lampItem) ||
-                e.rect.intersects(gunItem) ||
-                e.rect.intersects(exitDoor)
+                e.rect.intersects(lightItem) ||
+                e.rect.intersects(lockItem) ||
+                e.rect.intersects(keyItem)
             ) {
                 overlap = true;
             }
@@ -675,6 +946,8 @@ function createEnemies() {
             for (let p of portals) {
                 if (e.rect.intersects(p)) overlap = true;
             }
+
+            if (boss && e.rect.intersects(boss.rect)) overlap = true;
 
             if (overlap) {
                 e = null;
@@ -694,22 +967,77 @@ function createBoss() {
 
     boss = new Boss(x, y);
 
-    while (intersectsWall(boss.rect) || boss.rect.intersects(exitDoor) || boss.rect.intersects(gunItem)) {
+    while (intersectsWall(boss.rect)) {
         x -= blockSize;
         boss = new Boss(x, y);
     }
 }
+
+
+// ==================== 道具拾取 / Pickups ====================
+function boxIntersects() {
+    hasMiniMap = true;
+    showMiniMap = true;
+}
+
+function lightIntersects() {
+    hasLight = true;
+    unlockCodexItem('light');
+    triggerPopUp(
+        "Light found!",
+        "Your vision has opened.\nAuto-lock now works inside the lit area.",
+        3
+    );
+}
+
+function lockIntersects() {
+    hasLock = true;
+    unlockCodexItem('lock');
+
+    if (hasLock && hasKey) {
+        triggerPopUp(
+            "Seal completed!",
+            "You now have both lock and key.\nPress SHIFT to switch to Seal.",
+            3
+        );
+    } else {
+        triggerPopUp(
+            "Lock found!",
+            "Now search for the matching key.",
+            2.5
+        );
+    }
+}
+
+function keyIntersects() {
+    hasKey = true;
+    unlockCodexItem('key');
+
+    if (hasLock && hasKey) {
+        triggerPopUp(
+            "Seal completed!",
+            "You now have both lock and key.\nPress SHIFT to switch to Seal.",
+            3
+        );
+    } else {
+        triggerPopUp(
+            "Key found!",
+            "Now search for the matching lock.",
+            2.5
+        );
+    }
+}
+
 
 // ==================== 迷雾蒙版 / Fog Mask ====================
 function drawFog() {
     fogLayer.clear();
     fogLayer.noStroke();
 
-    // 与第二关相同亮度 / Same brightness as level 2
     fogLayer.fill(10, 12, 18, fogAlpha);
     fogLayer.rect(0, 0, width, height);
 
-    if (hasLamp) {
+    if (hasLight) {
         fogLayer.erase();
         fogLayer.circle(
             player.left - cam.x + player.width / 2,
@@ -722,131 +1050,142 @@ function drawFog() {
     image(fogLayer, 0, 0);
 }
 
-// ==================== 道具拾取 / Pickups ====================
-function boxIntersects() {
-    hasMiniMap = true;
-    triggerPopUp("Mini Map found!", "Press 'M' to show/hide the map.\nNow search for the lamp and the gun.", 3);
-}
-
-function lampIntersects() {
-    hasLamp = true;
-    triggerPopUp("Lamp found!", "Your vision has opened.\nAuto-lock now works inside the lit area.", 3);
-}
-
-function gunIntersects() {
-    hasGun = true;
-    triggerPopUp("Gun found!", "Press SPACE to shoot.\nYour equipped shop weapon is now active.", 3);
-}
 
 // ==================== 绘制 / Draw ====================
 function drawPlayer() {
-    push();
-    translate(player.left - cam.x, player.top - cam.y);
-
-    if (moving) {
-        let offset = sin(elapsedTime * 10) * 2;
-        translate(0, offset);
-    }
-
-    noStroke();
-    fill(0, 0, 0, 70);
-    ellipse(blockSize / 2, 42, 18, 8);
-
-    if (playerInvulnTimer > 0 && floor(gTime * 12) % 2 === 0) fill(255, 210, 210, 180);
-    else fill(50, 150, 255);
-
-    ellipse(blockSize / 2, 24, 28, 36);
-
-    fill(255, 220, 177);
-    ellipse(blockSize / 2, 12, 20, 20);
-
-    fill(0);
-    ellipse(blockSize / 2 - 4, 10, 3, 3);
-    ellipse(blockSize / 2 + 4, 10, 3, 3);
-
-    fill(255);
-    if (dir === 0) ellipse(blockSize / 2, 16, 2, 4);
-    else if (dir === 1) ellipse(blockSize / 2 + 2, 12, 4, 2);
-    else if (dir === 2) ellipse(blockSize / 2, 8, 2, 4);
-    else ellipse(blockSize / 2 - 2, 12, 4, 2);
-
-    if (hasGun) {
-        let c = currentGunStats.color;
-        fill(c[0], c[1], c[2]);
-
-        if (dir === 0) rect(13, 24, 6, 10, 2);
-        else if (dir === 1) rect(18, 20, 12, 5, 2);
-        else if (dir === 2) rect(13, 10, 6, 10, 2);
-        else rect(2, 20, 12, 5, 2);
-    }
-
-    pop();
+    drawSelectedCharacter(player, cam, dir, moving, elapsedTime);
 }
 
 function drawBox(x, y) {
     push();
-    noStroke();
-    fill(90, 50, 15, 80);
-    ellipse(x + 16, y + 28, 18, 6);
-    fill(139, 69, 19);
-    rect(x + 4, y + 12, 24, 16, 3);
-    fill(160, 82, 45);
-    rect(x + 4, y + 8, 24, 7, 3);
-    fill(255, 215, 0);
-    rect(x + 14, y + 16, 4, 8, 2);
-    ellipse(x + 16, y + 18, 6, 6);
-    pop();
-}
+    imageMode(CORNER);
 
-function drawLamp(x, y) {
-    push();
-    noStroke();
-    fill(80, 60, 40);
-    rect(x + 12, y + 18, 8, 10, 2);
-    fill(255, 220, 100);
-    ellipse(x + 16, y + 14, 14, 14);
-    fill(255, 220, 100, 80);
-    ellipse(x + 16, y + 14, 24, 24);
-    pop();
-}
-
-function drawGunPickup(x, y) {
-    push();
-    noStroke();
-    fill(40);
-    rect(x + 8, y + 14, 16, 6, 2);
-    rect(x + 20, y + 12, 6, 4, 1);
-    rect(x + 10, y + 18, 5, 10, 2);
-    pop();
-}
-
-function drawPortal(x, y) {
-    push();
-    noFill();
-    stroke(150, 80, 255, 180);
-    strokeWeight(3);
-    ellipse(x + 16, y + 16, 22, 22);
-    stroke(220, 180, 255, 120);
-    ellipse(x + 16, y + 16, 12, 12);
-    pop();
-}
-
-function drawDoor(x, y) {
-    push();
-    noStroke();
-
-    if (bossDefeated) {
-        fill(70, 40, 20);
-        rect(x + 3, y, 26, 40, 4);
-        fill(120, 80, 40);
-        rect(x + 7, y + 4, 18, 32, 3);
-        fill(255, 215, 0);
-        circle(x + 22, y + 20, 4);
+    if (boxImg) {
+        image(boxImg, x + 1, y + 1, blockSize - 2, blockSize - 2);
     } else {
-        fill(55, 20, 20);
-        rect(x + 3, y, 26, 40, 4);
-        fill(160, 40, 40, 160);
-        rect(x + 1, y - 2, 30, 44, 5);
+        noStroke();
+        fill(90, 50, 15, 80);
+        ellipse(x + 16, y + 28, 18, 6);
+        fill(139, 69, 19);
+        rect(x + 4, y + 12, 24, 16, 3);
+        fill(160, 82, 45);
+        rect(x + 4, y + 8, 24, 7, 3);
+        fill(255, 215, 0);
+        rect(x + 14, y + 16, 4, 8, 2);
+        ellipse(x + 16, y + 18, 6, 6);
+    }
+
+    pop();
+}
+
+function drawLightPickup(x, y) {
+    push();
+    imageMode(CORNER);
+
+    if (lightImg) {
+        image(lightImg, x, y, blockSize, blockSize);
+    } else {
+        noStroke();
+        fill(80, 60, 40);
+        rect(x + 12, y + 18, 8, 10, 2);
+        fill(255, 220, 100);
+        ellipse(x + 16, y + 14, 14, 14);
+        fill(255, 220, 100, 80);
+        ellipse(x + 16, y + 14, 24, 24);
+    }
+
+    pop();
+}
+
+function drawLockPickup(x, y) {
+    push();
+    imageMode(CORNER);
+
+    if (lockImg) {
+        image(lockImg, x, y, blockSize, blockSize);
+    } else {
+        noFill();
+        stroke(210, 190, 120);
+        strokeWeight(3);
+        rect(x + 10, y + 14, 12, 10, 2);
+        arc(x + 16, y + 14, 10, 10, PI, TWO_PI);
+    }
+
+    pop();
+}
+
+function drawKeyPickup(x, y) {
+    push();
+    imageMode(CORNER);
+
+    if (keyImg) {
+        image(keyImg, x, y, blockSize, blockSize);
+    } else {
+        stroke(230, 210, 120);
+        strokeWeight(3);
+        line(x + 10, y + 16, x + 24, y + 16);
+        noStroke();
+        fill(230, 210, 120);
+        circle(x + 10, y + 16, 8);
+        rect(x + 20, y + 13, 3, 6);
+        rect(x + 23, y + 13, 3, 3);
+    }
+
+    pop();
+}
+
+function drawPortal(x, y, portalRect) {
+    push();
+
+    let phase = (portalRect.left + portalRect.top) * 0.01;
+    let floatOffset = sin(gTime * 2.2 + phase) * 3;
+
+    imageMode(CORNER);
+
+    if (portalImg) {
+        tint(255, 235);
+        image(portalImg, x, y + floatOffset, blockSize, blockSize);
+        noTint();
+    } else {
+        noFill();
+        stroke(150, 80, 255, 180);
+        strokeWeight(3);
+        ellipse(x + 16, y + 16 + floatOffset, 22, 22);
+        stroke(220, 180, 255, 120);
+        ellipse(x + 16, y + 16 + floatOffset, 12, 12);
+    }
+
+    pop();
+}
+
+function drawBossCage() {
+    if (!boss) return;
+
+    let bx = boss.rect.left - cam.x;
+    let by = boss.rect.top - cam.y;
+
+    let cageW = boss.rect.width * 1.45;
+    let cageH = boss.rect.height * 1.45;
+
+    let targetX = bx - (cageW - boss.rect.width) / 2;
+    let targetY = by - (cageH - boss.rect.height) / 2;
+
+    let t = constrain(bossSealAnimTime / bossSealDuration, 0, 1);
+    let startY = targetY - 120;
+    let drawY = lerp(startY, targetY, t);
+
+    push();
+    imageMode(CORNER);
+
+    if (cageImg) {
+        tint(255, 255);
+        image(cageImg, targetX, drawY, cageW, cageH);
+        noTint();
+    } else {
+        noFill();
+        stroke(180, 220, 255);
+        strokeWeight(4);
+        rect(targetX, drawY, cageW, cageH, 6);
     }
 
     pop();
@@ -861,17 +1200,25 @@ function drawHud() {
     let y = 20;
     text("Level 3 Demo", 15, y);
     y += 16;
-    text("Gun: " + currentGunStats.name, 15, y);
+    text("Character: " + getSelectedCharacterName(), 15, y);
+    y += 16;
+    text("Weapon: " + currentWeaponStats.name, 15, y);
     y += 16;
     text("Map: " + (hasMiniMap ? "Yes" : "No"), 15, y);
     y += 16;
-    text("Lamp: " + (hasLamp ? "Yes" : "No"), 15, y);
+    text("Light: " + (hasLight ? "Yes" : "No"), 15, y);
     y += 16;
-    text("Boss: " + (bossDefeated ? "Defeated" : "Alive"), 15, y);
+    text("Lock: " + (hasLock ? "Yes" : "No"), 15, y);
+    y += 16;
+    text("Key: " + (hasKey ? "Yes" : "No"), 15, y);
+    y += 16;
+    text("Boss: " + (bossSealed ? "Sealed" : (boss && boss.lockedState ? "Locked HP" : "Alive")), 15, y);
     y += 16;
     text("Small kills: " + smallKillCount, 15, y);
-    y += 16;
-    text("Coins this run: £" + coinsEarnedThisRun, 15, y);
+
+    textAlign(RIGHT);
+    text("Item Codex: " + getCodexDisplayText(), width - 15, 20);
+    textAlign(LEFT);
 }
 
 function drawPlayerHealthBar() {
@@ -904,33 +1251,40 @@ function drawPlayerHealthBar() {
     textAlign(LEFT);
 }
 
-class Bullet {
-    constructor(x, y, dir, vx = null, vy = null, damage = 10) {
+
+// ==================== 投射物 / Projectiles ====================
+class Projectile {
+    constructor(x, y, dir, kind, vx = null, vy = null, damage = 10) {
         this.x = x;
         this.y = y;
-        this.r = 4;
         this.dir = dir;
+        this.kind = kind; // arrow / orb
         this.vx = vx;
         this.vy = vy;
         this.damage = damage;
         this.alive = true;
+        this.r = 5;
     }
 
     update(dt) {
+        if (this.kind === 'seal') return;
+
+        const speed = currentWeaponStats.speed;
+
         if (this.vx !== null && this.vy !== null) {
             this.x += this.vx * dt;
             this.y += this.vy * dt;
         } else {
-            if (this.dir === 0) this.y += currentGunStats.bulletSpeed * dt;
-            if (this.dir === 1) this.x += currentGunStats.bulletSpeed * dt;
-            if (this.dir === 2) this.y -= currentGunStats.bulletSpeed * dt;
-            if (this.dir === 3) this.x -= currentGunStats.bulletSpeed * dt;
+            if (this.dir === 0) this.y += speed * dt;
+            if (this.dir === 1) this.x += speed * dt;
+            if (this.dir === 2) this.y -= speed * dt;
+            if (this.dir === 3) this.x -= speed * dt;
         }
 
-        let bRect = new Rect(this.x - this.r, this.y - this.r, this.r * 2, this.r * 2, true);
+        let rect = new Rect(this.x - 10, this.y - 10, 20, 20, true);
 
         for (let w of wall) {
-            if (bRect.intersects(w)) {
+            if (rect.intersects(w)) {
                 this.alive = false;
                 return;
             }
@@ -943,9 +1297,36 @@ class Bullet {
 
     draw() {
         push();
-        noStroke();
-        fill(255, 220, 80);
-        circle(this.x - cam.x, this.y - cam.y, this.r * 2);
+
+        if (this.kind === 'arrow') {
+            let angle = 0;
+
+            if (this.vx !== null && this.vy !== null) {
+                angle = atan2(this.vy, this.vx);
+            } else {
+                if (this.dir === 0) angle = HALF_PI;
+                else if (this.dir === 1) angle = 0;
+                else if (this.dir === 2) angle = -HALF_PI;
+                else angle = PI;
+            }
+
+            translate(this.x - cam.x, this.y - cam.y);
+            rotate(angle);
+
+            imageMode(CENTER);
+            if (arrowImg) {
+                image(arrowImg, 0, 0, 18, 23);
+            } else {
+                stroke(92, 60, 32);
+                strokeWeight(3);
+                line(-8, 0, 8, 0);
+            }
+        } else {
+            noStroke();
+            fill(140, 210, 255);
+            circle(this.x - cam.x, this.y - cam.y, this.r * 2);
+        }
+
         pop();
     }
 }
@@ -992,15 +1373,18 @@ class HostileProjectile {
     }
 }
 
+
+// ==================== 敌人 / Enemies ====================
 class Enemy {
     constructor(x, y) {
-        this.rect = new Rect(x, y, 28, 28, true);
+        this.rect = new Rect(x, y, 32, 48, true);
         this.dir = floor(random(4));
         this.speed = enemySpeed;
         this.alive = true;
         this.hp = random([30, 40]);
         this.changeTimer = random(1, 3);
         this.shootTimer = random(1.2, 2.3);
+        this.floatPhase = random(TWO_PI);
     }
 
     update(dt) {
@@ -1030,7 +1414,7 @@ class Enemy {
         }
 
         if (this.rect.intersects(player)) {
-            damagePlayer(enemyTouchDamage, "A creature dragged you down!");
+            damagePlayer(enemyTouchDamage, "A little ghost dragged you down!");
         }
 
         this.shootTimer -= dt;
@@ -1048,7 +1432,7 @@ class Enemy {
             let vy = (dy / max(dist, 1)) * projSpeed;
 
             enemyProjectiles.push(
-                new HostileProjectile(ex, ey, vx, vy, enemyProjectileDamage, [180, 70, 70], "A creature shot you!")
+                new HostileProjectile(ex, ey, vx, vy, enemyProjectileDamage, [180, 70, 70], "A little ghost shot you!")
             );
 
             this.shootTimer = random(1.4, 2.5);
@@ -1057,25 +1441,29 @@ class Enemy {
 
     draw() {
         push();
-        translate(this.rect.left - cam.x, this.rect.top - cam.y);
 
-        noStroke();
-        fill(110, 25, 25);
-        ellipse(14, 18, 22, 20);
+        let bob = sin(gTime * 2.8 + this.floatPhase) * 2.5;
 
-        fill(150, 40, 40);
-        ellipse(14, 11, 18, 18);
+        let drawW = this.rect.width * 1.6;
+        let drawH = this.rect.height * 1.1;
 
-        fill(255);
-        ellipse(10, 10, 4, 4);
-        ellipse(18, 10, 4, 4);
+        let drawX = this.rect.left - cam.x - (drawW - this.rect.width) / 2;
+        let drawY = this.rect.top - cam.y + this.rect.height - drawH + bob;
 
-        fill(0);
-        ellipse(10, 10, 2, 2);
-        ellipse(18, 10, 2, 2);
+        imageMode(CORNER);
 
-        fill(255, 255, 255, 50);
-        ellipse(14, 11, 8, 5);
+        if (littleGhostImg) {
+            tint(255, 200);
+            drawingContext.shadowBlur = 12;
+            drawingContext.shadowColor = "rgba(180,220,255,0.6)";
+            image(littleGhostImg, drawX, drawY, drawW, drawH);
+            noTint();
+            drawingContext.shadowBlur = 0;
+        } else {
+            noStroke();
+            fill(170, 170, 255, 220);
+            ellipse(drawX + drawW / 2, drawY + drawH * 0.45, drawW * 0.7, drawH * 0.75);
+        }
 
         pop();
     }
@@ -1083,10 +1471,12 @@ class Enemy {
 
 class Boss {
     constructor(x, y) {
-        this.rect = new Rect(x, y, 40, 40, true);
+        this.rect = new Rect(x, y, 64, 64, true);
         this.hp = bossMaxHp;
         this.alive = true;
+        this.lockedState = false;
         this.shootTimer = bossShootCooldown;
+        this.floatPhase = random(TWO_PI);
     }
 
     update(dt) {
@@ -1154,37 +1544,60 @@ class Boss {
 
     draw() {
         push();
-        translate(this.rect.left - cam.x, this.rect.top - cam.y);
 
+        let bob = sin(gTime * 1.9 + this.floatPhase) * 3;
+
+        let drawW = this.rect.width * 1.2;
+        let drawH = this.rect.height * 1.2;
+
+        let drawX = this.rect.left - cam.x - (drawW - this.rect.width) / 2;
+        let drawY = this.rect.top - cam.y + this.rect.height - drawH + bob;
+
+        imageMode(CORNER);
+
+        if (bossImg) {
+            if (this.lockedState) {
+                tint(255, 180, 180, 220);
+                drawingContext.shadowBlur = 16;
+                drawingContext.shadowColor = "rgba(255,120,120,0.6)";
+            } else {
+                tint(255, 255);
+                drawingContext.shadowBlur = 16;
+                drawingContext.shadowColor = "rgba(180,100,255,0.55)";
+            }
+
+            image(bossImg, drawX, drawY, drawW, drawH);
+            noTint();
+            drawingContext.shadowBlur = 0;
+
+            // 下半部分轻微融入背景
+            noStroke();
+            for (let i = 0; i < 10; i++) {
+                let a = map(i, 0, 9, 0, 18);
+                fill(8, 10, 14, a);
+                rect(drawX, drawY + drawH * 0.58 + i * 3, drawW, 3);
+            }
+        } else {
+            noStroke();
+            fill(95, 20, 125, 220);
+            ellipse(drawX + drawW / 2, drawY + drawH / 2, drawW * 0.8, drawH * 0.8);
+        }
+
+        let hpRatio = constrain(this.hp / bossMaxHp, 0, 1);
         noStroke();
-        fill(55, 10, 75, 210);
-        ellipse(20, 24, 34, 30);
+        fill(30, 30, 30, 180);
+        rect(drawX + 6, drawY - 10, drawW - 12, 6, 3);
 
-        fill(95, 20, 125, 220);
-        ellipse(20, 13, 28, 26);
-
-        fill(255);
-        ellipse(14, 12, 5, 5);
-        ellipse(26, 12, 5, 5);
-
-        fill(0);
-        ellipse(14, 12, 2.5, 2.5);
-        ellipse(26, 12, 2.5, 2.5);
-
-        fill(160, 110, 220, 120);
-        ellipse(20, 18, 36, 20);
+        if (this.lockedState) fill(255, 80, 80);
+        else fill(180, 70, 220);
+        rect(drawX + 6, drawY - 10, (drawW - 12) * hpRatio, 6, 3);
 
         pop();
     }
 }
 
-// ==================== 工具函数 / Utility Functions ====================
-function getStoredGunLevel() {
-    let level = Number(localStorage.getItem('shopGunLevel') || '1');
-    if (!gunConfigs[level]) level = 1;
-    return level;
-}
 
+// ==================== 工具函数 / Utility Functions ====================
 function convertTime(time) {
     let seconds = floor(time % 60);
     let minutes = floor((time / 60) % 60);
@@ -1209,10 +1622,6 @@ function snapToGrid(value) {
     return floor(value / blockSize) * blockSize;
 }
 
-function tileSeed(x, y) {
-    return abs((x * 73856093) ^ (y * 19349663)) % 1000;
-}
-
 function intersectsWall(object) {
     for (let w of wall) {
         if (object.intersects(w)) return true;
@@ -1220,15 +1629,19 @@ function intersectsWall(object) {
     return false;
 }
 
-function triggerInformation(time) {
-    endTimeInformation = elapsedTime + time;
-}
+function triggerPopUp(title, message, time, requireEnter = false) {
+    if (requireEnter) {
+        endTimePopUp = Infinity;
+        popupRequiresEnter = true;
+    } else {
+        endTimePopUp = elapsedTime + time;
+        popupRequiresEnter = false;
+    }
 
-function triggerPopUp(title, message, time) {
-    endTimePopUp = elapsedTime + time;
     popUpTitle = title;
     popUpMessage = message;
 }
+
 
 // ==================== 类 / Classes ====================
 class Camera {
@@ -1404,6 +1817,7 @@ class Maze {
     }
 }
 
+
 // ==================== 地图 / Map ====================
 function setMap() {
     wall = [];
@@ -1456,67 +1870,46 @@ function drawMaze() {
     image(mazeLayer, -cam.x, -cam.y);
 }
 
-function isWallTile(gridX, gridY) {
-    if (gridX < 0 || gridY < 0 || gridY >= mazeMap.gridH || gridX >= mazeMap.gridW) return false;
-    return mazeMap.gridMap[gridY][gridX] === 0;
-}
-
 function drawTerrainToLayer(g, x, y) {
     const gx = floor(x / blockSize);
     const gy = floor(y / blockSize);
-    const seed = tileSeed(gx, gy);
+    const seed = abs(gx * 17 + gy * 23) % 24;
 
-    g.push();
-    g.noStroke();
-    g.fill(86, 92, 106);
-    g.rect(x, y, blockSize, blockSize);
-    g.fill(102, 110, 124);
-    g.rect(x + 2, y + 2, blockSize - 4, 8, 2);
+    let img = floorPlain01Img;
 
-    g.stroke(70, 76, 90);
-    g.strokeWeight(1);
-    g.line(x + 5 + (seed % 3), y + 8, x + 12 + (seed % 2), y + 10);
-    g.line(x + 18, y + 18 + (seed % 2), x + 26, y + 21);
-    g.line(x + 9, y + 24, x + 15, y + 26);
+    if (seed <= 9 && floorPlain01Img) {
+        img = floorPlain01Img;
+    } else if (seed <= 16 && floorPlain02Img) {
+        img = floorPlain02Img;
+    } else if (seed <= 21 && floorPlain03Img) {
+        img = floorPlain03Img;
+    } else if (floorCrackedGlowImg) {
+        img = floorCrackedGlowImg;
+    }
 
-    g.noStroke();
-    g.fill(130, 138, 150, 60);
-    g.circle(x + 7 + (seed % 4), y + 13, 2);
-    g.circle(x + 23, y + 9 + (seed % 3), 2);
-    g.circle(x + 18, y + 27, 2);
-    g.pop();
+    if (img) {
+        g.image(img, x, y, blockSize, blockSize);
+    } else {
+        g.push();
+        g.noStroke();
+        g.fill(86, 92, 106);
+        g.rect(x, y, blockSize, blockSize);
+        g.pop();
+    }
 }
 
 function drawWallToLayer(g, x, y) {
-    const gx = floor(x / blockSize);
-    const gy = floor(y / blockSize);
-    const up = isWallTile(gx, gy - 1);
-    const down = isWallTile(gx, gy + 1);
-    const left = isWallTile(gx - 1, gy);
-    const right = isWallTile(gx + 1, gy);
-    const seed = tileSeed(gx, gy);
-
-    g.push();
-    g.noStroke();
-
-    g.fill(36, 42, 54);
-    g.rect(x, y, blockSize, blockSize);
-
-    g.fill(52, 60, 74);
-    g.rect(x + 2, y + 2, blockSize - 4, blockSize - 4, 4);
-
-    if (!up) g.fill(80, 94, 112), g.rect(x + 2, y + 2, blockSize - 4, 5, 3);
-    if (!left) g.fill(70, 82, 98), g.rect(x + 2, y + 2, 5, blockSize - 4, 3);
-    if (!down) g.fill(18, 24, 32, 150), g.rect(x + 2, y + blockSize - 7, blockSize - 4, 5, 3);
-    if (!right) g.fill(18, 24, 32, 120), g.rect(x + blockSize - 7, y + 2, 5, blockSize - 4, 3);
-
-    g.fill(88, 100, 118, 110);
-    g.rect(x + 6, y + 8, 8, 5, 2);
-    g.rect(x + 18, y + 7 + (seed % 2), 7, 5, 2);
-    g.rect(x + 10, y + 19, 10, 6, 2);
-
-    g.pop();
+    if (wallLevel3Img) {
+        g.image(wallLevel3Img, x, y, blockSize, blockSize);
+    } else {
+        g.push();
+        g.noStroke();
+        g.fill(36, 42, 54);
+        g.rect(x, y, blockSize, blockSize);
+        g.pop();
+    }
 }
+
 
 // ==================== UI / Screens ====================
 function drawStart() {
@@ -1531,10 +1924,10 @@ function drawStart() {
     text('Explorer Camp - Level 3', width / 2, height / 2 - 28);
 
     textSize(12);
-    textFont('Verdana');
-    text("Find the map, lamp and gun.", width / 2, height / 2 + 2);
-    text("Use portals, survive the creatures, defeat the boss.", width / 2, height / 2 + 20);
-    text(`Current gun: ${currentGunStats.name}`, width / 2, height / 2 + 40);
+    textFont('Arial');
+    text("Find the map, light, lock and key.", width / 2, height / 2 + 2);
+    text("Use portals, survive the little ghosts, seal the boss.", width / 2, height / 2 + 20);
+    text(`Starting weapon: ${currentWeaponStats.name}`, width / 2, height / 2 + 40);
 
     if (floor(gTime * 3) % 2 === 1) {
         text("Press ENTER to start", width / 2, height / 2 + 64);
@@ -1555,14 +1948,13 @@ function drawEnd() {
     text('LEVEL 3 COMPLETE', width / 2, height / 2 - 38);
 
     textSize(12);
-    textFont('Verdana');
+    textFont('Arial');
     text(`Small kills: ${smallKillCount}`, width / 2, height / 2 - 8);
-    text(`Boss kills: ${bossKillCount}`, width / 2, height / 2 + 10);
-    text(`Coins earned this run: £${coinsEarnedThisRun}`, width / 2, height / 2 + 28);
-    text(`Total coins: £${localStorage.getItem('gameCoins') || '0'}`, width / 2, height / 2 + 46);
+    text(`Boss sealed: Yes`, width / 2, height / 2 + 12);
+    text(`Item Codex: ${getCodexDisplayText()}`, width / 2, height / 2 + 34);
 
     if (floor(gTime * 3) % 2 === 1) {
-        text("Press ESC to restart", width / 2, height / 2 + 72);
+        text("Press ESC to restart", width / 2, height / 2 + 66);
     }
 
     textAlign(LEFT);
@@ -1581,7 +1973,7 @@ function drawPause() {
 
     if (floor(gTime * 3) % 2 === 1) {
         textSize(12);
-        textFont('Verdana');
+        textFont('Arial');
         text("Press 'P' to pause/resume the game", width / 2, height / 2 + 20);
     }
 
@@ -1600,14 +1992,13 @@ function drawGameOver() {
     text('GAME OVER', width / 2, height / 2 - 42);
 
     textSize(11);
-    textFont('Verdana');
+    textFont('Arial');
     text(gameoverMsg, width / 2, height / 2 - 16);
-    text(`Small kills: ${smallKillCount}`, width / 2, height / 2 + 8);
-    text(`Boss kills: ${bossKillCount}`, width / 2, height / 2 + 24);
-    text(`Coins earned this run: £${coinsEarnedThisRun}`, width / 2, height / 2 + 40);
+    text(`Small kills: ${smallKillCount}`, width / 2, height / 2 + 10);
+    text(`Item Codex: ${getCodexDisplayText()}`, width / 2, height / 2 + 30);
 
     if (floor(gTime * 3) % 2 === 1) {
-        text("Press ESC to restart", width / 2, height / 2 + 68);
+        text("Press ESC to restart", width / 2, height / 2 + 58);
     }
 
     textAlign(LEFT);
@@ -1621,7 +2012,7 @@ function drawPopUp() {
     textAlign(CENTER);
     fill(255);
     textSize(16);
-    textFont('Verdana');
+    textFont('Arial');
     text(popUpTitle, width / 2, 100);
 
     textSize(12);
@@ -1633,27 +2024,30 @@ function drawPopUp() {
 function drawInformation() {
     fill(80, 105, 140);
     noStroke();
-    rect(width / 2 - 230, 56, 460, 380, 8);
+    rect(width / 2 - 230, 56, 460, 390, 8);
 
     textAlign(CENTER);
     fill(255);
     textSize(16);
-    textFont('Verdana');
+    textFont('Arial');
     text('Instructions', width / 2, 90);
 
     textAlign(LEFT);
     textSize(12);
+    noStroke();
 
     text('Find the chest first to unlock the mini map.', width / 2 - 210, 132);
     text('The fog covers the whole map at first.', width / 2 - 210, 152);
-    text('Find the lamp to unlock the lit vision area.', width / 2 - 210, 172);
-    text('Inside the lit area, your gun can auto-lock targets.', width / 2 - 210, 192);
-    text('Small enemies need several hits and can also shoot.', width / 2 - 210, 212);
-    text('Defeat a small enemy to recover 20 HP.', width / 2 - 210, 232);
-    text('Any portal can send you to another portal.', width / 2 - 210, 252);
-    text('Defeat the boss to open the exit.', width / 2 - 210, 272);
-    text("Press 'M' to show/hide the mini map.", width / 2 - 210, 300);
-    text("Press 'P' to pause.", width / 2 - 210, 320);
+    text('Find the light to unlock the lit vision area.', width / 2 - 210, 172);
+    text('Inside the lit area, your weapon can auto-lock targets.', width / 2 - 210, 192);
+    text('You start this level with your remembered weapon from Level 2.', width / 2 - 210, 212);
+    text('Find both the lock and the key to unlock the Seal.', width / 2 - 210, 232);
+    text('Use SHIFT to switch between Crossbow / Ring / Seal.', width / 2 - 210, 252);
+    text('The boss cannot be cleared by damage alone.', width / 2 - 210, 272);
+    text('When the boss enters locked HP state, switch to Seal and', width / 2 - 210, 292);
+    text('press SPACE near it to finish the level.', width / 2 - 210, 312);
+    text("Use Arrow Keys or WASD to move.", width / 2 - 210, 336);
+    text("Press 'M' to show/hide the mini map and 'P' to pause.", width / 2 - 210, 356);
 
     textAlign(CENTER);
     textSize(10);
@@ -1661,17 +2055,30 @@ function drawInformation() {
     strokeWeight(2);
     noFill();
 
-    text('Up', width / 2, 345);
-    rect(width / 2 - 22.5, 320, 45, 45, 10);
+    text('Up', width / 2, 350);
+    rect(width / 2 - 22.5, 325, 45, 45, 10);
 
-    text('Left', width / 2 - 50, 396);
-    rect(width / 2 - 72.5, 370, 45, 45, 10);
+    text('Left', width / 2 - 50, 401);
+    rect(width / 2 - 72.5, 375, 45, 45, 10);
 
-    text('Down', width / 2, 396);
-    rect(width / 2 - 22.5, 370, 45, 45, 10);
+    text('Down', width / 2, 401);
+    rect(width / 2 - 22.5, 375, 45, 45, 10);
 
-    text('Right', width / 2 + 50, 396);
-    rect(width / 2 + 27.5, 370, 45, 45, 10);
+    text('Right', width / 2 + 50, 401);
+    rect(width / 2 + 27.5, 375, 45, 45, 10);
+
+    push();
+    textAlign(CENTER, CENTER);
+    textFont('Arial');
+    textSize(12);
+    fill(255);
+    noStroke();
+    strokeWeight(0);
+
+    if (floor(gTime * 3) % 2 === 1) {
+        text("Press 'Enter' to continue", width / 2, 425);
+    }
+    pop();
 
     textAlign(LEFT);
 }
@@ -1707,28 +2114,29 @@ function drawMiniMap() {
         );
     }
 
-    fill(bossDefeated ? 0 : 180, bossDefeated ? 200 : 40, 40);
-    rect(
-        (exitDoor.left / blockSize) * miniMapScale + miniMapLeft + miniMapBorder,
-        (exitDoor.top / blockSize) * miniMapScale + miniMapTop + miniMapBorder,
-        miniMapScale,
-        miniMapScale
-    );
-
-    if (!hasLamp) {
+    if (!hasLight) {
         fill(255, 220, 0);
         circle(
-            (lampItem.left / blockSize) * miniMapScale + miniMapLeft + miniMapBorder + 1,
-            (lampItem.top / blockSize) * miniMapScale + miniMapTop + miniMapBorder + 1,
+            (lightItem.left / blockSize) * miniMapScale + miniMapLeft + miniMapBorder + 1,
+            (lightItem.top / blockSize) * miniMapScale + miniMapTop + miniMapBorder + 1,
             4
         );
     }
 
-    if (!hasGun) {
-        fill(0, 120, 255);
+    if (!hasLock) {
+        fill(220, 190, 120);
         circle(
-            (gunItem.left / blockSize) * miniMapScale + miniMapLeft + miniMapBorder + 1,
-            (gunItem.top / blockSize) * miniMapScale + miniMapTop + miniMapBorder + 1,
+            (lockItem.left / blockSize) * miniMapScale + miniMapLeft + miniMapBorder + 1,
+            (lockItem.top / blockSize) * miniMapScale + miniMapTop + miniMapBorder + 1,
+            4
+        );
+    }
+
+    if (!hasKey) {
+        fill(120, 220, 120);
+        circle(
+            (keyItem.left / blockSize) * miniMapScale + miniMapLeft + miniMapBorder + 1,
+            (keyItem.top / blockSize) * miniMapScale + miniMapTop + miniMapBorder + 1,
             4
         );
     }
@@ -1743,11 +2151,11 @@ function drawMiniMap() {
     }
 
     if (boss && boss.alive) {
-        fill(90, 0, 150);
+        fill(boss.lockedState ? 255 : 90, boss.lockedState ? 90 : 0, 150);
         circle(
             (boss.rect.left / blockSize) * miniMapScale + miniMapLeft + miniMapBorder + 1,
             (boss.rect.top / blockSize) * miniMapScale + miniMapTop + miniMapBorder + 1,
-            5
+            6
         );
     }
 
@@ -1775,6 +2183,7 @@ function drawElapsedTime() {
     textAlign(LEFT);
 }
 
+
 // ==================== 重置 / Reset ====================
 function resetGame() {
     gTime = 0;
@@ -1785,42 +2194,46 @@ function resetGame() {
     start = true;
     end = false;
     moving = false;
+    showInstructions = false;
 
     wall = [];
     terrain = [];
     dir = 0;
 
     box = null;
-    lampItem = null;
-    gunItem = null;
-    exitDoor = null;
+    lightItem = null;
+    lockItem = null;
+    keyItem = null;
 
     portals = [];
-    bullets = [];
+    projectiles = [];
     enemyProjectiles = [];
     enemies = [];
     boss = null;
 
     hasMiniMap = false;
-    hasLamp = false;
-    hasGun = false;
-    showMiniMap = true;
-    bossDefeated = false;
+    hasLight = false;
+    hasCrossbow = true;
+    hasRing = hasCodexItem('ring');
+    hasLock = false;
+    hasKey = false;
+    bossSealed = false;
 
     playerHp = playerMaxHp;
     playerInvulnTimer = 0;
-    shootCooldownTimer = 0;
+    attackCooldownTimer = 0;
     teleportCooldownTimer = 0;
 
     smallKillCount = 0;
-    bossKillCount = 0;
-    coinsEarnedThisRun = 0;
 
     endTimePopUp = 0;
     popUpTitle = '';
     popUpMessage = '';
     gameoverMsg = '';
-    endTimeInformation = 0;
+    popupRequiresEnter = false;
+
+    bossSealAnimating = false;
+    bossSealAnimTime = 0;
 
     setup();
 }
