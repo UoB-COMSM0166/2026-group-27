@@ -406,7 +406,7 @@ During our initial implementation, we found that players were still able to atta
 
 To ensure that the limited visibility feature affected gameplay, we added the fog effect using an off-screen layer, where a dark overlay is drawn with a circular area around the character, which is removed to represent their field of view when a torch is collected.  
 
-Additionally, we modified the weapon target system so that enemies could only be defeated if they were within the character’s visibility area. This was done by using a distance-based check. We used the Euclidean distance calculation (d = √(dx² + dy²) instead of a rectangular check, ensuring that the weapon attack range was completely circular, preventing corner exploitation. 
+Additionally, we modified the weapon target system so that enemies could only be defeated if they were within the character’s visibility area. This was done by using a distance-based check. We used the Euclidean distance calculation (d = √(dx² + dy²) instead of a rectangular check, ensuring that the weapon attack range was completely circular, preventing corner exploitation (Ericson, 2005). 
 
 These changes ensure that what the player sees matches with what they can interact with, making it appropriately challenging and strengthening immersion, as enemies cannot be defeated unless they are within the character’s field of vision, rather than the player’s vision of the whole dark maze. 
 
