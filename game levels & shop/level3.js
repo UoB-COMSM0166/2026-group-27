@@ -685,6 +685,10 @@ function damagePlayer(amount, sourceText = "Something hurt you!") {
     }
 }
 
+function healPlayer(amount) {
+    playerHp = min(playerMaxHp, playerHp + amount);
+}
+
 function updateProjectiles(dt) {
     for (let p of projectiles) {
         p.update(dt);
@@ -700,43 +704,44 @@ function updateProjectiles(dt) {
                     e.hp = 0;
                     e.alive = false;
                     smallKillCount += 1;
+                    healPlayer(3);
                 }
             }
         }
 
         if (boss && boss.alive && p.alive && pRect.intersects(boss.rect)) {
-            if (!(hasLock && hasKey)) {
-                boss.hp = 1;
-                if (!boss.lockedState) {
-                    boss.lockedState = true;
-                    triggerPopUp(
-                        "Boss locked!",
-                        "You need both the lock and the key to seal it.",
-                        2.2
-                    );
-                }
+            // 锁血后不再继续掉血
+            if (boss.lockedState) {
                 p.alive = false;
                 continue;
             }
 
-            if (hasLock && hasKey && currentWeapon !== "seal") {
-                boss.hp = max(1, boss.hp - p.damage);
-                if (boss.hp <= 1) {
-                    boss.hp = 1;
-                    boss.lockedState = true;
+            // 正常扣血
+            boss.hp -= p.damage;
+            p.alive = false;
+
+            // 快死时进入锁血/眩晕状态
+            if (boss.hp <= 18) {
+                boss.hp = 1;
+                boss.lockedState = true;
+
+                if (hasLock && hasKey) {
                     triggerPopUp(
                         "Boss weakened!",
                         "Switch to Seal and press SPACE near the boss.",
                         2.5
                     );
+                } else {
+                    triggerPopUp(
+                        "Boss stunned!",
+                        "You still need both the lock and the key to seal it.",
+                        2.5
+                    );
                 }
-                p.alive = false;
-                continue;
             }
-
-            p.alive = false;
         }
     }
+    
 
     projectiles = projectiles.filter(p => p.alive);
     enemies = enemies.filter(e => e.alive);
@@ -1582,15 +1587,6 @@ class Boss {
             fill(95, 20, 125, 220);
             ellipse(drawX + drawW / 2, drawY + drawH / 2, drawW * 0.8, drawH * 0.8);
         }
-
-        let hpRatio = constrain(this.hp / bossMaxHp, 0, 1);
-        noStroke();
-        fill(30, 30, 30, 180);
-        rect(drawX + 6, drawY - 10, drawW - 12, 6, 3);
-
-        if (this.lockedState) fill(255, 80, 80);
-        else fill(180, 70, 220);
-        rect(drawX + 6, drawY - 10, (drawW - 12) * hpRatio, 6, 3);
 
         pop();
     }
