@@ -96,6 +96,9 @@ let portalImg;
 let cageImg;
 let littleGhostImg;
 let bossImg;
+let mapUIImg;
+let timeUIImg;
+let hpUIImg;
 
 // ==================== 状态 / States ====================
 let hasMiniMap = false;
@@ -214,6 +217,9 @@ function preload() {
     floorPlain03Img = loadImage('assets/floor_plain_3.png');
     floorCrackedGlowImg = loadImage('assets/floor_cracked_glow3.png');
     wallLevel3Img = loadImage('assets/wall_level_3.png');
+    mapUIImg = loadImage('assets/map.png');
+    timeUIImg = loadImage('assets/time.png');
+    hpUIImg = loadImage('assets/hp.png');
 
     boxImg = loadImage('assets/box.png');
     lightImg = loadImage('assets/light.png');
@@ -1197,63 +1203,79 @@ function drawBossCage() {
 }
 
 function drawHud() {
+    // 开始界面 / 说明界面时不显示，避免挡住画面
+    if (start || showInstructions) return;
+
     fill(255);
     textSize(12);
     textFont('Arial');
     textAlign(LEFT);
 
-    let y = 20;
-    text("Level 3 Demo", 15, y);
-    y += 16;
-    text("Character: " + getSelectedCharacterName(), 15, y);
-    y += 16;
-    text("Weapon: " + currentWeaponStats.name, 15, y);
-    y += 16;
-    text("Map: " + (hasMiniMap ? "Yes" : "No"), 15, y);
-    y += 16;
-    text("Light: " + (hasLight ? "Yes" : "No"), 15, y);
-    y += 16;
-    text("Lock: " + (hasLock ? "Yes" : "No"), 15, y);
-    y += 16;
-    text("Key: " + (hasKey ? "Yes" : "No"), 15, y);
-    y += 16;
-    text("Boss: " + (bossSealed ? "Sealed" : (boss && boss.lockedState ? "Locked HP" : "Alive")), 15, y);
-    y += 16;
-    text("Small kills: " + smallKillCount, 15, y);
+    // 左上角只保留最重要的信息
+    let x = 14;
+    let y = 22;
 
-    textAlign(RIGHT);
-    text("Item Codex: " + getCodexDisplayText(), width - 15, 20);
+    text(`Weapon: ${currentWeaponStats.name}`, x, y);
+    y += 18;
+
+    let itemText = [];
+    if (hasMiniMap) itemText.push("Map");
+    if (hasLight) itemText.push("Light");
+    if (hasLock) itemText.push("Lock");
+    if (hasKey) itemText.push("Key");
+
+    text(`Items: ${itemText.length ? itemText.join(", ") : "None"}`, x, y);
+    y += 18;
+
+    text(`Boss: ${bossSealed ? "Sealed" : (boss && boss.lockedState ? "Stunned" : "Alive")}`, x, y);
     textAlign(LEFT);
 }
 
 function drawPlayerHealthBar() {
-    let x = width - 190;
-    let y = 16;
-    let w = 160;
-    let h = 16;
+    // ===== 缩小后的外框 =====
+    let frameW = 200;
+    let frameH = 50;
+
+    let frameX = width - frameW - 45;
+    let frameY = 6;
+
+    // ===== 按比例缩小后的内容区 =====
+    let barX = frameX + 32;
+    let barY = frameY + 17;
+    let barW = 146;
+    let barH = 18;
+
     let ratio = constrain(playerHp / playerMaxHp, 0, 1);
 
+    // 底槽
     noStroke();
-    fill(20, 20, 20, 180);
-    rect(x - 8, y - 10, w + 16, 36, 8);
+    fill(55, 28, 18);
+    rect(barX, barY, barW, barH, 6);
 
-    fill(255);
-    textAlign(LEFT);
-    textSize(12);
-    text("HP", x, y - 2);
+    // 血量
+    for (let i = 0; i < barW * ratio; i++) {
+        let t = i / barW;
+        let r = lerp(120, 200, t);
+        let g = lerp(22, 38, t);
+        let b = lerp(20, 28, t);
+        stroke(r, g, b);
+        line(barX + i, barY, barX + i, barY + barH);
+    }
+    noStroke();
 
-    fill(70);
-    rect(x, y + 4, w, h, 4);
+    // 数字
+    fill(230, 210, 160);
+    textAlign(CENTER, CENTER);
+    textSize(13);
+    textFont('Georgia');
+    text(`${playerHp}/${playerMaxHp}`, barX + barW / 2, barY + barH / 2 + 1);
 
-    if (ratio > 0.5) fill(70, 200, 100);
-    else if (ratio > 0.25) fill(240, 180, 60);
-    else fill(220, 70, 70);
-    rect(x, y + 4, w * ratio, h, 4);
+    // 盖边框
+    if (hpUIImg) {
+        image(hpUIImg, frameX, frameY, frameW, frameH);
+    }
 
-    fill(255);
-    textAlign(CENTER);
-    text(`${playerHp}/${playerMaxHp}`, x + w / 2, y + 17);
-    textAlign(LEFT);
+    textAlign(LEFT, BASELINE);
 }
 
 
@@ -2080,103 +2102,93 @@ function drawInformation() {
 }
 
 function drawMiniMap() {
-    let miniMapBorder = 5;
-    let miniMapLeft = 10;
-    let miniMapTop = height - mazeMap.gridH * miniMapScale - 10 - miniMapBorder;
+    let frameW = 215;
+    let frameH = 200;
 
-    fill(255);
+    let frameX = 10;
+    let frameY = height - frameH - -5;
+
+    // ===== 内部区域 =====
+    let innerX = frameX + 51;
+    let innerY = frameY + 43.5;
+    let innerW = 108;
+    let innerH = 112;
+
+    let scaleX = innerW / mazeMap.gridW;
+    let scaleY = innerH / mazeMap.gridH;
+    let scale = min(scaleX, scaleY);
+
+    // ===== 背景（羊皮纸色）=====
+    fill(230, 210, 160);
     noStroke();
-    rect(miniMapLeft, miniMapTop, mazeMap.gridW * miniMapScale + 10, mazeMap.gridH * miniMapScale + 10);
+    rect(innerX, innerY, innerW, innerH, 4);
 
-    fill(210);
-    rect(miniMapLeft + miniMapBorder, miniMapTop + miniMapBorder, mazeMap.gridW * miniMapScale, mazeMap.gridH * miniMapScale);
-
-    fill(0);
+    // ===== 墙 =====
+    fill(60, 40, 20);
     for (let w of wall) {
         rect(
-            (w.left / blockSize) * miniMapScale + miniMapLeft + miniMapBorder,
-            (w.top / blockSize) * miniMapScale + miniMapTop + miniMapBorder,
-            miniMapScale,
-            miniMapScale
+            (w.left / blockSize) * scale + innerX,
+            (w.top / blockSize) * scale + innerY,
+            scale,
+            scale
         );
     }
 
-    fill(150, 80, 255);
-    for (let p of portals) {
-        circle(
-            (p.left / blockSize) * miniMapScale + miniMapLeft + miniMapBorder + 1,
-            (p.top / blockSize) * miniMapScale + miniMapTop + miniMapBorder + 1,
-            4
-        );
-    }
-
-    if (!hasLight) {
-        fill(255, 220, 0);
-        circle(
-            (lightItem.left / blockSize) * miniMapScale + miniMapLeft + miniMapBorder + 1,
-            (lightItem.top / blockSize) * miniMapScale + miniMapTop + miniMapBorder + 1,
-            4
-        );
-    }
-
-    if (!hasLock) {
-        fill(220, 190, 120);
-        circle(
-            (lockItem.left / blockSize) * miniMapScale + miniMapLeft + miniMapBorder + 1,
-            (lockItem.top / blockSize) * miniMapScale + miniMapTop + miniMapBorder + 1,
-            4
-        );
-    }
-
-    if (!hasKey) {
-        fill(120, 220, 120);
-        circle(
-            (keyItem.left / blockSize) * miniMapScale + miniMapLeft + miniMapBorder + 1,
-            (keyItem.top / blockSize) * miniMapScale + miniMapTop + miniMapBorder + 1,
-            4
-        );
-    }
-
-    fill(180, 0, 180);
+    // ===== 敌人 =====
+    fill(120, 0, 120);
     for (let e of enemies) {
         circle(
-            (e.rect.left / blockSize) * miniMapScale + miniMapLeft + miniMapBorder + 1,
-            (e.rect.top / blockSize) * miniMapScale + miniMapTop + miniMapBorder + 1,
+            (e.rect.left / blockSize) * scale + innerX + 1,
+            (e.rect.top / blockSize) * scale + innerY + 1,
             3
         );
     }
 
-    if (boss && boss.alive) {
-        fill(boss.lockedState ? 255 : 90, boss.lockedState ? 90 : 0, 150);
-        circle(
-            (boss.rect.left / blockSize) * miniMapScale + miniMapLeft + miniMapBorder + 1,
-            (boss.rect.top / blockSize) * miniMapScale + miniMapTop + miniMapBorder + 1,
-            6
-        );
-    }
-
-    fill(255, 0, 0);
+    // ===== 玩家 =====
+    fill(200, 30, 30);
     circle(
-        (player.left / blockSize) * miniMapScale + miniMapLeft + miniMapBorder + 1,
-        (player.top / blockSize) * miniMapScale + miniMapTop + miniMapBorder + 1,
+        (player.left / blockSize) * scale + innerX + 1,
+        (player.top / blockSize) * scale + innerY + 1,
         4
     );
+
+    // ===== 金框盖上 =====
+    if (mapUIImg) {
+        image(mapUIImg, frameX, frameY, frameW, frameH);
+    }
 }
 
 function drawElapsedTime() {
-    fill(0);
+    let frameW = 120;
+    let frameH = 100;
+
+    let frameX = width / 2 - frameW / 2;
+    let frameY = -20;
+
+    let innerW = 76;
+    let innerH = 35;
+
+    let innerX = frameX + (frameW - innerW) / 2;
+    let innerY = frameY + (frameH - innerH) / 1.8;
+
+    // ===== 背景（羊皮纸色）=====
+    fill(230, 210, 160);
     noStroke();
-    rect(width / 2 - 37, 5, 74, 42);
+    rect(innerX, innerY, innerW, innerH, 6);
 
-    fill(255);
-    rect(width / 2 - 32, 10, 64, 32);
-
-    fill(0);
-    textAlign(CENTER);
+    // ===== 文字（深棕）=====
+    fill(60, 40, 20);
+    textAlign(CENTER, CENTER);
     textSize(20);
-    textFont('Arial');
-    text(convertTime(elapsedTime), width / 2, 32);
-    textAlign(LEFT);
+    textFont('Georgia');
+    text(convertTime(elapsedTime), innerX + innerW / 2, innerY + innerH / 2 + 1);
+
+    // ===== 金框盖上 =====
+    if (timeUIImg) {
+        image(timeUIImg, frameX, frameY, frameW, frameH);
+    }
+
+    textAlign(LEFT, BASELINE);
 }
 
 
