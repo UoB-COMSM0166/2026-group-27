@@ -241,7 +241,8 @@ function preload() {
 // ==================== p5 入口 / p5 Entry ====================
 function setup() {
     createCanvas(800, 600);
-
+    setupSelectedCharacter();
+    
     unlockCodexItem('crossbow');
     hasRing = hasCodexItem('ring');
 
