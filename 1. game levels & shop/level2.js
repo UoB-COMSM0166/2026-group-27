@@ -139,7 +139,8 @@ function preload() {
 // ==================== p5 入口 / p5 Entry ====================
 function setup() {
     createCanvas(800, 600);
-
+    setupSelectedCharacter();
+    
     // 第二关默认图鉴里有弩箭
     unlockCodexItem('crossbow');
 
