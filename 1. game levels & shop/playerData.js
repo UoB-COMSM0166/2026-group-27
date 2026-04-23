@@ -1,4 +1,5 @@
-const CHARACTER_STORAGE_KEY = "selectedCharacter";
+let currentCharacterConfig = null;
+const CHARACTER_STORAGE_KEY = "selectedCharacterId";
 
 const CHARACTER_CONFIG = {
     fox: {
@@ -42,21 +43,33 @@ const CHARACTER_CONFIG = {
 };
 
 function saveSelectedCharacter(characterId) {
+    characterId = String(characterId).toLowerCase();
+
     if (CHARACTER_CONFIG[characterId]) {
         localStorage.setItem(CHARACTER_STORAGE_KEY, characterId);
     }
 }
 
 function getSelectedCharacterId() {
-    const saved = localStorage.getItem(CHARACTER_STORAGE_KEY);
-    if (saved && CHARACTER_CONFIG[saved]) {
-        return saved;
-    }
+    let saved =
+        localStorage.getItem("selectedCharacterId") ||
+        localStorage.getItem("selectedCharacter") ||
+        "fox";
+
+    saved = String(saved).toLowerCase();
+
+    if (saved === "1") saved = "fernando";
+    if (saved === "2") saved = "eliza";
+    if (saved === "3") saved = "fox";
+
+    if (CHARACTER_CONFIG[saved]) return saved;
+
     return "fox";
 }
 
 function getSelectedCharacterConfig() {
-    return CHARACTER_CONFIG[getSelectedCharacterId()];
+    currentCharacterConfig = CHARACTER_CONFIG[getSelectedCharacterId()];
+    return currentCharacterConfig;
 }
 
 function getAllCharacters() {
@@ -65,4 +78,9 @@ function getAllCharacters() {
 
 function isCharacterSelected(characterId) {
     return getSelectedCharacterId() === characterId;
+}
+
+function setupSelectedCharacter() {
+    currentCharacterConfig = getSelectedCharacterConfig();
+    return currentCharacterConfig;
 }
