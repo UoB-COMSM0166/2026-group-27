@@ -154,7 +154,8 @@ function preload() {
 
 function setup() {
     createCanvas(800, 600);
-
+    setupSelectedCharacter();
+    
     mazeMap = new Maze(mazeW, mazeH, 'random', 1, 1);
     player = new Rect(32, 32, 32, 48, true);
     cam = new Camera();
