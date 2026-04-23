@@ -479,7 +479,7 @@ What made this implementation tractable was that no new subsystems were needed: 
 
 # 6. Evaluation
 
-The game was evaluated during its prototype stage, enabling us to identify and fix usability issues, navigation problems, and technical bugs during development. Since the game did not yet include the final Bristol-themed visuals, this allowed us to focus on evaluating the core gameplay mechanics without the influence of visual or narrative elements. 
+The game was evaluated during its prototype stage, enabling us to identify and fix usability issues and technical bugs during development. Since the game did not yet include the final Bristol-themed visuals, this allowed us to focus on evaluating the core gameplay mechanics without the influence of visual or narrative elements. 
 
 We used a mixed-methods approach, combining quantitative data from the System Usability Scale (SUS) with qualitative feedback from Think Aloud sessions. This helped us understand how well users could complete tasks and their overall experience during gameplay.
 
