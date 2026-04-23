@@ -37,6 +37,8 @@ const fogRevealRadius = 165;
 const ITEM_CODEX_KEY = "itemCodex";
 const EQUIPPED_WEAPON_KEY = "equippedWeapon";
 
+const bossSealHoldTime = 1.8;
+
 // 武器配置 / Weapon configs
 const weaponConfigs = {
     crossbow: { name: "Crossbow", damage: 16, speed: 360, cooldown: 0.22 },
@@ -130,7 +132,7 @@ let popupRequiresEnter = false;
 let bossSealAnimating = false;
 let bossSealAnimTime = 0;
 let bossSealDuration = 0.55;
-
+let bossSealHoldTimer = 0;
 
 // ==================== 图鉴 / Item Codex ====================
 function getCodexItems() {
@@ -314,7 +316,7 @@ function drawGame() {
         boss.draw();
     }
 
-    if (boss && bossSealAnimating) {
+    if (boss && (bossSealAnimating || bossSealed || end)) {
         drawBossCage();
     }
 
@@ -358,12 +360,17 @@ function act(dt) {
         bossSealAnimTime += dt;
 
         if (bossSealAnimTime >= bossSealDuration) {
-            bossSealAnimating = false;
-            if (boss) boss.alive = false;
-            bossSealed = true;
-            end = true;
-            pause = true;
+            bossSealHoldTimer += dt;
+
+            // 到时间后再进入通关
+            if (bossSealHoldTimer >= bossSealHoldTime) {
+                if (boss) boss.alive = false;
+                bossSealed = true;
+                end = true;
+                pause = true;
+            }
         }
+
         return;
     }
 
@@ -642,6 +649,7 @@ function attemptSealBoss() {
 function startBossSeal() {
     bossSealAnimating = true;
     bossSealAnimTime = 0;
+    bossSealHoldTimer = 0;
     pause = true;
 }
 
@@ -1175,30 +1183,72 @@ function drawBossCage() {
     let bx = boss.rect.left - cam.x;
     let by = boss.rect.top - cam.y;
 
-    let cageW = boss.rect.width * 1.45;
-    let cageH = boss.rect.height * 1.45;
+    let cageW = boss.rect.width * 1.5;
+    let cageH = boss.rect.height * 1.5;
 
     let targetX = bx - (cageW - boss.rect.width) / 2;
     let targetY = by - (cageH - boss.rect.height) / 2;
 
-    let t = constrain(bossSealAnimTime / bossSealDuration, 0, 1);
-    let startY = targetY - 120;
-    let drawY = lerp(startY, targetY, t);
+    let drawY = targetY;
+
+    // 下落动画
+    if (bossSealAnimating && bossSealAnimTime < bossSealDuration) {
+        let t = constrain(bossSealAnimTime / bossSealDuration, 0, 1);
+        let startY = targetY - 140;
+        drawY = lerp(startY, targetY, t);
+    }
 
     push();
     imageMode(CORNER);
 
+    // ===== 金光核心（呼吸感）=====
+    let glow = 22 + sin(gTime * 5) * 10;
+    drawingContext.shadowBlur = glow;
+    drawingContext.shadowColor = "rgba(255, 220, 120, 0.9)";
+
+    // ===== 主笼子 =====
     if (cageImg) {
-        tint(255, 255);
+        tint(255, 245, 180); // 偏金色
         image(cageImg, targetX, drawY, cageW, cageH);
         noTint();
     } else {
-        noFill();
-        stroke(180, 220, 255);
+        stroke(255, 220, 120);
         strokeWeight(4);
+        noFill();
         rect(targetX, drawY, cageW, cageH, 6);
     }
 
+    // ===== 外圈光环 =====
+    noStroke();
+    fill(255, 215, 100, 40);
+    ellipse(
+        targetX + cageW / 2,
+        drawY + cageH / 2,
+        cageW * 1.1,
+        cageH * 1.1
+    );
+
+    // ===== 内部封印光 =====
+    fill(255, 240, 160, 60);
+    ellipse(
+        targetX + cageW / 2,
+        drawY + cageH / 2,
+        cageW * 0.7,
+        cageH * 0.7
+    );
+
+    // ===== 金色十字闪光（重点帅）=====
+    stroke(255, 240, 180, 180);
+    strokeWeight(2);
+
+    let cx = targetX + cageW / 2;
+    let cy = drawY + cageH / 2;
+    let cross = 20 + sin(gTime * 8) * 6;
+
+    line(cx - cross, cy, cx + cross, cy);
+    line(cx, cy - cross, cx, cy + cross);
+
+    drawingContext.shadowBlur = 0;
     pop();
 }
 
