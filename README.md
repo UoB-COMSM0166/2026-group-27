@@ -425,6 +425,24 @@ Collision response rides on the same pattern. Movement is applied per axis, and 
 
 Every system described in the following sections assumes this foundation. The fog buffer in §5.1 is redrawn fresh every frame inside `drawGame()` because `drawFog()` is a flag-gated call like any other UI routine. The spawn loops in §5.2 can afford their 300–400 retry iterations because they run once during `setup()`, not per-frame. The boss AI in §5.3 scales its chasing velocity by `dt` and its shoot timer by `dt` using exactly the same pattern as the player—meaning the boss is guaranteed to behave the same way on every machine, and its tuning constants are real-world seconds rather than opaque magic numbers.
 
+
+
+## 5.1 Limited Visibility and Combat System - shorter version, need to include code here
+
+
+A key challenge we faced was implementing a limited visibility feature (fog) in levels 2 and 3. This restricts the player’s vision so that most of the maze remains dark, making navigation difficult and increasing the overall difficulty compared to level 1. Players can improve visibility by collecting a torch, which allows them to see a small area around the character (figure?)
+
+However, we did not want the maze to be completely black. This was to ensure that the game remains accessible, allowing players with visual impairments to still navigate the maze. This also balances challenge with usability, as a completely dark maze would make gameplay frustrating rather than engaging.
+
+During our initial implementation, we found that players were still able to attack enemies outside the character’s field of vision. This meant the feature did not serve its intended purpose and became a merely visual effect rather than affecting gameplay. 
+
+To ensure that the limited visibility feature affected gameplay, we added the fog effect using an off-screen layer, where a dark overlay is drawn with a circular area around the character, which is removed to represent their field of view when a torch is collected.  
+
+Additionally, we modified the weapon target system so that enemies could only be defeated if they were within the character’s visibility area. This was done by using a distance-based check. We used the Euclidean distance calculation (d = √(dx² + dy²) instead of a rectangular check, ensuring that the weapon attack range was completely circular, preventing corner exploitation. 
+
+These changes ensure that what the player sees matches with what they can interact with, making it appropriately challenging and strengthening immersion, as enemies cannot be defeated unless they are within the character’s field of vision, rather than the player’s vision of the whole dark maze. 
+
+
 ## 5.1 Atmospheric Vision Masking and Combat Synchronisation
 
 ### 5.1.1 Objectives and Motivations
