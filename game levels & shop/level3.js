@@ -1342,7 +1342,7 @@ class Projectile {
 
             imageMode(CENTER);
             if (arrowImg) {
-                image(arrowImg, 0, 0, 18, 23);
+                image(arrowImg, 0, 0, 28, 12);
             } else {
                 stroke(92, 60, 32);
                 strokeWeight(3);
@@ -2105,8 +2105,8 @@ function drawMiniMap() {
     let frameW = 215;
     let frameH = 200;
 
-    let frameX = 10;
-    let frameY = height - frameH - -5;
+    let frameX = -5;
+    let frameY = height - frameH + 15;
 
     // ===== 内部区域 =====
     let innerX = frameX + 51;
