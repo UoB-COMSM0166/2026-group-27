@@ -290,7 +290,7 @@ From this, we focused on key stakeholders such as players, developers, and teste
 
 To define the core features of our game, epics and user stories were created. 
 
-Epics were used to represent core gameplay features, such as navigation, item collection, and combat, which were then made into user stories using Cohn’s format: “As a [user], I want [goal] so that [reason]” (Cohn, 2004). This helped us develop features step by step while keeping the focus on user needs, rather than creating goals that may not benefit the game.
+Epics were used to represent core gameplay features, such as navigation, item collection, and combat, which were then made into user stories using Cohn’s format: “As a [user], I want [goal] so that [reason]” (Cohn, 2004). This helped us develop features step by step while focusing on user needs, rather than creating goals that may not benefit the game.
 
 Acceptance criteria were included to determine when a feature has been successfully implemented in the game using the Given-When-Then format. “Given” describes the starting state, “When” the action, and “Then” the expected result (de Biase et al., 2024).
 
@@ -392,7 +392,7 @@ Acceptance criteria were included to determine when a feature has been successfu
 
 - 15% ~750 words
 
-- Describe implementation of your game, in particular highlighting the TWO areas of *technical challenge* in developing your game.
+- Describe the implementation of your game, in particular highlighting the TWO areas of *technical challenge* in developing your game.
 
 # 5. Implementation
 
@@ -504,7 +504,7 @@ The main issues were related to map design, controls, and game mechanics.
 
   Participants suggested several improvements to the game mechanics, some of which matched features we already planned to implement, such as      adding item descriptions to improve understanding and engagement.
 
-  Participants struggled to know when they were running out of time and needed assistance when they were under pressure, meaning the clock at     the top of the screen alone was not sufficient. Hence, we decided to add a hint system to help locate the exit when time is running low, as     well as a warning sign when 10–20 seconds remain. 
+  Participants struggled to know when they were running out of time and needed assistance when under pressure, meaning the clock at the top of    the screen alone was not sufficient. Hence, we decided to add a hint system to help locate the exit when time is running low, as well as a      warning sign when 10–20 seconds remain. 
 
 
 ## 6.2 Quantitative Analysis: System Usability Scale (SUS)
@@ -531,7 +531,7 @@ The average SUS score was 90.75/100, indicating a high level of usability.
   * The lowest positive score was for “Felt confident” (Q9 = 4.3/5). While still high, this indicates that some players may require clearer
     in-game feedback to feel fully confident during gameplay. 
 
-Overall, these results suggest that usability is unlikely to negatively impact the gameplay experience. 
+Overall, these results suggest that usability is unlikely to negatively impact players' experience. 
 
 ## 6.3 Code Testing
 
