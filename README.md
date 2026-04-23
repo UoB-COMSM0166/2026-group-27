@@ -394,38 +394,6 @@ Acceptance criteria were included to determine when a feature has been successfu
 
 - Describe the implementation of your game, in particular highlighting the TWO areas of *technical challenge* in developing your game.
 
-# 5. Implementation
-
-## 5.0 System Architecture and Frame-Rate Independence
-
-### 5.0.1 Objectives and Motivations
-
-Before any of the gameplay-specific systems described in the sections below could be built, the game needed a predictable execution loop. Two concerns drove the top-level architecture: first, that the same source code must serve radically different screens—a main menu, three distinct levels, a shop, a pause overlay, a victory screen, and a game-over screen—without those subsystems interfering with each other; and second, that the game must behave consistently across hardware, so that a player on a 144 Hz gaming laptop and a player on a 30 Hz budget browser see the same character speed and the same enemy behaviour. Both concerns are invisible when they work and catastrophic when they don't, so getting them right early was a prerequisite for every mechanic built later.
-
-### 5.0.2 State-Flag Dispatch and Delta-Time Scaling
-
-Scene control is implemented through a small set of global boolean flags—`start`, `pause`, `gameover`, `end`, together with per-level overlay flags such as `showInstructions` and `showMiniMap`—that gate which subsystems run each frame. The `draw()` function itself is deliberately minimal:
-
-```js
-function draw() {
-    let dt = deltaTime / 1000;
-    if (dt > 1) dt = 0;
-    act(dt);
-    drawGame();
-}
-```
-
-All game logic lives in `act(dt)` and short-circuits immediately when `pause` is true, while `drawGame()` dispatches to the appropriate UI routine based on the flag combination (e.g., `if (pause) { if (start) drawStart(); else if (end) drawEnd(); ... }`). This separation prevents enemy updates from bleeding into pause screens—a class of bug that dogged our earliest prototypes—and makes adding new scenes a matter of extending the flag vocabulary rather than rewriting the loop. Because `drawFog()`, `drawMiniMap()`, `drawHud()`, and so on are simple functions guarded by their own flags, every level file reuses the same skeleton while defining its own subsystems.
-
-Delta-time decoupling sits on top of this skeleton. p5.js exposes `deltaTime` in milliseconds; we convert to seconds (`dt = deltaTime / 1000`) so that every downstream calculation is expressed in intuitive units—player speed is `120 px/s`, boss speed is `36 px/s`, shoot cooldown is `1.6 s`—rather than frame-count magic numbers. All movement then multiplies by `dt` (`player.top -= 120 * deltaTime`), as do all countdown timers (`shootTimer -= dt`, `playerInvulnTimer -= dt`, etc.), guaranteeing frame-rate independence. A one-line guard, `if (dt > 1) dt = 0`, handles the edge case of the browser tab losing focus: on return the accumulated delta can exceed one second, which without the clamp would teleport the player clear across the maze in a single "catch-up" frame.
-
-Collision response rides on the same pattern. Movement is applied per axis, and after each axis move the player's hitbox is tested against every wall; on intersection, the relevant edge is snapped to the wall (`player.right = w.left`, `player.top = w.bottom`, etc.) using `Rect` setters that propagate to the opposite edge automatically. Because the axes are handled independently, the sliding behaviour along wall corners emerges for free rather than requiring special-case diagonal logic.
-
-### 5.0.3 Role as a Foundation for the Rest of This Chapter
-
-Every system described in the following sections assumes this foundation. The fog buffer in §5.1 is redrawn fresh every frame inside `drawGame()` because `drawFog()` is a flag-gated call like any other UI routine. The spawn loops in §5.2 can afford their 300–400 retry iterations because they run once during `setup()`, not per-frame. The boss AI in §5.3 scales its chasing velocity by `dt` and its shoot timer by `dt` using exactly the same pattern as the player—meaning the boss is guaranteed to behave the same way on every machine, and its tuning constants are real-world seconds rather than opaque magic numbers.
-
-
 
 ## 5.1 Limited Visibility and Combat System - shorter version, need to include code here
 
@@ -458,22 +426,6 @@ The more subtle challenge was not drawing the fog but *honouring* it mechanicall
 ### 5.1.3 Reflections and Extensibility
 
 Aligning the rendering layer and the game-logic layer through a shared notion of visibility proved the cleanest way to keep both systems honest. The single `createGraphics` buffer pattern is also cheap enough that it could be extended with additional transparent holes per active torch or lamp without architectural change—each extra light source is a one-line `fogLayer.circle()` call inside the erase block. Future work could generalise this into directional cones (flashlights), fog-piercing consumables sold in the shop, or stealth mechanics that only register the player once the player enters an enemy's visibility window. Exposing the visibility radius as a named constant rather than a magic number has already made it trivial to tune playtest balance without grep-hunting through subsystems.
-
-## 5.2 Procedural Constraint-Based Spawning
-
-### 5.2.1 Objectives and Motivations
-
-To keep each playthrough feeling fresh and to prevent memorisation from trivialising later attempts, all pickups (chest, lamp, ring, crossbow) enemies and portal endpoints are spawned procedurally within each level. Randomness alone, however, produces unacceptable outcomes: an item placed inside a wall is uncollectable, an enemy overlapping the player spawn is an instant death and a pickup placed behind an already-placed item creates a visually ambiguous pile. Balancing procedural variety with absolute solvability was the central challenge of this subsystem.
-
-### 5.2.2 Grid Snapping and Bounded Resampling with Exclusion Lists
-
-In Level 2 and Level 3 all candidate positions are first passed through `snapToGrid(value)` (defined as `floor(value / blockSize) * blockSize`) which aligns them to the 32-pixel grid and eliminates a whole class of near-miss sub-pixel overlaps that plagued our earliest prototypes. Level 1 achieves the same alignment through an explicit modulo check inside its spawn loop (`while (boxX % blockSize !== 0 || ...)`) producing the same guarantee without a dedicated helper. On top of this, a generic sampling routine—`createItemInStartView(avoidList)` for opening-area spawns and `createItemInMidArea(avoidList)` for mid-map spawns—iterates up to 300–400 times, each iteration drawing fresh random coordinates within a region-appropriate bounding box and rejecting any candidate that (a) overlaps a wall tile (`intersectsWall(item)`), (b) intersects the player's hitbox or (c) intersects any object in the supplied `avoidList`. Placement order threads the exclusion list forward: in Level 2, `createBox([])`, then `createLight([box])`, then `createRing([box, lightItem])` so each new item automatically avoids every prior one without the caller having to manage state. If the loop exhausts its retry budget—rare but possible in dense mazes—the routine returns a hard-coded safe fallback (`new Rect(128, 128, blockSize, blockSize, true)`) so the game never fails to start.
-
-Enemy placement uses a similar but stricter loop: each candidate must avoid walls, the player, *and* every previously-placed pickup and the exit door. Because enemies are placed only after all pickups are finalised, a simple `while` loop that re-samples on any collision is sufficient, and the exclusion list is effectively the entire set of critical game objects. Portal placement in Level 3 uses a two-stage strategy: first 100 attempts jittered around four hand-picked target coordinates (so the portal network roughly preserves its intended topology), then—if any of those four fail—a fallback 200-attempt pass across the full map, constrained to lie outside the player's starting view (`isInStartView(px, py)`) to avoid a portal appearing inches from the spawn.
-
-### 5.2.3 Reflections and Extensibility
-
-Decoupling level *content* from level *layout* via this constraint-based spawner means that new item types or enemy archetypes can be added by plugging into the existing `createItemIn*` helpers and extending the `avoidList` threading—no hand-placement required. The bounded-retry pattern is also self-documenting about its own failure modes: the fallback position and the iteration cap make the worst-case behaviour explicit, which made debugging "impossible seed" edge cases straightforward during playtest. Future work could extend this into semantic constraints (e.g., guaranteeing at least one torch lies within a Manhattan-distance of 8 tiles from the start in Dark Maps, or weighting enemy density by district theme) without touching the core sampling loop, since those would simply be additional predicates evaluated inside the candidate-rejection step.
 
 ## 5.3 Boss AI: State-Aware Pursuit and Fan-Shot Attack
 
