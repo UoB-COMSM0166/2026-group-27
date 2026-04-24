@@ -854,13 +854,18 @@ function drawMistTexture(g) {
             tileW: 420,
             tileH: 260,
             step: 0.55,
-            alphaMin: 10,
-            alphaMax: 26,
-            parallax: 1.0,
-            driftSpeedX: 0.018,
-            driftSpeedY: 0.012,
-            driftAmountX: 45,
-            driftAmountY: 25,
+            alphaMin: 8,
+            alphaMax: 24,
+            parallax: 0.98,
+
+            flowX: 18,
+            flowY: 4,
+
+            wobbleSpeedX: 0.7,
+            wobbleSpeedY: 0.45,
+            wobbleAmountX: 30,
+            wobbleAmountY: 16,
+
             scaleMin: 0.9,
             scaleMax: 1.25
         },
@@ -868,13 +873,18 @@ function drawMistTexture(g) {
             tileW: 560,
             tileH: 340,
             step: 0.65,
-            alphaMin: 8,
-            alphaMax: 20,
+            alphaMin: 7,
+            alphaMax: 18,
             parallax: 0.92,
-            driftSpeedX: -0.012,
-            driftSpeedY: 0.016,
-            driftAmountX: 65,
-            driftAmountY: 35,
+
+            flowX: -10,
+            flowY: 7,
+
+            wobbleSpeedX: 0.45,
+            wobbleSpeedY: 0.6,
+            wobbleAmountX: 42,
+            wobbleAmountY: 22,
+
             scaleMin: 1.0,
             scaleMax: 1.35
         },
@@ -882,23 +892,36 @@ function drawMistTexture(g) {
             tileW: 720,
             tileH: 430,
             step: 0.75,
-            alphaMin: 5,
-            alphaMax: 14,
+            alphaMin: 4,
+            alphaMax: 12,
             parallax: 0.85,
-            driftSpeedX: 0.008,
-            driftSpeedY: -0.01,
-            driftAmountX: 90,
-            driftAmountY: 45,
+
+            flowX: 6,
+            flowY: -5,
+
+            wobbleSpeedX: 0.28,
+            wobbleSpeedY: 0.35,
+            wobbleAmountX: 60,
+            wobbleAmountY: 30,
+
             scaleMin: 1.1,
             scaleMax: 1.45
         }
     ];
 
     for (let layer of layers) {
-        let driftX = sin(gTime * layer.driftSpeedX) * layer.driftAmountX;
-        let driftY = cos(gTime * layer.driftSpeedY) * layer.driftAmountY;
 
-        // 关键：用 cam.x / cam.y 让雾属于地图，而不是贴在人身上
+        // ===== 流动 + 扰动 =====
+        let flowX = gTime * layer.flowX;
+        let flowY = gTime * layer.flowY;
+
+        let wobbleX = sin(gTime * layer.wobbleSpeedX) * layer.wobbleAmountX;
+        let wobbleY = cos(gTime * layer.wobbleSpeedY) * layer.wobbleAmountY;
+
+        let driftX = flowX + wobbleX;
+        let driftY = flowY + wobbleY;
+
+        // ===== 世界坐标绑定（关键）=====
         let offsetX = -cam.x * layer.parallax + driftX;
         let offsetY = -cam.y * layer.parallax + driftY;
 
@@ -910,10 +933,12 @@ function drawMistTexture(g) {
 
         for (let y = startY; y < height + layer.tileH; y += stepY) {
             for (let x = startX; x < width + layer.tileW; x += stepX) {
+
+                // ===== 动态 noise（让雾“活”起来）=====
                 let n = noise(
-                    (x + cam.x) * 0.004,
-                    (y + cam.y) * 0.004,
-                    gTime * 0.015
+                    (x + cam.x + flowX) * 0.004,
+                    (y + cam.y + flowY) * 0.004,
+                    gTime * 0.08
                 );
 
                 let alpha = map(n, 0, 1, layer.alphaMin, layer.alphaMax);
