@@ -6,7 +6,7 @@ const CHARACTER_CONFIG = {
         id: "fox",
         name: "Fox",
         type: "static4",
-        basePath: "assets/characters/fox/",
+        basePath: "assets/characters/Fox/",
         sprites: {
             front: "fox_front.png",
             back: "fox_back.png",
