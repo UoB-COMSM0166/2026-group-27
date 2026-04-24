@@ -404,7 +404,7 @@ A key challenge we faced was implementing a limited visibility feature (fog) in 
   <b>Figure ?: </b>
   <i> Visibility area in Level 2 </i> <br>
 
-<image src = "https://github.com/UoB-COMSM0166/2026-group-27/blob/50c930a73d6088f7f72dfacec58c1d89f2d4da36/6.%20readme%20docs/5.%20Level%202%20screenshot.png" width="50%">
+<image src = "https://github.com/UoB-COMSM0166/2026-group-27/blob/50c930a73d6088f7f72dfacec58c1d89f2d4da36/6.%20readme%20docs/5.%20Level%202%20screenshot.png" width="35%">
 
 </p>
 
