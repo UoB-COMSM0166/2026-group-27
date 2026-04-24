@@ -400,6 +400,15 @@ Acceptance criteria were included to determine when a feature has been successfu
 
 A key challenge we faced was implementing a limited visibility feature (fog) in levels 2 and 3. This restricts the player’s vision so that most of the maze remains dark, making navigation difficult and increasing the overall difficulty compared to level 1. Players can improve visibility by collecting a torch, which allows them to see a small area around the character (figure?)
 
+<p align="center">
+  <b>Figure ?: </b>
+  <i> Visibility area in Level 2 </i> <br>
+
+<image src = "https://github.com/UoB-COMSM0166/2026-group-27/blob/50c930a73d6088f7f72dfacec58c1d89f2d4da36/6.%20readme%20docs/5.%20Level%202%20screenshot.png" width="50%">
+
+</p>
+
+
 However, we did not want the maze to be completely black. This was to ensure that the game remains accessible, allowing players with visual impairments to still navigate the maze. This also balances challenge with usability, as a completely dark maze would make gameplay frustrating rather than engaging.
 
 During our initial implementation, we found that players were still able to attack enemies outside the character’s field of vision. This meant the feature did not serve its intended purpose and became a merely visual effect rather than affecting gameplay. 
