@@ -101,6 +101,8 @@ let bossImg;
 let mapUIImg;
 let timeUIImg;
 let hpUIImg;
+let mistImg;
+let softMistImg;
 
 // ==================== 状态 / States ====================
 let hasMiniMap = false;
@@ -233,6 +235,7 @@ function preload() {
     cageImg = loadImage('assets/cage.png');
     littleGhostImg = loadImage('assets/little ghost.png');
     bossImg = loadImage('assets/boss.png');
+    mistImg = loadImage('assets/mist.png');
 
     preloadSelectedCharacterSprites();
 }
@@ -242,7 +245,8 @@ function preload() {
 function setup() {
     createCanvas(800, 600);
     setupSelectedCharacter();
-    
+    softMistImg = createSoftMistImage(mistImg, 420, 260);
+
     unlockCodexItem('crossbow');
     hasRing = hasCodexItem('ring');
 
@@ -1054,20 +1058,180 @@ function drawFog() {
     fogLayer.clear();
     fogLayer.noStroke();
 
-    fogLayer.fill(10, 12, 18, fogAlpha);
+    // 黑色底雾
+    fogLayer.fill(10, 12, 18, 165);
     fogLayer.rect(0, 0, width, height);
+
+    // 世界坐标多层雾
+    drawMistTexture(fogLayer);
 
     if (hasLight) {
         fogLayer.erase();
-        fogLayer.circle(
-            player.left - cam.x + player.width / 2,
-            player.top - cam.y + player.height / 2,
-            fogRevealRadius * 2
-        );
+
+        // 先擦一个大而淡的外圈，做柔和过渡
+        for (let r = fogRevealRadius; r > 0; r -= 8) {
+            let a = map(r, 0, fogRevealRadius, 255, 20);
+            fogLayer.fill(255, a);
+            fogLayer.circle(
+                player.left - cam.x + player.width / 2,
+                player.top - cam.y + player.height / 2,
+                r * 2
+            );
+        }
+
         fogLayer.noErase();
     }
 
     image(fogLayer, 0, 0);
+}
+
+function createSoftMistImage(img, w, h) {
+    let g = createGraphics(w, h);
+    g.clear();
+
+    g.imageMode(CORNER);
+    g.image(img, 0, 0, w, h);
+
+    g.erase();
+
+    let feather = min(w, h) * 0.28;
+
+    for (let i = 0; i < feather; i++) {
+        let a = map(i, 0, feather, 255, 0);
+
+        g.fill(255, a);
+        g.noStroke();
+
+        g.rect(0, i, w, 1);
+        g.rect(0, h - i, w, 1);
+        g.rect(i, 0, 1, h);
+        g.rect(w - i, 0, 1, h);
+    }
+
+    g.noErase();
+
+    return g;
+}
+
+function drawMistTexture(g) {
+    if (!softMistImg) return;
+
+    g.push();
+    g.imageMode(CORNER);
+
+    const layers = [
+        {
+            tileW: 420,
+            tileH: 260,
+            step: 0.55,
+            alphaMin: 8,
+            alphaMax: 24,
+            parallax: 0.98,
+
+            flowX: 18,
+            flowY: 4,
+
+            wobbleSpeedX: 0.7,
+            wobbleSpeedY: 0.45,
+            wobbleAmountX: 30,
+            wobbleAmountY: 16,
+
+            scaleMin: 0.9,
+            scaleMax: 1.25
+        },
+        {
+            tileW: 560,
+            tileH: 340,
+            step: 0.65,
+            alphaMin: 7,
+            alphaMax: 18,
+            parallax: 0.92,
+
+            flowX: -10,
+            flowY: 7,
+
+            wobbleSpeedX: 0.45,
+            wobbleSpeedY: 0.6,
+            wobbleAmountX: 42,
+            wobbleAmountY: 22,
+
+            scaleMin: 1.0,
+            scaleMax: 1.35
+        },
+        {
+            tileW: 720,
+            tileH: 430,
+            step: 0.75,
+            alphaMin: 4,
+            alphaMax: 12,
+            parallax: 0.85,
+
+            flowX: 6,
+            flowY: -5,
+
+            wobbleSpeedX: 0.28,
+            wobbleSpeedY: 0.35,
+            wobbleAmountX: 60,
+            wobbleAmountY: 30,
+
+            scaleMin: 1.1,
+            scaleMax: 1.45
+        }
+    ];
+
+    for (let layer of layers) {
+
+        // ===== 流动 + 扰动 =====
+        let flowX = gTime * layer.flowX;
+        let flowY = gTime * layer.flowY;
+
+        let wobbleX = sin(gTime * layer.wobbleSpeedX) * layer.wobbleAmountX;
+        let wobbleY = cos(gTime * layer.wobbleSpeedY) * layer.wobbleAmountY;
+
+        let driftX = flowX + wobbleX;
+        let driftY = flowY + wobbleY;
+
+        // ===== 世界坐标绑定（关键）=====
+        let offsetX = -cam.x * layer.parallax + driftX;
+        let offsetY = -cam.y * layer.parallax + driftY;
+
+        let stepX = layer.tileW * layer.step;
+        let stepY = layer.tileH * layer.step;
+
+        let startX = -layer.tileW + positiveModulo(offsetX, stepX);
+        let startY = -layer.tileH + positiveModulo(offsetY, stepY);
+
+        for (let y = startY; y < height + layer.tileH; y += stepY) {
+            for (let x = startX; x < width + layer.tileW; x += stepX) {
+
+                // ===== 动态 noise（让雾“活”起来）=====
+                let n = noise(
+                    (x + cam.x + flowX) * 0.004,
+                    (y + cam.y + flowY) * 0.004,
+                    gTime * 0.08
+                );
+
+                let alpha = map(n, 0, 1, layer.alphaMin, layer.alphaMax);
+                let scale = map(n, 0, 1, layer.scaleMin, layer.scaleMax);
+
+                g.tint(255, alpha);
+                g.image(
+                    softMistImg,
+                    x,
+                    y,
+                    layer.tileW * scale,
+                    layer.tileH * scale
+                );
+            }
+        }
+    }
+
+    g.noTint();
+    g.pop();
+}
+
+function positiveModulo(value, mod) {
+    return ((value % mod) + mod) % mod;
 }
 
 
