@@ -427,6 +427,24 @@ The more subtle challenge was not drawing the fog but *honouring* it mechanicall
 
 Aligning the rendering layer and the game-logic layer through a shared notion of visibility proved the cleanest way to keep both systems honest. The single `createGraphics` buffer pattern is also cheap enough that it could be extended with additional transparent holes per active torch or lamp without architectural change—each extra light source is a one-line `fogLayer.circle()` call inside the erase block. Future work could generalise this into directional cones (flashlights), fog-piercing consumables sold in the shop, or stealth mechanics that only register the player once the player enters an enemy's visibility window. Exposing the visibility radius as a named constant rather than a magic number has already made it trivial to tune playtest balance without grep-hunting through subsystems.
 
+## 5.2 Final Boss Behaviour and Combat System (shorter version - need to add code)
+
+Another difficulty we faced was making the final boss in level 3 more challenging than the regular enemies, which simply move around the maze and are easy to avoid. If the final boss behaved the same way, this would feel underwhelming for the player. Hence, the boss was designed to actively follow and attack the player while still using the existing systems in the game.
+
+To address this, we implemented a distance-based behaviour system. The boss calculates its distance from the player and changes its behaviour depending on how far away the player is, without needing to develop a complex AI system. 
+
+We made two separate conditions for this: 
+
+When the player is far away (distance > 340 px), the boss only moves towards them, creating pressure.
+
+When the player is within attack range (distance < 340 px), the boss starts attacking the player. A timer (1.6 seconds) controls how often the boss shoots, ensuring consistent behaviour across different frame rates. When the timer reaches zero, the boss fires three projectiles spread at different angles. This makes the attacks harder to dodge, as it covers a larger area compared to a single projectile.
+
+
+Additionally, at medium distances (130–340 px), the boss both moves and attacks at the same time, creating the most pressure. At very close range (distance < 130 px), the boss stops moving but continues attacking, preventing players from exploiting close proximity. Contact damage is also applied when the player touches the boss, making the fight more challenging.
+
+These features make the boss fight more engaging and challenging. The player is forced to constantly move and attack the boss, rather than simply avoiding the enemy. This makes the final level feel more intense and rewarding compared to the previous levels.
+
+
 ## 5.3 Boss AI: State-Aware Pursuit and Fan-Shot Attack
 
 ### 5.3.1 Objectives and Motivations
