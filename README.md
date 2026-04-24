@@ -507,7 +507,7 @@ The main issues were related to map design, controls, and game mechanics.
 
 To ensure the game was engaging, we made sure that usability did not negatively affect player experience. If a game is too easy or unnecessarily difficult, it can reduce replayability as players can lose interest or become frustrated (Sweetser & Wyeth, 2005). Therefore, we evaluated whether the game was easy to use while being appropriately challenging. 
 
-We used SUS to measure how easily the participants could learn and interact with the game. Ten participants (P1-P10), recruited using convenience sampling, completed gameplay tasks such as collecting items and finding the exit before filling out the SUS questionnaire. (Raw data can be found [here](https://github.com/UoB-COMSM0166/2026-group-27/blob/0640bedc1be5ef09ce108df068695c78fd4372b6/6.%20readme%20docs/6.%20SUS%20Data%20Sheet.pdf).)
+We used SUS to measure how easily the participants could learn and interact with the game. Ten participants (P1-P10), recruited using convenience sampling, completed gameplay tasks such as collecting items and finding the exit before filling out the SUS questionnaire. (Raw data: Appendix ?)
 
 
 <p align="center">
@@ -671,8 +671,6 @@ You can delete this section in your own repo, it's just here for information. in
   - Is your repo clearly organised? Is code well commented throughout?
 
 # 13. Appendices
-
-Appendix ?: Black-Box Testing Results
 
 ## Appendix ?: Black-Box Testing Results
 
