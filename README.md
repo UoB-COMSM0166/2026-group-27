@@ -669,3 +669,42 @@ You can delete this section in your own repo, it's just here for information. in
 - **Documentation** of code (5% of report grade)
   - Organise your code so that it could easily be picked up by another team in the future and developed further.
   - Is your repo clearly organised? Is code well commented throughout?
+
+# 13. Appendices
+
+Appendix ?: Black-Box Testing Results
+
+# Black-box Testing
+
+## Normal
+| Test ID | Feature | Input / Action | Expected Result | Status |
+|--------|--------|----------------|-----------------|--------|
+| N1 | Shop | Coins ≥ price, click buy | Purchase succeeds, coins deducted | Pass |
+| N2 | Movement | Press ↑/←/↓/→ | Player moves in correct direction | Pass |
+| N3 | Teleport | Enter any portal | Player appears at a random portal | Pass |
+| N4 | Item | Pick up key | Key disappears and is collected | Pass |
+| N5 | Combat | Shoot enemy | Enemy takes damage | Pass |
+| N6 | Win Condition | Reach exit with objective | Level completed | Pass |
+
+## Boundary
+| Test ID | Feature | Input / Action | Expected Result | Status |
+|--------|--------|----------------|-----------------|--------|
+| B1 | Shop | Coins = price | Purchase succeeds | Pass |
+| B2 | Shop | Coins = price - 1 | Purchase fails | Pass |
+| B3 | Health | Health reduces to 0 | Player dies | Pass |
+| B4 | Health | Health = max, pick health | Health does not exceed max | Pass |
+| B5 | Collision | Move along wall edge | No wall penetration | Pass |
+| B6 | Teleport | Stand at portal edge | Teleport triggers correctly | Pass |
+
+## Error Cases
+| Test ID | Feature | Input / Action | Expected Result | Status |
+|--------|--------|----------------|-----------------|--------|
+| E1 | Shop | Buy without enough coins | Purchase denied, warning shown | Pass |
+| E2 | Door | Open door without key | Door remains locked | Pass |
+| E3 | Death | Move after death | No response / disabled controls | Pass |
+| E4 | Game State | Shoot in menu/shop | No effect | Pass |
+| E5 | Teleport | Rapid enter/exit portal | No glitch or infinite loop | Pass |
+
+Appendix ?: SUS Raw Data: 
+
+<img src = "https://github.com/UoB-COMSM0166/2026-group-27/blob/b39e3d41f380b62f687420c00b36013034de41ae/6.%20readme%20docs/13.%20SUS%20Raw%20Data%20Screenshot.png" width="30%">
