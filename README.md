@@ -241,7 +241,8 @@ Maniza
 
 <p align="center">
   <b>Figure ?: </b>
-  <i>Paper Prototype for Lost in Bristol developed during Workshop 3 </i> <br>
+  <i>Paper Prototype for Lost in Bristol 
+    developed during Workshop 3 </i> <br>
   </p>
 
 <p align="center">
