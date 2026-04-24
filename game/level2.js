@@ -106,6 +106,8 @@ let mapUIImg;
 let timeUIImg;
 let exitPortalImg;
 let arrowImg;
+let mistImg;
+let softMistImg;
 
 // ==================== 预加载 / Preload ====================
 function preload() {
@@ -119,6 +121,7 @@ function preload() {
     mapUIImg = loadImage('assets/map.png');
     timeUIImg = loadImage('assets/time.png');
     exitPortalImg = loadImage('assets/exit.png');
+    mistImg = loadImage('assets/mist.png');
 
     // 墙 / Wall
     wallImg = loadImage('assets/wall_column_tall.png');
@@ -140,7 +143,8 @@ function preload() {
 function setup() {
     createCanvas(800, 600);
     setupSelectedCharacter();
-    
+    softMistImg = createSoftMistImage(mistImg, 420, 260);
+
     // 第二关默认图鉴里有弩箭
     unlockCodexItem('crossbow');
 
@@ -784,20 +788,155 @@ function drawFog() {
     fogLayer.clear();
     fogLayer.noStroke();
 
-    fogLayer.fill(10, 12, 18, 185);
+    // 黑色底雾
+    fogLayer.fill(10, 12, 18, 165);
     fogLayer.rect(0, 0, width, height);
+
+    // 世界坐标多层雾
+    drawMistTexture(fogLayer);
 
     if (hasLight) {
         fogLayer.erase();
-        fogLayer.circle(
-            player.left - cam.x + player.width / 2,
-            player.top - cam.y + player.height / 2,
-            fogRadiusWithLight * 2
-        );
+
+        // 先擦一个大而淡的外圈，做柔和过渡
+        for (let r = fogRadiusWithLight; r > 0; r -= 8) {
+            let a = map(r, 0, fogRadiusWithLight, 255, 20);
+            fogLayer.fill(255, a);
+            fogLayer.circle(
+                player.left - cam.x + player.width / 2,
+                player.top - cam.y + player.height / 2,
+                r * 2
+            );
+        }
+
         fogLayer.noErase();
     }
 
     image(fogLayer, 0, 0);
+}
+
+function createSoftMistImage(img, w, h) {
+    let g = createGraphics(w, h);
+    g.clear();
+
+    g.imageMode(CORNER);
+    g.image(img, 0, 0, w, h);
+
+    g.erase();
+
+    let feather = min(w, h) * 0.28;
+
+    for (let i = 0; i < feather; i++) {
+        let a = map(i, 0, feather, 255, 0);
+
+        g.fill(255, a);
+        g.noStroke();
+
+        g.rect(0, i, w, 1);
+        g.rect(0, h - i, w, 1);
+        g.rect(i, 0, 1, h);
+        g.rect(w - i, 0, 1, h);
+    }
+
+    g.noErase();
+
+    return g;
+}
+
+function drawMistTexture(g) {
+    if (!softMistImg) return;
+
+    g.push();
+    g.imageMode(CORNER);
+
+    const layers = [
+        {
+            tileW: 420,
+            tileH: 260,
+            step: 0.55,
+            alphaMin: 10,
+            alphaMax: 26,
+            parallax: 1.0,
+            driftSpeedX: 0.018,
+            driftSpeedY: 0.012,
+            driftAmountX: 45,
+            driftAmountY: 25,
+            scaleMin: 0.9,
+            scaleMax: 1.25
+        },
+        {
+            tileW: 560,
+            tileH: 340,
+            step: 0.65,
+            alphaMin: 8,
+            alphaMax: 20,
+            parallax: 0.92,
+            driftSpeedX: -0.012,
+            driftSpeedY: 0.016,
+            driftAmountX: 65,
+            driftAmountY: 35,
+            scaleMin: 1.0,
+            scaleMax: 1.35
+        },
+        {
+            tileW: 720,
+            tileH: 430,
+            step: 0.75,
+            alphaMin: 5,
+            alphaMax: 14,
+            parallax: 0.85,
+            driftSpeedX: 0.008,
+            driftSpeedY: -0.01,
+            driftAmountX: 90,
+            driftAmountY: 45,
+            scaleMin: 1.1,
+            scaleMax: 1.45
+        }
+    ];
+
+    for (let layer of layers) {
+        let driftX = sin(gTime * layer.driftSpeedX) * layer.driftAmountX;
+        let driftY = cos(gTime * layer.driftSpeedY) * layer.driftAmountY;
+
+        // 关键：用 cam.x / cam.y 让雾属于地图，而不是贴在人身上
+        let offsetX = -cam.x * layer.parallax + driftX;
+        let offsetY = -cam.y * layer.parallax + driftY;
+
+        let stepX = layer.tileW * layer.step;
+        let stepY = layer.tileH * layer.step;
+
+        let startX = -layer.tileW + positiveModulo(offsetX, stepX);
+        let startY = -layer.tileH + positiveModulo(offsetY, stepY);
+
+        for (let y = startY; y < height + layer.tileH; y += stepY) {
+            for (let x = startX; x < width + layer.tileW; x += stepX) {
+                let n = noise(
+                    (x + cam.x) * 0.004,
+                    (y + cam.y) * 0.004,
+                    gTime * 0.015
+                );
+
+                let alpha = map(n, 0, 1, layer.alphaMin, layer.alphaMax);
+                let scale = map(n, 0, 1, layer.scaleMin, layer.scaleMax);
+
+                g.tint(255, alpha);
+                g.image(
+                    softMistImg,
+                    x,
+                    y,
+                    layer.tileW * scale,
+                    layer.tileH * scale
+                );
+            }
+        }
+    }
+
+    g.noTint();
+    g.pop();
+}
+
+function positiveModulo(value, mod) {
+    return ((value % mod) + mod) % mod;
 }
 
 class Projectile {
