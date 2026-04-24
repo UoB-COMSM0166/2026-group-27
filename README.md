@@ -704,7 +704,7 @@ You can delete this section in your own repo, it's just here for information. in
 | E4 | Game State | Shoot in menu/shop | No effect | Pass |
 | E5 | Teleport | Rapid enter/exit portal | No glitch or infinite loop | Pass |
 
-## Appendix ?: SUS Raw Data: 
+## Appendix ?: SUS Raw Data
 
 <p align="center">
 <img src = "https://github.com/UoB-COMSM0166/2026-group-27/blob/b39e3d41f380b62f687420c00b36013034de41ae/6.%20readme%20docs/13.%20SUS%20Raw%20Data%20Screenshot.png" width="70%">
