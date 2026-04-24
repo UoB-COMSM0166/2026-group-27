@@ -13,7 +13,7 @@ game set up instructions and link to play game. [Here is our game](https://uob-c
 
 1. [Our Group](https://github.com/UoB-COMSM0166/2026-group-27/tree/main#1-our-group) 
 2. [Introduction](https://github.com/UoB-COMSM0166/2026-group-27/tree/main#2-introduction)
-3. [Requirements](https://github.com/UoB-COMSM0166/2026-group-27/tree/main#2-introduction)
+3. [Requirements](https://github.com/UoB-COMSM0166/2026-group-27/tree/main#3-requirements)
 4. [Design](https://github.com/UoB-COMSM0166/2026-group-27/tree/main#4-design)
 5. [Implementation](https://github.com/UoB-COMSM0166/2026-group-27/tree/main#5-implementation)
 6. [Evaluation](https://github.com/UoB-COMSM0166/2026-group-27/tree/main#6-evaluation)
