@@ -503,7 +503,7 @@ The average SUS score was 90.75/100, indicating a high level of usability.
 
 Overall, these results suggest that usability is unlikely to negatively impact players' experience. 
 
-## 6.3 Code Testing
+## 6.3 Code Testing - need to edit this section
 
 To ensure the prototype was stable during user evaluations, performed several rounds of technical testing to verify the game logic before participants played the game to ensure we get more accurate results with the model being as close to being done as we want it to be, closer to the end product.
 
