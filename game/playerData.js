@@ -15,16 +15,16 @@ const CHARACTER_CONFIG = {
         }
     },
 
-    fernando: {
-        id: "fernando",
-        name: "Fernando",
+    Lando: {
+        id: "Lando",
+        name: "Lando",
         type: "animated12",
-        basePath: "assets/characters/Fernando/",
+        basePath: "assets/characters/Lando/",
         sprites: {
-            front: ["F-front1.png", "F-front2.png", "F-front3.png"],
-            back: ["F-back1.png", "F-back2.png", "F-back3.png"],
-            left: ["F-left1.png", "F-left2.png", "F-left3.png"],
-            right: ["F-right1.png", "F-right2.png", "F-right3.png"]
+            front: ["L-front1.png", "L-front2.png", "L-front3.png"],
+            back: ["L-back1.png", "L-back2.png", "L-back3.png"],
+            left: ["L-left1.png", "L-left2.png", "L-left3.png"],
+            right: ["L-right1.png", "L-right2.png", "L-right3.png"]
         }
     },
 
@@ -58,7 +58,7 @@ function getSelectedCharacterId() {
 
     saved = String(saved).toLowerCase();
 
-    if (saved === "1") saved = "fernando";
+    if (saved === "1") saved = "Lando";
     if (saved === "2") saved = "eliza";
     if (saved === "3") saved = "fox";
 
