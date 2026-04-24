@@ -674,9 +674,9 @@ You can delete this section in your own repo, it's just here for information. in
 
 Appendix ?: Black-Box Testing Results
 
-# Black-box Testing
+## Appendix ?: Black-Box Testing Results
 
-## Normal
+### Normal
 | Test ID | Feature | Input / Action | Expected Result | Status |
 |--------|--------|----------------|-----------------|--------|
 | N1 | Shop | Coins ≥ price, click buy | Purchase succeeds, coins deducted | Pass |
@@ -686,7 +686,7 @@ Appendix ?: Black-Box Testing Results
 | N5 | Combat | Shoot enemy | Enemy takes damage | Pass |
 | N6 | Win Condition | Reach exit with objective | Level completed | Pass |
 
-## Boundary
+### Boundary
 | Test ID | Feature | Input / Action | Expected Result | Status |
 |--------|--------|----------------|-----------------|--------|
 | B1 | Shop | Coins = price | Purchase succeeds | Pass |
@@ -696,7 +696,7 @@ Appendix ?: Black-Box Testing Results
 | B5 | Collision | Move along wall edge | No wall penetration | Pass |
 | B6 | Teleport | Stand at portal edge | Teleport triggers correctly | Pass |
 
-## Error Cases
+### Error Cases
 | Test ID | Feature | Input / Action | Expected Result | Status |
 |--------|--------|----------------|-----------------|--------|
 | E1 | Shop | Buy without enough coins | Purchase denied, warning shown | Pass |
@@ -705,6 +705,9 @@ Appendix ?: Black-Box Testing Results
 | E4 | Game State | Shoot in menu/shop | No effect | Pass |
 | E5 | Teleport | Rapid enter/exit portal | No glitch or infinite loop | Pass |
 
-Appendix ?: SUS Raw Data: 
+## Appendix ?: SUS Raw Data: 
 
-<img src = "https://github.com/UoB-COMSM0166/2026-group-27/blob/b39e3d41f380b62f687420c00b36013034de41ae/6.%20readme%20docs/13.%20SUS%20Raw%20Data%20Screenshot.png" width="30%">
+<p align="center">
+<img src = "https://github.com/UoB-COMSM0166/2026-group-27/blob/b39e3d41f380b62f687420c00b36013034de41ae/6.%20readme%20docs/13.%20SUS%20Raw%20Data%20Screenshot.png" width="70%">
+
+</p>
