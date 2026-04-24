@@ -337,17 +337,17 @@ Acceptance criteria were included to determine when a feature has been successfu
   </tr>
 
   <tr>
-    <td>Character Abilities</td>
-    <td>"As a player, I want to use characters with different abilities, so that I can experience different approaches to playing the game." 
+    <td>Character Customisation</td>
+    <td>"As a player, I want to choose between different characters, so that I can personalize my gaming experience." 
     </td>
     <td>
 - Given a character is selected <br>
       <br>
 - When the game begins <br>
       <br>
-- Then the character has a unique ability <br>
+- Then the chosen character is displayed in the game <br>
       <br>
-- And the ability affects gameplay strategy and movement  <br>
+- And the character does not affect gameplay mechanics <br>
 </td> 
   </tr>
 
