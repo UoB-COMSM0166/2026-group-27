@@ -34,7 +34,7 @@ let bgImg;
 let mapUIImg;
 let timeUIImg;
 
-let fernandoImg;
+let LandoImg;
 let elizaImg;
 let foxImg;
 
@@ -43,10 +43,10 @@ let codexImgs = {};
 // ==================== Character Data ====================
 const characterOptions = [
   {
-    id: "fernando",
-    name: "Fernando",
+    id: "Lando",
+    name: "Lando",
     desc: "A brave racer lost inside the underground maze.",
-    imgKey: "fernando"
+    imgKey: "Lando"
   },
   {
     id: "eliza",
@@ -112,7 +112,7 @@ function preload() {
   mapUIImg = loadImage("assets/map.png");
   timeUIImg = loadImage("assets/time.png");
 
-  fernandoImg = loadImage("assets/characters/Fernando/F-front1.png");
+  LandoImg = loadImage("assets/characters/Lando/L-front1.png");
   elizaImg = loadImage("assets/characters/Eliza/E-front1.png");
   foxImg = loadImage("assets/characters/Fox/fox_front.png");
 
@@ -748,7 +748,7 @@ function drawCharacterPortrait(charData, x, y, size, highlight) {
   push();
 
   let img = null;
-  if (charData.id === "fernando") img = fernandoImg;
+  if (charData.id === "Lando") img = LandoImg;
   if (charData.id === "eliza") img = elizaImg;
   if (charData.id === "fox") img = foxImg;
 
@@ -878,7 +878,7 @@ function keyPressed() {
   }
 
   if (currentScene === SCENE_CHARACTER_SELECT) {
-    if (key === '1') selectCharacterById("fernando");
+    if (key === '1') selectCharacterById("Lando");
     if (key === '2') selectCharacterById("eliza");
     if (key === '3') selectCharacterById("fox");
   }
