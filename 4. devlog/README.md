@@ -176,5 +176,12 @@ This folder stores developer logs.
   - 
   - Next Plan:
   - 
-  
+
+### Thanusha
+- Completed:
+  - Completed Code testing section of repo
+  - Edited implementation sections
+ 
+- In progress:
+  - Adding code snippets for implementation section
   
