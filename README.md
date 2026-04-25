@@ -484,7 +484,7 @@ We combined quantitative data from the System Usability Scale (SUS) with qualita
 
 ## 6.1 Qualitative Evaluation: Think Aloud
 
-During the TA tests, we asked participants to verbalise their thoughts and decision-making process while navigating the maze and completing tasks such as finding items and reaching the exit. This helps us identify unclear game concepts from a player’s perspective (Pellicone et al., 2022). 
+During the TA tests, we asked participants to verbalise their thoughts and decision-making process while navigating the maze and completing tasks such as finding items and reaching the exit. This helped us identify unclear game concepts from a player’s perspective (Pellicone et al., 2022). 
 
 Ten participants were recruited using convenience sampling from our weekly workshops, allowing us to receive quick feedback without requiring a controlled experiment.
 
