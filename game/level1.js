@@ -147,6 +147,7 @@ function preload() {
     mapUIImg = loadImage('assets/map.png');
     timeUIImg = loadImage('assets/time.png');
     preloadSelectedCharacterSprites();
+    uiPreload();
 }
 
 
@@ -242,13 +243,13 @@ function drawGame() {
 
     if (pause) {
         if (start) {
-            drawStart();
+            drawStart_L1();
         } else if (end) {
-            drawEnd();
+            drawEnd_L1();
         } else if (gameover) {
-            drawGameOver();
+            drawGameOver_L1();
         } else {
-            drawPause();
+            drawPause_L1();
         }
     }
 
@@ -257,6 +258,9 @@ function drawGame() {
     }
 
     drawElapsedTime();
+    drawMenuButton();
+    if (menuOpen) drawMenuPanel();
+    uiEndFrame();
 }
 
 
@@ -346,9 +350,14 @@ function act(deltaTime) {
 }
 
 
+function mousePressed() {
+    uiMousePressed();
+}
+
 // ==================== 键盘事件 / Keyboard events ====================
 
 function keyPressed() {
+    uiKeyPressed();
     lastKeyPress = keyCode;
 
     if (keyCode === ENTER && start) {
@@ -811,146 +820,88 @@ function setMap() {
 
 // ==================== 界面绘制 / UI drawing ====================
 
-function drawStart() {
-    fill(162, 44, 41);
-    noStroke();
-    rect(width / 2 - 150, height / 2 - 50, 290, 100, 10);
-
-    textAlign(CENTER);
-    fill(255);
-    textSize(32);
-    textFont('Impact');
-    text('Explorer Camp', width / 2, height / 2);
-
-    if (floor(gTime * 3) % 2 === 1) {
-        textSize(12);
-        textFont('Arial');
-        text("Press 'Enter' to start the game", width / 2, height / 2 + 20);
-    }
-
-    textAlign(LEFT);
+function drawStart_L1() {
+    let blink = floor(gTime * 3) % 2 === 1;
+    drawUnifiedScreen('start',
+        'Explorer Camp',
+        ["Find the exit of the maze.",
+         "Collect the chest to unlock the mini map,",
+         "then find the crossbow."],
+        "Press ENTER to start",
+        blink
+    );
 }
 
-
-function drawEnd() {
-    fill(46, 160, 85);
-    noStroke();
-    rect(width / 2 - 150, height / 2 - 60, 300, 120, 12);
-
-    textAlign(CENTER);
-    fill(255);
-    textSize(20);
-    textFont('Impact');
-    text('WIN', width / 2, height / 2 - 30);
-
-    textSize(10);
-    textFont('Arial');
-    text("Congratulations, you have become an Explorer!", width / 2, height / 2 - 10);
-
-    if (floor(gTime * 3) % 2 === 1) {
-        textSize(12);
-        text("Press 'ESC' to restart the game", width / 2, height / 2 + 20);
-    }
-
-    textAlign(LEFT);
+function drawEnd_L1() {
+    let blink = floor(gTime * 3) % 2 === 1;
+    drawUnifiedScreen('end',
+        'You Escaped!',
+        ["Congratulations, you became an Explorer!"],
+        "Press ESC to restart",
+        blink
+    );
 }
 
-
-function drawPause() {
-    fill(162, 44, 41);
-    noStroke();
-    rect(width / 2 - 150, height / 2 - 50, 290, 100, 10);
-
-    textAlign(CENTER);
-    fill(255);
-    textSize(20);
-    textFont('Impact');
-    text('PAUSE', width / 2, height / 2);
-
-    if (floor(gTime * 3) % 2 === 1) {
-        textSize(12);
-        textFont('Arial');
-        text("Press 'P' to pause/resume the game", width / 2, height / 2 + 20);
-    }
-
-    textAlign(LEFT);
+function drawPause_L1() {
+    let blink = floor(gTime * 3) % 2 === 1;
+    drawUnifiedScreen('pause',
+        'Paused',
+        ["Press P to resume."],
+        "Press P to resume",
+        blink
+    );
 }
 
-
-function drawGameOver() {
-    fill(182, 52, 52);
-    noStroke();
-    rect(width / 2 - 150, height / 2 - 60, 300, 120, 12);
-
-    textAlign(CENTER);
-    fill(255);
-    textSize(20);
-    textFont('Impact');
-    text('GAME OVER', width / 2, height / 2 - 30);
-
-    textSize(10);
-    textFont('Arial');
-    text(gameoverMsg, width / 2, height / 2 - 10);
-
-    if (floor(gTime * 3) % 2 === 1) {
-        textSize(12);
-        text("Press 'ESC' to restart the game", width / 2, height / 2 + 20);
-    }
-
-    textAlign(LEFT);
+function drawGameOver_L1() {
+    let blink = floor(gTime * 3) % 2 === 1;
+    drawUnifiedScreen('gameover',
+        'Game Over',
+        [gameoverMsg, "Better luck next time."],
+        "Press ESC to restart",
+        blink
+    );
 }
 
 
 function drawPopUp() {
-    fill(128, 161, 193);
-    noStroke();
-    rect(width / 2 - 145, 75, 290, 120, 10);
-
-    textAlign(CENTER);
-    fill(255);
-    textSize(16);
-    textFont('Arial');
-    text(popUpTitle, width / 2, 100);
-
-    textSize(12);
-    fillTextMultiLine(popUpMessage, width / 2, 130);
-
-    textAlign(LEFT);
+    if (endTimePopUp > gTime) {  // ← elapsedTime 改 gTime
+        drawUnifiedPopUp(popUpTitle, popUpMessage);
+    }
 }
 
 
 function drawInformation() {
-    fill(128, 161, 193);
-    noStroke();
-    rect(width / 2 - 200, 75, 400, 350, 10);
+    let bx = width / 2 - 230;
+    let by = 80;
+    let bw = 460;
+    let bh = 500;
+
+    drawInstructionBox(bx, by, bw, bh);
 
     textAlign(CENTER);
-    fill(255);
-    textSize(16);
-    textFont('Arial');
+    fill(248, 232, 190);
+    textSize(17);
+    textFont('Georgia');
+    textStyle(BOLD);
+    text('Instructions', width / 2, by + 60);
     textStyle(NORMAL);
-    text('Instructions', width / 2, 100);
 
-    textAlign(LEFT);
+    fill(230, 200, 150);
     textSize(12);
-    textFont('Arial');
-    textStyle(NORMAL);
-    noStroke();
+    textAlign(LEFT);
 
-    text('To become an explorer you should find the exit of the maze,',
-         width / 2 - 185, 140);
-    text('but before that you should find the chest to unlock the mini-map,',
-         width / 2 - 185, 157);
-    text('and then search for the crossbow.',
-         width / 2 - 185, 174);
+    let tx = bx + 65;
+    let ty = by + 110;
+    let gap = 20;
 
-    text('Be careful! You are lost in a big maze and have a limited',
-         width / 2 - 185, 208);
-    text('time to escape.',
-         width / 2 - 185, 225);
-
-    text("Use Arrow Keys or WASD to move. Press 'P' to pause.",
-         width / 2 - 185, 260);
+    text('To become an explorer, find the exit of the maze.', tx, ty);
+    text('Collect the chest first to unlock the mini map.', tx, ty + gap);
+    text('After that, search for the crossbow.', tx, ty + gap * 2);
+    text('You need the crossbow before leaving the maze.', tx, ty + gap * 3);
+    text('Be careful — your escape time is limited.', tx, ty + gap * 4);
+    text('Use Arrow Keys or WASD to move.', tx, ty + gap * 5);
+    text("Press 'M' to show/hide the mini map.", tx, ty + gap * 6);
+    text("Press 'P' to pause the game.", tx, ty + gap * 7);
 
     textAlign(CENTER);
     textSize(10);
@@ -958,33 +909,48 @@ function drawInformation() {
     strokeWeight(2);
     noFill();
 
-    text('Up', width / 2, 305);
-    rect(width / 2 - 22.5, 280, 45, 45, 10);
+    let kx = width / 2;
+    let ky = by + gap * 13 + 60;
 
-    text('Left', width / 2 - 50, 356);
-    rect(width / 2 - 72.5, 330, 45, 45, 10);
-
-    text('Down', width / 2, 356);
-    rect(width / 2 - 22.5, 330, 45, 45, 10);
-
-    text('Right', width / 2 + 50, 356);
-    rect(width / 2 + 27.5, 330, 45, 45, 10);
+    drawKeyBox(kx - 22.5, ky + 5, 45, 45, 'Up');
+    drawKeyBox(kx - 72.5, ky + 55, 45, 45, 'Left');
+    drawKeyBox(kx - 22.5, ky + 55, 45, 45, 'Down');
+    drawKeyBox(kx + 27.5, ky + 55, 45, 45, 'Right');
 
     push();
     textAlign(CENTER, CENTER);
-    textFont('Arial');
+    textFont('Georgia');
     textStyle(NORMAL);
     textSize(12);
-    fill(255);
+    fill(230, 200, 150);
     noStroke();
-    strokeWeight(0);
 
     if (floor(gTime * 3) % 2 === 1) {
-        text("Press 'Enter' to continue", width / 2, 405);
+        text("Press 'Enter' to continue", width / 2, ky + 130);
     }
+
     pop();
 
     textAlign(LEFT);
+}
+
+function drawKeyBox(x, y, w, h, label) {
+    push();
+
+    stroke(255);
+    strokeWeight(2);
+    noFill();
+    rect(x, y, w, h, 10);
+
+    noStroke();
+    fill(255);
+    textAlign(CENTER, CENTER);
+    textSize(10);
+    textFont('Georgia');
+    textStyle(BOLD);
+    text(label, x + w / 2, y + h / 2);
+
+    pop();
 }
 
 
@@ -1185,7 +1151,7 @@ function exitIntersects() {
 
 
 function triggerPopUp(title, message, time) {
-    endTimePopUp = elapsedTime + time;
+    endTimePopUp = gTime + time;
     popUpTitle = title;
     popUpMessage = message;
 }
