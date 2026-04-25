@@ -238,6 +238,7 @@ function preload() {
     mistImg = loadImage('assets/mist.png');
 
     preloadSelectedCharacterSprites();
+    uiPreload();
 }
 
 
@@ -345,10 +346,10 @@ function drawGame() {
     }
 
     if (pause) {
-        if (start) drawStart();
-        else if (end) drawEnd();
-        else if (gameover) drawGameOver();
-        else drawPause();
+        if (start) drawStart_L3();
+        else if (end) drawEnd_L3();
+        else if (gameover) drawGameOver_L3();
+        else drawPause_L3();
     }
 
     if (showInstructions) drawInformation();
@@ -356,6 +357,9 @@ function drawGame() {
     drawElapsedTime();
     drawHud();
     drawPlayerHealthBar();
+    drawMenuButton();
+    if (menuOpen) drawMenuPanel();
+    uiEndFrame();
 }
 
 function act(dt) {
@@ -408,8 +412,13 @@ function act(dt) {
 }
 
 
+function mousePressed() {
+    uiMousePressed();
+}
+
 // ==================== 输入 / Input ====================
 function keyPressed() {
+    uiKeyPressed();
     lastKeyPress = keyCode;
 
     if (keyCode === ENTER && start) {
@@ -1423,7 +1432,7 @@ function drawHud() {
 
     fill(255);
     textSize(12);
-    textFont('Arial');
+    textFont('Georgia');
     textAlign(LEFT);
 
     // 左上角只保留最重要的信息
@@ -1451,7 +1460,7 @@ function drawPlayerHealthBar() {
     let frameW = 200;
     let frameH = 50;
 
-    let frameX = width - frameW - 45;
+    let frameX = width - frameW - 65;
     let frameY = 6;
 
     // ===== 按比例缩小后的内容区 =====
@@ -2145,175 +2154,144 @@ function drawWallToLayer(g, x, y) {
 
 
 // ==================== UI / Screens ====================
-function drawStart() {
-    fill(50, 65, 98);
-    noStroke();
-    rect(width / 2 - 190, height / 2 - 86, 380, 172, 8);
-
-    textAlign(CENTER);
-    fill(255);
-    textSize(30);
-    textFont('Impact');
-    text('Explorer Camp - Level 3', width / 2, height / 2 - 28);
-
-    textSize(12);
-    textFont('Arial');
-    text("Find the map, light, lock and key.", width / 2, height / 2 + 2);
-    text("Use portals, survive the little ghosts, seal the boss.", width / 2, height / 2 + 20);
-    text(`Starting weapon: ${currentWeaponStats.name}`, width / 2, height / 2 + 40);
-
-    if (floor(gTime * 3) % 2 === 1) {
-        text("Press ENTER to start", width / 2, height / 2 + 64);
-    }
-
-    textAlign(LEFT);
+function drawStart_L3() {
+    let blink = floor(gTime * 3) % 2 === 1;
+    drawUnifiedScreen('start',
+        'Explorer Camp — Level 3',
+        ["Find the map, light, lock and key.",
+         "Use portals, survive ghosts, seal the boss.",
+         `Starting weapon: ${currentWeaponStats.name}`],
+        "Press ENTER to start",
+        blink
+    );
 }
 
-function drawEnd() {
-    fill(50, 65, 98);
-    noStroke();
-    rect(width / 2 - 180, height / 2 - 80, 360, 170, 8);
-
-    textAlign(CENTER);
-    fill(255);
-    textSize(24);
-    textFont('Impact');
-    text('LEVEL 3 COMPLETE', width / 2, height / 2 - 38);
-
-    textSize(12);
-    textFont('Arial');
-    text(`Small kills: ${smallKillCount}`, width / 2, height / 2 - 8);
-    text(`Boss sealed: Yes`, width / 2, height / 2 + 12);
-    text(`Item Codex: ${getCodexDisplayText()}`, width / 2, height / 2 + 34);
-
-    if (floor(gTime * 3) % 2 === 1) {
-        text("Press ESC to restart", width / 2, height / 2 + 66);
-    }
-
-    textAlign(LEFT);
+function drawEnd_L3() {
+    let blink = floor(gTime * 3) % 2 === 1;
+    drawUnifiedScreen('end',
+        'Level 3 Complete',
+        [`Small kills: ${smallKillCount}`,
+         'Boss sealed: Yes',
+         `Item Codex: ${getCodexDisplayText()}`],
+        "Press ESC to restart",
+        blink
+    );
 }
 
-function drawPause() {
-    fill(50, 65, 98);
-    noStroke();
-    rect(width / 2 - 145, height / 2 - 50, 290, 100, 8);
-
-    textAlign(CENTER);
-    fill(255);
-    textSize(20);
-    textFont('Impact');
-    text('PAUSE', width / 2, height / 2);
-
-    if (floor(gTime * 3) % 2 === 1) {
-        textSize(12);
-        textFont('Arial');
-        text("Press 'P' to pause/resume the game", width / 2, height / 2 + 20);
-    }
-
-    textAlign(LEFT);
+function drawPause_L3() {
+    let blink = floor(gTime * 3) % 2 === 1;
+    drawUnifiedScreen('pause',
+        'Paused',
+        ["Press P to resume."],
+        "Press P to resume",
+        blink
+    );
 }
 
-function drawGameOver() {
-    fill(120, 40, 40);
-    noStroke();
-    rect(width / 2 - 180, height / 2 - 82, 360, 170, 8);
-
-    textAlign(CENTER);
-    fill(255);
-    textSize(20);
-    textFont('Impact');
-    text('GAME OVER', width / 2, height / 2 - 42);
-
-    textSize(11);
-    textFont('Arial');
-    text(gameoverMsg, width / 2, height / 2 - 16);
-    text(`Small kills: ${smallKillCount}`, width / 2, height / 2 + 10);
-    text(`Item Codex: ${getCodexDisplayText()}`, width / 2, height / 2 + 30);
-
-    if (floor(gTime * 3) % 2 === 1) {
-        text("Press ESC to restart", width / 2, height / 2 + 58);
-    }
-
-    textAlign(LEFT);
+function drawGameOver_L3() {
+    let blink = floor(gTime * 3) % 2 === 1;
+    drawUnifiedScreen('gameover',
+        'Game Over',
+        [gameoverMsg,
+         `Kills: ${smallKillCount}`,
+         `Item Codex: ${getCodexDisplayText()}`],
+        "Press ESC to restart",
+        blink
+    );
 }
+
 
 function drawPopUp() {
-    fill(80, 105, 140);
-    noStroke();
-    rect(width / 2 - 160, 75, 320, 120, 8);
-
-    textAlign(CENTER);
-    fill(255);
-    textSize(16);
-    textFont('Arial');
-    text(popUpTitle, width / 2, 100);
-
-    textSize(12);
-    fillTextMultiLine(popUpMessage, width / 2, 130);
-
-    textAlign(LEFT);
+    if (endTimePopUp > elapsedTime || (typeof popupRequiresEnter !== 'undefined' && popupRequiresEnter)) {
+        drawUnifiedPopUp(popUpTitle, popUpMessage);
+    }
 }
 
 function drawInformation() {
-    fill(80, 105, 140);
-    noStroke();
-    rect(width / 2 - 230, 56, 460, 390, 8);
+    let bx = width / 2 - 230;
+    let by = 80;
+    let bw = 460;
+    let bh = 500;
+
+    drawInstructionBox(bx, by, bw, bh);
 
     textAlign(CENTER);
-    fill(255);
-    textSize(16);
-    textFont('Arial');
-    text('Instructions', width / 2, 90);
+    fill(248, 232, 190);
+    textSize(17);
+    textFont('Georgia');
+    textStyle(BOLD);
+    text('Instructions', width / 2, by + 60);
+    textStyle(NORMAL);
 
-    textAlign(LEFT);
+    fill(230, 200, 150);
     textSize(12);
-    noStroke();
+    textAlign(LEFT);
 
-    text('Find the chest first to unlock the mini map.', width / 2 - 210, 132);
-    text('The fog covers the whole map at first.', width / 2 - 210, 152);
-    text('Find the light to unlock the lit vision area.', width / 2 - 210, 172);
-    text('Inside the lit area, your weapon can auto-lock targets.', width / 2 - 210, 192);
-    text('You start this level with your remembered weapon from Level 2.', width / 2 - 210, 212);
-    text('Find both the lock and the key to unlock the Seal.', width / 2 - 210, 232);
-    text('Use SHIFT to switch between Crossbow / Ring / Seal.', width / 2 - 210, 252);
-    text('The boss cannot be cleared by damage alone.', width / 2 - 210, 272);
-    text('When the boss enters locked HP state, switch to Seal and', width / 2 - 210, 292);
-    text('press SPACE near it to finish the level.', width / 2 - 210, 312);
-    text("Use Arrow Keys or WASD to move.", width / 2 - 210, 336);
-    text("Press 'M' to show/hide the mini map and 'P' to pause.", width / 2 - 210, 356);
+    let tx = bx + 65;
+    let ty = by + 110;
+    let gap = 20;
 
+    text('Find the chest first to unlock the mini map.', tx, ty);
+    text('Find the light to unlock the lit vision area.', tx, ty + gap);
+    text('You start this level with your remembered weapon from Level 2.', tx, ty + gap * 2);
+    text('Find both the lock and the key to unlock the Seal.', tx, ty + gap * 3);
+    text('Use SHIFT to switch between Crossbow / Ring / Seal.', tx, ty + gap * 4);
+    text('The boss cannot be cleared by damage alone.', tx, ty + gap * 5);
+    text('When the boss enters locked HP state, switch to Seal and', tx, ty + gap * 6);
+    text('press SPACE near it to finish the level.', tx, ty + gap * 7);
+    text('Use Arrow Keys or WASD to move.', tx, ty + gap * 8);
+    text("Press 'M' to show/hide the mini map and 'P' to pause.", tx, ty + gap * 9);
+
+    // 方向键
     textAlign(CENTER);
     textSize(10);
     stroke(255);
     strokeWeight(2);
     noFill();
 
-    text('Up', width / 2, 350);
-    rect(width / 2 - 22.5, 325, 45, 45, 10);
+    let kx = width / 2;
+    let ky = by + gap * 13 + 60;
 
-    text('Left', width / 2 - 50, 401);
-    rect(width / 2 - 72.5, 375, 45, 45, 10);
+    drawKeyBox(kx - 22.5, ky + 5, 45, 45, 'Up');
 
-    text('Down', width / 2, 401);
-    rect(width / 2 - 22.5, 375, 45, 45, 10);
+    drawKeyBox(kx - 72.5, ky + 55, 45, 45, 'Left');
 
-    text('Right', width / 2 + 50, 401);
-    rect(width / 2 + 27.5, 375, 45, 45, 10);
+    drawKeyBox(kx - 22.5, ky + 55, 45, 45, 'Down');
+
+    drawKeyBox(kx + 27.5, ky + 55, 45, 45, 'Right');
 
     push();
     textAlign(CENTER, CENTER);
-    textFont('Arial');
+    textFont('Georgia');
     textSize(12);
-    fill(255);
+    fill(230, 200, 150);
     noStroke();
-    strokeWeight(0);
 
     if (floor(gTime * 3) % 2 === 1) {
-        text("Press 'Enter' to continue", width / 2, 425);
+        text("Press 'Enter' to continue", width / 2, ky + 130);
     }
     pop();
 
     textAlign(LEFT);
+}
+
+function drawKeyBox(x, y, w, h, label) {
+    push();
+
+    stroke(255);
+    strokeWeight(2);
+    noFill();
+    rect(x, y, w, h, 10);
+
+    noStroke();
+    fill(255);
+    textAlign(CENTER, CENTER);
+    textSize(10);
+    textFont('Georgia');
+    textStyle(BOLD);
+    text(label, x + w / 2, y + h / 2);
+
+    pop();
 }
 
 function drawMiniMap() {
