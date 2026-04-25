@@ -479,37 +479,39 @@ What made this implementation tractable was that no new subsystems were needed: 
 
 The game was evaluated during its prototype stage, enabling us to identify and fix usability issues and technical bugs during development. Since the game did not yet include the final Bristol-themed visuals, this allowed us to focus on evaluating the core gameplay mechanics without the influence of visual or narrative elements. 
 
-We used a mixed-methods approach, combining quantitative data from the System Usability Scale (SUS) with qualitative feedback from Think Aloud sessions. This helped us understand how well users could complete tasks and their overall experience during gameplay.
+We combined quantitative data from the System Usability Scale (SUS) with qualitative feedback from Think Aloud (TA) sessions. This helped us understand how well users could complete tasks and their overall experience during gameplay.
 
 
 ## 6.1 Qualitative Evaluation: Think Aloud
 
-To explore how players understood the game and identify misunderstandings or unclear game concepts, we conducted Think Aloud (TA) sessions (Pellicone et al., 2022). Ten participants were recruited using convenience sampling from our weekly workshops, allowing us to receive quick feedback during development without requiring a controlled experiment. We asked participants to verbalise their thoughts and decision-making process while navigating the maze and completing tasks such as finding items and reaching the exit.
+During the TA tests, we asked participants to verbalise their thoughts and decision-making process while navigating the maze and completing tasks such as finding items and reaching the exit. This helps us identify unclear game concepts from a player’s perspective (Pellicone et al., 2022). 
 
-The main issues were related to map design, controls, and game mechanics.
+Ten participants were recruited using convenience sampling from our weekly workshops, allowing us to receive quick feedback without requiring a controlled experiment.
 
-* **Map Design:**
+We grouped the feedback into common themes to identify repeated issues across different users. The main themes were map design, technical issues, and game mechanics.
 
-  Most users liked the maze's layout and its "spacious route", suggesting that the navigation structure was clear and easy to understand.         However, many noted that the environment felt empty and repetitive, resulting in reduced user engagement. This supported our planned use of     Bristol-themed visual elements, including landmarks and graffiti-style textures, to help players recognise different areas of the map.
- 
-* **Controls:**
+* Map Design:
 
-  A key issue was identified with input handling. The Enter key, used to start the game, only worked when the mouse cursor was positioned over    the game window. This made the controls unreliable and harder to use.
+Most users liked the maze's layout and its "spacious route", suggesting that the navigation structure was clear and easy to understand. However, many noted that the environment felt empty and repetitive, indicating a lack of visual detail in the prototype, which led to reduced user engagement. This supported our planned use of Bristol-themed visual elements, including landmarks and graffiti-style textures, to improve visual engagement and help players recognise different areas of the map.
 
-  This was fixed by ensuring the game window automatically captures keyboard input, meaning that the keyboard controls remain active during       gameplay.
+* Technical Glitches:
 
-* **Game Mechanics:**
+A key issue was identified with input handling. The Enter key, used to start the game, only worked when the mouse cursor was positioned over the game window. This made the controls unreliable and harder to use.
 
-  Participants suggested several improvements to the game mechanics, some of which matched features we already planned to implement, such as      adding item descriptions to improve understanding and engagement.
+This was fixed by ensuring the game window captures keyboard input, so inputs such as the Enter key are consistently detected during gameplay. 
+   
+* Game Mechanics:
 
-  Participants struggled to know when they were running out of time and needed assistance when under pressure, meaning the clock at the top of    the screen alone was not sufficient. Hence, we decided to add a hint system to help locate the exit when time is running low, as well as a      warning sign when 10–20 seconds remain. 
+Participants suggested several improvements to the game mechanics, some of which matched features we already planned to implement, such as adding item descriptions to improve understanding and engagement.
+
+Participants also suggested adding a hint system to help locate the exit when time is running low, as well as a warning when you are about to run out of time (e.g. 10–20 seconds remaining). This indicated that players needed clearer feedback when they are under pressure. 
 
 
 ## 6.2 Quantitative Analysis: System Usability Scale (SUS)
 
-To ensure the game was engaging, we made sure that usability did not negatively affect player experience. If a game is too easy or unnecessarily difficult, it can reduce replayability as players can lose interest or become frustrated (Sweetser & Wyeth, 2005). Therefore, we evaluated whether the game was easy to use while being appropriately challenging. 
+The SUS was used to evaluate the usability of the game. If a game is too easy, it can become uninteresting, while unnecessary difficulty or frustration can reduce replayability (Sweetser & Wyeth, 2005). 
 
-We used SUS to measure how easily the participants could learn and interact with the game. Ten participants (P1-P10), recruited using convenience sampling, completed gameplay tasks such as collecting items and finding the exit before filling out the SUS questionnaire. (Raw data: Appendix ?)
+Ten participants completed gameplay tasks such as collecting items and finding the exit before filling out the SUS questionnaire. (Raw data: Appendix ?)
 
 
 <p align="center">
@@ -527,25 +529,16 @@ The average SUS score was 90.75/100, indicating a high level of usability.
   * Negative usability statements, such as “Too complex” (Q2 = 1.4) and “Need technical support” (Q4 = 1.2), received low scores, indicating        that users did not find the game too difficult or confusing.
 
   * The lowest positive score was for “Felt confident” (Q9 = 4.3/5). While still high, this indicates that some players may require clearer
-    in-game feedback to feel fully confident during gameplay. 
+    in-game feedback to feel fully confident during gameplay.
 
-Overall, these results suggest that usability is unlikely to negatively impact players' experience. 
 
 ## 6.3 Code Testing - need to edit this section
 
-To ensure the prototype was stable during user evaluations, performed several rounds of technical testing to verify the game logic before participants played the game to ensure we get more accurate results with the model being as close to being done as we want it to be, closer to the end product.
+We used black-box testing to evaluate core gameplay features. This involved testing systems such as movement and item collecting, ensuring they worked as intended in different conditions. We chose this test as it focuses on how the game works from a player's perspective rather than the developer’s perspective, which involves looking at the internal code of the game. 
 
-* Input Handling Tests: We performed unit tests on the keyboard event listeners to ensure consistent response times. This led to the identification of the focus-handling bug regarding the "Enter" key. We subsequently modified the code to ensure the game canvas automatically captures input focus upon loading.
+We ensured the test assessed normal, boundary, and error cases (Appendix ?). Each test had a specific input and expected outcome. Boundary cases tested situations at the limits of the system, such as having just enough coins to make a purchase. Error cases ensured the game handled invalid actions correctly (e.g. attempting to open a door without a key). 
 
-* Mapping and Coordinate Logic: We verified the mathematical scaling of the small map by comparing the player’s (x,y) world coordinates against the UI markers. This was done to ensure the "green points" appeared in their correct relative positions on the map without any lag or offset issues.
-
-* Collision Detection: We conducted boundary testing by attempting to move the character through all environment assets and map borders. This ensured that players could not clip through walls or unintentionally exit the "spacious route" and fall outside of the world geometry.
-
-* Visual Stability: We tested a "Windows pointer" implementation to address camera jitter. By running the game at various frame rates, we confirmed that camera movement remained stable across different hardware performance levels
-
-* Integration Testing: Following the addition of "bounce pads" and the rewarding system, we re-tested the level flow to ensure these new mechanics did not interfere with existing game-state variables or exit gate triggers.
-
-* Input and Combat Logic: We conducted extensive testing on the player’s combat mechanics. Originally, the system was restricted so the character could only shoot in the direction they were moving; however, we refactored the aiming logic to allow for omnidirectional shooting, enabling the player to defend themselves regardless of their movement vector.
+However, as black-box testing does not consider the internal code, some issues were not identified during these tests. For example, an input bug with the Enter key was discovered during the Think Aloud tests (Section 6.1). This highlights the importance of combining both code structure testing and player-focused evaluation. 
 
 
 # 7. Process 
