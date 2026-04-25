@@ -79,8 +79,6 @@ let showInstructions = false;
 
 // 建立墙体查询表 / Create a wall search table
 let wallLookup = new Set();
-
-
 // ==================== 游戏对象 / Game objects ====================
 
 // 迷宫对象 / Maze object
@@ -359,6 +357,11 @@ function mousePressed() {
 function keyPressed() {
     uiKeyPressed();
     lastKeyPress = keyCode;
+     
+    if (end && keyCode === ENTER) {
+        goToNextLevel(1);
+        return;
+    }
 
     if (keyCode === ENTER && start) {
         pause = false;
@@ -373,7 +376,13 @@ function keyPressed() {
     }
 
     if (!start && !showInstructions && keyCode === KEY_PAUSE) {
-        pause = !pause;
+    pause = !pause;
+
+        if (menuOpen) {
+            closeMenuPanel();
+        }
+
+        return;
     }
 
     if (keyCode === ESCAPE && (end || gameover)) {
@@ -837,7 +846,7 @@ function drawEnd_L1() {
     drawUnifiedScreen('end',
         'You Escaped!',
         ["Congratulations, you became an Explorer!"],
-        "Press ESC to restart",
+        "Press ENTER to continue",
         blink
     );
 }
@@ -871,7 +880,7 @@ function drawPopUp() {
 
 
 function drawInformation() {
-    let bx = width / 2 - 230;
+    let bx = width / 1.7 - 300;
     let by = 80;
     let bw = 460;
     let bh = 500;
@@ -880,31 +889,42 @@ function drawInformation() {
 
     textAlign(CENTER);
     fill(248, 232, 190);
-    textSize(17);
-    textFont('Georgia');
+    textSize(19);
+    textFont('Cinzel');
     textStyle(BOLD);
     text('Instructions', width / 2, by + 60);
     textStyle(NORMAL);
 
     fill(230, 200, 150);
-    textSize(12);
+    textSize(14);
     textAlign(LEFT);
 
-    let tx = bx + 65;
-    let ty = by + 110;
+    let tx = bx + 110;
+    let ty = by + 115;
     let gap = 20;
 
-    text('To become an explorer, find the exit of the maze.', tx, ty);
-    text('Collect the chest first to unlock the mini map.', tx, ty + gap);
-    text('After that, search for the crossbow.', tx, ty + gap * 2);
-    text('You need the crossbow before leaving the maze.', tx, ty + gap * 3);
-    text('Be careful — your escape time is limited.', tx, ty + gap * 4);
-    text('Use Arrow Keys or WASD to move.', tx, ty + gap * 5);
-    text("Press 'M' to show/hide the mini map.", tx, ty + gap * 6);
-    text("Press 'P' to pause the game.", tx, ty + gap * 7);
+    textFont("Cinzel");
+    textSize(20);
+    text('Objective', tx, ty);
 
+    textFont("Cormorant Garamond");
+    textSize(16);
+    text('· Find the exit of the maze.', tx, ty + gap);
+    text('· Collect the chest to unlock the mini map.', tx, ty + gap * 2);
+    text('· Find the crossbow before leaving.', tx, ty + gap * 3);
+
+    textFont("Cinzel");
+    textSize(20);
+    text('Controls', tx, ty + gap * 5);
+
+    textFont("Cormorant Garamond");
+    textSize(16);
+    text('· Move: WASD / Arrow Keys', tx, ty + gap * 6);
+    text("· M: Toggle mini map", tx, ty + gap * 7);
+    text("· P: Pause", tx, ty + gap * 8);
+    
     textAlign(CENTER);
-    textSize(10);
+    textSize(14);
     stroke(255);
     strokeWeight(2);
     noFill();
@@ -919,9 +939,9 @@ function drawInformation() {
 
     push();
     textAlign(CENTER, CENTER);
-    textFont('Georgia');
+    textFont('Cormorant Garamond');
     textStyle(NORMAL);
-    textSize(12);
+    textSize(14);
     fill(230, 200, 150);
     noStroke();
 
@@ -945,8 +965,8 @@ function drawKeyBox(x, y, w, h, label) {
     noStroke();
     fill(255);
     textAlign(CENTER, CENTER);
-    textSize(10);
-    textFont('Georgia');
+    textSize(14);
+    textFont('Cormorant Garamond');
     textStyle(BOLD);
     text(label, x + w / 2, y + h / 2);
 
@@ -1057,7 +1077,7 @@ function drawElapsedTime() {
     fill(60, 40, 20);
     textAlign(CENTER, CENTER);
     textSize(20);
-    textFont('Georgia');
+    textFont('Cormorant Garamond');
     text(convertTime(elapsedTime), innerX + innerW / 2, innerY + innerH / 2 + 1);
 
     // ===== 金框盖上 =====
