@@ -498,8 +498,8 @@ Most users liked the maze's layout and its "spacious route", suggesting that the
 
 A key issue was identified with input handling. The Enter key, used to start the game, only worked when the mouse cursor was positioned over the game window. This made the controls unreliable and harder to use.
 
-This was fixed by ensuring the game window captures keyboard input, so inputs such as the Enter key are consistently detected during gameplay. 
-   
+This was fixed by ensuring the game window stays active during gameplay, so keyboard inputs like the Enter key are always detected.
+
 * Game Mechanics:
 
 Participants suggested several improvements to the game mechanics, some of which matched features we already planned to implement, such as adding item descriptions to improve understanding and engagement.
