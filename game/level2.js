@@ -25,14 +25,14 @@ const weaponConfigs = {
     crossbow: {
         name: "Crossbow",
         damage: 10,
-        projectileSpeed: 320,
+        projectileSpeed: 360,
         cooldown: 0.22
     },
     ring: {
         name: "Magic Ring",
         damage: 10,
-        projectileSpeed: 320,
-        cooldown: 0.22
+        projectileSpeed: 300,
+        cooldown: 0.32
     }
 };
 
@@ -257,14 +257,21 @@ function act(dt) {
 
 
 function mousePressed() {
+     SoundManager.init();
+
     uiMousePressed();
 }
 
 // ==================== 输入 / Input ====================
 function keyPressed() {
-    uiKeyPressed();
+     SoundManager.init();
+    if (uiKeyPressed()) return;
     lastKeyPress = keyCode;
-
+    
+    if (end && keyCode === ENTER) {
+        goToNextLevel(2);
+        return;
+    }
     // 开始游戏：先显示说明
     if (keyCode === ENTER && start) {
         pause = false;
@@ -280,7 +287,14 @@ function keyPressed() {
     }
 
     if (!start && !showInstructions && keyCode === KEY_PAUSE) {
+         SoundManager.playButton();
         pause = !pause;
+
+        if (menuOpen) {
+            closeMenuPanel();
+        }
+
+        return;
     }
 
     if (keyCode === ESCAPE && (end || gameover)) {
@@ -288,6 +302,7 @@ function keyPressed() {
     }
 
     if (keyCode === KEY_M) {
+         SoundManager.playButton();
         showMiniMap = !showMiniMap;
     }
 
@@ -630,6 +645,7 @@ function createEnemies() {
 
 // ==================== 道具拾取 / Pickups ====================
 function boxIntersects() {
+     SoundManager.playPickup();
     hasMiniMap = true;
     triggerPopUp(
         "Mini Map found!",
@@ -771,8 +787,8 @@ function drawHud() {
     if (start || showInstructions) return;
 
     fill(255);
-    textSize(12);
-    textFont('Georgia');
+    textSize(14);
+    textFont('Cormorant Garamond');
     textAlign(LEFT);
 
     let x = 14;
@@ -1048,8 +1064,22 @@ class Projectile {
             }
         } else {
             noStroke();
-            fill(140, 210, 255);
-            circle(this.x - cam.x, this.y - cam.y, this.r * 2);
+
+            if (this.kind === 'orb') {
+                drawingContext.shadowBlur = 14;
+                drawingContext.shadowColor = "rgba(255, 70, 70, 0.9)";
+
+                fill(255, 80, 80);
+                circle(this.x - cam.x, this.y - cam.y, this.r * 2.4);
+
+                fill(255, 190, 170, 160);
+                circle(this.x - cam.x, this.y - cam.y, this.r * 1.2);
+
+                drawingContext.shadowBlur = 0;
+            } else {
+                fill(140, 210, 255);
+                circle(this.x - cam.x, this.y - cam.y, this.r * 2);
+            }
         }
 
         pop();
@@ -1436,7 +1466,7 @@ function drawEnd_L2() {
         'Level 2 Complete',
         [`Kills: ${smallKillCount}`,
          `Item Codex: ${getCodexDisplayText()}`],
-        "Press ESC to restart",
+        "Press ENTER to continue",
         blink
     );
 }
@@ -1469,7 +1499,7 @@ function drawPopUp() {
 }
 
 function drawInformation() {
-    let bx = width / 2 - 230;
+    let bx = width / 1.7 - 300;
     let by = 80;
     let bw = 460;
     let bh = 500;
@@ -1478,32 +1508,42 @@ function drawInformation() {
 
     textAlign(CENTER);
     fill(248, 232, 190);
-    textSize(17);
-    textFont('Georgia');
+    textSize(19);
+    textFont('Cinzel');
     textStyle(BOLD);
     text('Instructions', width / 2, by + 60);
     textStyle(NORMAL);
 
     fill(230, 200, 150);
-    textSize(12);
+    textSize(16);
     textAlign(LEFT);
 
-    let tx = bx + 65;
-    let ty = by + 110;
+    let tx = bx + 130;
+    let ty = by + 115;
     let gap = 20;
 
-    text('Find the chest first to unlock the mini map.', tx, ty);
-    text('Then search for the light and the magic ring.', tx, ty + gap);
-    text('You already start with the crossbow equipped.', tx, ty + gap * 2);
-    text('The light clears the fog and enables auto-lock nearby.', tx, ty + gap * 3);
-    text('Press SPACE to attack.', tx, ty + gap * 4);
-    text('After finding the ring, press SHIFT to switch weapons.', tx, ty + gap * 5);
-    text('Reach the exit portal after collecting light and ring.', tx, ty + gap * 6);
-    text('Use Arrow Keys or WASD to move.', tx, ty + gap * 7);
-    text("Press 'M' to show/hide the mini map and 'P' to pause.", tx, ty + gap * 8);
+    textFont("Cinzel");
+    textSize(20);
+    text('Objective', tx, ty);
 
+    textFont("Cormorant Garamond");
+    textSize(16);
+    text('· Explore the maze and survive.', tx, ty + gap);
+    text('· Find the relic hidden inside.', tx, ty + gap * 2);
+    text('· Reach the exit portal.', tx, ty + gap * 3);
+
+    textFont("Cinzel");
+    textSize(20);
+    text('Controls', tx, ty + gap * 5);
+
+    textFont("Cormorant Garamond");
+    textSize(16);
+    text('· Move: WASD / Arrow Keys', tx, ty + gap * 6);
+    text("· M: Toggle mini map", tx, ty + gap * 7);
+    text("· P: Pause", tx, ty + gap * 8);
+    
     textAlign(CENTER);
-    textSize(10);
+    textSize(14);
     stroke(255);
     strokeWeight(2);
     noFill();
@@ -1518,8 +1558,8 @@ function drawInformation() {
 
     push();
     textAlign(CENTER, CENTER);
-    textFont('Georgia');
-    textSize(12);
+    textFont('Cormorant Garamond');
+    textSize(14);
     fill(230, 200, 150);
     noStroke();
 
@@ -1542,8 +1582,8 @@ function drawKeyBox(x, y, w, h, label) {
     noStroke();
     fill(255);
     textAlign(CENTER, CENTER);
-    textSize(10);
-    textFont('Georgia');
+    textSize(14);
+    textFont('Cormorant Garamond');
     textStyle(BOLD);
     text(label, x + w / 2, y + h / 2);
 
@@ -1657,7 +1697,7 @@ function drawElapsedTime() {
     fill(60, 40, 20);
     textAlign(CENTER, CENTER);
     textSize(20);
-    textFont('Georgia');
+    textFont('Cormorant Garamond');
     text(convertTime(elapsedTime), innerX + innerW / 2, innerY + innerH / 2 + 1);
 
     // ===== 金框盖上 =====
@@ -1670,6 +1710,8 @@ function drawElapsedTime() {
 
 // ==================== 重置 / Reset ====================
 function resetGame() {
+     SoundManager.stopBGM();
+
     gTime = 0;
     elapsedTime = 0;
     lastKeyPress = null;
