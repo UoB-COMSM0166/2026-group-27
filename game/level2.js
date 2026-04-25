@@ -137,6 +137,7 @@ function preload() {
 
     // 人物四视图 / Character sprites from shared renderer
     preloadSelectedCharacterSprites();
+    uiPreload();
 }
 
 // ==================== p5 入口 / p5 Entry ====================
@@ -212,10 +213,10 @@ function drawGame() {
     if (hasMiniMap && showMiniMap) drawMiniMap();
 
     if (pause) {
-        if (start) drawStart();
-        else if (end) drawEnd();
-        else if (gameover) drawGameOver();
-        else drawPause();
+        if (start) drawStart_L2();
+        else if (end) drawEnd_L2();
+        else if (gameover) drawGameOver_L2();
+        else drawPause_L2();
     }
 
     if (showInstructions) {
@@ -224,6 +225,9 @@ function drawGame() {
 
     drawElapsedTime();
     drawHud();
+    drawMenuButton();
+    if (menuOpen) drawMenuPanel();
+    uiEndFrame();
 }
 
 function act(dt) {
@@ -251,8 +255,14 @@ function act(dt) {
     }
 }
 
+
+function mousePressed() {
+    uiMousePressed();
+}
+
 // ==================== 输入 / Input ====================
 function keyPressed() {
+    uiKeyPressed();
     lastKeyPress = keyCode;
 
     // 开始游戏：先显示说明
@@ -762,7 +772,7 @@ function drawHud() {
 
     fill(255);
     textSize(12);
-    textFont('Arial');
+    textFont('Georgia');
     textAlign(LEFT);
 
     let x = 14;
@@ -1408,135 +1418,89 @@ function drawWallToLayer(g, x, y) {
 }
 
 // ==================== UI / Screens ====================
-function drawStart() {
-    fill(50, 65, 98);
-    noStroke();
-    rect(width / 2 - 170, height / 2 - 70, 340, 140, 8);
-
-    textAlign(CENTER);
-    fill(255);
-    textSize(30);
-    textFont('Impact');
-    text('Explorer Camp - Level 2', width / 2, height / 2 - 18);
-
-    textSize(12);
-    textFont('Arial');
-    text("Find the map, light, ring and reach the door.", width / 2, height / 2 + 10);
-    text("Start weapon: Crossbow", width / 2, height / 2 + 28);
-
-    if (floor(gTime * 3) % 2 === 1) {
-        text("Press ENTER to start", width / 2, height / 2 + 50);
-    }
-
-    textAlign(LEFT);
+function drawStart_L2() {
+    let blink = floor(gTime * 3) % 2 === 1;
+    drawUnifiedScreen('start',
+        'Explorer Camp — Level 2',
+        ["Find the map, light, ring",
+         "and reach the door.",
+         "Start weapon: Crossbow"],
+        "Press ENTER to start",
+        blink
+    );
 }
 
-function drawEnd() {
-    fill(50, 65, 98);
-    noStroke();
-    rect(width / 2 - 170, height / 2 - 72, 340, 150, 8);
-
-    textAlign(CENTER);
-    fill(255);
-    textSize(24);
-    textFont('Impact');
-    text('LEVEL 2 COMPLETE', width / 2, height / 2 - 24);
-
-    textSize(12);
-    textFont('Arial');
-    text(`Kills: ${smallKillCount}`, width / 2, height / 2 + 8);
-    text(`Item Codex: ${getCodexDisplayText()}`, width / 2, height / 2 + 30);
-
-    if (floor(gTime * 3) % 2 === 1) {
-        text("Press ESC to restart the game", width / 2, height / 2 + 58);
-    }
-
-    textAlign(LEFT);
+function drawEnd_L2() {
+    let blink = floor(gTime * 3) % 2 === 1;
+    drawUnifiedScreen('end',
+        'Level 2 Complete',
+        [`Kills: ${smallKillCount}`,
+         `Item Codex: ${getCodexDisplayText()}`],
+        "Press ESC to restart",
+        blink
+    );
 }
 
-function drawPause() {
-    fill(50, 65, 98);
-    noStroke();
-    rect(width / 2 - 145, height / 2 - 50, 290, 100, 8);
-
-    textAlign(CENTER);
-    fill(255);
-    textSize(20);
-    textFont('Impact');
-    text('PAUSE', width / 2, height / 2);
-
-    if (floor(gTime * 3) % 2 === 1) {
-        textSize(12);
-        textFont('Arial');
-        text("Press 'P' to pause/resume the game", width / 2, height / 2 + 20);
-    }
-
-    textAlign(LEFT);
+function drawPause_L2() {
+    let blink = floor(gTime * 3) % 2 === 1;
+    drawUnifiedScreen('pause',
+        'Paused',
+        ["Press P to resume."],
+        "Press P to resume",
+        blink
+    );
 }
 
-function drawGameOver() {
-    fill(120, 40, 40);
-    noStroke();
-    rect(width / 2 - 170, height / 2 - 72, 340, 150, 8);
-
-    textAlign(CENTER);
-    fill(255);
-    textSize(20);
-    textFont('Impact');
-    text('GAME OVER', width / 2, height / 2 - 28);
-
-    textSize(11);
-    textFont('Arial');
-    text(gameoverMsg, width / 2, height / 2 - 6);
-    text(`Kills: ${smallKillCount}`, width / 2, height / 2 + 20);
-    text(`Item Codex: ${getCodexDisplayText()}`, width / 2, height / 2 + 40);
-
-    if (floor(gTime * 3) % 2 === 1) {
-        text("Press ESC to restart", width / 2, height / 2 + 62);
-    }
-
-    textAlign(LEFT);
+function drawGameOver_L2() {
+    let blink = floor(gTime * 3) % 2 === 1;
+    drawUnifiedScreen('gameover',
+        'Game Over',
+        [gameoverMsg, `Kills: ${smallKillCount}`],
+        "Press ESC to restart",
+        blink
+    );
 }
+
 
 function drawPopUp() {
-    fill(80, 105, 140);
-    noStroke();
-    rect(width / 2 - 160, 75, 320, 120, 8);
-
-    textAlign(CENTER);
-    fill(255);
-    textSize(16);
-    textFont('Arial');
-    text(popUpTitle, width / 2, 100);
-
-    textSize(12);
-    fillTextMultiLine(popUpMessage, width / 2, 130);
-    textAlign(LEFT);
+    if (endTimePopUp > elapsedTime || (typeof popupRequiresEnter !== 'undefined' && popupRequiresEnter)) {
+        drawUnifiedPopUp(popUpTitle, popUpMessage);
+    }
 }
 
 function drawInformation() {
-    fill(80, 105, 140);
-    noStroke();
-    rect(width / 2 - 210, 70, 420, 360, 8);
+    let bx = width / 2 - 230;
+    let by = 80;
+    let bw = 460;
+    let bh = 500;
+
+    drawInstructionBox(bx, by, bw, bh);
 
     textAlign(CENTER);
-    fill(255);
-    textSize(16);
-    textFont('Arial');
-    text('Instructions', width / 2, 100);
+    fill(248, 232, 190);
+    textSize(17);
+    textFont('Georgia');
+    textStyle(BOLD);
+    text('Instructions', width / 2, by + 60);
+    textStyle(NORMAL);
 
-    textAlign(LEFT);
+    fill(230, 200, 150);
     textSize(12);
-    noStroke();
+    textAlign(LEFT);
 
-    text('Find the chest first to unlock the mini map.', width / 2 - 190, 140);
-    text('Then search for the light and the magic ring.', width / 2 - 190, 160);
-    text('You already start with the crossbow equipped.', width / 2 - 190, 180);
-    text('The light clears the fog and enables auto-lock nearby.', width / 2 - 190, 200);
-    text("Press SPACE to attack.", width / 2 - 190, 230);
-    text("After finding the ring, press SHIFT to switch weapons.", width / 2 - 190, 250);
-    text("Use Arrow Keys or WASD to move.", width / 2 - 190, 280);
-    text("Press 'M' to toggle the mini map and 'P' to pause.", width / 2 - 190, 300);
+    let tx = bx + 65;
+    let ty = by + 110;
+    let gap = 20;
+
+    text('Find the chest first to unlock the mini map.', tx, ty);
+    text('Then search for the light and the magic ring.', tx, ty + gap);
+    text('You already start with the crossbow equipped.', tx, ty + gap * 2);
+    text('The light clears the fog and enables auto-lock nearby.', tx, ty + gap * 3);
+    text('Press SPACE to attack.', tx, ty + gap * 4);
+    text('After finding the ring, press SHIFT to switch weapons.', tx, ty + gap * 5);
+    text('Reach the exit portal after collecting light and ring.', tx, ty + gap * 6);
+    text('Use Arrow Keys or WASD to move.', tx, ty + gap * 7);
+    text("Press 'M' to show/hide the mini map and 'P' to pause.", tx, ty + gap * 8);
 
     textAlign(CENTER);
     textSize(10);
@@ -1544,32 +1508,46 @@ function drawInformation() {
     strokeWeight(2);
     noFill();
 
-    text('Up', width / 2, 325);
-    rect(width / 2 - 22.5, 300, 45, 45, 10);
+    let kx = width / 2;
+    let ky = by + gap * 13 + 60;
 
-    text('Left', width / 2 - 50, 376);
-    rect(width / 2 - 72.5, 350, 45, 45, 10);
-
-    text('Down', width / 2, 376);
-    rect(width / 2 - 22.5, 350, 45, 45, 10);
-
-    text('Right', width / 2 + 50, 376);
-    rect(width / 2 + 27.5, 350, 45, 45, 10);
+    drawKeyBox(kx - 22.5, ky + 5, 45, 45, 'Up');
+    drawKeyBox(kx - 72.5, ky + 55, 45, 45, 'Left');
+    drawKeyBox(kx - 22.5, ky + 55, 45, 45, 'Down');
+    drawKeyBox(kx + 27.5, ky + 55, 45, 45, 'Right');
 
     push();
     textAlign(CENTER, CENTER);
-    textFont('Arial');
+    textFont('Georgia');
     textSize(12);
-    fill(255);
+    fill(230, 200, 150);
     noStroke();
-    strokeWeight(0);
 
     if (floor(gTime * 3) % 2 === 1) {
-        text("Press 'Enter' to continue", width / 2, 410);
+        text("Press 'Enter' to continue", width / 2, ky + 130);
     }
     pop();
 
     textAlign(LEFT);
+}
+
+function drawKeyBox(x, y, w, h, label) {
+    push();
+
+    stroke(255);
+    strokeWeight(2);
+    noFill();
+    rect(x, y, w, h, 10);
+
+    noStroke();
+    fill(255);
+    textAlign(CENTER, CENTER);
+    textSize(10);
+    textFont('Georgia');
+    textStyle(BOLD);
+    text(label, x + w / 2, y + h / 2);
+
+    pop();
 }
 
 function drawMiniMap() {
