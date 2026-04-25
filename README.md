@@ -400,7 +400,7 @@ Acceptance criteria were included to determine when a feature has been successfu
 ## 5.1 Limited Visibility and Combat System - shorter version, need to include code here
 
 
-A key challenge we faced was implementing a limited visibility feature (fog) in levels 2 and 3. This restricts the player’s vision so that most of the maze remains dark, making navigation difficult and increasing the overall difficulty compared to level 1. Players can improve visibility by collecting a torch, which allows them to see a small area around the character (figure?)
+A key challenge we faced was implementing a limited visibility feature (fog) in levels 2 and 3. This restricts the player’s vision so that most of the maze remains dark, making navigation difficult and increasing the overall difficulty compared to level 1. Players can improve visibility by collecting a torch, which allows them to see a small area around the character (figure?).
 
 <p align="center">
   <b>Figure ?: </b>
