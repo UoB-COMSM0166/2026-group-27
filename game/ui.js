@@ -1,4 +1,4 @@
-// ==================== 共用 UI 系统 / Shared UI System ====================
+// ==================== 共用 UI / Shared UI ====================
 let menuImg;
 
 // ===== 菜单按钮状态 =====
@@ -15,7 +15,7 @@ let menuPanelTargetAlpha = 0;
 let _menuBtns = [];
 let _lastMenuBtns = [];
 
-const UI_FONT = 'Georgia';
+const UI_FONT = 'Cinzel';
 const UI_TITLE_COLOR = [248, 232, 190];
 const UI_TEXT_COLOR = [232, 200, 145];
 const UI_LINE_COLOR = [190, 145, 70];
@@ -59,7 +59,7 @@ function drawMenuPanel() {
     if (menuPanelAlpha < 2) return;
 
     let panelW = 240;
-    let panelH = 160;
+    let panelH = 220;
     let panelX = width - menuBtnPadding - panelW;
     let panelY = menuBtnPadding + menuBtnSize + 8;
 
@@ -86,12 +86,17 @@ function drawMenuPanel() {
     let btnW = panelW - 68;
     let btnH = 30;
 
-    drawMenuPanelBtn(btnX, btnY, btnW, btnH, 'Return to Main Menu', menuPanelAlpha, function () {
-        returnToMainMenu();
+    drawMenuPanelBtn(btnX, btnY, btnW, btnH, 'Restart', menuPanelAlpha, function () {
+        restartLevel();
     });
 
-    drawMenuPanelBtn(btnX, btnY + 42, btnW, btnH, 'Resume', menuPanelAlpha, function () {
+    drawMenuPanelBtn(btnX, btnY + 42, btnW, btnH, 'Instructions', menuPanelAlpha, function () {
+        showInstructions = true;
         closeMenuPanel();
+    });
+
+    drawMenuPanelBtn(btnX, btnY + 84, btnW, btnH, 'Return to Main Menu', menuPanelAlpha, function () {
+        returnToMainMenu();
     });
 
     pop();
@@ -123,7 +128,7 @@ function drawMenuPanelBtn(x, y, w, h, label, alpha, callback) {
 
     noStroke();
     fill(248, 224, 168, alpha);
-    textSize(12);
+    textSize(14);
     textFont(UI_FONT);
     textAlign(CENTER, CENTER);
     text(label, x + w / 2, y + h / 2);
@@ -158,15 +163,16 @@ function closeMenuPanel() {
     }
 }
 
-function returnToMainMenu() {
+function restartLevel() {
     closeMenuPanel();
 
     if (typeof resetGame === 'function') {
         resetGame();
     }
+}
 
-    if (typeof start !== 'undefined') start = true;
-    if (typeof pause !== 'undefined') pause = true;
+function returnToMainMenu() {
+    window.location.href = "main_menu.html";
 }
 
 // ==================== 点击检测 ====================
@@ -199,7 +205,7 @@ function uiMousePressed() {
         }
 
         let panelW = 240;
-        let panelH = 160;
+        let panelH = 220;
         let panelX = width - menuBtnPadding - panelW;
         let panelY = menuBtnPadding + menuBtnSize + 8;
 
