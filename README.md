@@ -437,7 +437,7 @@ The more subtle challenge was not drawing the fog but *honouring* it mechanicall
 
 Aligning the rendering layer and the game-logic layer through a shared notion of visibility proved the cleanest way to keep both systems honest. The single `createGraphics` buffer pattern is also cheap enough that it could be extended with additional transparent holes per active torch or lamp without architectural change—each extra light source is a one-line `fogLayer.circle()` call inside the erase block. Future work could generalise this into directional cones (flashlights), fog-piercing consumables sold in the shop, or stealth mechanics that only register the player once the player enters an enemy's visibility window. Exposing the visibility radius as a named constant rather than a magic number has already made it trivial to tune playtest balance without grep-hunting through subsystems.
 
-## 5.2 Final Boss Behaviour and Combat System (shorter version - need to add code)
+## 5.2 Final Boss: Movement and Combat System (shorter version - need to add code)
 
 Another difficulty we faced was making the final boss in level 3 more challenging than the regular enemies, which simply move around the maze and are easy to avoid. If the final boss behaved the same way, this would feel underwhelming for the player. Hence, the boss was designed to actively follow and attack the player while still using the existing systems in the game.
 
