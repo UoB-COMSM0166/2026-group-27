@@ -123,7 +123,7 @@ function preload() {
 
 // ==================== p5 Entry ====================
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(800, 600);
   textFont("Georgia");
 
   initStorage();
@@ -148,10 +148,6 @@ function draw() {
 
   drawTopBar();
   drawFlashMessage();
-}
-
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
 }
 
 // ==================== Storage ====================
