@@ -538,7 +538,7 @@ We used black-box testing to evaluate core gameplay features. This involved test
 
 We ensured the test assessed normal, boundary, and error cases (Appendix ?). Each test had a specific input and expected outcome. Boundary cases tested situations at the limits of the system, such as having just enough coins to make a purchase. Error cases ensured the game handled invalid actions correctly, such as attempting to open a door without a key. 
 
-However, as black-box testing does not consider the internal code, some issues were not identified during these tests. For example, an input bug with the Enter key was discovered during the Think Aloud tests ([Section 6.1] (https://github.com/UoB-COMSM0166/2026-group-27/tree/main#61-qualitative-evaluation-think-aloud-ta)). This highlights the importance of combining both code structure testing and player-focused evaluation. 
+However, as black-box testing does not consider the internal code, some issues were not identified during these tests. For example, an input bug with the Enter key was discovered during the Think Aloud tests ([Section 6.1](https://github.com/UoB-COMSM0166/2026-group-27/tree/main#61-qualitative-evaluation-think-aloud-ta)). This highlights the importance of combining both code structure testing and player-focused evaluation. 
 
 
 # 7. Process 
