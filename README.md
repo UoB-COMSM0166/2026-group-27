@@ -1,6 +1,6 @@
 # 2026-group-27
 
-
+ 
 <p align="center">
 <img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/03d6826ad7f8d7e7f84cc896539c44efde7da56c/readme%20docs/1.%20banner.gif" width= "150%">
 </p>
