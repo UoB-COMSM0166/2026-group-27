@@ -275,11 +275,6 @@ function setup() {
     createBoss();
     createPortals();
     createEnemies();
-
-    cam.focus(player.left, player.top);
-     {
-        SoundManager.playLevelBGM(3);
-    }
 }
 
 function draw() {
@@ -421,14 +416,11 @@ function act(dt) {
 
 
 function mousePressed() {
-     SoundManager.init();
-
     uiMousePressed();
 }
 
 // ==================== 输入 / Input ====================
 function keyPressed() {
-     SoundManager.init();
     if (uiKeyPressed()) return;
     lastKeyPress = keyCode;
 
@@ -456,7 +448,6 @@ function keyPressed() {
     }
 
     if (!start && !showInstructions && keyCode === KEY_PAUSE) {
-         SoundManager.playButton();
         pause = !pause;
 
         if (menuOpen) {
@@ -471,7 +462,6 @@ function keyPressed() {
     }
 
     if (keyCode === KEY_M) {
-         SoundManager.playButton();
         showMiniMap = !showMiniMap;
     }
 
@@ -1059,7 +1049,6 @@ function createBoss() {
 
 // ==================== 道具拾取 / Pickups ====================
 function boxIntersects() {
-     SoundManager.playPickup();
     hasMiniMap = true;
     showMiniMap = true;
 }
@@ -2507,8 +2496,6 @@ function drawElapsedTime() {
 
 // ==================== 重置 / Reset ====================
 function resetGame() {
-     SoundManager.stopBGM();
-
     gTime = 0;
     elapsedTime = 0;
     lastKeyPress = null;
