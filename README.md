@@ -532,7 +532,7 @@ The average SUS score was 90.75/100, indicating a high level of usability.
     in-game feedback to feel fully confident during gameplay.
 
 
-## 6.3 Code Testing - need to edit this section
+## 6.3 Code Testing
 
 We used black-box testing to evaluate core gameplay features. This involved testing systems such as movement and item collecting, ensuring they worked as intended in different conditions. We chose this test as it focuses on how the game works from a player's perspective rather than the developer’s perspective, which involves looking at the internal code of the game. 
 
