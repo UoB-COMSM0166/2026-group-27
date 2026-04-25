@@ -482,7 +482,7 @@ The game was evaluated during its prototype stage, enabling us to identify and f
 We combined quantitative data from the System Usability Scale (SUS) with qualitative feedback from Think Aloud (TA) sessions. This helped us understand how well users could complete tasks and their overall experience during gameplay.
 
 
-## 6.1 Qualitative Evaluation: Think Aloud
+## 6.1 Qualitative Evaluation: Think Aloud (TA)
 
 During the TA tests, we asked participants to verbalise their thoughts and decision-making process while navigating the maze and completing tasks such as finding items and reaching the exit. This helped us identify unclear game concepts from a player’s perspective (Pellicone et al., 2022). 
 
