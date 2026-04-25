@@ -42,7 +42,7 @@ const bossSealHoldTime = 1.8;
 // 武器配置 / Weapon configs
 const weaponConfigs = {
     crossbow: { name: "Crossbow", damage: 16, speed: 360, cooldown: 0.22 },
-    ring:     { name: "Magic Ring", damage: 12, speed: 320, cooldown: 0.22 },
+    ring:     { name: "Magic Ring", damage: 26, speed: 300, cooldown: 0.32 },
     seal:     { name: "Seal", damage: 0,  speed: 0,   cooldown: 0.35 }
 };
 
@@ -277,6 +277,9 @@ function setup() {
     createEnemies();
 
     cam.focus(player.left, player.top);
+     {
+        SoundManager.playLevelBGM(3);
+    }
 }
 
 function draw() {
@@ -337,7 +340,7 @@ function drawGame() {
     drawPlayer();
     drawFog();
 
-    if (endTimePopUp > elapsedTime || popupRequiresEnter) {
+    if ((endTimePopUp > elapsedTime || popupRequiresEnter) && !bossSealAnimating && !end) {
         drawPopUp();
     }
 
@@ -346,10 +349,15 @@ function drawGame() {
     }
 
     if (pause) {
-        if (start) drawStart_L3();
-        else if (end) drawEnd_L3();
-        else if (gameover) drawGameOver_L3();
-        else drawPause_L3();
+        if (start) {
+            drawStart_L3();
+        } else if (end) {
+            drawEnd_L3();
+        } else if (gameover) {
+            drawGameOver_L3();
+        } else if (!bossSealAnimating) {
+            drawPause_L3();
+        }
     }
 
     if (showInstructions) drawInformation();
@@ -413,13 +421,21 @@ function act(dt) {
 
 
 function mousePressed() {
+     SoundManager.init();
+
     uiMousePressed();
 }
 
 // ==================== 输入 / Input ====================
 function keyPressed() {
-    uiKeyPressed();
+     SoundManager.init();
+    if (uiKeyPressed()) return;
     lastKeyPress = keyCode;
+
+    if (end && keyCode === ENTER) {
+        goToNextLevel(3);
+        return;
+    }
 
     if (keyCode === ENTER && start) {
         pause = false;
@@ -440,7 +456,14 @@ function keyPressed() {
     }
 
     if (!start && !showInstructions && keyCode === KEY_PAUSE) {
+         SoundManager.playButton();
         pause = !pause;
+
+        if (menuOpen) {
+            closeMenuPanel();
+        }
+
+        return;
     }
 
     if (keyCode === ESCAPE && (end || gameover)) {
@@ -448,6 +471,7 @@ function keyPressed() {
     }
 
     if (keyCode === KEY_M) {
+         SoundManager.playButton();
         showMiniMap = !showMiniMap;
     }
 
@@ -557,35 +581,51 @@ function usePortal(fromIndex) {
     ];
 
     let placed = false;
+
     for (let d of destinations) {
         let testRect = new Rect(d.x, d.y, player.width, player.height, true);
-        if (!intersectsWall(testRect)) {
-            let blockedByPortal = false;
-            for (let p of portals) {
-                if (testRect.intersects(p)) {
-                    blockedByPortal = true;
-                    break;
-                }
-            }
-            if (!blockedByPortal) {
-                player.left = d.x;
-                player.top = d.y;
-                placed = true;
+
+        if (!isInsideWorld(testRect)) continue;
+        if (intersectsWall(testRect)) continue;
+
+        let blockedByPortal = false;
+        for (let p of portals) {
+            if (testRect.intersects(p)) {
+                blockedByPortal = true;
                 break;
             }
         }
+
+        if (!blockedByPortal) {
+            player.left = d.x;
+            player.top = d.y;
+            placed = true;
+            break;
+        }
     }
 
+    // 如果四周都不能放，就放到传送门自身附近的安全点
     if (!placed) {
-        player.left = target.left + blockSize;
-        player.top = target.top;
+        player.left = constrain(target.left + blockSize, 0, worldWidth - player.width);
+        player.top = constrain(target.top, 0, worldHeight - player.height);
+
         while (intersectsWall(player)) {
-            player.left -= blockSize;
+            player.left = constrain(player.left + blockSize, 0, worldWidth - player.width);
+            if (player.left >= worldWidth - player.width) break;
         }
     }
 
     teleportCooldownTimer = teleportCooldownTime;
     triggerPopUp("Warped!", "The portal dragged you elsewhere.", 1.2);
+}
+
+function isInsideWorld(r) {
+    return (
+        r.left >= 0 &&
+        r.top >= 0 &&
+        r.right <= worldWidth &&
+        r.bottom <= worldHeight
+    );
 }
 
 function shootProjectile() {
@@ -664,6 +704,16 @@ function startBossSeal() {
     bossSealAnimating = true;
     bossSealAnimTime = 0;
     bossSealHoldTimer = 0;
+
+    endTimePopUp = 0;
+    popupRequiresEnter = false;
+    popUpTitle = '';
+    popUpMessage = '';
+
+    if (menuOpen) {
+        closeMenuPanel();
+    }
+
     pause = true;
 }
 
@@ -1009,6 +1059,7 @@ function createBoss() {
 
 // ==================== 道具拾取 / Pickups ====================
 function boxIntersects() {
+     SoundManager.playPickup();
     hasMiniMap = true;
     showMiniMap = true;
 }
@@ -1431,8 +1482,8 @@ function drawHud() {
     if (start || showInstructions) return;
 
     fill(255);
-    textSize(12);
-    textFont('Georgia');
+    textSize(14);
+    textFont('Cormorant Garamond');
     textAlign(LEFT);
 
     // 左上角只保留最重要的信息
@@ -1490,8 +1541,8 @@ function drawPlayerHealthBar() {
     // 数字
     fill(230, 210, 160);
     textAlign(CENTER, CENTER);
-    textSize(13);
-    textFont('Georgia');
+    textSize(17);
+    textFont('Cormorant Garamond');
     text(`${playerHp}/${playerMaxHp}`, barX + barW / 2, barY + barH / 2 + 1);
 
     // 盖边框
@@ -1574,8 +1625,22 @@ class Projectile {
             }
         } else {
             noStroke();
-            fill(140, 210, 255);
-            circle(this.x - cam.x, this.y - cam.y, this.r * 2);
+
+            if (this.kind === 'orb') {
+                drawingContext.shadowBlur = 14;
+                drawingContext.shadowColor = "rgba(255, 70, 70, 0.9)";
+
+                fill(255, 80, 80);
+                circle(this.x - cam.x, this.y - cam.y, this.r * 2.4);
+
+                fill(255, 190, 170, 160);
+                circle(this.x - cam.x, this.y - cam.y, this.r * 1.2);
+
+                drawingContext.shadowBlur = 0;
+            } else {
+                fill(140, 210, 255);
+                circle(this.x - cam.x, this.y - cam.y, this.r * 2);
+            }
         }
 
         pop();
@@ -2173,7 +2238,7 @@ function drawEnd_L3() {
         [`Small kills: ${smallKillCount}`,
          'Boss sealed: Yes',
          `Item Codex: ${getCodexDisplayText()}`],
-        "Press ESC to restart",
+        "Press ENTER to continue",
         blink
     );
 }
@@ -2208,7 +2273,7 @@ function drawPopUp() {
 }
 
 function drawInformation() {
-    let bx = width / 2 - 230;
+    let bx = width / 1.7 - 300;
     let by = 80;
     let bw = 460;
     let bh = 500;
@@ -2217,34 +2282,43 @@ function drawInformation() {
 
     textAlign(CENTER);
     fill(248, 232, 190);
-    textSize(17);
-    textFont('Georgia');
+    textSize(19);
+    textFont('Cinzel');
     textStyle(BOLD);
     text('Instructions', width / 2, by + 60);
     textStyle(NORMAL);
 
     fill(230, 200, 150);
-    textSize(12);
+    textSize(16);
     textAlign(LEFT);
 
-    let tx = bx + 65;
-    let ty = by + 110;
+    let tx = bx + 80;
+    let ty = by + 115;
     let gap = 20;
+    
+    textFont("Cinzel");
+    textSize(20);
+    text('Objective', tx, ty);
 
-    text('Find the chest first to unlock the mini map.', tx, ty);
-    text('Find the light to unlock the lit vision area.', tx, ty + gap);
-    text('You start this level with your remembered weapon from Level 2.', tx, ty + gap * 2);
-    text('Find both the lock and the key to unlock the Seal.', tx, ty + gap * 3);
-    text('Use SHIFT to switch between Crossbow / Ring / Seal.', tx, ty + gap * 4);
-    text('The boss cannot be cleared by damage alone.', tx, ty + gap * 5);
-    text('When the boss enters locked HP state, switch to Seal and', tx, ty + gap * 6);
-    text('press SPACE near it to finish the level.', tx, ty + gap * 7);
-    text('Use Arrow Keys or WASD to move.', tx, ty + gap * 8);
-    text("Press 'M' to show/hide the mini map and 'P' to pause.", tx, ty + gap * 9);
+    textFont("Cormorant Garamond");
+    textSize(16);
+    text('· Collect Light, Key and Lock.', tx, ty + gap);
+    text('· Seal the boss to escape.', tx, ty + gap * 2);
 
+    textFont("Cinzel");
+    textSize(20);
+    text('Mechanics', tx, ty + gap * 4);
+
+    textFont("Cormorant Garamond");
+    textSize(16);
+    text('· SHIFT: Switch weapon (Crossbow / Ring / Seal)', tx, ty + gap * 5);
+    text('· Boss is immune to normal damage.', tx, ty + gap * 6);
+    text('· Use Seal when HP is locked.', tx, ty + gap * 7);
+    text('· Press SPACE near boss to finish.', tx, ty + gap * 8);
+    
     // 方向键
     textAlign(CENTER);
-    textSize(10);
+    textSize(14);
     stroke(255);
     strokeWeight(2);
     noFill();
@@ -2262,8 +2336,8 @@ function drawInformation() {
 
     push();
     textAlign(CENTER, CENTER);
-    textFont('Georgia');
-    textSize(12);
+    textFont('Cormorant Garamond');
+    textSize(14);
     fill(230, 200, 150);
     noStroke();
 
@@ -2286,8 +2360,8 @@ function drawKeyBox(x, y, w, h, label) {
     noStroke();
     fill(255);
     textAlign(CENTER, CENTER);
-    textSize(10);
-    textFont('Georgia');
+    textSize(14);
+    textFont('Cormorant Garamond');
     textStyle(BOLD);
     text(label, x + w / 2, y + h / 2);
 
@@ -2419,7 +2493,7 @@ function drawElapsedTime() {
     fill(60, 40, 20);
     textAlign(CENTER, CENTER);
     textSize(20);
-    textFont('Georgia');
+    textFont('Cormorant Garamond');
     text(convertTime(elapsedTime), innerX + innerW / 2, innerY + innerH / 2 + 1);
 
     // ===== 金框盖上 =====
@@ -2433,6 +2507,8 @@ function drawElapsedTime() {
 
 // ==================== 重置 / Reset ====================
 function resetGame() {
+     SoundManager.stopBGM();
+
     gTime = 0;
     elapsedTime = 0;
     lastKeyPress = null;
