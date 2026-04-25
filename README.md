@@ -536,7 +536,7 @@ The average SUS score was 90.75/100, indicating a high level of usability.
 
 We used black-box testing to evaluate core gameplay features. This involved testing systems such as movement and item collecting, ensuring they worked as intended in different conditions. We chose this test as it focuses on how the game works from a player's perspective rather than the developer’s perspective, which involves looking at the internal code of the game. 
 
-We ensured the test assessed normal, boundary, and error cases (Appendix ?). Each test had a specific input and expected outcome. Boundary cases tested situations at the limits of the system, such as having just enough coins to make a purchase. Error cases ensured the game handled invalid actions correctly (e.g. attempting to open a door without a key). 
+We ensured the test assessed normal, boundary, and error cases (Appendix ?). Each test had a specific input and expected outcome. Boundary cases tested situations at the limits of the system, such as having just enough coins to make a purchase. Error cases ensured the game handled invalid actions correctly, such as attempting to open a door without a key. 
 
 However, as black-box testing does not consider the internal code, some issues were not identified during these tests. For example, an input bug with the Enter key was discovered during the Think Aloud tests (Section 6.1). This highlights the importance of combining both code structure testing and player-focused evaluation. 
 
