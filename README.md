@@ -2,7 +2,7 @@
 
  
 <p align="center">
-<img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/03d6826ad7f8d7e7f84cc896539c44efde7da56c/readme%20docs/1.%20banner.gif" width= "150%">
+<img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/5c7512fc3f6da78114246c7d17cc2bf4fb7299ef/5.%20readme%20docs/01.%20banner.gif" width= "150%">
 </p>
 
 game set up instructions and link to play game. [Here is our game](https://uob-comsm0166.github.io/2026-group-27/)
@@ -246,7 +246,7 @@ Maniza
   </p>
 
 <p align="center">
-<img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/98d07e99f1b2d6d9eb1fe36669cb4fe53ca8d869/readme%20docs/3.%20paper%20protoype%20lost%20in%20bristol.gif" width= "25%">
+<img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/5c7512fc3f6da78114246c7d17cc2bf4fb7299ef/5.%20readme%20docs/03.%20paper%20protoype%20lost%20in%20bristol.gif" width= "25%">
 </p>
 
 
@@ -275,7 +275,7 @@ From this, we focused on key stakeholders such as players, developers, and teste
 <p align="center">
    <b>Figure ?: </b>
   <i>Onion Model for Lost in Bristol (adapted from: Alexander & Robertson, 2004).</i> <br>
-<img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/b0b48e33ac387bd2e73276ba06acaeb4621912e3/readme%20docs/3.%20onion%20model.jpg" 
+<img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/5c7512fc3f6da78114246c7d17cc2bf4fb7299ef/5.%20readme%20docs/03.%20onion%20model.jpg" 
  width="100%">
 </p>
 
@@ -406,7 +406,7 @@ A key challenge we faced was implementing a limited visibility feature (fog) in 
   <b>Figure ?: </b>
   <i> Visibility area in Level 2 </i> <br>
 
-<image src = "https://github.com/UoB-COMSM0166/2026-group-27/blob/50c930a73d6088f7f72dfacec58c1d89f2d4da36/6.%20readme%20docs/5.%20Level%202%20screenshot.png" width="35%">
+<image src = "https://github.com/UoB-COMSM0166/2026-group-27/blob/5c7512fc3f6da78114246c7d17cc2bf4fb7299ef/5.%20readme%20docs/05.%20Level%202%20screenshot.png" width="35%">
 
 </p>
 
@@ -450,7 +450,7 @@ When the player is within attack range (130-340 px), the boss moves towards and 
   <b>Figure ?: </b>
   <i>Boss Movement & Attack</i> <br>
  
-<img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/c4c81d0bc77866251bf9f55e2d29b61ef6180ebb/5.%20readme%20docs/5.%20boss%20move%20%2B%20attack.gif" width= "40%">
+<img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/5c7512fc3f6da78114246c7d17cc2bf4fb7299ef/5.%20readme%20docs/05.%20boss%20move%20%2B%20attack.gif" width= "40%">
 </p>
 <br>
 
@@ -461,7 +461,7 @@ At very close range (distance < 130 px), the boss stops moving but continues att
   <b>Figure ?: </b>
   <i>Boss Attack with no movement </i> <br>
  
-<img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/c4c81d0bc77866251bf9f55e2d29b61ef6180ebb/5.%20readme%20docs/5.%20boss%20attack%20only.gif" width= "40%">
+<img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/5c7512fc3f6da78114246c7d17cc2bf4fb7299ef/5.%20readme%20docs/05.%20boss%20attack%20only.gif" width= "40%">
 </p>
 <br>
 
@@ -532,7 +532,7 @@ Ten participants completed gameplay tasks such as collecting items and finding t
   <b>Figure ?: </b>
   <i>Bar graph displaying SUS results </i> <br>
 
-<img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/b2d580e4e40cc95ca773bf0637cdd362cdd939ca/readme%20docs/6.%20SUS%20graph.png" width = "100%">
+<img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/5c7512fc3f6da78114246c7d17cc2bf4fb7299ef/5.%20readme%20docs/06.%20SUS%20graph.png" width = "100%">
 
 </p>
 
@@ -710,6 +710,6 @@ You can delete this section in your own repo, it's just here for information. in
 ## Appendix ?: SUS Raw Data
 
 <p align="center">
-<img src = "https://github.com/UoB-COMSM0166/2026-group-27/blob/b39e3d41f380b62f687420c00b36013034de41ae/6.%20readme%20docs/13.%20SUS%20Raw%20Data%20Screenshot.png" width="70%">
+<img src = "https://github.com/UoB-COMSM0166/2026-group-27/blob/5c7512fc3f6da78114246c7d17cc2bf4fb7299ef/5.%20readme%20docs/13.%20SUS%20Raw%20Data%20Screenshot.png" width="70%">
 
 </p>
