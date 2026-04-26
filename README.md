@@ -443,12 +443,7 @@ Another difficulty we faced was making the final boss in level 3 more challengin
 
 To address this, we implemented a distance-based behaviour system. The boss calculates its distance from the player and changes its behaviour depending on how far away the player is, without needing to develop a complex AI system. 
 
-We made two separate conditions for this: 
-
-* When the player is far away (distance > 340 px), the boss only moves towards them, creating pressure.
-
-* When the player is within attack range (distance < 340 px), the boss starts attacking the player. A timer (1.6 seconds) controls how often      the boss shoots, ensuring consistent behaviour across different frame rates. When the timer reaches zero, the boss fires three projectiles      spread at different angles. This makes the attacks harder to dodge, as it covers a larger area compared to a single projectile.
-
+When the player is within attack range (distance < 340 px), the boss starts attacking the player. A timer (1.6 seconds) controls how often      the boss shoots, ensuring consistent behaviour across different frame rates. When the timer reaches zero, the boss fires three projectiles      spread at different angles. This makes the attacks harder to dodge, as it covers a larger area compared to a single projectile.
 
 Additionally, at medium distances (130–340 px), the boss both moves and attacks at the same time, creating the most pressure. At very close range (distance < 130 px), the boss stops moving but continues attacking, preventing players from exploiting close proximity. Contact damage is also applied when the player touches the boss, making the fight more challenging.
 
