@@ -451,7 +451,7 @@ The system then generates multiple random positions within a defined area until 
  * Exclusion list: 
    `avoidList.includes(object)`
 
-To prevent the system from getting stuck in rare cases where no valid position is found, a maximum number of attempts is set. If no valid position is found within this limit, a fallback position is used. 
+To prevent the system from getting stuck in rare cases where no valid position is found, a maximum number of attempts is set. If no valid position is found within this limit, a fallback position is used shown below:
 
       while (!validPosition) {
           x = random(...)
