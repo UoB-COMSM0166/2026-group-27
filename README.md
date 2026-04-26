@@ -437,7 +437,36 @@ The more subtle challenge was not drawing the fog but *honouring* it mechanicall
 
 Aligning the rendering layer and the game-logic layer through a shared notion of visibility proved the cleanest way to keep both systems honest. The single `createGraphics` buffer pattern is also cheap enough that it could be extended with additional transparent holes per active torch or lamp without architectural change—each extra light source is a one-line `fogLayer.circle()` call inside the erase block. Future work could generalise this into directional cones (flashlights), fog-piercing consumables sold in the shop, or stealth mechanics that only register the player once the player enters an enemy's visibility window. Exposing the visibility radius as a named constant rather than a magic number has already made it trivial to tune playtest balance without grep-hunting through subsystems.
 
-## 5.2 Final Boss: Movement and Combat System (shorter version - need to add code)
+## 5.2 Spawning System 
+
+A key challenge we faced was ensuring that game elements such as enemies, items, and portals spawned randomly but also fairly. Random placement could lead to issues such as items spawning inside the maze walls or enemies spawning at the player’s spawn point, causing instant death, making the game unplayable. 
+
+To prevent this, we implemented a controlled random spawning system, where the game first checks whether a position is valid before placing any object. All spawn positions are aligned to a grid (32 px tiles), using a snapping function, ensuring objects are positioned correctly within the maze: 
+
+`snapToGrid(value) = floor(value / blockSize) * blockSize` 
+
+The system then generates multiple random positions within a defined area until a valid one is found. A position is only accepted if it does not overlap with walls, the player’s character, or any previously placed objects. This is checked using collision detection, along with an exclusion list that stores already placed objects to prevent overlap. 
+
+Collision detection: 
+`if (intersectsWall || intersectsPlayer || intersectsObject) reject;`
+
+Exclusion list: 
+`avoidList.includes(object)`
+
+Enemy placement follows a similar approach but includes stricter checks to ensure enemies do not overlap with the player’s starting position, pickups, or the exit. 
+
+To prevent the system from getting stuck in rare cases where no valid position is found, a maximum number of attempts is set. If no valid position is found within this limit, a fallback position is used. 
+
+`while (!validPosition) {
+    x = random(...)
+    y = random(...)
+    validPosition = checkCollision(x, y)
+}`
+
+These features maintain randomness while ensuring all spawns remain fair and playable, resulting in varied but consistent level layouts.
+
+
+## 5.3 Final Boss: Movement and Combat System (shorter version - need to add code)
 
 Another difficulty we faced was making the final boss in level 3 more challenging than the regular enemies, which simply move around the maze and are easy to avoid. If the final boss behaved the same way, this would feel underwhelming for the player. Hence, the boss was designed to actively follow and attack the player while still using the existing systems in the game.
 
