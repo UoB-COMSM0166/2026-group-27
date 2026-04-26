@@ -396,48 +396,7 @@ Acceptance criteria were included to determine when a feature has been successfu
 
 - Describe the implementation of your game, in particular highlighting the TWO areas of *technical challenge* in developing your game.
 
-
-## 5.1 Limited Visibility and Combat System - shorter version, need to include code here
-
-
-A key challenge we faced was implementing a limited visibility feature (fog) in levels 2 and 3. This restricts the player’s vision so that most of the maze remains dark, making navigation difficult and increasing the overall difficulty compared to level 1. Players can improve visibility by collecting a torch, which allows them to see a small area around the character (figure?).
-
-<p align="center">
-  <b>Figure ?: </b>
-  <i> Visibility area in Level 2 </i> <br>
-
-<image src = "https://github.com/UoB-COMSM0166/2026-group-27/blob/5c7512fc3f6da78114246c7d17cc2bf4fb7299ef/5.%20readme%20docs/05.%20Level%202%20screenshot.png" width="35%">
-
-</p>
-
-However, we did not want the maze to be completely black. This was to ensure that the game remains accessible, allowing players with visual impairments to still navigate the maze. This also balances challenge with usability, as a completely dark maze would make gameplay frustrating rather than engaging.
-
-During our initial implementation, we found that players were still able to attack enemies outside the character’s field of vision. This meant the feature did not serve its intended purpose and became a merely visual effect rather than affecting gameplay. 
-
-To ensure that the limited visibility feature affected gameplay, we added the fog effect using an off-screen layer, where a dark overlay is drawn with a circular area around the character, which is removed to represent their field of view when a torch is collected.  
-
-Additionally, we modified the weapon target system so that enemies could only be defeated if they were within the character’s visibility area. This was done by using a distance-based check. We used the Euclidean distance calculation (`d = sqrt(dx*dx + dy*dy)`) instead of a rectangular check, ensuring that the weapon attack range was completely circular, preventing corner exploitation (Ericson, 2005). 
-
-These changes ensure that what the player sees matches with what they can interact with, making it appropriately challenging and strengthening immersion, as enemies cannot be defeated unless they are within the character’s field of vision, rather than the player’s vision of the whole dark maze. 
-
-
-## 5.1 Atmospheric Vision Masking and Combat Synchronisation
-
-### 5.1.1 Objectives and Motivations
-
-A defining feature of our Dark Maps mode is fog-of-war: the player sees only a small radius around the character and must locate a torch to extend visibility. This mechanic had to feel atmospheric and performant, but it also had to remain *fair*—the combat system must not allow the player to interact with entities hidden inside the fog, and enemies must not aggro through walls of darkness they appear to lie beyond. Synchronising what is rendered with what is mechanically valid was therefore a correctness requirement, not merely a visual concern.
-
-### 5.1.2 Off-Screen Buffer Rendering and Distance-Capped Targeting
-
-Fog-of-war is rendered using a secondary off-screen `p5.Graphics` buffer, initialised once at setup as `fogLayer = createGraphics(width, height)` and reused every frame. The `drawFog()` routine first fills the buffer with a semi-opaque navy (`fill(10, 12, 18, 185)`) to establish the dark layer, then—if `hasLight` is true—punches a transparent "hole" around the player by calling `fogLayer.erase()` before drawing a circle of diameter `fogRadiusWithLight * 2` (with `fogRadiusWithLight = 165` px) centred on the player's screen coordinates. The buffer is finally composited over the main canvas in a single `image(fogLayer, 0, 0)` call. Because the buffer is cleared and fully redrawn each frame rather than mutated in place, performance remains stable even when additional light sources are introduced, and we avoid per-pixel operations on the primary rendering surface entirely.
-
-The more subtle challenge was not drawing the fog but *honouring* it mechanically. The omnidirectional shooting system includes auto-lock targeting via `findAutoTarget(px, py, range)`, which iterates over `enemies[]` and returns the nearest live enemy within `range`. A naïve implementation would use an unlimited range, allowing the crossbow to lock onto enemies the player could not possibly see—trivialising hidden encounters and breaking the atmosphere we had just spent effort rendering. To close this exploit, we cap the targeting range to closely match the fog's visibility radius of 165 px: 210 px in Level 2 (crossbow) and 220 px in Level 3 (gun, whose lamp grants marginally larger situational awareness). In both cases the small surplus over 165 accounts for the feathered edge of the halo and feels intuitive to players. Enemies outside this radius are excluded from the candidate list even though they exist in the world state. Crucially, a Euclidean distance test (`d = sqrt(dx*dx + dy*dy)`) is used rather than a bounding-box check, so the "lock zone" is genuinely circular and cannot be gamed by off-axis corner exploits.
-
-### 5.1.3 Reflections and Extensibility
-
-Aligning the rendering layer and the game-logic layer through a shared notion of visibility proved the cleanest way to keep both systems honest. The single `createGraphics` buffer pattern is also cheap enough that it could be extended with additional transparent holes per active torch or lamp without architectural change—each extra light source is a one-line `fogLayer.circle()` call inside the erase block. Future work could generalise this into directional cones (flashlights), fog-piercing consumables sold in the shop, or stealth mechanics that only register the player once the player enters an enemy's visibility window. Exposing the visibility radius as a named constant rather than a magic number has already made it trivial to tune playtest balance without grep-hunting through subsystems.
-
-## 5.2 Spawning System 
+## 5.1 Spawning System 
 
 A key challenge we faced was ensuring that game elements such as enemies, items, and portals spawned randomly but also fairly. Random placement could lead to issues such as items spawning inside the maze walls or enemies spawning at the player’s spawn point, causing instant death, making the game unplayable. 
 
@@ -462,7 +421,7 @@ To prevent the system from getting stuck in rare cases where no valid position i
 These features maintain randomness while ensuring all spawns remain fair and playable, resulting in varied but consistent level layouts.
 
 
-## 5.3 Final Boss: Movement and Combat System (shorter version - need to add code)
+## 5.2 Final Boss: Movement and Combat System (shorter version - need to add code)
 
 Another difficulty we faced was making the final boss in level 3 more challenging than the regular enemies, which simply move around the maze and are easy to avoid. If the final boss behaved the same way, this would feel underwhelming for the player. Hence, the boss was designed to actively follow and attack the player while still using the existing systems in the game.
 
@@ -492,9 +451,6 @@ At very close range (distance < 130 px), the boss stops moving but continues att
 
 
 These features make the boss fight more engaging and challenging. The player is forced to constantly move and attack the boss, rather than simply avoiding the enemy. This makes the final level feel more intense and rewarding compared to the previous levels.
-
-
-## 5.3 Boss AI: State-Aware Pursuit and Fan-Shot Attack
 
 ### 5.3.1 Objectives and Motivations
 
