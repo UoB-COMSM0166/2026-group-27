@@ -443,7 +443,9 @@ A key challenge we faced was ensuring that game elements such as enemies, items,
 
 To prevent this, we implemented a controlled random spawning system, where the game first checks whether a position is valid before placing any object. All spawn positions are aligned to a grid (32 px tiles), using a snapping function, ensuring objects are positioned correctly within the maze: 
 <p align="center"> 
-`snapToGrid(value) = floor(value / blockSize) * blockSize` 
+
+ `snapToGrid(value) = floor(value / blockSize) * blockSize` 
+ 
 </p>
 
 The system then generates multiple random positions within a defined area until a valid one is found. A position is only accepted if it does not overlap with walls, the player’s character, or any previously placed objects. This is checked using collision detection, along with an exclusion list that stores already placed objects to prevent overlap. 
