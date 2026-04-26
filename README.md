@@ -452,10 +452,10 @@ When the player is within attack range (130-340 px), the boss moves towards and 
   </p>
 
 <p align="center">
-<img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/c4c81d0bc77866251bf9f55e2d29b61ef6180ebb/5.%20readme%20docs/5.%20boss%20move%20%2B%20attack.gif" width= "50%">
+<img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/c4c81d0bc77866251bf9f55e2d29b61ef6180ebb/5.%20readme%20docs/5.%20boss%20move%20%2B%20attack.gif" width= "40%">
 </p>
 
-At very close range (distance < 130 px), the boss stops moving but continues attacking, preventing players from exploiting close proximity (Figure ). Contact damage is also applied when the player touches the boss, making the fight more challenging.
+At very close range (distance < 130 px), the boss stops moving but continues attacking, making it harder to avoid attacks due to the close proximity (Figure ). Contact damage is also applied when the player touches the boss, making the fight more challenging.
 
 
 <p align="center">
@@ -464,7 +464,7 @@ At very close range (distance < 130 px), the boss stops moving but continues att
   </p>
 
 <p align="center">
-<img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/c4c81d0bc77866251bf9f55e2d29b61ef6180ebb/5.%20readme%20docs/5.%20boss%20attack%20only.gif" width= "50%">
+<img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/c4c81d0bc77866251bf9f55e2d29b61ef6180ebb/5.%20readme%20docs/5.%20boss%20attack%20only.gif" width= "40%">
 </p>
 
 
