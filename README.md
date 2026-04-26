@@ -443,9 +443,31 @@ Another difficulty we faced was making the final boss in level 3 more challengin
 
 To address this, we implemented a distance-based behaviour system. The boss calculates its distance from the player and changes its behaviour depending on how far away the player is, without needing to develop a complex AI system. 
 
-When the player is within attack range (distance < 340 px), the boss starts attacking the player. A timer (1.6 seconds) controls how often      the boss shoots, ensuring consistent behaviour across different frame rates. When the timer reaches zero, the boss fires three projectiles      spread at different angles. This makes the attacks harder to dodge, as it covers a larger area compared to a single projectile.
+When the player is within attack range (130-340 px), the boss moves towards and starts attacking the player, creating the most pressure. A timer (1.6 seconds) controls how often the boss shoots, ensuring consistent behaviour across different frame rates. When the timer reaches zero, the boss fires three projectiles spread at different angles. This makes the attacks harder to dodge, as it covers a larger area compared to a single projectile (Figure ).
 
-Additionally, at medium distances (130–340 px), the boss both moves and attacks at the same time, creating the most pressure. At very close range (distance < 130 px), the boss stops moving but continues attacking, preventing players from exploiting close proximity. Contact damage is also applied when the player touches the boss, making the fight more challenging.
+
+<p align="center">
+  <b>Figure ?: </b>
+  <i>Boss Movement & Attack</i> <br>
+  </p>
+
+<p align="center">
+<img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/c4c81d0bc77866251bf9f55e2d29b61ef6180ebb/5.%20readme%20docs/5.%20boss%20move%20%2B%20attack.gif" width= "25%">
+</p>
+
+At very close range (distance < 130 px), the boss stops moving but continues attacking, preventing players from exploiting close proximity (Figure ). Contact damage is also applied when the player touches the boss, making the fight more challenging.
+
+
+<p align="center">
+  <b>Figure ?: </b>
+  <i>Boss Attack with no movement </i> <br>
+  </p>
+
+<p align="center">
+<img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/c4c81d0bc77866251bf9f55e2d29b61ef6180ebb/5.%20readme%20docs/5.%20boss%20attack%20only.gif" width= "25%">
+</p>
+
+
 
 These features make the boss fight more engaging and challenging. The player is forced to constantly move and attack the boss, rather than simply avoiding the enemy. This makes the final level feel more intense and rewarding compared to the previous levels.
 
