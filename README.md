@@ -402,7 +402,7 @@ A key challenge we faced was ensuring that game elements such as enemies, items,
 
 To prevent this, we implemented a controlled random spawning system, in which the game first checks whether a position is valid before placing any object. All spawn positions are aligned to a grid (32 px tiles) using a snapping function, ensuring objects are positioned correctly within the maze without overlapping: `snapToGrid(value) = floor(value / blockSize) * blockSize` 
 
-The system then generates random positions within a defined area until a valid location is found. A position is only accepted if it does not overlap with walls, the player’s character, or any previously placed objects. This is checked using collision detection, along with an exclusion list that stores already placed objects. This prevents overlap and ensures that the objects are evenly distributed across the maze.  Enemy placement follows a similar approach but includes stricter checks to ensure they do not overlap with the player’s starting position, pickups, or the exit. 
+The system then generates random positions until a valid one is found. A position is only accepted if it does not overlap with walls, the player’s character, or any previously placed objects. This is checked using collision detection, along with an exclusion list that stores already placed objects. This prevents overlap and ensures that the objects are evenly distributed across the maze.  Enemy placement follows a similar approach but includes stricter checks to ensure they do not overlap with the player’s starting position, pickups, or the exit. 
 
  * Collision detection: 
    `if (intersectsWall || intersectsPlayer || intersectsObject) reject;`
