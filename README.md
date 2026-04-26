@@ -400,9 +400,9 @@ Acceptance criteria were included to determine when a feature has been successfu
 
 A key challenge we faced was ensuring that game elements such as enemies, items, and portals spawned randomly but also fairly. Random placement could lead to issues such as items spawning inside the maze walls or enemies spawning at the player’s spawn point, causing instant death, making the game unplayable. 
 
-To prevent this, we implemented a controlled random spawning system, where the game first checks whether a position is valid before placing any object. All spawn positions are aligned to a grid (32 px tiles), using a snapping function, ensuring objects are positioned correctly within the maze: `snapToGrid(value) = floor(value / blockSize) * blockSize` 
+To prevent this, we implemented a controlled random spawning system, in which the game first checks whether a position is valid before placing any object. All spawn positions are aligned to a grid (32 px tiles) using a snapping function, ensuring objects are positioned correctly within the maze: `snapToGrid(value) = floor(value / blockSize) * blockSize` 
 
-The system then generates multiple random positions within a defined area until a valid one is found. A position is only accepted if it does not overlap with walls, the player’s character, or any previously placed objects. This is checked using collision detection, along with an exclusion list that stores already placed objects to prevent overlap. Enemy placement follows a similar approach but includes stricter checks to ensure enemies do not overlap with the player’s starting position, pickups, or the exit. 
+The system then generates multiple random positions within a defined area until a valid location is found. A position is only accepted if it does not overlap with walls, the player’s character, or any previously placed objects. This is checked using collision detection, along with an exclusion list that stores already placed objects to prevent overlap. Enemy placement follows a similar approach but includes stricter checks to ensure they do not overlap with the player’s starting position, pickups, or the exit. 
 
  * Collision detection: 
    `if (intersectsWall || intersectsPlayer || intersectsObject) reject;`
@@ -410,7 +410,7 @@ The system then generates multiple random positions within a defined area until 
  * Exclusion list: 
    `avoidList.includes(object)`
 
-To prevent the system from getting stuck in rare cases where no valid position is found, a maximum number of attempts is set. If no valid position is found within this limit, a fallback position is used:
+To prevent the system from getting stuck in rare cases where no valid position is found, a maximum number of attempts is set. If no valid position is found within this limit, a fallback position is used to ensure the game still generates a complete and playable map:
 
                                        while (!validPosition) {
                                           x = random(...)
@@ -418,16 +418,16 @@ To prevent the system from getting stuck in rare cases where no valid position i
                                           validPosition = checkCollision(x, y)
                                           }
 
-These features maintain randomness while ensuring all spawns remain fair and playable, resulting in varied but consistent level layouts.
+These features maintain randomness while ensuring all spawns remain fair and playable, improving overall replayability for players. 
 
 
 ## 5.2 Final Boss: Movement and Combat System (shorter version - need to add code)
 
-Another difficulty we faced was making the final boss in level 3 more challenging than the regular enemies, which simply move around the maze and are easy to avoid. If the final boss behaved the same way, this would feel underwhelming for the player. Hence, the boss was designed to actively follow and attack the player while still using the existing systems in the game.
+Another difficulty we faced was making the final boss in level 3 more challenging than the regular enemies, with predictable movements which makes it relatively easy to avoid. If the final boss behaved the same way, there would be no increase in difficulty compared to previous levels, resulting in an underwhelming experience for the player. Hence, the boss was designed to actively follow and attack the player while reusing existing systems in the game.
 
 To address this, we implemented a distance-based behaviour system. The boss calculates its distance from the player and changes its behaviour depending on how far away the player is, without needing to develop a complex AI system. 
 
-When the player is within attack range (130-340 px), the boss moves towards and starts attacking the player, creating the most pressure. A timer (1.6 seconds) controls how often the boss shoots, ensuring consistent behaviour across different frame rates. When the timer reaches zero, the boss fires three projectiles spread at different angles. This makes the attacks harder to dodge, as it covers a larger area compared to a single projectile (Figure ).
+When the player is within attack range (130-340 px), the boss becomes more aggressive by moving towards the player while attacking simultaneously, increasing combat pressure. A timer (1.6 seconds) controls how often the boss shoots, ensuring consistent behaviour across different frame rates. When the timer reaches zero, the boss fires three projectiles towards the player. This makes the attacks harder to dodge, as it covers a larger area compared to a single projectile (Figure ).
 
   * Boss Firing Timer:
   
@@ -445,7 +445,7 @@ When the player is within attack range (130-340 px), the boss moves towards and 
 </p>
 <br>
 
-At very close range (distance < 130 px), the boss stops moving but continues attacking, making it harder to avoid attacks due to the close proximity (Figure ). Contact damage is also applied when the player touches the boss, making the fight more challenging.
+At very close range (distance < 130 px), the boss stops moving but continues attacking, making it harder to avoid attacks due to the close proximity (Figure ). Contact damage is applied when the player touches the boss, making the fight more challenging.
 
 
 <p align="center">
@@ -457,7 +457,7 @@ At very close range (distance < 130 px), the boss stops moving but continues att
 <br>
 
 
-These features make the boss fight more engaging and challenging. The player is forced to constantly move and attack the boss, rather than simply avoiding the enemy. This makes the final level feel more intense and rewarding compared to the previous levels.
+These features make the boss fight more challenging compared to the enemies from previous levels, as the player is forced to constantly move, focus on timing and spatial awareness while attacking the boss, rather than simply avoiding it. 
 
 ### 5.3.1 Objectives and Motivations
 
