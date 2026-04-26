@@ -31,7 +31,7 @@ game set up instructions and link to play game. [Here is our game](https://uob-c
   <b>Figure 1: </b>
   <i>Group Photo!</i> <br>
   
-<img src="https://github.com/UoB-COMSM0166/2026-group-27/blob/ffbe86f53cd08808ffe139176c6d5e68248c4792/IMG_2312.jpeg" width="75%">
+<img src="https://github.com/UoB-COMSM0166/2026-group-27/blob/c53194505bf720b768c38d7a6e9e03655f07a9c8/5.%20readme%20docs/01.%20group%20photo.jpeg" width="75%">
 </p>
 
 <p align="center">
