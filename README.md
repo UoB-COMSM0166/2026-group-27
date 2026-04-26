@@ -459,24 +459,6 @@ At very close range (distance < 130 px), the boss stops moving but continues att
 
 These features make the boss fight more challenging compared to the enemies from previous levels, as the player is forced to constantly move, focus on their position and distance from the boss and time their attacks, rather than simply avoiding a predictable enemy. 
 
-### 5.3.1 Objectives and Motivations
-
-The final boss encounter in Level 3 needed to feel distinctly different from the wandering enemies the player had faced up to that point. Random movement and single-shot projectiles—fine for background threats, would have made for a pretty underwhelming finale. Instead, the goal was to design behavior that actively hunted the player, forced them to keep moving and punished anyone who tried to stand still, all while fitting smoothly into the existing projectile system used by regular enemies.
-
-### 5.3.2 Distance-Gated Chasing and Three-Shot Fan Spread
-
-The `Boss` class maintains two pieces of state: health (`bossMaxHp = 180`) and a countdown timer (`shootTimer`, reset to `bossShootCooldown = 1.6` seconds after each volley). Every `update(dt)` tick computes the vector from the boss to the player and its Euclidean distance, then branches on two distance thresholds that together define the boss's behavioural envelope:
-
-- **Chase phase** (`dist > 130`): the boss normalises the player-vector and moves along it at `bossSpeed = 36` px/s scaled by `dt`. A simple write-and-revert collision check attempts the move, then reverts `left`/`top` to their pre-move values if any wall intersection is detected. This keeps the boss physically bounded by the same tile grid the player uses, without any separate pathfinding subsystem.
-
-- **Attack phase** (`dist < 340`): the shoot timer ticks down; when it expires, the boss fires `fireFanShot(px, py)` and resets the timer. The fan shot computes `baseAngle = atan2(dy, dx)` toward the player and emits three `HostileProjectile` instances at `baseAngle - 18°`, `baseAngle`, and `baseAngle + 18°`—a total spread of 36 degrees. Each projectile uses precomputed velocity (`vx = cos(a) * 105`, `vy = sin(a) * 105`) rather than axis-aligned movement, enabling diagonal trajectories that the existing `HostileProjectile` update step handles uniformly with all other enemy shots.
-
-The two phases overlap: within 130–340 px, the boss both chases and fires, which is where the fight is most pressured. Beyond 340 px the boss chases in silence; inside 130 px it stops chasing but keeps firing, meaning a player who tries to juke-and-melee encounters a wall of projectiles at point-blank range. Contact damage (`bossContactDamage = 16`) on intersection with the player's hitbox closes the final loophole and rewards distance management.
-
-### 5.3.3 Reflections and Extensibility
-
-What made this implementation tractable was that no new subsystems were needed: movement reused the existing axis-based collision pattern; projectiles reused `HostileProjectile`, already written for mob enemies; targeting reused the `atan2`-based angle computation already used by the player's omnidirectional crossbow. The boss is therefore roughly 90 lines of new code rather than a parallel engine, and its distance thresholds are tuned as named constants (`bossSpeed`, `bossShootCooldown`, etc.) at the top of the file, making balance passes quick. The same skeleton would naturally support phase-two behaviours (swap fan-shot for a circular burst below 50% HP), teleport abilities (lean on the portal-search helper from Section 5.2), or multi-target spread angles (change the `[−spread, 0, +spread]` list to five or seven entries)—all as incremental extensions rather than rewrites.
-
 # 6. Evaluation
 
 The game was evaluated during its prototype stage, enabling us to identify and fix usability issues and technical bugs during development. Since the game did not yet include the final Bristol-themed visuals, this allowed us to focus on evaluating the core gameplay mechanics without the influence of visual or narrative features. 
