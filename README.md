@@ -429,6 +429,13 @@ To address this, we implemented a distance-based behaviour system. The boss calc
 
 When the player is within attack range (130-340 px), the boss moves towards and starts attacking the player, creating the most pressure. A timer (1.6 seconds) controls how often the boss shoots, ensuring consistent behaviour across different frame rates. When the timer reaches zero, the boss fires three projectiles spread at different angles. This makes the attacks harder to dodge, as it covers a larger area compared to a single projectile (Figure ).
 
+  * Boss Firing Timer:
+  
+          this.shootTimer -= dt;
+          if (dist < 340 && this.shootTimer <= 0) {
+              this.fireFanShot(px, py);
+              this.shootTimer = bossShootCooldown;
+          }
 
 <p align="center">
   <b>Figure ?: </b>
