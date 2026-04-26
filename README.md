@@ -449,9 +449,7 @@ When the player is within attack range (130-340 px), the boss moves towards and 
 <p align="center">
   <b>Figure ?: </b>
   <i>Boss Movement & Attack</i> <br>
-  </p>
-
-<p align="center">
+ 
 <img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/c4c81d0bc77866251bf9f55e2d29b61ef6180ebb/5.%20readme%20docs/5.%20boss%20move%20%2B%20attack.gif" width= "40%">
 </p>
 <br>
@@ -462,9 +460,7 @@ At very close range (distance < 130 px), the boss stops moving but continues att
 <p align="center">
   <b>Figure ?: </b>
   <i>Boss Attack with no movement </i> <br>
-  </p>
-
-<p align="center">
+ 
 <img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/c4c81d0bc77866251bf9f55e2d29b61ef6180ebb/5.%20readme%20docs/5.%20boss%20attack%20only.gif" width= "40%">
 </p>
 <br>
