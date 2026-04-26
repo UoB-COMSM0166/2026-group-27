@@ -453,11 +453,11 @@ The system then generates multiple random positions within a defined area until 
 
 To prevent the system from getting stuck in rare cases where no valid position is found, a maximum number of attempts is set. If no valid position is found within this limit, a fallback position is used. 
 
-      `while (!validPosition) {
+      while (!validPosition) {
           x = random(...)
           y = random(...)
           validPosition = checkCollision(x, y)
-      }`
+      }
 
 These features maintain randomness while ensuring all spawns remain fair and playable, resulting in varied but consistent level layouts.
 
