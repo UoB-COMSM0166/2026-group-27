@@ -192,9 +192,6 @@ This folder stores developer logs.
 - Completed:
   - Changed and edited section 5 and added code snippets
   - Added gif / videos for section 5. 
- 
-- In progress:
-  - 
 
  
   
