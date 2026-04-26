@@ -441,30 +441,23 @@ Aligning the rendering layer and the game-logic layer through a shared notion of
 
 A key challenge we faced was ensuring that game elements such as enemies, items, and portals spawned randomly but also fairly. Random placement could lead to issues such as items spawning inside the maze walls or enemies spawning at the player’s spawn point, causing instant death, making the game unplayable. 
 
-To prevent this, we implemented a controlled random spawning system, where the game first checks whether a position is valid before placing any object. All spawn positions are aligned to a grid (32 px tiles), using a snapping function, ensuring objects are positioned correctly within the maze: 
-<p align="center"> 
+To prevent this, we implemented a controlled random spawning system, where the game first checks whether a position is valid before placing any object. All spawn positions are aligned to a grid (32 px tiles), using a snapping function, ensuring objects are positioned correctly within the maze: `snapToGrid(value) = floor(value / blockSize) * blockSize` 
 
- `snapToGrid(value) = floor(value / blockSize) * blockSize` 
- 
-</p>
+The system then generates multiple random positions within a defined area until a valid one is found. A position is only accepted if it does not overlap with walls, the player’s character, or any previously placed objects. This is checked using collision detection, along with an exclusion list that stores already placed objects to prevent overlap. Enemy placement follows a similar approach but includes stricter checks to ensure enemies do not overlap with the player’s starting position, pickups, or the exit. 
 
-The system then generates multiple random positions within a defined area until a valid one is found. A position is only accepted if it does not overlap with walls, the player’s character, or any previously placed objects. This is checked using collision detection, along with an exclusion list that stores already placed objects to prevent overlap. 
+ * Collision detection: 
+   `if (intersectsWall || intersectsPlayer || intersectsObject) reject;`
 
-Collision detection: 
-`if (intersectsWall || intersectsPlayer || intersectsObject) reject;`
-
-Exclusion list: 
-`avoidList.includes(object)`
-
-Enemy placement follows a similar approach but includes stricter checks to ensure enemies do not overlap with the player’s starting position, pickups, or the exit. 
+ * Exclusion list: 
+   `avoidList.includes(object)`
 
 To prevent the system from getting stuck in rare cases where no valid position is found, a maximum number of attempts is set. If no valid position is found within this limit, a fallback position is used. 
 
-`while (!validPosition) {
-    x = random(...)
-    y = random(...)
-    validPosition = checkCollision(x, y)
-}`
+      `while (!validPosition) {
+          x = random(...)
+          y = random(...)
+          validPosition = checkCollision(x, y)
+      }`
 
 These features maintain randomness while ensuring all spawns remain fair and playable, resulting in varied but consistent level layouts.
 
