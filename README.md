@@ -454,6 +454,7 @@ When the player is within attack range (130-340 px), the boss moves towards and 
 <p align="center">
 <img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/c4c81d0bc77866251bf9f55e2d29b61ef6180ebb/5.%20readme%20docs/5.%20boss%20move%20%2B%20attack.gif" width= "40%">
 </p>
+<br>
 
 At very close range (distance < 130 px), the boss stops moving but continues attacking, making it harder to avoid attacks due to the close proximity (Figure ). Contact damage is also applied when the player touches the boss, making the fight more challenging.
 
@@ -466,7 +467,7 @@ At very close range (distance < 130 px), the boss stops moving but continues att
 <p align="center">
 <img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/c4c81d0bc77866251bf9f55e2d29b61ef6180ebb/5.%20readme%20docs/5.%20boss%20attack%20only.gif" width= "40%">
 </p>
-
+<br>
 
 
 These features make the boss fight more engaging and challenging. The player is forced to constantly move and attack the boss, rather than simply avoiding the enemy. This makes the final level feel more intense and rewarding compared to the previous levels.
