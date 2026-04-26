@@ -457,7 +457,7 @@ At very close range (distance < 130 px), the boss stops moving but continues att
 <br>
 
 
-These features make the boss fight more challenging compared to the enemies from previous levels, as the player is forced to constantly move, focus on timing and spatial awareness while attacking the boss, rather than simply avoiding it. 
+These features make the boss fight more challenging compared to the enemies from previous levels, as the player is forced to constantly move, focus on timing and spatial awareness while attacking, rather than simply avoiding the enemy. 
 
 ### 5.3.1 Objectives and Motivations
 
