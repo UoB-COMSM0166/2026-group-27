@@ -246,7 +246,7 @@ Maniza
   </p>
 
 <p align="center">
-<img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/5c7512fc3f6da78114246c7d17cc2bf4fb7299ef/5.%20readme%20docs/03.%20paper%20protoype%20lost%20in%20bristol.gif" width= "25%">
+<img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/f6eb2dd289198ac83513909ae7b6078e33eb18dc/5.%20readme%20docs/03.%20paper%20protoype%20lost%20in%20bristol.gif" width= "25%">
 </p>
 
 
@@ -450,7 +450,7 @@ When the player is within attack range (130-340 px), the boss moves towards and 
   <b>Figure ?: </b>
   <i>Boss Movement & Attack</i> <br>
  
-<img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/5c7512fc3f6da78114246c7d17cc2bf4fb7299ef/5.%20readme%20docs/05.%20boss%20move%20%2B%20attack.gif" width= "40%">
+<img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/f6eb2dd289198ac83513909ae7b6078e33eb18dc/5.%20readme%20docs/05.%20boss%20move%20%2B%20attack.gif" width= "40%">
 </p>
 <br>
 
@@ -461,7 +461,7 @@ At very close range (distance < 130 px), the boss stops moving but continues att
   <b>Figure ?: </b>
   <i>Boss Attack with no movement </i> <br>
  
-<img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/5c7512fc3f6da78114246c7d17cc2bf4fb7299ef/5.%20readme%20docs/05.%20boss%20attack%20only.gif" width= "40%">
+<img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/f6eb2dd289198ac83513909ae7b6078e33eb18dc/5.%20readme%20docs/05.%20boss%20attack%20only.gif" width= "40%">
 </p>
 <br>
 
