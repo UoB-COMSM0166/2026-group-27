@@ -197,12 +197,12 @@ This folder stores developer logs.
   - UI: animation UI, game cover
   - Test and debug for the animation
 ### Iza
- - Completed:
- - Gameplay: updated enemies data, weapon data and difficulty selection
- - UI: updated instruction, setting, level preview, jump button, items
- - Arts: menu UI, gameplay UI
- - Audio: All sound effect, background music of game
- - Integrated code, test and debug
- - Deployed the game website and delivered
+- Completed:
+  - Gameplay: updated enemies data, weapon data and difficulty selection
+  - UI: updated instruction, setting, level preview, jump button, items
+  - Arts: menu UI, gameplay UI
+  - Audio: All sound effect, background music of game
+  - Integrated code, test and debug
+  - Deployed the game website and delivered
  
   
