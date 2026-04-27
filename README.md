@@ -491,7 +491,7 @@ We grouped the feedback into common themes to identify repeated issues across di
   Participants also suggested adding a hint system to help locate the exit when time is running low, as well as a warning when you are about to   run out of time (e.g. 10–20 seconds remaining). This indicated that players needed clearer feedback when they are under pressure. 
 
 
-## 6.2 Quantitative Analysis: System Usability Scale (SUS)
+## 6.2 Quantitative Analysis: System Usability Scale (SUS) - editing this section - thanusha
 
 The SUS was used to evaluate the usability of the game. If a game is too easy, it can become uninteresting, while unnecessary difficulty or frustration can reduce replayability (Sweetser & Wyeth, 2005). 
 
@@ -506,7 +506,7 @@ Ten participants completed gameplay tasks such as collecting items and finding t
 
 </p>
 
-The average SUS score was 90.75/100, indicating a high level of usability.
+The average SUS score was , indicating a high level of usability.
 
   * Positive usability statements scored highly, such as “Learn quickly” (Q7 = 4.8/5) and “Well integrated” (Q5 = 4.7/5), suggesting that the     game was intuitive. 
  
