@@ -159,11 +159,10 @@ This folder stores developer logs.
   - Updated terrain and wall of all levels
   - Created character portrait: boss, Fernando, Eliza
   - In Progress:
-  - 
-  - Problems:
-  - 
+  - Game animation
+  - UI design
   - Next Plan:
-  - 
+  - Complete game animation and ui design
  ### Iza
  - Completed:
   - Updated UI: main hub, instruction, weapon switching
@@ -171,12 +170,9 @@ This folder stores developer logs.
   - Replaced arts of game: main characters, normal enemy, boss, key items, weapons, attack effect
   - Optimised game mechanics: weapon/item pickup, attack mechanics
   - In Progress:
-  - 
-  - Problems:
-  - 
-  - Next Plan:
-  - 
-
+  - Updeate the remaining UI
+  - Test and optimise gameplay
+    
 ### Thanusha
 - Completed:
   - Completed Code testing section of repo
@@ -193,5 +189,20 @@ This folder stores developer logs.
   - Changed and edited section 5 and added code snippets
   - Added gif / videos for section 5. 
 
+### liz：
+- Completed:
+  - Completed full animation of game: opening, cutscene1, cutscene2, cutscene3, ending
+  - Animation presentation and background music
+  - Arts: cover, webpage background, UI arts
+  - UI: animation UI, game cover
+  - Test and debug for the animation
+### Iza
+ - Completed:
+ - Gameplay: updated enemies data, weapon data and difficulty selection
+ - UI: updated instruction, setting, level preview, jump button, items
+ - Arts: menu UI, gameplay UI
+ - Audio: All sound effect, background music of game
+ - Integrated code, test and debug
+ - Deployed the game website and delivered
  
   
