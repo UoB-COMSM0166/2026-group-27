@@ -194,14 +194,15 @@ This folder stores developer logs.
   - Completed full animation of game: opening, cutscene1, cutscene2, cutscene3, ending
   - Animation presentation and background music
   - Arts: cover, webpage background, UI arts
-  - UI: animation UI, game cover
+  - UI: animation UI, start page
   - Test and debug for the animation
 ### Iza
 - Completed:
   - Gameplay: updated enemies data, weapon data and difficulty selection
   - UI: updated instruction, setting, level preview, jump button, items
   - Arts: menu UI, gameplay UI
-  - Audio: All sound effect, background music of game
+  - Audio: All sound effect, including item pickup, button, enemy attack etc.
+           background music of game
   - Integrated code, test and debug
   - Deployed the game website and delivered
  
