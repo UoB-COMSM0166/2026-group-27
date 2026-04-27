@@ -502,18 +502,10 @@ Ten participants completed gameplay tasks such as collecting items and finding t
   <b>Figure ?: </b>
   <i>Bar graph displaying SUS results </i> <br>
 
-<img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/5c7512fc3f6da78114246c7d17cc2bf4fb7299ef/5.%20readme%20docs/06.%20SUS%20graph.png" width = "100%">
+<img src= "" width = "100%">
 
 </p>
 
-The average SUS score was , indicating a high level of usability.
-
-  * Positive usability statements scored highly, such as “Learn quickly” (Q7 = 4.8/5) and “Well integrated” (Q5 = 4.7/5), suggesting that the     game was intuitive. 
- 
-  * Negative usability statements, such as “Too complex” (Q2 = 1.4) and “Need technical support” (Q4 = 1.2), received low scores, indicating        that users did not find the game too difficult or confusing.
-
-  * The lowest positive score was for “Felt confident” (Q9 = 4.3/5). While still high, this indicates that some players may require clearer
-    in-game feedback to feel fully confident during gameplay.
 
 
 ## 6.3 Code Testing
