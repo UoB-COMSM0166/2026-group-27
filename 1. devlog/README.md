@@ -164,7 +164,7 @@ This folder stores developer logs.
   - Next Plan:
   - Complete game animation and ui design
  ### Iza
- - Completed:
+- Completed:
   - Updated UI: main hub, instruction, weapon switching
   - Created art: teleportation array
   - Replaced arts of game: main characters, normal enemy, boss, key items, weapons, attack effect
