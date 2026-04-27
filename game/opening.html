@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Lost in Bristol - Opening</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+
+<!-- p5 -->
+<script src="https://cdn.jsdelivr.net/npm/p5@1.9.3/lib/p5.min.js"></script>
+
+<!-- 你的开场动画 JS（改成你的真实文件名） -->
+<script src="audio.js"></script>
+<script src="opening.js"></script>
+
+<style>
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+canvas {
+  display: block;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== 背景（和 Level1 完全一致）===== */
+body {
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-image: url('assets/gamebackground.png');
+  background-size: cover;
+  background-position: center;
+  background-color: #05060a;
+
+  font-family: Georgia;
+}
+
+/* 边缘暗角 */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 75% 75% at 50% 50%,
+    transparent 35%,
+    rgba(4,5,10,0.75) 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===== 关键：等比缩放 canvas ===== */
+canvas {
+  display: block;
+  position: relative;
+  z-index: 1;
+
+  /* 保持比例，只控制高度 */
+  height: 600px !important;
+  width: auto !important;
+
+  /* 和关卡一致的边框效果 */
+  box-shadow:
+    0 0 0 2px rgba(190, 155, 70, 0.4),
+    0 0 0 5px rgba(8, 10, 16, 0.9),
+    0 0 50px rgba(0, 0, 0, 0.95);
+}
+
+</style>
+
+</head>
+
+<body>
+</body>
+</html>

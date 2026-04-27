@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lost in Bristol</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.9.3/lib/p5.min.js"></script>
+  <script src="audio.js"></script>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      overflow: hidden;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-image: url('assets/gamebackground.png');
+      background-size: cover;
+      background-position: center;
+      background-color: #05060a;
+      font-family: 'Cormorant Garamond', serif;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse 75% 75% at 50% 50%, transparent 35%, rgba(4,5,10,0.75) 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    canvas {
+      display: block;
+      position: relative;
+      z-index: 1;
+      box-shadow:
+        0 0 0 2px rgba(190, 155, 70, 0.4),
+        0 0 0 5px rgba(8, 10, 16, 0.9),
+        0 0 50px rgba(0, 0, 0, 0.95);
+    }
+  </style>
+</head>
+<body>
+<script>
+let bgImg, titleImg, enterImg;
+
+let fadeAlpha = 255;
+let outAlpha  = 0;
+let leaving   = false;
+let breatheT  = 0;
+let blinkT    = 0;
+let bgm, bgmStarted = false;
+
+function preload() {
+  bgImg    = loadImage("assets/background/start.png");
+  titleImg = loadImage("assets/ui/lost_in_bristol.png");
+  enterImg = loadImage("assets/ui/enter.png");
+}
+
+function setup() {
+  createCanvas(1067, 600);
+  textFont("Cinzel");
+  bgm = new Audio("sounds/main_theme.mp3");
+  bgm.loop = true;
+  bgm.volume = 0.05;
+  bgm.play().catch(() => {});
+  bgmStarted = true;
+}
+
+function draw() {
+  background(0);
+
+  if (bgImg) image(bgImg, 0, 0, width, height);
+
+  // 微压暗
+  fill(10, 20, 40, 45);
+  noStroke();
+  rect(0, 0, width, height);
+
+  drawTitle();
+  drawEnterBtn();
+
+  // 开场淡入
+  if (fadeAlpha > 0) {
+    fadeAlpha = max(0, fadeAlpha - 4);
+    fill(0, fadeAlpha);
+    rect(0, 0, width, height);
+  }
+
+  // 离开黑屏
+  if (leaving) {
+    outAlpha = min(255, outAlpha + 4);
+    fill(0, outAlpha);
+    rect(0, 0, width, height);
+  }
+
+  breatheT += 0.018;
+  blinkT   += 0.022;
+}
+
+// 标题：呼吸缩放 + 辉光
+function drawTitle() {
+  if (!titleImg) return;
+
+  let sc   = 1.0 + sin(breatheT) * 0.018;
+  let glow = 160 + sin(breatheT) * 60;
+
+  let tw = width * 0.42;
+  let th = tw * (titleImg.height / titleImg.width);
+
+  push();
+  imageMode(CENTER);
+  translate(width / 2, height * 0.42);
+  scale(sc);
+
+  // 辉光底层
+  tint(200, 215, 255, glow * 0.28);
+  image(titleImg, 2, 3, tw + 14, th + 14);
+
+  tint(255, 255);
+  image(titleImg, 0, 0, tw, th);
+  noTint();
+  pop();
+}
+
+// Enter按钮：闪烁 + 金色阴影
+function drawEnterBtn() {
+  if (!enterImg || leaving) return;
+
+  let appear = constrain(map(255 - fadeAlpha, 80, 200, 0, 1), 0, 1);
+  let blink  = 0.75 + sin(blinkT) * 0.25;
+  let alpha  = appear * blink * 255;
+
+  let tw = width * 0.18;
+  let th = tw * (enterImg.height / enterImg.width);
+  let cx = width  / 2;
+  let cy = height * 0.8;
+
+  let hovering = abs(mouseX - cx) < tw / 2 && abs(mouseY - cy) < th / 2;
+  let sc = hovering ? 1.08 : 1.0;
+
+  push();
+  imageMode(CENTER);
+  translate(cx, cy);
+  scale(sc);
+
+  // 金色阴影底层（不提亮，只扩散）
+  drawingContext.shadowBlur = 22;
+  drawingContext.shadowColor = `rgba(200, 160, 60, ${appear * blink * 0.6})`;
+
+  // 主图，原色不改变
+  tint(255, alpha);
+  image(enterImg, 0, 0, tw, th);
+  noTint();
+
+  drawingContext.shadowBlur = 0;
+  pop();
+}
+
+function tryPlayBGM() {
+  if (bgmStarted) {
+    // 已经在播了，只确保音量到位
+    bgm.volume = 0.05;
+    return;
+  }
+  bgmStarted = true;
+  bgm.volume = 0.05;
+  bgm.play().catch(() => {});
+}
+
+function enterGame() {
+  if (leaving || fadeAlpha > 60) return;
+  leaving = true;
+  tryPlayBGM();
+  // 等黑屏动画完成再跳转（约2秒）
+  setTimeout(() => {
+    window.location.href = "opening.html";
+  }, 2000);
+}
+
+function mousePressed() {
+  tryPlayBGM();
+  enterGame();
+}
+
+function keyPressed() {
+  tryPlayBGM();
+  if (key === ' ' || keyCode === ENTER) enterGame();
+}
+</script>
+</body>
+</html>
