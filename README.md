@@ -640,14 +640,14 @@ You can delete this section in your own repo, it's just here for information. in
 
 ## Appendix 1: SUS Results
 
-### Appendix 1.1: Level 1: 
+### Appendix 1.1: Level 1
 
 <p align="center">
 <img src = "https://github.com/UoB-COMSM0166/2026-group-27/blob/ed777816b6fa0be6ac10b85e07bea25d78ef4bce/5.%20readme%20docs/13.%20SUS%201%20results%20final.jpg" width="100%">
 
 </p>
 
-### Appendix 1.2: Level 2: 
+### Appendix 1.2: Level 2 
 
 <p align="center">
 <img src = "https://github.com/UoB-COMSM0166/2026-group-27/blob/69360be200f0feb62e45fe2c7f4425f81b3a72ca/5.%20readme%20docs/13.%20SUS%202%20results%20.jpg" width="100%">
