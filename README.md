@@ -456,7 +456,6 @@ At very close range (distance < 130 px), the boss stops moving but continues att
 </p>
 <br>
 
-
 These features make the boss fight more challenging compared to the enemies from previous levels, as the player is forced to constantly move, focus on their position and distance from the boss and time their attacks, rather than simply avoiding a predictable enemy. 
 
 # 6. Evaluation
@@ -476,7 +475,7 @@ We grouped the feedback into common themes to identify repeated issues across di
 
 * Map Design:
 
-  Most users liked the maze's layout and its "spacious route", suggesting that the navigation structure was clear and easy to understand.         However, many noted that the environment felt empty and repetitive, indicating a lack of visual detail in the prototype, which led to reduced   user engagement. This supported our planned use of Bristol-themed visual elements, including landmarks and graffiti-style textures, to          improve visual engagement and help players recognise different areas of the map.  <br>
+  Most users liked the maze's layout and its "spacious route", suggesting that the navigation structure was clear and easy to understand.         However, many noted that the environment felt empty and repetitive, indicating a lack of visual detail in the prototype, which led to reduced   user engagement. This supported our planned use of Bristol-themed visual elements, such as landmarks in the background of story mode, to        improve visual engagement and help players recognise different areas of Bristol.  <br>
 
 
 * Technical Glitches:
@@ -524,7 +523,7 @@ We expected usability to be similar across both levels, as the core game design 
 
 We used black-box testing to evaluate core gameplay features. This involved testing systems such as movement and item collecting, ensuring they worked as intended in different conditions. We chose this test as it focuses on how the game works from a player's perspective rather than the developer’s perspective, which involves looking at the internal code of the game. 
 
-We ensured the test assessed normal, boundary, and error cases (Appendix ?). Each test had a specific input and expected outcome. Boundary cases tested situations at the limits of the system, such as having just enough coins to make a purchase. Error cases ensured the game handled invalid actions correctly, such as attempting to open a door without a key. 
+We ensured the test assessed normal, boundary, and error cases ([Appendix 2](https://github.com/UoB-COMSM0166/2026-group-27#appendix-2-black-box-testing-results)). Boundary cases tested situations at the limits of the system, such as having just enough coins to make a purchase. Error cases ensured the game handled invalid actions correctly, such as attempting to open a door without a key. 
 
 However, as black-box testing does not consider the internal code, some issues were not identified during these tests. For example, an input bug with the Enter key was discovered during the Think Aloud tests ([Section 6.1](https://github.com/UoB-COMSM0166/2026-group-27/tree/main#61-qualitative-evaluation-think-aloud-ta)). This highlights the importance of combining both code structure testing and player-focused evaluation to produce more reliable results. 
 
