@@ -509,7 +509,7 @@ SUS mean scores were calculated for each level, and a Wilcoxon signed-rank test 
 </p>
 
  * **SUS Mean Scores**: Level 1 achieved higher mean SUS scores (M = 87.3) compared to Level 2 (M = 79.6).
-     (Calculated in Microsoft Excel; see [Appendix 1](https://github.com/UoB-COMSM0166/2026-group-27#13-appendices))
+     (Calculated in Microsoft Excel; see [Appendix 1](https://github.com/UoB-COMSM0166/2026-group-27#13-appendices)).
 
  * **Wilcoxon Signed Rank Test**: Statistically significant difference between Level 1 and Level 2 usability scores (W = 0, p = 0.005).
      This was calculated using an online statistical tool (Social Science Statistics, n.d.). 
