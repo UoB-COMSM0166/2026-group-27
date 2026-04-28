@@ -467,7 +467,7 @@ We combined quantitative data from the System Usability Scale (SUS) with qualita
 
 ## 6.1 Qualitative Evaluation: Think Aloud (TA)
 
-During TA tests, participants verbalised their thoughts while navigating the maze and completing tasks such as finding items and reaching the exit. This helped us identify unclear game concepts from a player’s perspective (Pellicone et al., 2022). 
+During TA tests, participants verbalised their thoughts while navigating the maze and completing tasks such as finding items and reaching the exit. These tests allowed us to identify unclear game concepts from a player’s perspective (Pellicone et al., 2022). 
 
 Ten participants were recruited using convenience sampling from our weekly workshops, allowing us to receive quick feedback without requiring a controlled experiment.
 
@@ -478,7 +478,7 @@ Feedback was grouped into common themes: map design, technical issues, and game 
   Most users liked the maze's layout and its "spacious route", suggesting that the navigation structure was clear and easy to understand.         However, many noted that the environment felt empty and repetitive, reducing user engagement. This supported our planned use of Bristol-        themed visual elements, such as landmarks in the background of story mode, to improve visual engagement and help players recognise different    areas of Bristol.  <br>
 
 
-* Technical Glitches:
+* Technical Issues:
 
   A key issue was identified with input handling. The Enter key, used to start the game, only worked when the mouse cursor was positioned over    the game window. This made the controls unreliable and harder to use.
 
@@ -487,12 +487,12 @@ Feedback was grouped into common themes: map design, technical issues, and game 
 
 * Game Mechanics:
 
-  Participants suggested improvements to the game mechanics, some of which matched features we already planned to implement, such as              adding item descriptions to improve understanding. They also suggested adding a warning when time is running low (e.g. 10–20 seconds            remaining). This indicated that players needed clearer feedback when they are under pressure. 
+  Participants suggested improvements to the game mechanics, some of which matched features we already planned to implement, such as              adding item descriptions to improve understanding. They also suggested adding a warning when time is running low (e.g. 10–20 seconds            remaining). This indicated that players needed clearer feedback when they are under pressure.
 
 
 ## 6.2 Quantitative Analysis: System Usability Scale (SUS)
 
-The SUS was used to evaluate the usability across different levels. If a game is too easy, it can become uninteresting, while unnecessary difficulty or frustration can reduce replayability (Sweetser & Wyeth, 2005). Therefore, we compared both levels to evaluate whether usability is consistent as difficulty increases.
+The SUS was used to evaluate the usability across different levels. If a game is too easy, it can become uninteresting, while unnecessary difficulty or frustration can reduce replayability (Sweetser & Wyeth, 2005). SUS was chosen as it is known to be reliable and is commonly used in evaluating usability in game design (Maxim & Arnedo-Moreno, 2025).
 
 Ten participants completed level 1 and level 2, completing the SUS questionnaire after each level. Each question was rated on a scale of 1-5 (1=strongly disagree and 5=strongly agree) (Raw data: [Appendix 1](https://github.com/UoB-COMSM0166/2026-group-27#13-appendices)). 
 
