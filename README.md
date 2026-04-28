@@ -497,9 +497,9 @@ We grouped the feedback into common themes to identify repeated issues across di
 
 The SUS was used to evaluate the usability of the game across different levels. If a game is too easy, it can become uninteresting, while unnecessary difficulty or frustration can reduce replayability (Sweetser & Wyeth, 2005). Therefore, we compared both levels to evaluate whether usability is consistent as difficulty increases.
 
-Ten participants completed level 1 and then filled out the SUS questionnaire, then completed level 2 and filled out the questionnaire again. Each SUS question was rated ranked on a scale of 1-5 (1=strongly disagree and 5=strongly agree) (Raw data: Appendix 1). 
+Ten participants completed level 1 and then filled out the SUS questionnaire, then completed level 2 and filled out the questionnaire again. Each SUS question was rated on a scale of 1-5 (1=strongly disagree and 5=strongly agree) (Raw data: [Appendix 1](https://github.com/UoB-COMSM0166/2026-group-27#13-appendices)). 
 
-SUS mean scores were calculated for each level, and a Wilcoxon signed-rank test was conducted to compare whether usability between levels was statistically significant. This test was chosen as the same participants took part in both levels, and SUS responses were collected using a rating scale (1-5), so a method that does not assume exact numerical data (a non-parametric test) was more suitable. 
+SUS mean scores were calculated for each level, and a Wilcoxon signed-rank test was conducted to determine whether usability between levels was statistically significant. This test was chosen as the same participants took part in both levels, and SUS responses were collected using a rating scale (1-5), so a method that does not assume exact numerical data (a non-parametric test) was more suitable. 
 
 <p align="center">
   <b>Figure ?: </b>
@@ -510,7 +510,7 @@ SUS mean scores were calculated for each level, and a Wilcoxon signed-rank test 
 </p>
 
  * **SUS Mean Scores**: Level 1 achieved higher mean SUS scores (M = 87.3) compared to Level 2 (M = 79.6).
-     (Calculated in Microsoft Excel; see Appendix 1)
+     (Calculated in Microsoft Excel; see [Appendix 1](https://github.com/UoB-COMSM0166/2026-group-27#13-appendices))
 
  * **Wilcoxon Signed Rank Test**: Statistically significant difference between Level 1 and Level 2 usability scores (W = 0, p = 0.005).
      This was calculated using an online statistical tool (Social Science Statistics, n.d.). 
