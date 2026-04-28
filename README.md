@@ -490,7 +490,7 @@ Feedback was grouped into common themes: map design, technical issues, and game 
   Participants suggested improvements to the game mechanics, some of which matched features we already planned to implement, such as              adding item descriptions to improve understanding. They also suggested adding a warning when time is running low (e.g. 10–20 seconds            remaining). This indicated that players needed clearer feedback when they are under pressure. 
 
 
-## 6.2 Quantitative Analysis: System Usability Scale (SUS) - editing this section - thanusha
+## 6.2 Quantitative Analysis: System Usability Scale (SUS)
 
 The SUS was used to evaluate the usability across different levels. If a game is too easy, it can become uninteresting, while unnecessary difficulty or frustration can reduce replayability (Sweetser & Wyeth, 2005). Therefore, we compared both levels to evaluate whether usability is consistent as difficulty increases.
 
