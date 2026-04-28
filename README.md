@@ -476,15 +476,15 @@ We grouped the feedback into common themes to identify repeated issues across di
 
 * Map Design:
 
-  Most users liked the maze's layout and its "spacious route", suggesting that the navigation structure was clear and easy to understand.         However, many noted that the environment felt empty and repetitive, indicating a lack of visual detail in the prototype, which led to reduced   user engagement. This supported our planned use of Bristol-themed visual elements, including landmarks and graffiti-style textures, to          improve visual engagement and help players recognise different areas of the map.
-  <br>
+  Most users liked the maze's layout and its "spacious route", suggesting that the navigation structure was clear and easy to understand.         However, many noted that the environment felt empty and repetitive, indicating a lack of visual detail in the prototype, which led to reduced   user engagement. This supported our planned use of Bristol-themed visual elements, including landmarks and graffiti-style textures, to          improve visual engagement and help players recognise different areas of the map.  <br>
+
 
 * Technical Glitches:
 
   A key issue was identified with input handling. The Enter key, used to start the game, only worked when the mouse cursor was positioned over    the game window. This made the controls unreliable and harder to use.
 
-  This was fixed by ensuring the game window stays active during gameplay, so keyboard inputs like the Enter key are always detected.
-  <br>
+  This was fixed by ensuring the game window stays active during gameplay, so keyboard inputs like the Enter key are always detected.  <br>
+  
 
 * Game Mechanics:
 
