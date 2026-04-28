@@ -456,7 +456,7 @@ At very close range (distance < 130 px), the boss stops moving but continues att
 </p>
 <br>
 
-These features make the boss fight more challenging compared to the enemies from previous levels, as the player is forced to constantly move, focus on their position and distance from the boss and time their attacks, rather than simply avoiding a predictable enemy. This approach balances increasing challenge with user engagement to maintain an enjoyable experience (Sweetser & Wyeth, 2005). 
+These features make the boss fight more challenging compared to the enemies from previous levels, as the player is forced to constantly move, focus on their position and distance from the boss and time their attacks, rather than simply avoiding a predictable enemy. This approach balances increasing challenge with user engagement to maintain an overall enjoyable experience for the player (Sweetser & Wyeth, 2005). 
 
 # 6. Evaluation
 
