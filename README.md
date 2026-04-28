@@ -495,10 +495,11 @@ We grouped the feedback into common themes to identify repeated issues across di
 
 ## 6.2 Quantitative Analysis: System Usability Scale (SUS) - editing this section - thanusha
 
-The SUS was used to evaluate the usability of the game. If a game is too easy, it can become uninteresting, while unnecessary difficulty or frustration can reduce replayability (Sweetser & Wyeth, 2005). 
+The SUS was used to evaluate the usability of the game across different levels. If a game is too easy, it can become uninteresting, while unnecessary difficulty or frustration can reduce replayability (Sweetser & Wyeth, 2005). Therefore, we compared both levels to evaluate whether usability is consistent as difficulty increases.
 
-Ten participants completed gameplay tasks such as collecting items and finding the exit before filling out the SUS questionnaire. (Raw data: Appendix ?)
+Ten participants completed level 1 and then filled out the SUS questionnaire, then completed level 2 and filled out the questionnaire again. Each SUS question was rated ranked on a scale of 1-5 (1=strongly disagree and 5=strongly agree) (Raw data: Appendix 1). 
 
+SUS mean scores were calculated for each level, and a Wilcoxon signed-rank test was conducted to compare whether usability between levels was statistically significant. This test was chosen as the same participants took part in both levels, and SUS responses were collected using a rating scale (1-5), so a method that does not assume exact numerical data (a non-parametric test) was more suitable. 
 
 <p align="center">
   <b>Figure ?: </b>
@@ -508,6 +509,15 @@ Ten participants completed gameplay tasks such as collecting items and finding t
 
 </p>
 
+ * **SUS Mean Scores**: Level 1 achieved higher mean SUS scores (M = 87.3) compared to Level 2 (M = 79.6).
+     (Calculated in Microsoft Excel; see Appendix 1)
+
+ * **Wilcoxon Signed Rank Test**: Statistically significant difference between Level 1 and Level 2 usability scores (W = 0, p = 0.005).
+     This was calculated using an online statistical tool (Social Science Statistics, n.d.). 
+
+Both levels scored above the SUS benchmark of 68, suggesting high usability in both conditions. Level 1 scored above the 85 benchmark, which is considered an "excellent" usability score, while level 2 achieved a score of 79.6, falling within the "good" range. 
+
+We expected usability to be similar across both levels, as the core game design is mostly the same. However, level 2 introduces new gameplay elements such as weapons and enemies, which slightly increases gameplay difficulty. Hence, these results suggest that increased difficulty in Level 2 may have influenced the participants' perceptions of usability, as usability in games can be affected by difficulty and player experience, making it harder to separate usability from gameplay difficulty during evaluation (Olsen et al., 2011). 
 
 
 ## 6.3 Code Testing
