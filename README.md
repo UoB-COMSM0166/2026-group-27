@@ -638,9 +638,25 @@ You can delete this section in your own repo, it's just here for information. in
 
 # 13. Appendices
 
-## Appendix ?: Black-Box Testing Results
+## Appendix 1: SUS Results
 
-### Normal
+### 1.1: Level 1: 
+
+<p align="center">
+<img src = "https://github.com/UoB-COMSM0166/2026-group-27/blob/ed777816b6fa0be6ac10b85e07bea25d78ef4bce/5.%20readme%20docs/13.%20SUS%201%20results%20final.jpg" width="100%">
+
+</p>
+
+### 1.2: Level 2: 
+
+<p align="center">
+<img src = "https://github.com/UoB-COMSM0166/2026-group-27/blob/69360be200f0feb62e45fe2c7f4425f81b3a72ca/5.%20readme%20docs/13.%20SUS%202%20results%20.jpg" width="100%">
+
+</p>
+
+## Appendix 2: Black-Box Testing Results
+
+### 2.1: Normal
 | Test ID | Feature | Input / Action | Expected Result | Status |
 |--------|--------|----------------|-----------------|--------|
 | N1 | Shop | Coins ≥ price, click buy | Purchase succeeds, coins deducted | Pass |
@@ -650,7 +666,7 @@ You can delete this section in your own repo, it's just here for information. in
 | N5 | Combat | Shoot enemy | Enemy takes damage | Pass |
 | N6 | Win Condition | Reach exit with objective | Level completed | Pass |
 
-### Boundary
+### 2.2: Boundary
 | Test ID | Feature | Input / Action | Expected Result | Status |
 |--------|--------|----------------|-----------------|--------|
 | B1 | Shop | Coins = price | Purchase succeeds | Pass |
@@ -660,7 +676,7 @@ You can delete this section in your own repo, it's just here for information. in
 | B5 | Collision | Move along wall edge | No wall penetration | Pass |
 | B6 | Teleport | Stand at portal edge | Teleport triggers correctly | Pass |
 
-### Error Cases
+### 2.3: Error Cases
 | Test ID | Feature | Input / Action | Expected Result | Status |
 |--------|--------|----------------|-----------------|--------|
 | E1 | Shop | Buy without enough coins | Purchase denied, warning shown | Pass |
@@ -668,19 +684,3 @@ You can delete this section in your own repo, it's just here for information. in
 | E3 | Death | Move after death | No response / disabled controls | Pass |
 | E4 | Game State | Shoot in menu/shop | No effect | Pass |
 | E5 | Teleport | Rapid enter/exit portal | No glitch or infinite loop | Pass |
-
-## Appendix ?: SUS Results
-
-### Level 1: 
-
-<p align="center">
-<img src = "https://github.com/UoB-COMSM0166/2026-group-27/blob/ed777816b6fa0be6ac10b85e07bea25d78ef4bce/5.%20readme%20docs/13.%20SUS%201%20results%20final.jpg" width="100%">
-
-</p>
-
-### Level 2: 
-
-<p align="center">
-<img src = "https://github.com/UoB-COMSM0166/2026-group-27/blob/69360be200f0feb62e45fe2c7f4425f81b3a72ca/5.%20readme%20docs/13.%20SUS%202%20results%20.jpg" width="100%">
-
-</p>
