@@ -615,7 +615,7 @@ We also focused on the player's mental and physical experience, especially given
 
   <tr>
   <td>Keyu Zhou</td>
-  <td>1.0</td>
+  <td>Did not attend demo session. Did not have any contact with the rest of the team towards the end of the project (after easter)</td>
   </tr>
 
   <tr>
