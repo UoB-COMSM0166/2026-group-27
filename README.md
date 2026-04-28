@@ -487,7 +487,7 @@ Feedback was grouped into common themes: map design, technical issues, and game 
 
 * **Game Mechanics**:
 
-  Participants suggested improvements to the game mechanics, some of which matched features we already planned to implement, such as              adding item descriptions to improve understanding. They also suggested adding a warning when time is running low (e.g. 10–20 seconds            remaining). This indicated that players needed clearer feedback when they are under pressure.
+  Participants suggested adding a warning when time is running low (e.g. 10–20 seconds remaining). This indicated that players needed clearer     feedback when they are under pressure, which we considered during the rest of the development process. 
 
 
 ## 6.2 Quantitative Analysis: System Usability Scale (SUS)
