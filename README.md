@@ -462,20 +462,20 @@ These features make the boss fight more challenging compared to the enemies from
 
 The game was evaluated during its prototype stage, enabling us to identify and fix usability issues and technical bugs during development. Since the game did not yet include the final Bristol-themed visuals, this allowed us to focus on evaluating the core gameplay mechanics without the influence of visual or narrative features. 
 
-We combined quantitative data from the System Usability Scale (SUS) with qualitative feedback from Think Aloud (TA) sessions. This helped us understand how well users could complete tasks and their overall experience during gameplay.
+We combined quantitative data from the System Usability Scale (SUS) with qualitative feedback from Think Aloud (TA) sessions to evaluate usability and user experience
 
 
 ## 6.1 Qualitative Evaluation: Think Aloud (TA)
 
-During the TA tests, we asked participants to verbalise their thoughts and decision-making process while navigating the maze and completing tasks such as finding items and reaching the exit. This helped us identify unclear game concepts from a player’s perspective (Pellicone et al., 2022). 
+During TA tests, participants verbalised their thoughts while navigating the maze and completing tasks such as finding items and reaching the exit. This helped us identify unclear game concepts from a player’s perspective (Pellicone et al., 2022). 
 
 Ten participants were recruited using convenience sampling from our weekly workshops, allowing us to receive quick feedback without requiring a controlled experiment.
 
-We grouped the feedback into common themes to identify repeated issues across different users. The main themes were map design, technical issues, and game mechanics.
+Feedback was grouped into common themes: map design, technical issues, and game mechanics.
 
 * Map Design:
 
-  Most users liked the maze's layout and its "spacious route", suggesting that the navigation structure was clear and easy to understand.         However, many noted that the environment felt empty and repetitive, indicating a lack of visual detail in the prototype, which led to reduced   user engagement. This supported our planned use of Bristol-themed visual elements, such as landmarks in the background of story mode, to        improve visual engagement and help players recognise different areas of Bristol.  <br>
+  Most users liked the maze's layout and its "spacious route", suggesting that the navigation structure was clear and easy to understand.         However, many noted that the environment felt empty and repetitive, reducing user engagement. This supported our planned use of Bristol-        themed visual elements, such as landmarks in the background of story mode, to improve visual engagement and help players recognise different    areas of Bristol.  <br>
 
 
 * Technical Glitches:
@@ -487,18 +487,16 @@ We grouped the feedback into common themes to identify repeated issues across di
 
 * Game Mechanics:
 
-  Participants suggested several improvements to the game mechanics, some of which matched features we already planned to implement, such as      adding item descriptions to improve understanding and engagement.
-
-  Participants also suggested adding a hint system to help locate the exit when time is running low, as well as a warning when you are about to   run out of time (e.g. 10–20 seconds remaining). This indicated that players needed clearer feedback when they are under pressure. 
+  Participants suggested improvements to the game mechanics, some of which matched features we already planned to implement, such as              adding item descriptions to improve understanding. They also suggested adding a warning when time is running low (e.g. 10–20 seconds            remaining). This indicated that players needed clearer feedback when they are under pressure. 
 
 
 ## 6.2 Quantitative Analysis: System Usability Scale (SUS) - editing this section - thanusha
 
-The SUS was used to evaluate the usability of the game across different levels. If a game is too easy, it can become uninteresting, while unnecessary difficulty or frustration can reduce replayability (Sweetser & Wyeth, 2005). Therefore, we compared both levels to evaluate whether usability is consistent as difficulty increases.
+The SUS was used to evaluate the usability across different levels. If a game is too easy, it can become uninteresting, while unnecessary difficulty or frustration can reduce replayability (Sweetser & Wyeth, 2005). Therefore, we compared both levels to evaluate whether usability is consistent as difficulty increases.
 
-Ten participants completed level 1 and then filled out the SUS questionnaire, then completed level 2 and filled out the questionnaire again. Each SUS question was rated on a scale of 1-5 (1=strongly disagree and 5=strongly agree) (Raw data: [Appendix 1](https://github.com/UoB-COMSM0166/2026-group-27#13-appendices)). 
+Ten participants completed level 1 and level 2, completing the SUS questionnaire after each level. Each question was rated on a scale of 1-5 (1=strongly disagree and 5=strongly agree) (Raw data: [Appendix 1](https://github.com/UoB-COMSM0166/2026-group-27#13-appendices)). 
 
-SUS mean scores were calculated for each level, and a Wilcoxon signed-rank test was conducted to determine whether usability between levels was statistically significant. This test was chosen as the same participants took part in both levels, and SUS responses were collected using a rating scale (1-5), so a method that does not assume exact numerical data (a non-parametric test) was more suitable. 
+SUS mean scores were calculated, and a Wilcoxon signed-rank test was used to determine whether usability between levels was statistically significant. This test was chosen as the same participants took part in both levels, and SUS responses were collected using a rating scale (1-5), so a method that does not assume exact numerical data (a non-parametric test) was more suitable. 
 
 <p align="center">
   <b>Figure ?: </b>
@@ -508,25 +506,24 @@ SUS mean scores were calculated for each level, and a Wilcoxon signed-rank test 
 
 </p>
 
- * **SUS Mean Scores**: Level 1 achieved higher mean SUS scores (M = 87.3) compared to Level 2 (M = 79.6).
+ * **SUS Mean Scores**: Level 1 scored higher (M = 87.3) than Level 2 (M = 79.6).
      (Calculated in Microsoft Excel; see [Appendix 1](https://github.com/UoB-COMSM0166/2026-group-27#13-appendices)).
 
  * **Wilcoxon Signed Rank Test**: Statistically significant difference between Level 1 and Level 2 usability scores (W = 0, p = 0.005).
      This was calculated using an online statistical tool (Social Science Statistics, n.d.). 
 
-Both levels scored above the SUS benchmark of 68, suggesting high usability in both conditions. Level 1 scored above the 85 benchmark, which is considered an "excellent" usability score, while level 2 achieved a score of 79.6, falling within the "good" range. 
+Both levels scored above the SUS benchmark of 68, suggesting high usability in both conditions. Level 1 achieved an “excellent” score (>85), while Level 2 fell within the “good” range.
 
-We expected usability to be similar across both levels, as the core game design is mostly the same. However, level 2 introduces new gameplay elements such as weapons and enemies, which slightly increases gameplay difficulty. Hence, these results suggest that increased difficulty in Level 2 may have influenced the participants' perceptions of usability, as usability in games can be affected by difficulty and player experience, making it harder to separate usability from gameplay difficulty during evaluation (Olsen et al., 2011). 
+We expected usability to be similar across levels, as the core game design was consistent. However, level 2 introduced new gameplay elements such as weapons and enemies, increasing gameplay difficulty. Hence, increased difficulty in Level 2 may have influenced the participants' perceptions of usability, as usability in games can be affected by difficulty and player experience, making it harder to separate usability from gameplay difficulty during evaluation (Olsen et al., 2011). 
 
 
 ## 6.3 Code Testing
 
-We used black-box testing to evaluate core gameplay features. This involved testing systems such as movement and item collecting, ensuring they worked as intended in different conditions. We chose this test as it focuses on how the game works from a player's perspective rather than the developer’s perspective, which involves looking at the internal code of the game. 
+We used black-box testing to evaluate core gameplay features such as item collection and movement. We chose this test as it focuses on how the game works from a player's perspective rather than the developer’s perspective, which involves looking at the internal code of the game. 
 
-We ensured the test assessed normal, boundary, and error cases ([Appendix 2](https://github.com/UoB-COMSM0166/2026-group-27#appendix-2-black-box-testing-results)). Boundary cases tested situations at the limits of the system, such as having just enough coins to make a purchase. Error cases ensured the game handled invalid actions correctly, such as attempting to open a door without a key. 
+Test cases included normal, boundary, and error conditions ([Appendix 2](https://github.com/UoB-COMSM0166/2026-group-27#appendix-2-black-box-testing-results)). Boundary cases tested situations at the limits of the system, such as having just enough coins to make a purchase. Error cases ensured the game handled invalid actions correctly, such as attempting to buy an upgrade without enough coins.  
 
-However, as black-box testing does not consider the internal code, some issues were not identified during these tests. For example, an input bug with the Enter key was discovered during the Think Aloud tests ([Section 6.1](https://github.com/UoB-COMSM0166/2026-group-27/tree/main#61-qualitative-evaluation-think-aloud-ta)). This highlights the importance of combining both code structure testing and player-focused evaluation to produce more reliable results. 
-
+However, as black-box testing does not consider the internal code, some issues were not detected. For example, an input bug with the Enter key was discovered during the Think Aloud tests ([Section 6.1](https://github.com/UoB-COMSM0166/2026-group-27/tree/main#61-qualitative-evaluation-think-aloud-ta)). This highlights the importance of combining both code structure testing and player-focused evaluation to produce more reliable results. 
 
 # 7. Process 
 
