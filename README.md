@@ -410,7 +410,7 @@ The system then generates random positions until a valid one is found. A positio
  * Exclusion list: 
    `avoidList.includes(object)`
 
-To prevent the system from getting stuck in rare cases where no valid position is found, a maximum number of attempts is set. If no valid position is found within this limit, a fallback position is used to ensure the game still generates a complete and playable map:
+To prevent the system from getting stuck in rare cases where no valid position is found, a maximum number of attempts is set. If no valid position is found within this limit, the system repeatedly generates new positions until a valid one is found. 
 
                                        while (!validPosition) {
                                           x = random(...)
@@ -456,7 +456,7 @@ At very close range (distance < 130 px), the boss stops moving but continues att
 </p>
 <br>
 
-These features make the boss fight more challenging compared to the enemies from previous levels, as the player is forced to constantly move, focus on their position and distance from the boss and time their attacks, rather than simply avoiding a predictable enemy. 
+These features make the boss fight more challenging compared to the enemies from previous levels, as the player is forced to constantly move, focus on their position and distance from the boss and time their attacks, rather than simply avoiding a predictable enemy. This approach balances increasing challenge with user engagement to maintain an enjoyable experience (Sweetser & Wyeth, 2005). 
 
 # 6. Evaluation
 
@@ -514,7 +514,7 @@ SUS mean scores were calculated, and a Wilcoxon signed-rank test was used to det
 
 Both levels scored above the SUS benchmark of 68, suggesting high usability in both conditions. Level 1 achieved an “excellent” score (>85), while Level 2 fell within the “good” range.
 
-We expected usability to be similar across levels, as the core game design was consistent. However, level 2 introduced new gameplay elements such as weapons and enemies, increasing gameplay difficulty. Hence, increased difficulty in Level 2 may have influenced the participants' perceptions of usability, as usability in games can be affected by difficulty and player experience, making it harder to separate usability from gameplay difficulty during evaluation (Olsen et al., 2011). 
+We expected usability to be similar across levels, as the core game design was consistent. However, level 2 introduced new gameplay elements such as weapons and enemies, increasing gameplay difficulty. Hence, increased difficulty in level 2 may have influenced the participants' perceptions of usability, as usability in games can be affected by difficulty and player experience, making it harder to separate usability from gameplay difficulty during evaluation (Olsen et al., 2011). 
 
 
 ## 6.3 Code Testing
