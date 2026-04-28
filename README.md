@@ -473,19 +473,19 @@ Ten participants were recruited using convenience sampling from our weekly works
 
 Feedback was grouped into common themes: map design, technical issues, and game mechanics.
 
-* Map Design:
+* **Map Design**:
 
   Most users liked the maze's layout and its "spacious route", suggesting that the navigation structure was clear and easy to understand.         However, many noted that the environment felt empty and repetitive, reducing user engagement. This supported our planned use of Bristol-        themed visual elements, such as landmarks in the background of story mode, to improve visual engagement and help players recognise different    areas of Bristol.  <br>
 
 
-* Technical Issues:
+* **Technical Issues**:
 
   A key issue was identified with input handling. The Enter key, used to start the game, only worked when the mouse cursor was positioned over    the game window. This made the controls unreliable and harder to use.
 
   This was fixed by ensuring the game window stays active during gameplay, so keyboard inputs like the Enter key are always detected.  <br>
   
 
-* Game Mechanics:
+* **Game Mechanics**:
 
   Participants suggested improvements to the game mechanics, some of which matched features we already planned to implement, such as              adding item descriptions to improve understanding. They also suggested adding a warning when time is running low (e.g. 10–20 seconds            remaining). This indicated that players needed clearer feedback when they are under pressure.
 
