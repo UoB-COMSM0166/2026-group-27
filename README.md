@@ -268,9 +268,7 @@ We have chosen to work on Lost in Bristol because...
 
 ## 3.2 Identifying Stakeholders
 
-Stakeholders for Lost in Bristol were identified using the Onion Model to ensure all relevant groups were considered (Alexander & Robertson, 2004). This helped us define our target audience and understand how different users would interact with the game.
-
-From this, we focused on key stakeholders such as players, developers, and testers, which influenced our decisions throughout development and ensured the game remained aligned with user needs (Pirozzi, 2019). 
+Stakeholders for Lost in Bristol were identified using the Onion Model to ensure all relevant groups were considered (Alexander & Robertson, 2004). This helped us understand how different users would interact with the game and ensured the game remained aligned with user needs (Pirozzi, 2019). 
 
 <p align="center">
    <b>Figure ?: </b>
@@ -281,12 +279,11 @@ From this, we focused on key stakeholders such as players, developers, and teste
 
 **The Product:** Lost in Bristol video game.
 
-**The System:** Stakeholders involved in developing the game, including developers, designers, and project managers.
+**The System:** Stakeholders involved in developing the game, including developers, designers, and project managers. Recognising these stakeholders helped ensure that design decisions were aligned with their roles and were realistic, meaning they could be successfully implemented within the project's timeframe.
 
-**The Containing System:** The main users of the game, such as players, who interact with and experience the gameplay.
+**The Containing System:** The main users of the game, such as players, who interact with and experience the gameplay. This helped us focus on user experience by ensuring features such as controls and difficulty progression were intuitive and engaging.
 
-**The Wider Environment:** External stakeholders such as assessors, testers, and Computer Science students, who evaluate or learn from the product, and influence its development. 
-
+**The Wider Environment:** External stakeholders such as assessors, testers, and Computer Science students, who evaluate or influence the product's  development. Recognising this helped ensure the game was suitable for testing and could be assessed effectively. 
 
 ## 3.3 Epics & User Stories
 
