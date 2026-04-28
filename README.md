@@ -502,7 +502,7 @@ Ten participants completed gameplay tasks such as collecting items and finding t
   <b>Figure ?: </b>
   <i>Bar graph displaying SUS results </i> <br>
 
-<img src= "" width = "100%">
+<img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/2ae707b39f84b1b235a63b57fef3804015f89114/5.%20readme%20docs/06.%20SUS%20graph.png" width = "100%">
 
 </p>
 
