@@ -681,6 +681,6 @@ You can delete this section in your own repo, it's just here for information. in
 ### Level 2: 
 
 <p align="center">
-<img src = "https://github.com/UoB-COMSM0166/2026-group-27/blob/69360be200f0feb62e45fe2c7f4425f81b3a72ca/5.%20readme%20docs/13.%20SUS%202%20results%20.jpg" width="50%">
+<img src = "https://github.com/UoB-COMSM0166/2026-group-27/blob/69360be200f0feb62e45fe2c7f4425f81b3a72ca/5.%20readme%20docs/13.%20SUS%202%20results%20.jpg" width="100%">
 
 </p>
