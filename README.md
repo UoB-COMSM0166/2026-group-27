@@ -21,7 +21,7 @@ game set up instructions and link to play game. [Here is our game](https://uob-c
 8. [Sustainability, Ethics, and Accessability](https://github.com/UoB-COMSM0166/2026-group-27/tree/main/README.md#8-sustainability-ethics-and-accessability)
 9. [Conclusion](https://github.com/UoB-COMSM0166/2026-group-27/tree/main#9-conclusion)
 10. [Contribution Statement](https://github.com/UoB-COMSM0166/2026-group-27/tree/main#10-contribution-statement)
-11. [AI Statement](https://github.com/UoB-COMSM0166/2026-group-27/tree/main/README.md#11-ai-statement)
+11. [AI Statement](https://github.com/UoB-COMSM0166/2026-group-27/tree/main#11-ai-statement)
 12. [References](https://github.com/UoB-COMSM0166/2026-group-27/tree/main#12-references) 
 13. [Appendices](https://github.com/UoB-COMSM0166/2026-group-27/tree/main#13-appendices)
 
@@ -548,7 +548,7 @@ The pattern in our setbacks was that they were almost always coordination failur
 The project succeeded because the team allowed its own working methods to evolve. We did not start with a formal task board or disciplined branching conventions, and imposing all of those in week one would probably have produced more friction than it resolved. Instead, we adopted each habit in direct response to a concrete problem we had just experienced, so everyone already understood *why* the new rule existed by the time it was introduced. If we were to start again, we would make two changes early: agreeing on a small "house style" for art and UI before any sprites are drawn, so that asset rework is limited; and establishing a branch-per-feature Git workflow from day one, rather than committing directly to `main`. What we would preserve is the broad division of roles across code, narrative, content and art, and audio lines, the integration of testing into every role rather than treating it as a separate phase, and the informal culture of covering for each other during difficult weeks—all of which were, in the end, more valuable than any tooling choice.
 
 
-# 8. Sustainability, Ethics and Accessibility (10% 750 words)
+# 8. Sustainability, Ethics and Accessibility
 - Evidence of the impact of your game across the environment and two other areas: environmental + 2 of the following: Social, Economical, Technical, Individual (10% 750 words)
 
 When we were developing Lost in Bristol, we didn't just want to focus on the "fun" factor but also wanted to think about the footprint a game like this leaves behind. Balancing the intensity of our "Twists" with the responsibility of creating a modern project meant looking at how we impact the environment, the individual players and the technical landscape.
