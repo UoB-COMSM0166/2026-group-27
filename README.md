@@ -674,7 +674,7 @@ You can delete this section in your own repo, it's just here for information. in
 ### Level 1: 
 
 <p align="center">
-<img src = "https://github.com/UoB-COMSM0166/2026-group-27/blob/cbd9b72a9d8715cfa65b6dca1155c87506356422/5.%20readme%20docs/13.%20SUS%201%20results.jpg" width="70%">
+<img src = "https://github.com/UoB-COMSM0166/2026-group-27/blob/ed777816b6fa0be6ac10b85e07bea25d78ef4bce/5.%20readme%20docs/13.%20SUS%201%20results%20final.jpg" width="100%">
 
 </p>
 
