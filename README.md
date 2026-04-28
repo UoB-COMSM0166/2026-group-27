@@ -669,9 +669,18 @@ You can delete this section in your own repo, it's just here for information. in
 | E4 | Game State | Shoot in menu/shop | No effect | Pass |
 | E5 | Teleport | Rapid enter/exit portal | No glitch or infinite loop | Pass |
 
-## Appendix ?: SUS Raw Data
+## Appendix ?: SUS Results
+
+### Level 1: 
 
 <p align="center">
-<img src = "https://github.com/UoB-COMSM0166/2026-group-27/blob/5c7512fc3f6da78114246c7d17cc2bf4fb7299ef/5.%20readme%20docs/13.%20SUS%20Raw%20Data%20Screenshot.png" width="70%">
+<img src = "https://github.com/UoB-COMSM0166/2026-group-27/blob/cbd9b72a9d8715cfa65b6dca1155c87506356422/5.%20readme%20docs/13.%20SUS%201%20results.jpg" width="70%">
+
+</p>
+
+### Level 2: 
+
+<p align="center">
+<img src = "https://github.com/UoB-COMSM0166/2026-group-27/blob/cbd9b72a9d8715cfa65b6dca1155c87506356422/5.%20readme%20docs/13.%20SUS%202%20results.jpg" width="70%">
 
 </p>
