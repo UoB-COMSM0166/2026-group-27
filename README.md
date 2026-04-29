@@ -111,7 +111,7 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
   <tbody>
     <tr>
       <td>Portal</td>
-      <td> <<img width="100" height="100" alt="portal final" src="https://github.com/user-attachments/assets/cf4d3a34-0351-4040-b606-998fd3e14647">         
+      <td><img width="100" height="100" alt="portal final" src="https://github.com/user-attachments/assets/cf4d3a34-0351-4040-b606-998fd3e14647">         
 </td>
       <td>Teleports player around the maze.</td>
     </tr>
