@@ -369,11 +369,8 @@ Acceptance criteria were included to determine when a feature has been successfu
 
 ### - Sequence Diagram
 
+
 # 5. Implementation
-
-- 15% ~750 words
-
-- Describe the implementation of your game, in particular highlighting the TWO areas of *technical challenge* in developing your game.
 
 ## 5.1 Spawning System 
 
@@ -406,15 +403,19 @@ Another difficulty we faced was making the final boss in level 3 more challengin
 
 To address this, we implemented a distance-based behaviour system. The boss calculates its distance from the player and changes its behaviour depending on how far away the player is, making the battle less predictable and challenging without requiring a complex AI system. 
 
-When the player is within attack range (130-340 px), the boss becomes more aggressive by moving towards the player while attacking simultaneously, increasing combat pressure. A timer (1.6 seconds) controls how often the boss shoots, ensuring consistent behaviour across different frame rates. When the timer reaches zero, the boss fires three projectiles towards the player. This makes the attacks harder to dodge, as it covers a larger area compared to a single projectile (Figure ).
+When the player is within attack range (130-340 px), the boss becomes more aggressive by moving towards the player while attacking simultaneously, increasing combat pressure. A timer (1.6 seconds) controls how often the boss shoots, ensuring consistent behaviour across different frame rates. When the timer reaches zero, the boss fires three projectiles towards the player (Figure ?). This makes the attacks harder to dodge, as it covers a larger area compared to a single projectile (Figure ).
 
-  * Boss Firing Timer:
+  <p align="center">
+  <b>Figure ?: </b>
+  <i>Code Snippet for Boss Attack Timer</i> <br>
+  </p>
   
           this.shootTimer -= dt;
           if (dist < 340 && this.shootTimer <= 0) {
               this.fireFanShot(px, py);
               this.shootTimer = bossShootCooldown;
           }
+          
 
 <p align="center">
   <b>Figure ?: </b>
