@@ -225,22 +225,17 @@ Maniza
 <img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/f6eb2dd289198ac83513909ae7b6078e33eb18dc/5.%20readme%20docs/03.%20paper%20protoype%20lost%20in%20bristol.gif" width= "25%">
 </p>
 
-
-
-<table align="center" width="100%">
-  <tr>
-    <td align="center">
+<p align="center">
       <b>Figure ?</b><br>
       <i>Game Idea 1: Lost in Bristol.</i><br>
-      <img src="https://github.com/UoB-COMSM0166/2026-group-27/blob/07648b4772195a195a19fc710e553b9d7434fc7c/5.%20readme%20docs/03.%20Lost%20in%20bristol%20game%20idea.jpg" width="500">
-    </td>
-    <td align="center">
+      <img src="https://github.com/UoB-COMSM0166/2026-group-27/blob/07648b4772195a195a19fc710e553b9d7434fc7c/5.%20readme%20docs/03.%20Lost%20in%20bristol%20game%20idea.jpg" width="50%">
+</p>
+
+   <p align="center">
       <b>Figure ?</b><br>
       <i>Game Idea 2: The Will and the Fox</i><br>
-      <img src="https://github.com/UoB-COMSM0166/2026-group-27/blob/07648b4772195a195a19fc710e553b9d7434fc7c/5.%20readme%20docs/03.%20The%20will%20and%20the%20Fox%20game%20idea.jpg" width="500" >
-    </td>
-  </tr>
-</table>
+      <img src="https://github.com/UoB-COMSM0166/2026-group-27/blob/07648b4772195a195a19fc710e553b9d7434fc7c/5.%20readme%20docs/03.%20The%20will%20and%20the%20Fox%20game%20idea.jpg" width="50%" >
+   </p>
 
 
 
