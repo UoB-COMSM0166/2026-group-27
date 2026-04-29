@@ -229,7 +229,7 @@ Maniza
   </p>
 
 <p align="center">
-<img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/f6eb2dd289198ac83513909ae7b6078e33eb18dc/5.%20readme%20docs/03.%20paper%20protoype%20lost%20in%20bristol.gif" width= "40%">
+<img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/f6eb2dd289198ac83513909ae7b6078e33eb18dc/5.%20readme%20docs/03.%20paper%20protoype%20lost%20in%20bristol.gif" width= "30%">
 </p>
 
 
