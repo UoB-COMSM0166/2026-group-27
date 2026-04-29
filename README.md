@@ -111,7 +111,7 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
   <tbody>
     <tr>
       <td>Portal</td>
-      <td> <img width="32" height="32" alt="portal" src="https://github.com/user-attachments/assets/db1fd37f-90f4-474f-9620-929f83d76f55" width= "100%"/>
+      <td> <img width="60" height="60" alt="portal" src="https://github.com/user-attachments/assets/db1fd37f-90f4-474f-9620-929f83d76f55" width= "100%"/>
 </td>
       <td>Act as portals to Teleport to safer spaces.</td>
     </tr>
@@ -154,7 +154,7 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
   </tbody>
 </table> 
 
-## Meet our Characters:
+## Meet our Characters!
 
 
 <table align="center">
