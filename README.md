@@ -489,7 +489,7 @@ Feedback was grouped into common themes: map design, technical issues, and game 
 
 ## 6.2 Quantitative Analysis: System Usability Scale (SUS)
 
-The SUS was used to evaluate the usability across different levels. If a game is too easy, it can become uninteresting, while unnecessary difficulty or frustration can reduce replayability (Sweetser & Wyeth, 2005). SUS was chosen as it is known to be reliable and is commonly used in evaluating usability in game design (Maxim & Arnedo-Moreno, 2025).
+The SUS was used to evaluate the usability across different levels. If a game is too easy, it can become uninteresting, while unnecessary difficulty or frustration can reduce replayability. SUS was chosen as it is known to be reliable and is commonly used in evaluating usability in game design (Maxim & Arnedo-Moreno, 2025).
 
 Ten participants completed level 1 and level 2, completing the SUS questionnaire after each level. Each question was rated on a scale of 1-5 (1=strongly disagree and 5=strongly agree) (Raw data: [Appendix 1](https://github.com/UoB-COMSM0166/2026-group-27#13-appendices)). 
 
