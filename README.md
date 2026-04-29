@@ -204,7 +204,7 @@ thanusha
 <b>Figure ?: </b>
   <i>Exsisting games for Inspiration</i> <br>
 
-<img src = "https://github.com/UoB-COMSM0166/2026-group-27/blob/aa666427357eab36d2cadab3a72697295e5a6e50/5.%20readme%20docs/03.%20Lost%20in%20bristol%20game%20idea.jpg" width="50%">
+<img src = "https://github.com/UoB-COMSM0166/2026-group-27/blob/aa666427357eab36d2cadab3a72697295e5a6e50/5.%20readme%20docs/03.%20Lost%20in%20bristol%20game%20idea.jpg" width="70%">
 
   
 
