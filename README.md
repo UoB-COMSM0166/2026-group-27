@@ -118,11 +118,16 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
     <tr>
       <td>Crossbow</td>
       <td> <img width="77" height="74" alt="Screenshot 2026-04-21 at 01 58 36" src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/crossbow.png" width="50"></td>
-      <td>To shoot enemies.</td>
+      <td>For physical attack.</td>
+    </tr>
+     <tr>
+      <td>Ring</td>
+      <td> <img width="77" height="74" alt="Screenshot 2026-04-21 at 01 58 36" src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/ring.png" width="50"></td>
+      <td>For magical attack.</td>
     </tr>
     <tr>
-      <td>Gulls</td>
-      <td> <img width="45" height="45" alt="seagull" src="https://github.com/user-attachments/assets/9558e8cf-eea2-4f0f-97ec-d86c77909644" width="80"> </td>
+      <td>Ghost</td>
+      <td> <img width="45" height="45" alt="seagull" src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/little%20ghost.png"> </td>
       <td>Mini cursed hurdles to distract and steal lives until the curse is lifted.</td>
     </tr>
     <tr>
