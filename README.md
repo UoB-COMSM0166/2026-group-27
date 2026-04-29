@@ -603,8 +603,15 @@ We also focused on the player's mental and physical experience, especially given
 
 # 11. AI Statement
 
-- summarise your team's use of AI ao we know where to give you credit for work done (250 words)
-- PLEASE WRITE THE REPO YOURSELF - NO AI USE FOR WRITING THE REPO 
+We primarily used AI for the visual arts in our game. This allowed us to focus more on developing the game mechanics and internal code, while also maintaining a consistent art style for our game.
+
+The majority of game objects in Table ? and characters in Table ? we designed using AI, apart from the portal design and animation, and the fox character, which was done by Thanusha using [Piskel](https://www.piskelapp.com/). 
+
+Some initial pixel art drafts were created by Thanusha and Maniza, specifically the maze walls and the Lando Norris character, which were then used as references for generating these assets using AI (see figures below). 
+
+We also used AI tools to support development by helping debug code and identify errors. Additionally, AI was used to translate code snippets and labels, allowing each team member to read and understand the code in their preferred language.
+
+The AI tools for these tasks were primarily Google Gemini and ChatGPT. 
 
 # 12. References
 
