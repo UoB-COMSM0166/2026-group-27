@@ -125,6 +125,21 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
       <td> <img width="77" height="74" alt="Screenshot 2026-04-21 at 01 58 36" src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/ring.png" width="50"></td>
       <td>For magical attack.</td>
     </tr>
+   <tr>
+      <td>Lock</td>
+      <td> <img width="77" height="74" alt="Screenshot 2026-04-21 at 01 58 36" src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/lock.png" width="50"></td>
+      <td>For completing the seal</td>
+    </tr>
+    <tr>
+      <td>Key</td>
+      <td> <img width="77" height="74" alt="Screenshot 2026-04-21 at 01 58 36" src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/key.png" width="50"></td>
+      <td>For completing the seal</td>
+    </tr>
+     <tr>
+      <td>Prison</td>
+      <td> <img width="77" height="74" alt="Screenshot 2026-04-21 at 01 58 36" src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/cage.png" width="50"></td>
+      <td>For sealing the boss</td>
+    </tr>
     <tr>
       <td>Ghost</td>
       <td> <img width="45" height="45" alt="seagull" src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/little%20ghost.png"> </td>
