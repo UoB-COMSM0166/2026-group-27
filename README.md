@@ -176,11 +176,11 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
 
 
  <tr>
-   <td> <img width="200" height="200" src="https://github.com/UoB-COMSM0166/2026-group-27/blob/74cb50b56a60ad1eda158a457542ae2ea4fafddb/pixel%20art%20characters/fox%20bigger%20for%20repo.png"> </td>
-    <td>Fox</td>
+   <td> 
+<img width="200" height="200" alt="fox bigger for repo" src="https://github.com/user-attachments/assets/ccc54c65-e060-4a2c-bcfa-ac702a0bdf98">
+</td>
+<td>Fox</td>
   </tr>
-
-  </table>
 
 
 
