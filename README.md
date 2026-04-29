@@ -128,17 +128,17 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
    <tr>
       <td>Lock</td>
       <td> <img width="77" height="74" alt="Screenshot 2026-04-21 at 01 58 36" src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/lock.png" width="50"></td>
-      <td>For completing the seal</td>
+      <td>For completing the seal.</td>
     </tr>
     <tr>
       <td>Key</td>
       <td> <img width="77" height="74" alt="Screenshot 2026-04-21 at 01 58 36" src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/key.png" width="50"></td>
-      <td>For completing the seal</td>
+      <td>For completing the seal.</td>
     </tr>
      <tr>
       <td>Prison</td>
       <td> <img width="77" height="74" alt="Screenshot 2026-04-21 at 01 58 36" src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/cage.png" width="50"></td>
-      <td>For sealing the boss</td>
+      <td>For sealing the boss.</td>
     </tr>
     <tr>
       <td>Ghost</td>
@@ -147,9 +147,9 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
     </tr>
     <tr>
       <td> The Boss </td>
-      <td> <img width="54" height="64" alt="boss-3" src="https://github.com/user-attachments/assets/85e52399-c6be-4009-8328-f3b349153988" />
+      <td> <img width="54" height="64" alt="boss-3" src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/boss.png" />
 </td>
-      <td> A powerful monster that attacks and is the final barrier to victory.</td>
+      <td> The curse master of the mists from the Dark Ages.</td>
     </tr>
   </tbody>
 </table> 
@@ -165,16 +165,16 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
   </tr>
 
   <tr>
-    <td> <img src="https://github.com/user-attachments/assets/cfd07d29-5951-449d-acb2-edc0f07ade99" width= "50%"> </td>
+    <td> <img src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/characters/Lando/L-front2.png" width= "50%"> </td>
     <td>Lando Norris (F1 World Champion 2025)</td>
     <td>Speed</td>
   </tr>
 
   
  <tr>
-   <td> <img src="https://github.com/UoB-COMSM0166/2026-group-27/blob/766d8e707f5d440de77d4fab74e682d93f8d769e/pixel%20art%20characters/Banksy%20Character%20for%20repo.png" width="50%"> </td>
-    <td>Banksy: Girl with Balloon</td>
-    <td>Invisibility</td>
+   <td> <img src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/characters/Eliza/E-front2.png" width="50%"> </td>
+    <td>Eliza</td>
+    <td>Investigative capability</td>
   </tr>
 
 
