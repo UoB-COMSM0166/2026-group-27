@@ -418,7 +418,7 @@ To prevent the system from getting stuck in rare cases where no valid position i
 These features maintain randomness while ensuring all spawns remain fair and playable, improving replayability for players. 
 
 
-## 5.2 Final Boss: Movement and Combat System (shorter version - need to add code)
+## 5.2 Final Boss: Movement and Combat System
 
 Another difficulty we faced was making the final boss in level 3 more challenging than the regular enemies, with predictable movements which makes it relatively easy to avoid. If the final boss behaved the same way, there would be no increase in difficulty compared to previous levels, resulting in an underwhelming experience for the player. Hence, the boss was designed to actively follow and attack the player while reusing existing systems in the game.
 
