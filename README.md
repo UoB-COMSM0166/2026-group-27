@@ -128,17 +128,17 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
    <tr>
       <td>Lock</td>
       <td> <img width="77" height="74" alt="Screenshot 2026-04-21 at 01 58 36" src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/lock.png" width="50"></td>
-      <td>Needed in Level 3 to lock the final boss away in a cage.</td>
+      <td>Needed in Level 3 to imprison the boss.</td>
     </tr>
     <tr>
       <td>Key</td>
       <td> <img width="77" height="74" alt="Screenshot 2026-04-21 at 01 58 36" src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/key.png" width="50"></td>
-      <td>Needed in Level 3 to lock the final boss away in a cage.</td>
+      <td>Needed in Level 3 to imprison the boss.</td>
     </tr>
      <tr>
       <td>Cage</td>
       <td> <img width="77" height="74" alt="Screenshot 2026-04-21 at 01 58 36" src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/cage.png" width="50"></td>
-      <td>Defeat the boss</td>
+      <td>Needed in Level 3 to imprison the boss.</td>
     </tr>
     <tr>
       <td>Ghost</td>
