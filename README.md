@@ -201,56 +201,12 @@ thanusha
 ## 3.1 Ideation Process 
 
 <p align="center">
-<b>Table ?: </b>
-  <i>Game ideas....</i> <br>
-  <p align="center">
+<b>Figure ?: </b>
+  <i>Exsisting games for Inspiration</i> <br>
 
-<table align="center" width="100%">
-  <tr>
-    <th>Game Idea</th>
-    <th>Inspiration</th>
-    <th>Description</th>
-    <th>Possible Challenges</th>
-  </tr>
+<img src = "https://github.com/UoB-COMSM0166/2026-group-27/blob/aa666427357eab36d2cadab3a72697295e5a6e50/5.%20readme%20docs/03.%20Lost%20in%20bristol%20game%20idea.jpg" width="50%">
 
-  <tr>
-    <td>Lost In Bristol</td>
-    <td>
-      Pac-Man (1980)<br><br>
-      The Legend of Zelda (1986)
-    </td>
-    <td>
-      Maze-exploration game incorporating landmarks, culture, and people from Bristol.<br><br>
-      Players fight enemies, collect weapons, and discover Bristol landmarks while navigating a maze.
-      This combines Pac-Man-style maze navigation with Zelda-style combat, equipment, and exploration mechanics.
-    </td>
-    <td>
-      - Balancing maze complexity and visibility<br>
-      - Designing engaging enemy AI<br>
-      - Integrating combat and exploration smoothly<br>
-      - Ensuring performance in large maze environments
-    </td>
-  </tr>
-
-<tr>
-  <td> Court Clash</td>
-  <td> Stick Tennis Gameplay</td>
-  <td>A fast-paced tennis-style game where players control a tennis bat to keep the ball in play. Difficulty increases over time with faster speeds, power-ups and dynamic elements to create an addictive, replayable experience.</td>
-  <td>
-      -Balancing game speed and difficulty progression
-      -integrating power-ups smoothly
-      -ensuring performance at high speeds
-      -making experience challenging and enjoyable 
-  </td>
-</tr>
-  <tr>
-    <td>Game Idea 3</td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-
-</table> 
+  
 
 Maniza
 ### - [Kanban Board](https://github.com/orgs/UoB-COMSM0166/projects/172)
