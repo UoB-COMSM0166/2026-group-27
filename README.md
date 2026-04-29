@@ -100,10 +100,10 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
 
 <h2>Game Objects</h2>
 
-<table border="1" cellspacing="0" cellpadding="10">
+<table align="center" border="1" cellspacing="0" cellpadding="10">
   <thead>
     <tr>
-      <th>Category</th>
+      <th>Name</th>
       <th>Image</th>
       <th>Description</th>
     </tr>
@@ -113,37 +113,37 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
       <td>Portal</td>
       <td> <img width="60" height="60" alt="portal" src="https://github.com/user-attachments/assets/db1fd37f-90f4-474f-9620-929f83d76f55" width= "100%"/>
 </td>
-      <td>Act as portals to Teleport to safer spaces.</td>
+      <td>Teleports player around the maze.</td>
     </tr>
     <tr>
       <td>Crossbow</td>
       <td> <img width="77" height="74" alt="Screenshot 2026-04-21 at 01 58 36" src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/crossbow.png" width="50"></td>
-      <td>For physical attack.</td>
+      <td>Weapon to attack enemies (-1 damage)</td>
     </tr>
      <tr>
       <td>Ring</td>
       <td> <img width="77" height="74" alt="Screenshot 2026-04-21 at 01 58 36" src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/ring.png" width="50"></td>
-      <td>For magical attack.</td>
+      <td>Weapon to attack enemies (-3 damage).</td>
     </tr>
    <tr>
       <td>Lock</td>
       <td> <img width="77" height="74" alt="Screenshot 2026-04-21 at 01 58 36" src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/lock.png" width="50"></td>
-      <td>For completing the seal.</td>
+      <td>Needed in Level 3 to lock the final boss away in a cage.</td>
     </tr>
     <tr>
       <td>Key</td>
       <td> <img width="77" height="74" alt="Screenshot 2026-04-21 at 01 58 36" src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/key.png" width="50"></td>
-      <td>For completing the seal.</td>
+      <td>Needed in Level 3 to lock the final boss away in a cage.</td>
     </tr>
      <tr>
-      <td>Prison</td>
+      <td>Cage</td>
       <td> <img width="77" height="74" alt="Screenshot 2026-04-21 at 01 58 36" src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/cage.png" width="50"></td>
-      <td>For sealing the boss.</td>
+      <td>Defeat the boss</td>
     </tr>
     <tr>
       <td>Ghost</td>
       <td> <img width="45" height="45" alt="seagull" src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/little%20ghost.png"> </td>
-      <td>Mini cursed hurdles to distract and steal lives until the curse is lifted.</td>
+      <td>Mini enemies around the maze.</td>
     </tr>
     <tr>
       <td> The Boss </td>
