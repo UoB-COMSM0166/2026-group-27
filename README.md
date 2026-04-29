@@ -117,7 +117,7 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
     </tr>
     <tr>
       <td>Crossbow</td>
-      <td> <img width="77" height="74" alt="Screenshot 2026-04-21 at 01 58 36" src="[https://github.com/user-attachments/assets/5ad002e0-31a1-4d8f-bb69-68dc8a98b87a](https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/crossbow.png)" width="50"></td>
+      <td> <img width="77" height="74" alt="Screenshot 2026-04-21 at 01 58 36" src="[https://github.com/user-attachments/assets/5ad002e0-31a1-4d8f-bb69-68dc8a98b87a" width="50"></td>
       <td>To shoot enemies.</td>
     </tr>
     <tr>
