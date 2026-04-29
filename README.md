@@ -158,30 +158,31 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
 
 
 <table align="center">
+ <table width = "100%" align="center">
+  <tr>
+    <th width = "40%">Image</th>
+    <th width = "20">Name</th>
+  </tr>
   <tr>
     <th>Avatar</th>
     <th>Name</th>
-    <th>Special Ability</th>
   </tr>
 
   <tr>
-    <td> <img src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/characters/Lando/L-front2.png" width= "30%"> </td>
+    <td> <img src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/characters/Lando/L-front2.png"> </td>
     <td>Lando Norris (F1 World Champion 2025)</td>
-    <td>Speed</td>
   </tr>
 
   
  <tr>
-   <td> <img src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/characters/Eliza/E-front2.png" width="30%"> </td>
+   <td> <img src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/characters/Eliza/E-front2.png"> </td>
     <td>Eliza (A history student at the UoB)</td>
-    <td>Investigative capability</td>
   </tr>
 
 
  <tr>
-   <td> <img src="https://github.com/UoB-COMSM0166/2026-group-27/blob/74cb50b56a60ad1eda158a457542ae2ea4fafddb/pixel%20art%20characters/fox%20bigger%20for%20repo.png" width= "50%"> </td>
+   <td> <img src="https://github.com/UoB-COMSM0166/2026-group-27/blob/74cb50b56a60ad1eda158a457542ae2ea4fafddb/pixel%20art%20characters/fox%20bigger%20for%20repo.png"> </td>
     <td>Fox</td>
-    <td>Sly & Quick</td>
   </tr>
 
   </table>
