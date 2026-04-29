@@ -388,12 +388,6 @@ The system then generates random positions until a valid one is found. A positio
 
 To prevent the system from getting stuck in rare cases where no valid position is found, a maximum number of attempts is set. This is essential because the system can keep generating invalid positions of the maze. Hence, a retry loop is used, which keeps generating new positions until a valid one is found or the attempt limit is reached.
 
-                                       while (!validPosition) {
-                                          x = random(...)
-                                          y = random(...)
-                                          validPosition = checkCollision(x, y)
-                                          }
-
 These features maintain randomness while ensuring all spawns remain fair and playable, improving replayability for players. 
 
 
