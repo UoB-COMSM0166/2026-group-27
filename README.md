@@ -626,8 +626,8 @@ If we had the opportunity to develop a sequel, we could develop a more robust st
    - Did not attend demo session <br>
    - Was not in contact with the team <br> 
      towards the end of the project (after easter) <br>
-   - No known contribution to game design, code,
-     or repo</td>
+   - No known contribution to game design,
+     code, or repo</td>
   </tr>
 
   <tr>
