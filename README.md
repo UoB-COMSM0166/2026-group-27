@@ -225,6 +225,8 @@ Next, as a team, we developed two game ideas that combined features from at leas
       <img src="https://github.com/UoB-COMSM0166/2026-group-27/blob/07648b4772195a195a19fc710e553b9d7434fc7c/5.%20readme%20docs/03.%20The%20will%20and%20the%20Fox%20game%20idea.jpg" width="70%" >
    </p>
 
+In workshop 3, we developed prototypes for the two game ideas. This gave us a visual representation of what our two potential game ideas could look and function. This helped us compare how each team member pictured the potential game designs and encouraged discussion to agree on a shared vision for each game idea. It also helped us see how complex the mechanics were and if they could be realistically built.
+
      
 Maniza
 ### - [Kanban Board](https://github.com/orgs/UoB-COMSM0166/projects/172)
