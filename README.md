@@ -393,7 +393,7 @@ Due to the complexity of our game, we created subsystems:
 
    - These classes manage the core gameplay elements and player-related data. Maze and LevelBase define the structure of each level, while the       Camera controls the player’s view of the game. CharacterRender handles the character chosen by the player and displays it in the game 
 
-   These systems separate gameplay logic, rendering, and environment, making the code easier to manage and maintain.
+   - These systems separate gameplay logic, rendering, and environment, making the code easier to manage and maintain.
 
 * <b>Combat and Level Mechanics: </b>
   (WeaponSystem, Projectile, HostileProjectile, Enemy, Boss, FogSystem, PortalSystem)
