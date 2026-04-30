@@ -375,13 +375,15 @@ Acceptance criteria were included to determine when a feature has been successfu
 A class diagram was developed to visualise the structure of our game system and show the relationships between different game elements. This supports object-oriented design principles by helping us organise our code and make it reusable for potential future work (Nikiforova et al., 2011).
 
 
+
 <p align="center">
       <b>Figure 8: </b>
       <i>Class diagram for Lost in Bristol.</i><br>
-      <img src="" width="">
+      <img width="1464" height="2105" alt="diagram1" src="https://github.com/user-attachments/assets/8677e1b3-c96e-4f79-8381-fee1868a402b" />
 </p>
 
 
+<img width="1392" height="3604" alt="sequence" src="https://github.com/user-attachments/assets/af6cc198-4462-4bdd-b7b6-afce2970777d" />
 
 * <b>Game Flow and Control: </b>
   (`GameFlowManager`, `MainMenuController`, `OpeningController`)
@@ -414,14 +416,15 @@ A class diagram was developed to visualise the structure of our game system and 
 <p align="center">
       <b>Figure 9: </b>
       <i>Sequence diagram 1</i><br>
-      <img src="" width="">
+      <img width="1497" height="2256" alt="sequence" src="https://github.com/user-attachments/assets/1999ee0a-e7d3-4f78-9e23-ed680d7b052a" />
 </p>
+
 
 
 <p align="center">
       <b>Figure 10: </b>
       <i>Sequence diagram 2</i><br>
-      <img src="" width="">
+      <img width="1392" height="3604" alt="sequence" src="https://github.com/user-attachments/assets/0270cfd2-c5c6-4ac4-ba7a-cecaf9f18964" />
 </p>
 
 
