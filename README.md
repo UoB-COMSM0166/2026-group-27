@@ -49,7 +49,7 @@ game set up instructions and link to play game. [Here is our game](https://uob-c
   <tr>
     <td>Suki Dai</td>
     <td>daisy20010313@gmail.com</td>
-    <td>@username</td>
+    <td>@Suki0515</td>
   </tr>
 
   <tr>
@@ -61,19 +61,19 @@ game set up instructions and link to play game. [Here is our game](https://uob-c
    <tr>
     <td>Liz Chen</td>
     <td>ji25241@bristol.ac.uk</td>
-    <td>@username</td>
+    <td>@lizchen0201</td>
   </tr>
 
   <tr>
     <td>Yizhou Pan</td>
     <td>izapan610@gmail.com</td>
-    <td>@username</td>
+    <td>@izapan610</td>
   </tr>
 
   <tr>
     <td>Keyu Zhou</td>
     <td>email</td>
-    <td>@username</td>
+    <td>@zhoukeyu63-netizen</td>
   </tr>
 
    <tr>
