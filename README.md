@@ -428,7 +428,7 @@ We created two sequence diagrams for Lost in Bristol: one for the storyline and 
 
 * **Gameplay Sequence Diagram**
 
- - The gameplay sequence diagram shows how the player interacts with the game during maze levels. For example, when the player attacks an          enemy, this input is processed by the game system, which then interacts with classes such as the `WeaponSystem` and `Enemy` to calculate        damage. This shows how multiple classes interact with each other to update game progress for the player (Figure 10). 
+  - The gameplay sequence diagram shows how the player interacts with the game during maze levels. For example, when the player attacks an          enemy, this input is processed by the game system, which then interacts with classes such as the `WeaponSystem` and `Enemy` to calculate        damage. This shows how multiple classes interact with each other to update game progress for the player (Figure 10). 
 
  
  <p align="center">
