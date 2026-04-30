@@ -414,7 +414,7 @@ A class diagram was developed to visualise the structure of our game system and 
 <p align="center">
       <b>Figure 9: </b>
       <i>Sequence diagram 1</i><br>
-      <img width="75%" alt="sequence" src="https://github.com/user-attachments/assets/1999ee0a-e7d3-4f78-9e23-ed680d7b052a" />
+      <img width="50%" alt="sequence" src="https://github.com/user-attachments/assets/1999ee0a-e7d3-4f78-9e23-ed680d7b052a" />
 </p>
 
 
@@ -422,7 +422,7 @@ A class diagram was developed to visualise the structure of our game system and 
 <p align="center">
       <b>Figure 10: </b>
       <i>Sequence diagram 2</i><br>
-      <img width="75%" alt="sequence" src="https://github.com/user-attachments/assets/0270cfd2-c5c6-4ac4-ba7a-cecaf9f18964" />
+      <img width="50%" alt="sequence" src="https://github.com/user-attachments/assets/0270cfd2-c5c6-4ac4-ba7a-cecaf9f18964" />
 </p>
 
 
