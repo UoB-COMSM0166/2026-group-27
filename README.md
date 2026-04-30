@@ -264,13 +264,13 @@ Stakeholders for Lost in Bristol were identified using the Onion Model to ensure
  width="100%">
 </p>
 
-**The Product:** Lost in Bristol video game.
+* **The Product:** Lost in Bristol video game.
 
-**The System:** Stakeholders involved in developing the game, including developers, designers, and project managers. Recognising these stakeholders helped ensure that design decisions were aligned with their roles and were realistic, meaning they could be successfully implemented within the project's timeframe.
+* **The System:** Stakeholders involved in developing the game, including developers, designers, and project managers. Recognising these          stakeholders helped ensure that design decisions were aligned with their roles and were realistic, meaning they could be successfully           implemented within the project's timeframe.
 
-**The Containing System:** The main users of the game, such as players, who interact with and experience the gameplay. This helped us focus on user experience by ensuring features such as controls and difficulty progression were intuitive and engaging.
+* **The Containing System:** The main users of the game, such as players, who interact with and experience the gameplay. This helped us focus     on user experience by ensuring features such as controls and difficulty progression were intuitive and engaging.
 
-**The Wider Environment:** External stakeholders such as assessors, testers, and Computer Science students, who evaluate or influence the product's  development. Recognising this helped ensure the game was suitable for testing and could be assessed effectively. 
+* **The Wider Environment:** External stakeholders such as assessors, testers, and Computer Science students, who evaluate or influence the       product's development. Recognising this helped ensure the game was suitable for testing and could be assessed effectively. 
 
 ## 3.3 Epics & User Stories
 
