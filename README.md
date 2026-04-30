@@ -421,7 +421,7 @@ We created two sequence diagrams for Lost in Bristol: one for the storyline and 
 
 <p align="center">
       <b>Figure 9: </b>
-      <i>Sequence diagram 1: Storyline</i><br>
+      <i>Sequence Diagram 1 - Storyline</i><br>
       <img width="50%" alt="sequence" src="https://github.com/user-attachments/assets/1999ee0a-e7d3-4f78-9e23-ed680d7b052a" />
 </p>
 
@@ -429,7 +429,7 @@ We created two sequence diagrams for Lost in Bristol: one for the storyline and 
 
 <p align="center">
       <b>Figure 10: </b>
-      <i>Sequence diagram 2: Gameplay</i><br>
+      <i>Sequence Diagram 2 - Gameplay</i><br>
       <img width="50%" alt="sequence" src="https://github.com/user-attachments/assets/0270cfd2-c5c6-4ac4-ba7a-cecaf9f18964" />
 </p>
 
