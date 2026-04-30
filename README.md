@@ -268,11 +268,11 @@ Stakeholders for Lost in Bristol were identified using the Onion Model to ensure
 
 ## 3.3 Epics & User Stories
 
-To define the core features of our game, epics and user stories were created. 
+To define the core features of our game, epics and user stories were created (Table 4). 
 
 Epics were used to represent core gameplay features, such as navigation, item collection, and combat, which were then made into user stories using Cohn’s format: “As a [user], I want [goal] so that [reason]” (Cohn, 2004). This helped us develop features step by step while focusing on user needs, rather than creating goals that may not benefit the game.
 
-Acceptance criteria were included to determine when a feature has been successfully implemented in the game using the Given-When-Then format. “Given” describes the starting state, “When” the action, and “Then” the expected result (de Biase et al., 2024) (Table 4).
+Acceptance criteria were included to determine when a feature has been successfully implemented in the game using the Given-When-Then format. “Given” describes the starting state, “When” the action, and “Then” the expected result (de Biase et al., 2024).
 
 
 <p align="center">
