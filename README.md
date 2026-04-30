@@ -419,6 +419,8 @@ We created two sequence diagrams for Lost in Bristol: one for the storyline and 
 
 **Storyline Sequence Diagram**
 
+The storyline sequence diagram illustrates how cutscenes are displayed within the game. For example, after completing a level, the system initiates a cutscene that displays dialogue and transitions the player to the next level. This shows how story elements are included in the overall gameplay experience (Figure 9).
+
 <p align="center">
       <b>Figure 9: </b>
       <i>Sequence Diagram 1 - Storyline</i><br>
