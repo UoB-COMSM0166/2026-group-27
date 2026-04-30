@@ -2,7 +2,8 @@
 
  
 <p align="center">
-<img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/5c7512fc3f6da78114246c7d17cc2bf4fb7299ef/5.%20readme%20docs/01.%20banner.gif" width= "150%">
+<img width="1920" height="869" alt="image" src="https://github.com/user-attachments/assets/4f4cf863-bcf7-45f6-986d-0e37d6fcb723" />
+
 </p>
 
 game set up instructions and link to play game. [Here is our game](https://uob-comsm0166.github.io/2026-group-27/)
