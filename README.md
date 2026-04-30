@@ -409,7 +409,7 @@ A class diagram was developed to visualise the structure of our game system and 
   - These handle additional gameplay features such as difficulty scaling and collision detection. The `Rect` class handles interactions between     objects, ensuring accurate collision response in the gameplay.
 
 
-### - Sequence Diagram
+## 4.2 Sequence Diagram
 
 <p align="center">
       <b>Figure 9: </b>
