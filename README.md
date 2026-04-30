@@ -203,15 +203,15 @@ thanusha
 
 ## 3.1 Ideation Process 
 
-We used [Miro](https://miro.com/) to brainstorm ideas for our game. Initially, each team member selected a game they really enjoyed and listed key features that made it unique, which we could potentially include in our own game, such as combat, multiplayer options, and story modes (Figure ?).
+We used [Miro](https://miro.com/) to brainstorm ideas for our game. Initially, each team member selected a game they really enjoyed and listed key features that made it unique, which we could potentially include in our own game, such as combat, multiplayer options, and story modes (Figure 2).
 
 <p align="center">
 <b>Figure 2: </b>
-  <i>Exsisting games for Inspiration</i> <br>
+  <i>Exsisting games for inspiration brainstorm</i> <br>
 
 <img src = "https://github.com/UoB-COMSM0166/2026-group-27/blob/3cdb4f3052e580042f58e75d640b9036f2ad641f/5.%20readme%20docs/03.%20Game%20Inspo.jpg" width="90%">
 
-Next, as a team, we developed two game ideas that combined features from at least two out of the four listed games, ensuring that each team member's favourite game was included in our designs. Before developing our ideas, we decided that our game should be based in Bristol, as all our team members are international students new to the city. We wanted to create a game inspired by the city we are currently living in (Figure ? & ?) 
+Next, as a team, we developed two game ideas that combined features from at least two out of the four listed games, ensuring that each team member's favourite game was included in our designs. Before developing our ideas, we decided that our game should be based in Bristol, as all our team members are international students new to the city. We wanted to create a game inspired by the city we are currently living in (Figure 3 and 4) 
 
 <p align="center">
       <b>Figure 3</b>
@@ -225,7 +225,7 @@ Next, as a team, we developed two game ideas that combined features from at leas
       <img src="https://github.com/UoB-COMSM0166/2026-group-27/blob/07648b4772195a195a19fc710e553b9d7434fc7c/5.%20readme%20docs/03.%20The%20will%20and%20the%20Fox%20game%20idea.jpg" width="70%" >
    </p>
 
-In workshop 3, we developed prototypes for the two game ideas. This gave us a visual representation of what our two potential game ideas could look and function. This helped us compare how each team member pictured the potential game designs and encouraged discussion to agree on a shared vision for each game idea. It also helped us see how complex the mechanics were and if they could be realistically built (Figure ? & ?).
+In workshop 3, we developed prototypes for the two game ideas. This gave us a visual representation of what our two potential game ideas could look and function. This helped us compare how each team member pictured the potential game designs and encouraged discussion to agree on a shared vision for each game idea. It also helped us see how complex the mechanics were and if they could be realistically built (Figure 5 and 6).
 
 <p align="center">
   <b>Figure 5: </b>
@@ -249,7 +249,7 @@ In contrast, Will of the Fox did not include cutscene elements and offered less 
 
 ## 3.2 Identifying Stakeholders
 
-Stakeholders for Lost in Bristol were identified using the Onion Model to ensure all relevant groups were considered (Alexander & Robertson, 2004). This helped us understand how different users would interact with the game and ensured the game remained aligned with user needs (Pirozzi, 2019). 
+Stakeholders for Lost in Bristol were identified using the Onion Model to ensure all relevant groups were considered (Figure 7). This helped us understand how different users would interact with the game and ensured the game remained aligned with user needs (Pirozzi, 2019). 
 
 <p align="center">
    <b>Figure 7: </b>
@@ -272,7 +272,7 @@ To define the core features of our game, epics and user stories were created.
 
 Epics were used to represent core gameplay features, such as navigation, item collection, and combat, which were then made into user stories using Cohn’s format: “As a [user], I want [goal] so that [reason]” (Cohn, 2004). This helped us develop features step by step while focusing on user needs, rather than creating goals that may not benefit the game.
 
-Acceptance criteria were included to determine when a feature has been successfully implemented in the game using the Given-When-Then format. “Given” describes the starting state, “When” the action, and “Then” the expected result (de Biase et al., 2024).
+Acceptance criteria were included to determine when a feature has been successfully implemented in the game using the Given-When-Then format. “Given” describes the starting state, “When” the action, and “Then” the expected result (de Biase et al., 2024) (Table 4).
 
 
 <p align="center">
@@ -298,7 +298,7 @@ Acceptance criteria were included to determine when a feature has been successfu
       <br>
 - Then movement is restricted by walls <br>
       <br>
-- And the environment reflect Bristol (e.g. graffiti, brick textures) <br>
+- And the environment reflects Bristol (e.g. brick textures) <br>
 </td>
   </tr>
 
