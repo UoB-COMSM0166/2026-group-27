@@ -371,8 +371,9 @@ Acceptance criteria were included to determine when a feature has been successfu
 
 ## 4.1 Class Diagram
 
-A class diagram was developed to visualise the structure of our game system and show the relationships between different game elements. This supports object-oriented design principles by helping us organise our code and make it reusable for potential future work (Nikiforova et al., 2011).
+A class diagram was developed to visualise the structure of our game system and show the relationships between different game elements. This helped us plan the system architecture and ensure we implemented an object-oriented design approach throughout development.
 
+The diagram follows OOD principles by separating the game into modular components. Systems such as combat and level progression are implemented as individual classes. This supports encapsulation and maintainability, as each system can function and be updated or debugged without affect the rest of the game. Overall, this structure helps us organise our code and make it reusable for potential future development (Nikiforova et al., 2011).
 
 
 <p align="center">
