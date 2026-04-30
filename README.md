@@ -171,20 +171,20 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
   <i>Characters in Lost in Bristol</i> <br>
 </p>
 
-<table align="center">
+<table align="center" border="1" cellspacing="0" cellpadding="10">
   <tr>
-    <th width = "30%">Image</th>
-    <th width = "70">Name</th>
+    <th>Image</th>
+    <th>Name</th>
   </tr>
 
   <tr>
-    <td> <img src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/characters/Lando/L-front2.png"> </td>
+    <td> <img width="97" height="94" src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/characters/Lando/L-front2.png"> </td>
     <td>Lando Norris (F1 World Champion 2025)</td>
   </tr>
 
   
  <tr>
-   <td> <img src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/characters/Eliza/E-front2.png"> </td>
+   <td> <img width="97" height="94" src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/characters/Eliza/E-front2.png"> </td>
     <td>Eliza (A history student at the UoB)</td>
   </tr>
 
