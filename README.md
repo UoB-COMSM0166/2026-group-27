@@ -437,7 +437,7 @@ These features make the boss fight more challenging compared to the enemies from
 
 The game was evaluated during its prototype stage, enabling us to identify and fix usability issues and technical bugs during development. Since the game did not yet include the final Bristol-themed visuals, this allowed us to focus on evaluating the core gameplay mechanics without the influence of visual or narrative features. 
 
-We combined quantitative data from the System Usability Scale (SUS) with qualitative feedback from Think Aloud (TA) sessions to evaluate usability and user experience
+We combined qualitative feedback from Think Aloud (TA) sessions with quantitative data from the System Usability Scale (SUS) to evaluate usability and user experience.
 
 
 ## 6.1 Qualitative Evaluation: Think Aloud (TA)
@@ -533,7 +533,7 @@ The project succeeded because the team allowed its own working methods to evolve
 
 While creating Lost in Bristol, our primary goal was to create an immersive experience, however, we also wanted to consider how our game will affect our community. We used design elements, such as interactive game-play "twists", game length and systems layout, to assess their potential impacts on the environment, the social factor and technical sustainability, in accordance to the Sustainability Awareness Framework (SusAF).
 
-## Environmental Impact
+## 8.1 Environmental Impact
 How much energy/resources does the system consume? This is a significant area when thinking about the environment.
 Lost in Bristol is a browser-based game designed with HTML, CSS and JavaScript, so there's no need to install/require high-powered hardware. As a result, Lost in Bristol lowers CPU and GPU usage while users play it, thus reducing energy consumption per session.
 Additionally, because the assets are lightweight and use simple rendering methods, the game runs well on lower-specification devices.
@@ -548,7 +548,7 @@ Important Environmental Factors:
 * Possible reduction in e-waste from reduced hardware needs over time
 * Energy consumption may increase due to more extensive play-time and scaling
 
-## Technical Impact:
+## 8.2 Technical Impact:
 The technical aspect of a system focuses on its adaptability, maintainability and ongoing sustainability over time. Lost in Bristol was developed using standard web technologies, which allows it to run on most laptops and desktop browsers without requiring installation. This approach reduces compatibility issues and also allows users to access the game easily without requiring additional setup.
 
 From an enabling perspective, the modular architecture of the system makes it easier to update and maintain. Player movement, enemy behaviour, and level design can all be altered separately since they are all independent components of the complete system. As a result of this modular design approach, development efforts to implement updates occur more quickly and are less costly than if the components were integrated into a single application. Consequently, the game can change continually without requiring a full rebuild, which contributes to its length of life.
@@ -563,7 +563,7 @@ Important Technical Factors:
 * As software becomes more complex, it will cause more technical debt.
 * To achieve long-term sustainability, one must follow coding best practices.
   
-## Social Impact:
+## 8.3 Social Impact:
 The social aspect of the game refers to inclusiveness, user experience, trust, and overall well-being. The game Lost in Bristol has a user-friendly interface and simple controls, so people from any background or level of expertise can play. This reduced entry level makes it much easier for users to become engaged with the game early on. Because it is easy to use, over time more diverse types of people will start playing the game.
 
 The game is a maze that can be used for exploration and navigating through mazes meaning this will stimulate players' problem solving skills and their spatial skills—both of which require cognitive reasoning and provide opportunities to meet and progress through levels until completion. Consistent game mechanics and predictable behaviour will also develop trust between users and the system, when a user knows they will get the same result by interacting with the system in the same way as they did before, they feel more confident while using the system.
@@ -578,16 +578,16 @@ Important Social Factors:
 
 # 9. Conclusion
 
-## Overall Reflection:
+## 9.1 Overall Reflection:
 Developing Lost in Bristol has helped us to grow and challenge our capabilities as Software Engineers because it allowed us to merge features of both game design and technological implementation. As such, we put together a structured approach to creating the game that incorporated, the design of the maze, how the enemies behaved, how the levels progressed and this culminated in a game that has been developed closely in-line with the original concept. Looking back,the project can be defined as a process of problem solving. It involved continuous feature refinement and game-play improvement through consistent testing. This process taught us the value of flexibility and planning that later served as important lessons as we evolved our original ideas to develop a more balanced and functional game than we would have had if we had stuck with our initial plans.
-## Lessons Learnt:
+## 9.2 Lessons Learned:
 * The first significant thing we as a team learned was how critical it is to plan early. The original vision for the Maze-survival Game lacked clarity leading to a number of re-works during the course of development. This demonstrated an evolution in the original concept and illustrated the need for flexibility and planning early when developing interactive systems.
 * The second major takeaway was that structuring code correctly is extremely important. As we progressed through the game with more and more features being added, we began to realise that unorganised code was making it increasingly difficult to debug. As a result, we decided to compartmentalise the code into smaller, modular components (such as player movement, enemy, and level), which became easy to track and maintain the system efficiently. Overall, this reinforced the importance of good coding practices when it comes to sustaining and eventually scaling a project.  
-## Challenges:
+## 9.3 Challenges:
 While developing the game, the team faced various challenges for e.g., design issues presented significant challenges related to balancing gameplay difficulty with integrating game systems seamlessly. The earlier versions were either too simple or too difficult and required many iterations of required game design concepts (enemy statue enemy spawn points, enemy controls). The random spawn points and continuing issues related to the Boss also had a significant impact on balance as well as the players experience (progression through the game). Additionally, integrating new features without any glitches was challenging as even minor deficiencies could significantly impact the systems that were interconnected, while continuing to manage time across team members was also difficult. The competitive character of the community and ongoing play testing have provided continuous feedback related to game product improvements; by providing an opportunity to coordinate efforts more effectively (structure of each task), game systems have continued to evolve and create a more balanced, stable gaming experience.
-## Immediate Future Work: 
+## 9.4 Immediate Future Work: 
 For immediate future work, we are planning to improve performance, to create a more user-friendly UI and to include additional accessibility options, such as better visual contrast and control options. We may also enhance the current game by incorporating new levels, improving enemy AI and improving code structure for maintainability.
-## Sequel: Lost In Bristol 2
+## 9.5 Sequel: Lost In Bristol 2
 If we had the opportunity to develop a sequel, we could develop a more robust story and incorporate more Bristol-related landmarks and environments. We could introduce additional playable characters with unique abilities and backstories for more entertaining experience. Supporting mobile compatibility, including touch controls, will also make the game more accessible to a wider audience. Finally, we could include more dynamic level designs and methods of progression to enhance replay value, while sticking to the existing core concept.
 
 # 10. Contribution Statement
