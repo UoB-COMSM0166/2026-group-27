@@ -534,27 +534,51 @@ The project succeeded because the team allowed its own working methods to evolve
 
 
 # 8. Sustainability, Ethics and Accessibility
-- Evidence of the impact of your game across the environment and two other areas: environmental + 2 of the following: Social, Economical, Technical, Individual (10% 750 words)
 
-When we were developing Lost in Bristol, we didn't just want to focus on the "fun" factor but also wanted to think about the footprint a game like this leaves behind. Balancing the intensity of our "Twists" with the responsibility of creating a modern project meant looking at how we impact the environment, the individual players and the technical landscape.
+While creating Lost in Bristol, our primary goal was to create an immersive experience, however, we also wanted to consider how our game will affect our community. We used design elements, such as interactive game-play "twists", game length and systems layout, to assess their potential impacts on the environment, the social factor and technical sustainability, in accordance to the Sustainability Awareness Framework (SusAF).
 
-## Environmental Impact: Digital Efficiency
-As student developers, we realised that even if our game is digital, there are actual environmental costs associated with it, mostly due to player device usage and energy consumption during production.
+## Environmental Impact
+How much energy/resources does the system consume? This is a significant area when thinking about the environment.
+Lost in Bristol is a browser-based game designed with HTML, CSS and JavaScript, so there's no need to install/require high-powered hardware. As a result, Lost in Bristol lowers CPU and GPU usage while users play it, thus reducing energy consumption per session.
+Additionally, because the assets are lightweight and use simple rendering methods, the game runs well on lower-specification devices.
 
--Optimisation as Sustainability: To make sure the game doesn't require expensive, power-hungry GPUs to run, we gave priority to asset optimisation and efficient programming. We have decreased the wattage needed for a typical play session by lowering the computational load required to render our "Dark Maps" and urban districts.
+The design has been helpful over time. Users are less likely to upgrade to play this game because it doesn't require high-powered hardware, which can help reduce electronic waste. Long-term, if other games take this lightweight approach more broadly, it could lead to the development of more sustainable games in general.
 
--Cloud & Storage: We also maintained small file sizes. A tiny but significant step toward lowering the carbon footprint of digital distribution, smaller builds result in less energy being consumed during downloads and less server space being needed on hosting platforms.
+On the other hand, SusAF also shows some trade-offs. While Lost in Bristol will be efficient in terms of energy consumed during each session, extended gameplay will result in increased total use of the device, which will increase the cumulative amount of energy consumed. Also, as more and more players access Lost in Bristol (if it becomes popular), these increased numbers will generate greater amounts of data traffic and user access to servers, which will require greater amounts of energy to be consumed to operate the data centres that will house the servers. This illustrates that environmental effects are affected both by design choices and by user habits and mass adoption of a system.
 
-## Individual Impact: Cognitive Load & Accessibility
-We also focused on the player's mental and physical experience, especially given our high-stress mechanics like the Hostile Environment and Dynamic Visibility.
+Important Environmental Factors:
 
--Accessibility in Navigation: We realized that "Dark Maps" could be frustrating or even for players with visual impairments or high anxiety. To mitigate this, we implemented adjustable "Flashlight" intensity and high-contrast map pick-ups.
+* Energy savings per session due to lightweight design/browser-based applications
+* Possible reduction in e-waste from reduced hardware needs over time
+* Energy consumption may increase due to more extensive play-time and scaling
 
--The Stress Balance: While the game is designed to be high-stakes, we wanted the Individual experience to be one of tactics and growth, not genuine distress. We included clear safe zones portals to give players a mental breather, ensuring that the difficulty feels like a fair challenge rather than an overwhelming burden on their well-being and they actually enjoy.
+## Technical Impact:
+The technical aspect of a system focuses on its adaptability, maintainability and ongoing sustainability over time. Lost in Bristol was developed using standard web technologies, which allows it to run on most laptops and desktop browsers without requiring installation. This approach reduces compatibility issues and also allows users to access the game easily without requiring additional setup.
 
+From an enabling perspective, the modular architecture of the system makes it easier to update and maintain. Player movement, enemy behaviour, and level design can all be altered separately since they are all independent components of the complete system. As a result of this modular design approach, development efforts to implement updates occur more quickly and are less costly than if the components were integrated into a single application. Consequently, the game can change continually without requiring a full rebuild, which contributes to its length of life.
 
-## technical 
-## social
+The growth of the system also presents various risks. As new functionality is added, the overall size of the codebase grows and can become increasingly difficult to manage, resulting in what is commonly referred to as "technical debt". Technical debt typically reduces development efficiency and maintainability over time. The long-term effectiveness of the system can be negatively affected if adequate documentation and regular refactoring activities are not conducted.
+
+This situation presents one critical trade-off between expanding the functionality of an application and keeping it simple. To create a sustainable technical design, good development practices(such as modularisation, version control and ongoing optimisation) must be used to maintain an appropriate balance between expanding application functionality and maintaining simplicity.
+
+Important Technical Factors::
+* There are other ways web-design can help with accessibility.
+* Modular code allows for easy maintenance and provides a way to make future updates.
+* As software becomes more complex, it will cause more technical debt.
+* To achieve long-term sustainability, one must follow coding best practices.
+  
+## Social Impact:
+The social aspect of the game refers to inclusiveness, user experience, trust, and overall well-being. The game Lost in Bristol has a user-friendly interface and simple controls, so people from any background or level of expertise can play. This reduced entry level makes it much easier for users to become engaged with the game early on. Because it is easy to use, over time more diverse types of people will start playing the game.
+
+The game is a maze that can be used for exploration and navigating through mazes meaning this will stimulate players' problem solving skills and their spatial skills—both of which require cognitive reasoning and provide opportunities to meet and progress through levels until completion. Consistent game mechanics and predictable behaviour will also develop trust between users and the system, when a user knows they will get the same result by interacting with the system in the same way as they did before, they feel more confident while using the system.
+
+Even with these positives about the game, there are some negatives. There are no advanced accessibility features in the game; for example, there are no colour blind modes or assistive options that could possibly prevent a user from using the game due to their physical condition. This will lessen the inclusiveness of users over time and, therefore, will negatively affect society. Additionally, while the design of the game promotes engagement through immersion, there is also a balance between providing satisfaction and engagement; therefore, too much engagement may create additional screen time and can result in user fatigue and/or reduction in user productivity.
+
+Important Social Factors:
+* The simple design of games promotes user engagement and accessibility.
+* Cognitive skills such as problem-solving are supported through gameplay.
+* The lack of accessibility options ultimately limits the inclusivity of a game. 
+* Increased engagement may negatively impact users' well-being.
 
 # 9. Conclusion
 
