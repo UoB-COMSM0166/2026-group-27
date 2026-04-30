@@ -383,8 +383,6 @@ A class diagram was developed to visualise the structure of our game system and 
 </p>
 
 
-<img width="1392" height="3604" alt="sequence" src="https://github.com/user-attachments/assets/af6cc198-4462-4bdd-b7b6-afce2970777d" />
-
 * <b>Game Flow and Control: </b>
   (`GameFlowManager`, `MainMenuController`, `OpeningController`)
 
