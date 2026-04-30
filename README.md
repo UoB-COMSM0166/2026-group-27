@@ -239,7 +239,7 @@ In workshop 3, we developed prototypes for the two game ideas. This gave us a vi
 
 We chose Lost in Bristol as our final game idea, after a group discussion, as it allowed us to incorporate features from most of the games we had listed during our inspiration brainstorm. We also felt that the Bristol theme could be represented more effectively by using cutscenes with Bristol-themed visuals. 
 
-In contrast, Will of the Fox did not include a storyline or cutscene elements and offered less flexibility for implementing Bristol-themed elements. We also thought it would be difficult to include progression or increased difficulty, as it focused on competitive multiplayer, whereas Lost in Bristol allowed for more structured progression across levels. Overall, Lost in Bristol provided a more achievable design and aligned with our team’s goals.
+In contrast, Will of the Fox did not include cutscene elements and offered less flexibility for implementing Bristol-themed elements. We also thought it would be difficult to include progression or increased difficulty, as it focused on competitive multiplayer, whereas Lost in Bristol allowed for more structured progression across levels. Overall, Lost in Bristol provided a more achievable design and aligned with our team’s goals.
 
 ## 3.2 Identifying Stakeholders
 
