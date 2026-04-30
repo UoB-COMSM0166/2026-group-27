@@ -173,8 +173,8 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
 
 <table align="center">
   <tr>
-    <th width = "40%">Image</th>
-    <th width = "60">Name</th>
+    <th width = "30%">Image</th>
+    <th width = "70">Name</th>
   </tr>
 
   <tr>
