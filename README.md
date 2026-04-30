@@ -383,6 +383,8 @@ A class diagram was developed to visualise the structure of our game system and 
 </p>
 
 
+**Subsystems:**
+
 * <b>Game Flow and Control: </b>
   (`GameFlowManager`, `MainMenuController`, `OpeningController`)
 
