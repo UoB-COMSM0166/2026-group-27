@@ -203,7 +203,7 @@ thanusha
 
 ## 3.1 Ideation Process 
 
-We used [Miro](https://miro.com/)to brainstorm ideas for our game. Initially, each team member selected a game they really enjoyed and listed key features that made it unique, which we could potentially include in our own game, such as combat, multiplayer options, and story modes (Figure ?).
+We used [Miro](https://miro.com/) to brainstorm ideas for our game. Initially, each team member selected a game they really enjoyed and listed key features that made it unique, which we could potentially include in our own game, such as combat, multiplayer options, and story modes (Figure ?).
 
 <p align="center">
 <b>Figure ?: </b>
