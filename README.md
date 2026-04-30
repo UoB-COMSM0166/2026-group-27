@@ -622,9 +622,11 @@ If we had the opportunity to develop a sequel, we could develop a more robust st
 
   <tr>
   <td>Keyu Zhou</td>
-  <td>Did not attend demo session. <br>
-   Was not in contact with the team <br> 
-   towards the end of the project (after easter).</td>
+  <td>
+   * Did not attend demo session <br>
+   * Was not in contact with the team <br> 
+     towards the end of the project (after easter).
+   * No known contribution to code or repo</td>
   </tr>
 
   <tr>
