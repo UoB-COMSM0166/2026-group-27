@@ -88,7 +88,11 @@ game set up instructions and link to play game. [Here is our game](https://uob-c
 
 Lost in Bristol is an immersive, third-person maze-puzzle game that challenges players to navigate a stylized, labyrinthine recreation of Bristol’s iconic urban landscape. Developed as a tribute to the city’s unique cultural identity, the game tasks players with escaping a series of increasingly complex districts within a strict time limit. The project’s core objective was to blend traditional maze-solving mechanics with high-stakes survival elements and environmental storytelling.
 
-## The "Twist": Survival and Strategy
+## The "Twist": Survival and Strategy<p align="center">
+      <b>Figure 9: </b>
+      <i>Class diagram for Lost in Bristol.</i><br>
+      <img src="" width="">
+</p>
 
 What makes Lost in Bristol novel is its departure from passive exploration. While most maze games focus solely on pathfinding, our implementation introduces three "Twists" that heighten the difficulty:
 
@@ -446,7 +450,7 @@ Another difficulty we faced was making the final boss in level 3 more challengin
 
 To address this, we implemented a distance-based behaviour system. The boss calculates its distance from the player and changes its behaviour depending on how far away the player is, making the battle less predictable and challenging without requiring a complex AI system. 
 
-When the player is within attack range (130-340 px), the boss becomes more aggressive by moving towards the player while attacking simultaneously, increasing combat pressure. A timer (1.6 seconds) controls how often the boss shoots, ensuring consistent behaviour across different frame rates. When the timer reaches zero, the boss fires three projectiles towards the player (Figure ?). This makes the attacks harder to dodge, as it covers a larger area compared to a single projectile (Figure ).
+When the player is within attack range (130-340 px), the boss becomes more aggressive by moving towards the player while attacking simultaneously, increasing combat pressure. A timer (1.6 seconds) controls how often the boss shoots, ensuring consistent behaviour across different frame rates (Figure 11). When the timer reaches zero, the boss fires three projectiles while moving towards the player. This makes the attacks harder to dodge, as it covers a larger area compared to a single projectile (Figure 12).
 
   <p align="center">
   <b>Figure 11: </b>
@@ -468,7 +472,7 @@ When the player is within attack range (130-340 px), the boss becomes more aggre
 </p>
 <br>
 
-At very close range (distance < 130 px), the boss stops moving but continues attacking, making it harder to avoid attacks due to the close proximity (Figure ). Contact damage is applied when the player touches the boss, making the fight more challenging.
+At very close range (distance < 130 px), the boss stops moving but continues attacking, making it harder to avoid attacks due to the close proximity (Figure 13). Contact damage is applied when the player touches the boss, making the fight more challenging.
 
 
 <p align="center">
