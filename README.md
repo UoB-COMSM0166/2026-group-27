@@ -151,8 +151,8 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
       <td>Needed in Level 3 to imprison the boss.</td>
     </tr>
     <tr>
-      <td>Ghost</td>
-      <td> <img width="87" height="84" alt="seagull" src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/little%20ghost.png"> </td>
+      <td>Cat Ghost</td>
+      <td> <img width="97" height="94" alt="seagull" src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/little%20ghost.png"> </td>
       <td>Mini enemies around the maze.</td>
     </tr>
     <tr>
