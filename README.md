@@ -157,7 +157,7 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
     </tr>
     <tr>
       <td> The Boss </td>
-      <td> <img width="54" height="64" alt="boss-3" src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/boss.png" />
+      <td> <img width="77" height="74" alt="boss-3" src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/boss.png" />
 </td>
       <td> The curse master of the mists from the Dark Ages.</td>
     </tr>
