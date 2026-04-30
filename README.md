@@ -399,7 +399,7 @@ A class diagram was developed to visualise the structure of our game system and 
 * <b>Combat and Level Mechanics: </b>
   (`WeaponSystem`, `Projectile`, `HostileProjectile`, `Enemy`, `Boss`, `FogSystem`, `PortalSystem`)
   
-  - These control gameplay mechanics, such as combat and enemy behaviour. For example, `Projectile` handlea both player and enemy attacks in          levels 2 and 3, while the `PortalSystem` allows telleportation in level 3.
+  - These control gameplay mechanics, such as combat and enemy behaviour. For example, `Projectile` handles both player and enemy attacks in          levels 2 and 3, while the `PortalSystem` allows telleportation in level 3.
 
   - Level 1 is an introductory level, which only focuses on navigation and the core mechanics of the game. As a result, most of the classes         here are only connected to levels 2 & 3. This reflects the progressive structure of the game, where difficulty increases gradually to           support player learning and engagement.
   
