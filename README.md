@@ -196,36 +196,6 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
   </table> 
 
 
-  <table align="center" border="1" cellspacing="0" cellpadding="10">
-  <tr>
-    <th>Image</th>
-    <th style="width: 200px;">Name</th>
-  </tr>
-
-  <tr>
-    <td><img width="100" height="170" src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/characters/Lando/L-front2.png"></td>
-    <td style="width: 200px; word-wrap: break-word;">
-      Lando Norris (F1 World Champion 2025)
-    </td>
-  </tr>
-
-  <tr>
-    <td><img width="100" height="170" src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/characters/Eliza/E-front2.png"></td>
-    <td style="width: 200px; word-wrap: break-word;">
-      Eliza (A history student at the UoB)
-    </td>
-  </tr>
-
-  <tr>
-    <td><img width="150" height="180" src="https://github.com/UoB-COMSM0166/2026-group-27/blob/f1c65b46da2c74285b04cf476763cf63e8f45696/3.%20pixel%20art%20(characters%20%2B%20weapons)/fox%20bigger%20for%20repo.png"></td>
-    <td style="width: 200px;">
-      Fox <3
-    </td>
-  </tr>
-</table>
-
-
-
 
 # 3. Requirements
 
