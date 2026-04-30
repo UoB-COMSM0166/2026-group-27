@@ -203,11 +203,15 @@ thanusha
 
 ## 3.1 Ideation Process 
 
+We used [Miro](https://miro.com/)to brainstorm ideas for our game. Initially, each team member selected a game they really enjoyed and listed key features that made it unique, which we could potentially include in our own game, such as combat, multiplayer options, and story modes (Figure ?).
+
 <p align="center">
 <b>Figure ?: </b>
   <i>Exsisting games for Inspiration</i> <br>
 
 <img src = "https://github.com/UoB-COMSM0166/2026-group-27/blob/3cdb4f3052e580042f58e75d640b9036f2ad641f/5.%20readme%20docs/03.%20Game%20Inspo.jpg" width="90%">
+
+Next, as a team, we developed two game ideas that combined features from at least two out of the four listed games, ensuring that each team member's favourite game was included in our designs. Before developing our ideas, we decided that our game should be based in Bristol, as all our team members are international students new to the city. We wanted to create a game inspired by the city we are currently living in (Figure ? & ?) 
 
 <p align="center">
       <b>Figure ?</b><br>
@@ -221,8 +225,7 @@ thanusha
       <img src="https://github.com/UoB-COMSM0166/2026-group-27/blob/07648b4772195a195a19fc710e553b9d7434fc7c/5.%20readme%20docs/03.%20The%20will%20and%20the%20Fox%20game%20idea.jpg" width="70%" >
    </p>
 
-  
-
+     
 Maniza
 ### - [Kanban Board](https://github.com/orgs/UoB-COMSM0166/projects/172)
 
