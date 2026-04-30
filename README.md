@@ -503,7 +503,7 @@ We expected usability to be similar across levels, as the core game design was c
 
 We used black-box testing to evaluate core gameplay features such as item collection and movement. We chose this test as it focuses on how the game works from a player's perspective rather than the developer’s perspective, which involves looking at the internal code of the game. 
 
-Test cases included normal, boundary, and error conditions ([Appendix 2](https://github.com/UoB-COMSM0166/2026-group-27#appendix-2-black-box-testing-results)). Boundary cases tested situations at the limits of the system, such as having just enough coins to make a purchase. Error cases ensured the game handled invalid actions correctly, such as attempting to buy an upgrade without enough coins.  
+Test cases included normal, boundary, and error conditions. Boundary cases tested situations at the limits of the system, such as having just enough coins to make a purchase. Error cases ensured the game handled invalid actions correctly, such as attempting to buy an upgrade without enough coins. All tested cases passed (Black-box testing found in: [Appendix 2](https://github.com/UoB-COMSM0166/2026-group-27#appendix-2-black-box-testing-results)).
 
 However, as black-box testing does not consider the internal code, some issues were not detected. For example, an input bug with the Enter key was discovered during the Think Aloud tests ([Section 6.1](https://github.com/UoB-COMSM0166/2026-group-27/tree/main#61-qualitative-evaluation-think-aloud-ta)). This highlights the importance of combining both code structure testing and player-focused evaluation to produce more reliable results. 
 
