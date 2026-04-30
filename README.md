@@ -216,14 +216,14 @@ We used [Miro](https://miro.com/) to brainstorm ideas for our game. Initially, e
 Next, as a team, we developed two game ideas that combined features from at least two out of the four listed games, ensuring that each team member's favourite game was included in our designs. Before developing our ideas, we decided that our game should be based in Bristol, as all our team members are international students new to the city. We wanted to create a game inspired by the city we are currently living in (Figure 3 and 4) 
 
 <p align="center">
-      <b>Figure 3</b>
-      <i>Game Idea 1: Lost in Bristol.</i><br>
+      <b>Figure 3: </b>
+      <i>Game Idea 1 - Lost in Bristol.</i><br>
       <img src="https://github.com/UoB-COMSM0166/2026-group-27/blob/07648b4772195a195a19fc710e553b9d7434fc7c/5.%20readme%20docs/03.%20Lost%20in%20bristol%20game%20idea.jpg" width="70%">
 </p>
 
    <p align="center">
-      <b>Figure 4</b>
-      <i>Game Idea 2: The Will and the Fox</i><br>
+      <b>Figure 4: </b>
+      <i>Game Idea 2 - The Will and the Fox</i><br>
       <img src="https://github.com/UoB-COMSM0166/2026-group-27/blob/07648b4772195a195a19fc710e553b9d7434fc7c/5.%20readme%20docs/03.%20The%20will%20and%20the%20Fox%20game%20idea.jpg" width="70%" >
    </p>
 
