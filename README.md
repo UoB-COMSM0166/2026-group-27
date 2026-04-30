@@ -392,21 +392,21 @@ A class diagram was developed to visualise the structure of our game system and 
 * <b>Player and Core Systems: </b>
   (`CharacterDataManager`, `CharacterRender`, `LevelBase`, `Camera`, `Maze`)
 
-  - Maze and LevelBase define the structure of each level, while the Camera controls the player’s view of the game. CharacterRender handles the     character chosen by the player and displays it in the game 
+  - `Maze` and `LevelBase` define the structure of each level, while the `Camera` controls the player’s view of the game. `CharacterRender`          handles the character chosen by the player and displays it in the game 
 
    - These systems separate gameplay logic, rendering, and environment, making the code easier to manage and maintain.
 
 * <b>Combat and Level Mechanics: </b>
   (`WeaponSystem`, `Projectile`, `HostileProjectile`, `Enemy`, `Boss`, `FogSystem`, `PortalSystem`)
   
-  - These control gameplay mechanics, such as combat and enemy behaviour. For example, projectiles handle both player and enemy attacks in          levels 2 and 3, while the PortalSystem allows telleportation in level 3.
+  - These control gameplay mechanics, such as combat and enemy behaviour. For example, `Projectile` handlea both player and enemy attacks in          levels 2 and 3, while the `PortalSystem` allows telleportation in level 3.
 
   - Level 1 is an introductory level, which only focuses on navigation and the core mechanics of the game. As a result, most of the classes         here are only connected to levels 2 & 3. This reflects the progressive structure of the game, where difficulty increases gradually to           support player learning and engagement.
   
 * <b>Interaction and Utility Systems: </b>
   (`DifficultyManager`, `CodexManager`, `Rect`)
   
-  - These handle additional gameplay features such as difficulty scaling and collision detection. The Rect class handles interactions between       objects, ensuring accurate collision response in the gameplay.
+  - These handle additional gameplay features such as difficulty scaling and collision detection. The `Rect` class handles interactions between     objects, ensuring accurate collision response in the gameplay.
 
 
 ### - Sequence Diagram
