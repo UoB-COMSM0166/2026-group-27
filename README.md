@@ -372,6 +372,9 @@ Acceptance criteria were included to determine when a feature has been successfu
 
 ## 4.1 Class Diagram
 
+A class diagram was developed to visualise the structure of our game system and show the relationships between different game elements. This supports object-oriented design principles by helping us organise our code and make it reusable for potential future work (Nikiforova et al., 2011).
+
+
 <p align="center">
       <b>Figure 8: </b>
       <i>Class diagram for Lost in Bristol.</i><br>
@@ -379,8 +382,6 @@ Acceptance criteria were included to determine when a feature has been successfu
 </p>
 
 
-
-Due to the complexity of our game, we created subsystems: 
 
 * <b>Game Flow and Control: </b>
   (GameFlowManager, MainMenuController, OpeningController)
