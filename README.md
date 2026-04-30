@@ -582,9 +582,21 @@ Important Social Factors:
 
 # 9. Conclusion
 
-- 10% ~500 words
+## Overall Reflection:
+The development process for Lost in Bristol was an experience that encompassed much more than simply creating a game. It involved combining the design with the technical implementation of the game and iteratively solving problems.
 
-- Reflect on the project as a whole. Lessons learnt. Reflect on challenges. Future work, describe both immediate next steps for your current game and also what you would potentially do if you had chance to develop a sequel.
+## Lessons Learnt:
+* The first significant thing we as a team learned was how critical it is to plan early. Even though we had a clear vision of creating a maze-survival game from the start, there were features of the game (such as the behaviour of enemies and the progression of levels) that needed to be reworked during development. This demonstrated that our original concept was often revised during the course of development and that flexibility is key to developing interactive systems.
+* The second major takeaway was that structuring code correctly is extremely important. As we progressed through the game with more and more features being added, we began to realise that unorganised code was making it increasingly difficult to debug. As a result, we decided to compartmentalise the code into smaller, modular components (such as player movement, enemy, and level), which became easy to track and maintain the system efficiently. Overall, this reinforced the importance of good coding practices when it comes to sustaining and eventually scaling a project.
+  
+## Challenges:
+While developing the game, the team faced various challenges for e.g., design issues presented significant challenges related to balancing gameplay difficulty with integrating game systems seamlessly. The earlier versions were either too simple or too difficult and required many iterations of required game design concepts (enemy statue enemy spawn points, enemy controls). The random spawn points and continuing issues related to the Boss also had a significant impact on balance as well as the players experience (progression through the game). Additionally, integrating new features without any glitches was challenging as even minor deficiencies could significantly impact the systems that were interconnected, while continuing to manage time across team members was also difficult. The competitive character of the community and ongoing play testing have provided continuous feedback related to game product improvements; by providing an opportunity to coordinate efforts more effectively (structure of each task), game systems have continued to evolve and create a more balanced, stable gaming experience.
+
+## Immediate Future Work: 
+For immediate future work, we are planning to improve performance, to create a more user-friendly UI and to include additional accessibility options, such as better visual contrast and control options. We may also enhance the current game by incorporating new levels, improving enemy AI and improving code structure for maintainability.
+
+## Sequel: Lost In Bristol 2
+If we had the opportunity to develop a sequel, we could develop a more robust story and incorporate more Bristol-related landmarks and environments. We could introduce additional playable characters with unique abilities and backstories for more entertaining experience. Supporting mobile compatibility, including touch controls, will also make the game more accessible to a wider audience. Finally, we could include more dynamic level designs and methods of progression to enhance replay value, while sticking to the existing core concept.
 
 # 10. Contribution Statement
 
