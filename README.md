@@ -128,12 +128,12 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
     <tr>
       <td>Crossbow</td>
       <td> <img width="77" height="74" alt="Screenshot 2026-04-21 at 01 58 36" src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/crossbow.png" width="50"></td>
-      <td>Weapon to attack enemies (-1 damage)</td>
+      <td>Weapon to attack enemies (1 damage per attack)</td>
     </tr>
      <tr>
-      <td>Ring</td>
+      <td>Magic Ring</td>
       <td> <img width="77" height="74" alt="Screenshot 2026-04-21 at 01 58 36" src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/ring.png" width="50"></td>
-      <td>Weapon to attack enemies (-3 damage).</td>
+      <td>Weapon to attack enemies (3 damage per attack).</td>
     </tr>
    <tr>
       <td>Lock</td>
