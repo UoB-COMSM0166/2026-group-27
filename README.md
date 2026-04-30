@@ -99,6 +99,8 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
 * Dynamic Visibility: In specialised "Dark Maps," the gameplay shifts entirely. Players must find and manage a torch and physical map pick-ups to see, forcing them to rely on memory and limited visual cues rather than simple trial and error.
 
 
+### Game Objects
+
 <p align="center">
    <b>Table 2: </b>
   <i>Game Objects in Lost in Bristol</i> <br>
@@ -158,7 +160,7 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
   </tbody>
 </table> 
 
-## Meet our Characters!
+### Meet our Characters!
 
 <p align="center">
    <b>Table 3: </b>
