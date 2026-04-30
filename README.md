@@ -366,7 +366,7 @@ Acceptance criteria were included to determine when a feature has been successfu
 - 15% ~750 words 
 - System architecture. Class diagrams, behavioural diagrams
 
-### - Class Diagram
+## 4.1 Class Diagram
 
 Due to the complexity of our game, we created subsystems: 
 
