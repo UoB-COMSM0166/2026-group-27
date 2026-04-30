@@ -100,7 +100,7 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
 
 
 <p align="center">
-   <b>Table ?: </b>
+   <b>Table 2: </b>
   <i>Game Objects in Lost in Bristol</i> <br>
 </p>
 
@@ -161,7 +161,7 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
 ## Meet our Characters!
 
 <p align="center">
-   <b>Table ?: </b>
+   <b>Table 3: </b>
   <i>Characters in Lost in Bristol</i> <br>
 </p>
 
@@ -206,7 +206,7 @@ thanusha
 We used [Miro](https://miro.com/) to brainstorm ideas for our game. Initially, each team member selected a game they really enjoyed and listed key features that made it unique, which we could potentially include in our own game, such as combat, multiplayer options, and story modes (Figure ?).
 
 <p align="center">
-<b>Figure ?: </b>
+<b>Figure 2: </b>
   <i>Exsisting games for Inspiration</i> <br>
 
 <img src = "https://github.com/UoB-COMSM0166/2026-group-27/blob/3cdb4f3052e580042f58e75d640b9036f2ad641f/5.%20readme%20docs/03.%20Game%20Inspo.jpg" width="90%">
@@ -214,13 +214,13 @@ We used [Miro](https://miro.com/) to brainstorm ideas for our game. Initially, e
 Next, as a team, we developed two game ideas that combined features from at least two out of the four listed games, ensuring that each team member's favourite game was included in our designs. Before developing our ideas, we decided that our game should be based in Bristol, as all our team members are international students new to the city. We wanted to create a game inspired by the city we are currently living in (Figure ? & ?) 
 
 <p align="center">
-      <b>Figure ?</b><br>
+      <b>Figure 3</b>
       <i>Game Idea 1: Lost in Bristol.</i><br>
       <img src="https://github.com/UoB-COMSM0166/2026-group-27/blob/07648b4772195a195a19fc710e553b9d7434fc7c/5.%20readme%20docs/03.%20Lost%20in%20bristol%20game%20idea.jpg" width="70%">
 </p>
 
    <p align="center">
-      <b>Figure ?</b><br>
+      <b>Figure 4</b>
       <i>Game Idea 2: The Will and the Fox</i><br>
       <img src="https://github.com/UoB-COMSM0166/2026-group-27/blob/07648b4772195a195a19fc710e553b9d7434fc7c/5.%20readme%20docs/03.%20The%20will%20and%20the%20Fox%20game%20idea.jpg" width="70%" >
    </p>
@@ -228,7 +228,7 @@ Next, as a team, we developed two game ideas that combined features from at leas
 In workshop 3, we developed prototypes for the two game ideas. This gave us a visual representation of what our two potential game ideas could look and function. This helped us compare how each team member pictured the potential game designs and encouraged discussion to agree on a shared vision for each game idea. It also helped us see how complex the mechanics were and if they could be realistically built (Figure ? & ?).
 
 <p align="center">
-  <b>Figure ?: </b>
+  <b>Figure 5: </b>
   <i>Paper Prototype for Lost in Bristol 
     developed during Workshop 3 </i> <br>
   </p>
@@ -236,6 +236,12 @@ In workshop 3, we developed prototypes for the two game ideas. This gave us a vi
 <p align="center">
 <img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/f6eb2dd289198ac83513909ae7b6078e33eb18dc/5.%20readme%20docs/03.%20paper%20protoype%20lost%20in%20bristol.gif" width= "30%">
 </p>
+
+
+<p align="center">
+  <b>Figure 6: </b>
+  <i>Prototype for The Will and the Fox </i> <br>
+  </p>
 
 We chose Lost in Bristol as our final game idea, after a group discussion, as it allowed us to incorporate features from most of the games we had listed during our inspiration brainstorm. We also felt that the Bristol theme could be represented more effectively by using cutscenes with Bristol-themed visuals. 
 
@@ -246,7 +252,7 @@ In contrast, Will of the Fox did not include cutscene elements and offered less 
 Stakeholders for Lost in Bristol were identified using the Onion Model to ensure all relevant groups were considered (Alexander & Robertson, 2004). This helped us understand how different users would interact with the game and ensured the game remained aligned with user needs (Pirozzi, 2019). 
 
 <p align="center">
-   <b>Figure ?: </b>
+   <b>Figure 7: </b>
   <i>Onion Model for Lost in Bristol (adapted from: Alexander & Robertson, 2004).</i> <br>
 <img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/5c7512fc3f6da78114246c7d17cc2bf4fb7299ef/5.%20readme%20docs/03.%20onion%20model.jpg" 
  width="100%">
@@ -270,7 +276,7 @@ Acceptance criteria were included to determine when a feature has been successfu
 
 
 <p align="center">
-<b>Table ?: </b>
+<b>Table 4: </b>
   <i>Epics, User stories and Acceptance Criteria.</i> <br>
 </p>
 
