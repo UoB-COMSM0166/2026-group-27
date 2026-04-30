@@ -379,7 +379,7 @@ A class diagram was developed to visualise the structure of our game system and 
 <p align="center">
       <b>Figure 8: </b>
       <i>Class diagram for Lost in Bristol.</i><br>
-      <img width="1464" height="2105" alt="diagram1" src="https://github.com/user-attachments/assets/8677e1b3-c96e-4f79-8381-fee1868a402b" />
+      <img width="50%" alt="diagram1" src="https://github.com/user-attachments/assets/8677e1b3-c96e-4f79-8381-fee1868a402b" />
 </p>
 
 
