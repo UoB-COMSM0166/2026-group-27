@@ -178,7 +178,7 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
   </tr>
 
   <tr>
-    <td> <img width="200" height="200" src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/characters/Lando/L-front2.png"> </td>
+    <td> <img width="100" height="200" src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/characters/Lando/L-front2.png"> </td>
     <td>Lando Norris (F1 World Champion 2025)</td>
   </tr>
 
