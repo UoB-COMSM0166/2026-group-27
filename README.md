@@ -411,19 +411,25 @@ A class diagram was developed to visualise the structure of our game system and 
   - These handle additional gameplay features such as difficulty scaling and collision detection. The `Rect` class handles interactions between     objects, ensuring accurate collision response in the gameplay.
 
 
-## 4.2 Sequence Diagram
+## 4.2 Sequence Diagrams
+
+Sequence diagrams were developed to show how different objects in the system interact with each other and the exact order in which these interactions occur, making it easier to structure the game and find any errors or bugs.
+
+We created two sequence diagrams for Lost in Bristol: one for the storyline and one for gameplay. 
+
+**Storyline Sequence Diagram**
 
 <p align="center">
       <b>Figure 9: </b>
-      <i>Sequence diagram 1</i><br>
+      <i>Sequence diagram 1: Storyline</i><br>
       <img width="50%" alt="sequence" src="https://github.com/user-attachments/assets/1999ee0a-e7d3-4f78-9e23-ed680d7b052a" />
 </p>
 
-
+**Gameplay Sequence Diagram**
 
 <p align="center">
       <b>Figure 10: </b>
-      <i>Sequence diagram 2</i><br>
+      <i>Sequence diagram 2: Gameplay</i><br>
       <img width="50%" alt="sequence" src="https://github.com/user-attachments/assets/0270cfd2-c5c6-4ac4-ba7a-cecaf9f18964" />
 </p>
 
