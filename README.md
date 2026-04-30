@@ -184,13 +184,13 @@ What makes Lost in Bristol novel is its departure from passive exploration. Whil
 
   
  <tr>
-   <td> <img width="97" height="94" src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/characters/Eliza/E-front2.png"> </td>
+   <td> <img width="100" height="150" src="https://github.com/UoB-COMSM0166/2026-group-27/blob/main/game/assets/characters/Eliza/E-front2.png"> </td>
     <td>Eliza (A history student at the UoB)</td>
   </tr>
 
 
  <tr>
-   <td> <img width="97" height="94" src="https://github.com/UoB-COMSM0166/2026-group-27/blob/f1c65b46da2c74285b04cf476763cf63e8f45696/3.%20pixel%20art%20(characters%20%2B%20weapons)/fox%20bigger%20for%20repo.png"> </td>
+   <td> <img width="100" height="150" src="https://github.com/UoB-COMSM0166/2026-group-27/blob/f1c65b46da2c74285b04cf476763cf63e8f45696/3.%20pixel%20art%20(characters%20%2B%20weapons)/fox%20bigger%20for%20repo.png"> </td>
 <td>Fox</td>
   </tr>
   </table> 
