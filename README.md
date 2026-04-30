@@ -368,6 +368,14 @@ Acceptance criteria were included to determine when a feature has been successfu
 
 ## 4.1 Class Diagram
 
+<p align="center">
+      <b>Figure 8: </b>
+      <i>Class diagram for Lost in Bristol.</i><br>
+      <img src="" width="">
+</p>
+
+
+
 Due to the complexity of our game, we created subsystems: 
 
 * <b>Game Flow and Control: </b>
@@ -396,6 +404,19 @@ Due to the complexity of our game, we created subsystems:
 
 
 ### - Sequence Diagram
+
+<p align="center">
+      <b>Figure 9: </b>
+      <i>Sequence diagram 1</i><br>
+      <img src="" width="">
+</p>
+
+
+<p align="center">
+      <b>Figure 10: </b>
+      <i>Sequence diagram 2</i><br>
+      <img src="" width="">
+</p>
 
 
 # 5. Implementation
@@ -428,7 +449,7 @@ To address this, we implemented a distance-based behaviour system. The boss calc
 When the player is within attack range (130-340 px), the boss becomes more aggressive by moving towards the player while attacking simultaneously, increasing combat pressure. A timer (1.6 seconds) controls how often the boss shoots, ensuring consistent behaviour across different frame rates. When the timer reaches zero, the boss fires three projectiles towards the player (Figure ?). This makes the attacks harder to dodge, as it covers a larger area compared to a single projectile (Figure ).
 
   <p align="center">
-  <b>Figure ?: </b>
+  <b>Figure 11: </b>
   <i>Code Snippet for Boss Attack Timer</i> <br>
   </p>
   
@@ -440,7 +461,7 @@ When the player is within attack range (130-340 px), the boss becomes more aggre
           
 
 <p align="center">
-  <b>Figure ?: </b>
+  <b>Figure 12: </b>
   <i>Boss Movement & Attack</i> <br>
  
 <img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/f6eb2dd289198ac83513909ae7b6078e33eb18dc/5.%20readme%20docs/05.%20boss%20move%20%2B%20attack.gif" width= "40%">
@@ -451,7 +472,7 @@ At very close range (distance < 130 px), the boss stops moving but continues att
 
 
 <p align="center">
-  <b>Figure ?: </b>
+  <b>Figure 13: </b>
   <i>Boss Attack with no movement </i> <br>
  
 <img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/f6eb2dd289198ac83513909ae7b6078e33eb18dc/5.%20readme%20docs/05.%20boss%20attack%20only.gif" width= "40%">
@@ -501,7 +522,7 @@ Ten participants completed level 1 and level 2, completing the SUS questionnaire
 SUS mean scores were calculated, and a Wilcoxon signed-rank test was used to determine whether usability between levels was statistically significant. This test was chosen as the same participants took part in both levels, and SUS responses were collected using a rating scale (1-5), so a method that does not assume exact numerical data (a non-parametric test) was more suitable. 
 
 <p align="center">
-  <b>Figure ?: </b>
+  <b>Figure 14: </b>
   <i>Bar graph displaying SUS results </i> <br>
 
 <img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/c841dd521269626e505282d43f6ca604df28f281/5.%20readme%20docs/06.%20SUS%20graph%20final.png" width = "100%">
