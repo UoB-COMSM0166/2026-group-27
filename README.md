@@ -617,6 +617,16 @@ Lost in Bristol is a browser-based game built using HTML, CSS, and JavaScript, m
 
 However, longer gaming sessions can increase total energy usage over time. Additionally, if the game reaches a larger audience, increased data traffic and server use could raise energy demands on servers and data centres. This highlights a trade-off between efficient design and large-scale usage, showing that the environmental impact of the game is influenced by both design choices and user behaviour.
 
+### Green Software Foundation Pattern:
+| Pattern | Implementation |
+|---|---|
+| Use of local storage | `localStorage` is used to store player choices such as selected character, difficulty, equipped weapon, and progress. This ensures data persists across levels without repeated setup. |
+| Separate game states | The game is divided into states (e.g. `menu`, `gameplay`, `pause`, `gameOver`), allowing better control of logic and preventing unnecessary updates when inactive. |
+| Shared UI functions | Common UI elements are implemented in `ui.js` and reused across levels, reducing duplication and improving consistency. |
+| Modular file structure | The project is split into focused files (e.g. `level1.js`, `level2.js`, `audio.js`, `playerData.js`), making the code easier to maintain, scale, and update. |
+
+
+
 ## 8.2 Technical
 Systems such as player movement, enemy behaviour, and level design are implemented as separate components, allowing them to be modified individually without affecting the rest of the game. This makes updates more efficient and allows the game to evolve without requiring a full rebuild.
 
