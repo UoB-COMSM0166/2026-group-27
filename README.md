@@ -368,6 +368,20 @@ Acceptance criteria were included to determine when a feature has been successfu
 
 ## 3.4 Use-case Specification
 
+The use case diagram shows how the player interacts with Lost in Bristol at a high level. It focuses on the main actions in the game rather than detailed mechanics.
+
+We used the diagram to identify and organise key player actions such as starting the game and interacting with objects. By modelling these interactions, we were able to understand how different gameplay systems are connected and ensures that progression through the game remains logical and consistent.
+
+The diagram also highlights which features are important to gameplay and which are level-specific or optional, supporting clearer system design and reducing complexity. Overall, it provided a useful overview for evaluating how the player experiences the game from start to finish.
+
+<p align="center">
+   <b>Figure 8: </b>
+  <i>Use-case Diagram</i> <br>
+<img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/c057b239b76ba56d71c882356bd48ed871a1e523/5.%20readme%20docs/use-case.jpeg" 
+ width="100%">
+</p>
+
+
 # 4. Design
 
 ## 4.1 Class Diagram
@@ -378,7 +392,7 @@ The diagram follows OOD principles by separating the game into modular component
 
 
 <p align="center">
-      <b>Figure 8: </b>
+      <b>Figure 9: </b>
       <i>Class diagram for Lost in Bristol.</i><br>
       <img width="75%" alt="diagram1" src="https://github.com/user-attachments/assets/8677e1b3-c96e-4f79-8381-fee1868a402b" />
 </p>
@@ -423,7 +437,7 @@ We created two sequence diagrams for Lost in Bristol: one for the storyline and 
   - The storyline sequence diagram illustrates how cutscenes are displayed within the game. For example, after completing a level, the              system initiates a cutscene that displays dialogue and transitions the player to the next level. This shows how story elements are              included in the overall gameplay experience (Figure 9).
 
 <p align="center">
-      <b>Figure 9: </b>
+      <b>Figure 10: </b>
       <i>Sequence Diagram 1 - Storyline</i><br>
       <img width="50%" alt="sequence" src="https://github.com/user-attachments/assets/1999ee0a-e7d3-4f78-9e23-ed680d7b052a" />
 </p>
@@ -434,7 +448,7 @@ We created two sequence diagrams for Lost in Bristol: one for the storyline and 
 
  
  <p align="center">
-       <b>Figure 10: </b>
+       <b>Figure 11: </b>
        <i>Sequence Diagram 2 - Gameplay</i><br>
        <img width="50%" alt="sequence" src="https://github.com/user-attachments/assets/0270cfd2-c5c6-4ac4-ba7a-cecaf9f18964" />
  </p>
@@ -470,7 +484,7 @@ To address this, we implemented a distance-based behaviour system. The boss calc
 When the player is within attack range (130-340 px), the boss becomes more aggressive by moving towards the player while attacking simultaneously, increasing combat pressure. A timer (1.6 seconds) controls how often the boss shoots, ensuring consistent behaviour across different frame rates (Figure 11). When the timer reaches zero, the boss fires three projectiles while moving towards the player. This makes the attacks harder to dodge, as it covers a larger area compared to a single projectile (Figure 12).
 
   <p align="center">
-  <b>Figure 11: </b>
+  <b>Figure 12: </b>
   <i>Code Snippet for Boss Attack Timer</i> <br>
   </p>
   
@@ -482,7 +496,7 @@ When the player is within attack range (130-340 px), the boss becomes more aggre
           
 
 <p align="center">
-  <b>Figure 12: </b>
+  <b>Figure 13: </b>
   <i>Boss Movement & Attack</i> <br>
  
 <img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/f6eb2dd289198ac83513909ae7b6078e33eb18dc/5.%20readme%20docs/05.%20boss%20move%20%2B%20attack.gif" width= "40%">
@@ -493,7 +507,7 @@ At very close range (distance < 130 px), the boss stops moving but continues att
 
 
 <p align="center">
-  <b>Figure 13: </b>
+  <b>Figure 14: </b>
   <i>Boss Attack with no movement </i> <br>
  
 <img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/f6eb2dd289198ac83513909ae7b6078e33eb18dc/5.%20readme%20docs/05.%20boss%20attack%20only.gif" width= "40%">
@@ -543,7 +557,7 @@ Ten participants completed level 1 and level 2, completing the SUS questionnaire
 SUS mean scores were calculated, and a Wilcoxon signed-rank test was used to determine whether usability between levels was statistically significant. This test was chosen as the same participants took part in both levels, and SUS responses were collected using a rating scale (1-5), so a method that does not assume exact numerical data (a non-parametric test) was more suitable. 
 
 <p align="center">
-  <b>Figure 14: </b>
+  <b>Figure 15: </b>
   <i>Bar graph displaying SUS results </i> <br>
 
 <img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/c841dd521269626e505282d43f6ca604df28f281/5.%20readme%20docs/06.%20SUS%20graph%20final.png" width = "100%">
@@ -585,14 +599,15 @@ We used GitHub as a development tool, specifically a [devlog README file](https:
 
 
 <p align="center">
- <b>Figure ?: </b>
+ <b>Figure 16: </b>
  <i>Jira Kanban Board</i> <br>
   <img alt="Kanban board" src="https://github.com/user-attachments/assets/ea0182d3-3a1e-47b9-aab0-bd22b0b1d998" width="500">
 </p>
 
 For game development, collaboration was supported through GitHub using a fork-and-branch workflow. Each team member worked on separate forks, allowing features to be developed independently and reviewed by other team members before being merged into the main repository. We found in-person meetings to be the most efficient in discussing and organising code. 
+
 <p align="center">
- <b>Figure ?: </b>
+ <b>Figure 17: </b>
  <i>Overview of task progress and distribution using Jira Kanban board </i> <br>
   <img alt="pie chart jira" src="https://github.com/user-attachments/assets/0568d962-1234-45ae-9e9b-e96867b4b467" width="350" />
 </p>
@@ -602,9 +617,8 @@ For game development, collaboration was supported through GitHub using a fork-an
 Furthermore, to stay on track, we held weekly in-person meetings outside of the timetabled workshop session to review progress, discuss new ideas and ensure we all were on the same page. Additionally, we had a WhatsApp group chat for daily communication, allowing us to share updates or ask questions outside of university and in-person meetings (Figure ?).
 
 <p align="center">
-  <b>Figure ?: </b>
+  <b>Figure 18: </b>
   <i>Screenshot of WhatsApp Group Chat</i> <br>
- 
 <img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/e87cc7f13cc2b0ad7c3e630d19e73bb6d4225184/5.%20readme%20docs/07.%20Whatsapp%20Screenshot.jpg" width= "30%">
 </p>
 
@@ -614,7 +628,7 @@ The WhatsApp group was also really helpful for overcoming language barriers with
 ## Areas of Improvement
 
 * Although communication within the team was generally strong and we assigned roles to each member, we fell behind schedule at times due to a     lack of clearly defined deadlines for individual tasks. This resulted in some work being rushed towards the end of the project.
-  We rarely communicated during term breaks as we did not plan meetings or send many updates on our group chat. After the break, when we started working on the project again, we needed time to regain our momentum and    ensure all team members were actively working on tasks and communicating effectively again. 
+  We rarely communicated during term breaks as we did not plan meetings or send many updates on our group chat. After the break, when we          started working on the project again, we needed time to regain our momentum and    ensure all team members were actively working on tasks and   communicating effectively again. 
 
 * Furthermore, we assigned each team member specific roles (see [Table 1](https://github.com/UoB-COMSM0166/2026-group-27/tree/main#1-our-group)   for group roles). However, these roles were not strictly enforced, meaning that members could contribute to other areas of the project, such    as assisting with the repo or supporting development tasks. While this encouraged collaboration and gave all members exposure to different      aspects of the project, it also slowed us down. Specifically, the lack of clearly defined responsibilities and deadlines meant that multiple    tasks were ongoing but not complete across multiple areas. 
 
@@ -627,7 +641,7 @@ The WhatsApp group was also really helpful for overcoming language barriers with
 While developing Lost in Bristol, we considered how the game impacts environmental, technical, and social factors using the Sustainability Awareness Framework (SusAF) to help us evaluate the strengths and potential limitations of our design. 
 
 <p align="center">
- <b>Figure 8.1: </b>
+ <b>Figure 19: </b>
  <i>Sustainability Diagram</i> <br>
   <img src="https://github.com/user-attachments/assets/1d827fca-87fb-499e-ba8f-1f0a10b2ed1b" alt="susAD" width="350">
 </p>
@@ -644,7 +658,6 @@ However, longer gaming sessions can increase total energy usage over time. Addit
 | Separate game states | The game is divided into states (e.g. `menu`, `gameplay`, `pause`, `gameOver`), allowing better control of logic and preventing unnecessary updates when inactive. |
 | Shared UI functions | Common UI elements are implemented in `ui.js` and reused across levels, reducing duplication and improving consistency. |
 | Modular file structure | The project is split into focused files (e.g. `level1.js`, `level2.js`, `audio.js`, `playerData.js`), making the code easier to maintain, scale, and update. |
-
 
 
 ## 8.2 Technical
