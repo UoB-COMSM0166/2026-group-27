@@ -57,42 +57,42 @@
     <td>Suki Dai</td>
     <td>daisy20010313@gmail.com</td>
     <td>@Suki0515</td>
-   <th>UI/UX Designer and Documentation</th>
+   <td>UI/UX Designer and Documentation</td>
   </tr>
 
   <tr>
     <td>Thanusha Gorva</td>
     <td>jx25475@bristol.ac.uk</td>
     <td>@thanusha170</td>
-   <th>UI/UX Designer and Lead Documentation </th>
+   <td>UI/UX Designer and Lead Documentation </td>
   </tr>
 
    <tr>
     <td>Liz Chen</td>
     <td>ji25241@bristol.ac.uk</td>
     <td>@lizchen0201</td>
-    <th>Technical Owner</th>
+    <td>Technical Owner</td>
   </tr>
 
   <tr>
     <td>Yizhou Pan</td>
     <td>izapan610@gmail.com</td>
     <td>@izapan610</td>
-   <th>Lead Developer and Sound Designer</th>
+   <td>Lead Developer and Sound Designer</td>
   </tr>
 
   <tr>
     <td>Keyu Zhou</td>
     <td>email</td>
     <td>@zhoukeyu63-netizen</td>
-   <th>Role</th>
+   <td>Role</td>
   </tr>
 
    <tr>
     <td>Maniza Singh</td>
     <td>jq25952@bristol.ac.uk</td>
     <td>@ManizaS17</td>
-    <th>Scrum Master / Product Manager</th>
+    <td>Scrum Master / Product Manager</td>
   </tr>
   
 </table>
