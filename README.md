@@ -582,20 +582,10 @@ However, as black-box testing does not consider the internal code, some issues w
 
 ## Collaboration
 
+
 As a team, we adopted a flexible and collaborative approach aligned with Agile principles, with a strong emphasis on communication and continuous progress tracking. This ensured that all members contributed effectively throughout the project. This was particularly important for us as we had new members who joined the group halfway through the project, so we needed to familiarise them with our game design and plans. Regular communication and documentation helped manage this transition and ensured that development continued smoothly despite these changes.
 
-To stay on track, we held weekly in-person meetings outside of the timetabled workshop session to review progress, discuss new ideas and ensure we all were on the same page. Additionally, we had a WhatsApp group chat for daily communication, allowing us to share updates or ask questions outside of university and in-person meetings (Figure ?).
-
-<p align="center">
-  <b>Figure ?: </b>
-  <i>Screenshot of WhatsApp Group Chat</i> <br>
- 
-<img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/e87cc7f13cc2b0ad7c3e630d19e73bb6d4225184/5.%20readme%20docs/07.%20Whatsapp%20Screenshot.jpg" width= "30%">
-</p>
-
-The WhatsApp group was also really helpful for overcoming language barriers within the team, as not all members had the same level of English proficiency. Written communication within the group allowed ideas to be expressed more clearly and translated if necessary to help us understand each other better, improving overall collaboration and reducing the risk of miscommunication. 
-
-Furthermore, we used GitHub as a development tool, specifically a [devlog README file](https://github.com/UoB-COMSM0166/2026-group-27/tree/542337afaf5a9f9f3a855065c2fda8c948da1b56/1.%20devlog) where every week each team member recorded tasks they completed, work in progress and planned future work. We also used a Jira board to keep track of individual progress. 
+We used GitHub as a development tool, specifically a [devlog README file](https://github.com/UoB-COMSM0166/2026-group-27/tree/542337afaf5a9f9f3a855065c2fda8c948da1b56/1.%20devlog) where every week each team member recorded tasks they completed, work in progress and planned future work. We also used a Jira board to keep track of individual progress. 
 
 
 <p align="center">
@@ -605,6 +595,13 @@ Furthermore, we used GitHub as a development tool, specifically a [devlog README
 </p>
 
 For game development, collaboration was supported through GitHub using a fork-and-branch workflow. Each team member worked on separate forks, allowing features to be developed independently and reviewed by other team members before being merged into the main repository. We found in-person meetings to be the most efficient in discussing and organising code. 
+<p align="center">
+ <b>Figure ?: </b>
+ <i>Overview of task progress and distribution using Jira Kanban board </i> <br>
+  <img alt="pie chart jira" src="https://github.com/user-attachments/assets/0568d962-1234-45ae-9e9b-e96867b4b467" width="350" />
+</p>
+
+Furthermore, to stay on track, we held weekly in-person meetings outside of the timetabled workshop session to review progress, discuss new ideas and ensure we all were on the same page. Additionally, we had a WhatsApp group chat for daily communication, allowing us to share updates or ask questions outside of university and in-person meetings (Figure ?).
 
 ## Areas of Improvement
 
