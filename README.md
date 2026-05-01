@@ -88,11 +88,8 @@ game set up instructions and link to play game. [Here is our game](https://uob-c
 
 Lost in Bristol is an immersive, third-person maze-puzzle game that challenges players to navigate a stylized, labyrinthine recreation of Bristol’s iconic urban landscape. Developed as a tribute to the city’s unique cultural identity, the game tasks players with escaping a series of increasingly complex districts within a strict time limit. The project’s core objective was to blend traditional maze-solving mechanics with high-stakes survival elements and environmental storytelling.
 
-## The "Twist": Survival and Strategy<p align="center">
-      <b>Figure 9: </b>
-      <i>Class diagram for Lost in Bristol.</i><br>
-      <img src="" width="">
-</p>
+## The "Twist": Survival and Strategy
+     
 
 What makes Lost in Bristol novel is its departure from passive exploration. While most maze games focus solely on pathfinding, our implementation introduces three "Twists" that heighten the difficulty:
 
