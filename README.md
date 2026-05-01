@@ -601,7 +601,7 @@ For game development, collaboration was supported through GitHub using a fork-an
   <img alt="pie chart jira" src="https://github.com/user-attachments/assets/0568d962-1234-45ae-9e9b-e96867b4b467" width="350" />
 </p>
 
-To stay on track, we held weekly in-person meetings outside of the timetabled workshop session to review progress, discuss new ideas and ensure we all were on the same page. Additionally, we had a WhatsApp group chat for daily communication, allowing us to share updates or ask questions outside of university and in-person meetings (Figure ?).
+Furthermore, to stay on track, we held weekly in-person meetings outside of the timetabled workshop session to review progress, discuss new ideas and ensure we all were on the same page. Additionally, we had a WhatsApp group chat for daily communication, allowing us to share updates or ask questions outside of university and in-person meetings (Figure ?).
 
 <p align="center">
   <b>Figure ?: </b>
