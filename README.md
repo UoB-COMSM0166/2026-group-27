@@ -94,7 +94,12 @@
 
 Lost in Bristol is a third-person maze-based story game inspired by classic arcade maze games such as Pac-Man, along with story-driven combat games like Hollow Knight. In terms of the “twists”, the game combines exploration, combat, storytelling and level progression to create a darker and more immersive take on the traditional maze game genre.
 
-Set in a cursed version of Bristol, the game follows the player as they navigate through 3 maze-based levels, each introducing new mechanics and increasing in difficulty. In Level 1, the player is introduced to basic navigation and a simple weapon system using a crossbow. Level 2 increases difficulty by introducing a darker environment where the player must find items such as a lamp and other essential weapons, while also defeating and avoiding enemies. Level 3 expands the gameplay further by introducing portals that allow the player to teleport across the maze, alongside a final boss that must be defeated by imprisoning it to lift the curse.
+Set in a cursed version of Bristol, the game follows the player as they navigate through 3 maze-based levels, each introducing new mechanics and increasing in difficulty. 
+   * In Level 1, the player is introduced to basic navigation and a simple weapon system using a crossbow.
+     
+   * Level 2 increases difficulty by introducing a darker maze where the player must find items such as a lamp and other essential weapons,          while also defeating and avoiding enemies.
+     
+   * Level 3 expands the gameplay further by introducing portals that allow the player to teleport across the maze, alongside a final boss that      must be defeated by imprisoning it to lift the curse.
 
 The game also includes narrative cutscenes after each level, which gradually reveal the game’s lore and deepen player engagement, requiring the player to complete each level in order to fully unlock the story.
 
