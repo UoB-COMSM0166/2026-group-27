@@ -597,10 +597,17 @@ Furthermore, we used GitHub as a development tool, specifically a [devlog README
   <img alt="Kanban board" src="https://github.com/user-attachments/assets/ea0182d3-3a1e-47b9-aab0-bd22b0b1d998" width="500">
 </p>
 
+
 ## Areas of Improvement
 
-Although communication within the team was generally strong and we assigned roles to each member, we fell behind schedule at times due to a lack of clearly defined deadlines for individual tasks. This resulted in some work being rushed towards the end of the project.
-We rarely communicated during term breaks as we did not plan meetings or send many updates on our group chat. While the holidays were a break for us, it slowed overall progress. After the break,we needed time to regain momentum and get everyone back to working and communicate effectively. Also our lack of art background had made creating pixel art a bit challenging.
+* Although communication within the team was generally strong and we assigned roles to each member, we fell behind schedule at times due to a     lack of clearly defined deadlines for individual tasks. This resulted in some work being rushed towards the end of the project.
+  We rarely communicated during term breaks as we did not plan meetings or send many updates on our group chat. While the holidays were a break   for us, it slowed overall progress. After the break, when we started working on the project again, we needed time to regain our momentum and    ensure all team members were actively working on tasks and communicating effectively again. 
+
+* Furthermore, we assigned each team member specific roles (see [Table 1]() for group roles). However, these roles were not strictly enforced,    meaning that members could contribute to other areas of the project, such as assisting with the repo or supporting development tasks. While     this encouraged collaboration and gave all members exposure to different aspects of the project, it also slowed us down. Specifically, the      lack of clearly defined responsibilities and deadlines meant that multiple tasks were ongoing but not complete across multiple areas. 
+
+* Additionally, our lack of experience in digital art made the creation of pixel art assets challenging, as we initially planned to design        multiple sprites manually using tools such as Piskel. However, we underestimated the time and skill required to produce consistent and high-    quality pixel art, which slowed overall progress.
+
+  As a result, we used AI-generated elements to support the visuals of the game, allowing us to save time and continue development and focus on   other tasks effectively. Although we were able to adapt our approach, this highlighted the importance of accurately assessing a team’s skill    sets during the planning phase and choosing methods that align with those capabilities.
 
 ## Agile Discussion:
 
