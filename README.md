@@ -592,16 +592,7 @@ The WhatsApp group was also greatly helpful for overcoming language barriers wit
 We also used GitHub as a development tool, specifically a [devlog README file](https://github.com/UoB-COMSM0166/2026-group-27/tree/542337afaf5a9f9f3a855065c2fda8c948da1b56/1.%20devlog) where every week each team member recorded tasks they completed, work in progress and planned future work. This improved transparency and allowed us to track individual contributions across the project. 
 
 
-Jira - makes sure that wokr was spread evenly across team members 
-
-
-
-
-## 7.1 Team Composition and Workflow
-
-Our team of six divided responsibilities across four axes. Suki, Yizhou, and Liz led on programming, UI, level design, and testing—implementing the three levels, the main menu, the shop, and the character rendering pipeline, and shaping the moment-to-moment gameplay through decisions about maze layouts, enemy density, item placement regions, and pacing thresholds. Liz additionally led on storyline development, weaving the Bristol-set narrative that frames the three levels and gives them thematic continuity. Maniza and Thanusha led on written content, visual art, and testing, producing the pop-up text, instruction screens, hand-illustrated pickup icons, and the aged-bronze UI frames, while also providing structured feedback on difficulty and usability across playthroughs. Yuki led on audio design and testing. Roles were not strictly rigid—members stepped into adjacent areas when deadlines approached—but having a lead for each area meant every decision had a clear owner and no subsystem was left in limbo.
-
-The principal collaboration tool was a shared GitHub repository, used as the single source of truth for code and assets. All programmers committed directly to the repository rather than emailing files around, making it possible to track who changed what, roll back broken commits, and merge parallel work. Day-to-day coordination happened in a group chat, where urgent questions, blockers, and asset iterations were discussed; higher-level decisions—such as overall art direction or narrative connections between levels—were deferred to regular team meetings so everyone had context. Testing happened in batches rather than as a separate phase: once a subsystem was feature-complete, multiple team members would each run through it and report issues back into the chat, which let the programmers prioritise fixes against a grounded list of observations rather than their own assumptions about what might break.
+Jira - makes sure that work was spread evenly across team members 
 
 
 ## Tools and Techniques:
