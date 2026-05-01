@@ -627,10 +627,10 @@ The WhatsApp group was also really helpful for overcoming language barriers with
 While developing Lost in Bristol, we considered how the game impacts environmental, technical, and social factors using the Sustainability Awareness Framework (SusAF) to help us evaluate the strengths and potential limitations of our design. 
 
 <p align="center">
+ <b>Figure ?: </b>
+ <i>Sustainability Diagram</i> <br>
   <img src="https://github.com/user-attachments/assets/1d827fca-87fb-499e-ba8f-1f0a10b2ed1b" alt="susAD" width="350">
 </p>
-
-
 
 ## 8.1 Environmental
 Lost in Bristol is a browser-based game built using HTML, CSS, and JavaScript, meaning it does not require installation or high-performance hardware to run. As a result, it has relatively low CPU and GPU usage, which reduces energy consumption during gameplay. This also allows it to run on lower-specification devices, reducing the need for users to upgrade their hardware, which can help decrease electronic waste. 
