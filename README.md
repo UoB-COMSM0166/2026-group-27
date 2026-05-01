@@ -610,6 +610,9 @@ Furthermore, to stay on track, we held weekly in-person meetings outside of the 
 <img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/e87cc7f13cc2b0ad7c3e630d19e73bb6d4225184/5.%20readme%20docs/07.%20Whatsapp%20Screenshot.jpg" width= "30%">
 </p>
 
+The WhatsApp group was also really helpful for overcoming language barriers within the team, as not all members had the same level of English proficiency. Written communication within the group allowed ideas to be expressed more clearly and translated if necessary to help us understand each other better, improving overall collaboration and reducing the risk of miscommunication.
+
+
 ## Areas of Improvement
 
 * Although communication within the team was generally strong and we assigned roles to each member, we fell behind schedule at times due to a     lack of clearly defined deadlines for individual tasks. This resulted in some work being rushed towards the end of the project.
