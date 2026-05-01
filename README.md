@@ -587,7 +587,7 @@ To stay on track, we held weekly in-person meetings outside of the timetabled wo
 
 The WhatsApp group was also greatly helpful for overcoming language barriers within the team, as not all members had the same level of English proficiency. Written communication within the group allowed ideas to be expressed more clearly and translated if necessary to help us understand each other better, improving overall collaboration and reducing the risk of miscommunication. 
 
-We also used GitHub as a development tool, specifically a devlog README file where every week each team member recorded tasks they completed, work in progress and planned future work. This improved transparency and allowed us to track individual contributions across the project. 
+We also used GitHub as a development tool, specifically a [devlog README file](https://github.com/UoB-COMSM0166/2026-group-27/tree/542337afaf5a9f9f3a855065c2fda8c948da1b56/1.%20devlog) where every week each team member recorded tasks they completed, work in progress and planned future work. This improved transparency and allowed us to track individual contributions across the project. 
 Jira - makes sure that wokr was spread evenly across team members 
 
 
