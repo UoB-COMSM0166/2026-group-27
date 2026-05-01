@@ -15,10 +15,6 @@
 
 </div>
 
-
-
-# Video Demonstration
-
 # Table of Contents  
 
 1. [Our Group](https://github.com/UoB-COMSM0166/2026-group-27/tree/main#1-our-group) 
