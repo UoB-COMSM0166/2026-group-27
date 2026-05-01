@@ -658,7 +658,7 @@ However, the current version has limitations in accessibility. There are no dedi
 
 # 9. Conclusion
 
-## 9.1 Reflection:
+## 9.1 Reflection
 
 Developing Lost in Bristol helped us improve and apply our software engineering skills by combining game design with technical implementation. The project was an ongoing problem-solving process, supported by regular testing and improvements. This helped us understand the importance of being flexible in design and the value of gradually improving the game in the development process.
 
