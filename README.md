@@ -669,6 +669,8 @@ Developing Lost in Bristol helped us improve and apply our software engineering 
 ## 9.? Future Work
 In the short term, potential future work could prioritise improving accessibility features such as colourblind friendly palettes, aligning with the Web Content Accessibility Guidelines (WCAG) recommendations (W3C, 2025). We also plan to optimise performance by refining the game loop and reducing unnecessary processing during non-active states such as menus and pauses.
 
+Another important improvement would be making the game accessible on mobile devices by adapting the controls and interface for touch screens. This would allow the game to reach a wider audience and improve usability across different platforms.
+
 ## 9.? Sequel: Lost In Bristol 2
 
 A potential sequel could expand the game world into an alternate version of Bristol, such as a historical setting or an alien invasion scenario. Additionally, Bristol-themed visuals could be incorporated into the maze levels themselves, rather than only being included in cutscenes. This allows for unique and varied environments and level designs. 
