@@ -233,6 +233,8 @@ Next, as a team, we developed two game ideas that combined features from at leas
 
 In workshop 3, we developed prototypes for the two game ideas. This gave us a visual representation of what our two potential game ideas could look and function. This helped us compare how each team member pictured the potential game designs and encouraged discussion to agree on a shared vision for each game idea. It also helped us see how complex the mechanics were and if they could be realistically built (Figure 5 and 6).
 
+<table align="center" width="100%">
+ <tr>
 <p align="center">
   <b>Figure 5: </b>
   <i>Paper Prototype for Lost in Bristol 
@@ -242,13 +244,15 @@ In workshop 3, we developed prototypes for the two game ideas. This gave us a vi
 <p align="center">
 <img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/f6eb2dd289198ac83513909ae7b6078e33eb18dc/5.%20readme%20docs/03.%20paper%20protoype%20lost%20in%20bristol.gif" width= "30%">
 </p>
-
-
+ </tr>
+<tr>
 <p align="center">
   <b>Figure 6: </b>
   <i>Prototype for The Will and the Fox </i> <br>
  <img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/1654f265acb071d30c2705c8287f72e56f9c53fc/5.%20readme%20docs/03.%20Prototype%202.gif" width="40%">
   </p>
+</tr>
+</table>
 
 We chose Lost in Bristol as our final game idea, after a group discussion, as it allowed us to incorporate features from most of the games we had listed during our inspiration brainstorm. We also felt that the Bristol theme could be represented more effectively by using cutscenes with Bristol-themed visuals. 
 
