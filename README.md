@@ -581,7 +581,7 @@ To stay on track, we held weekly in-person meetings outside of the timetabled wo
   <b>Figure ?: </b>
   <i>Screenshot of WhatsApp Group Chat</i> <br>
  
-<img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/e87cc7f13cc2b0ad7c3e630d19e73bb6d4225184/5.%20readme%20docs/07.%20Whatsapp%20Screenshot.jpg" width= "40%">
+<img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/e87cc7f13cc2b0ad7c3e630d19e73bb6d4225184/5.%20readme%20docs/07.%20Whatsapp%20Screenshot.jpg" width= "30%">
 </p>
 
 
