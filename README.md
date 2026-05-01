@@ -651,17 +651,24 @@ However, the current version has limitations in accessibility. There are no dedi
 
 # 9. Conclusion
 
-## 9.1 Overall Reflection:
-Developing Lost in Bristol has helped us to grow and challenge our capabilities as Software Engineers because it allowed us to merge features of both game design and technological implementation. As such, we put together a structured approach to creating the game that incorporated, the design of the maze, how the enemies behaved, how the levels progressed and this culminated in a game that has been developed closely in-line with the original concept. Looking back,the project can be defined as a process of problem solving. It involved continuous feature refinement and game-play improvement through consistent testing. This process taught us the value of flexibility and planning that later served as important lessons as we evolved our original ideas to develop a more balanced and functional game than we would have had if we had stuck with our initial plans.
-## 9.2 Lessons Learned:
-* The first significant thing we as a team learned was how critical it is to plan early. The original vision for the Maze-survival Game lacked clarity leading to a number of re-works during the course of development. This demonstrated an evolution in the original concept and illustrated the need for flexibility and planning early when developing interactive systems.
+## 9.1 Reflection:
+
+Developing Lost in Bristol helped us improve and apply our software engineering skills by combining game design with technical implementation. The project was an ongoing problem-solving process, supported by regular testing and improvements. This helped us understand the importance of being flexible in design and the value of gradually improving the game in the development process.
+
+* The first significant thing we as a team learned was how critical it is to plan early. The original vision for the Maze-survival Game lacked clarity, leading to a number of reworks during the course of development. This demonstrated an evolution in the original concept and illustrated the need for flexibility and planning early when developing interactive systems.
+ 
 * The second major takeaway was that structuring code correctly is extremely important. As we progressed through the game with more and more features being added, we began to realise that unorganised code was making it increasingly difficult to debug. As a result, we decided to compartmentalise the code into smaller, modular components (such as player movement, enemy and level), which became easy to track and maintain the system efficiently. Overall, this reinforced the importance of good coding practices when it comes to sustaining and eventually scaling a project.  
-## 9.3 Challenges:
-While developing the game, the team faced various challenges for e.g., design issues presented significant challenges related to balancing gameplay difficulty with integrating game systems seamlessly. The earlier versions were either too simple or too difficult and required many iterations of required game design concepts (enemy statue, enemy spawn points, enemy controls). The random spawn points and continuing issues related to the Boss also had a significant impact on balance as well as the players experience (progression through the game). Additionally, integrating new features without any glitches was challenging as even minor deficiencies could significantly impact the systems that were interconnected, while continuing to manage time across team members was also difficult. The competitive character of the community and ongoing play testing have provided continuous feedback related to game product improvements; by providing an opportunity to coordinate efforts more effectively (structure of each task), game systems have continued to evolve and create a more balanced, stable gaming experience.
-## 9.4 Immediate Future Work: 
-For immediate future work, we are planning to improve performance, to create a more user-friendly UI and to include additional accessibility options, such as better visual contrast and control options. We may also enhance the current game by incorporating new levels, improving enemy AI and improving code structure for maintainability.
-## 9.5 Sequel: Lost In Bristol 2
-If we had the opportunity to develop a sequel, we could develop a more robust story and incorporate more Bristol-related landmarks and environments. We could introduce additional playable characters with unique abilities and backstories for more entertaining experience. Supporting mobile compatibility, including touch controls, will also make the game more accessible to a wider audience. Finally, we could include more dynamic level designs and methods of progression to enhance replay value, while sticking to the existing core concept.
+
+## 9.? Future Work
+In the short term, potential future work could prioritise improving accessibility features such as colourblind friendly palettes, aligning with the Web Content Accessibility Guidelines (WCAG) recommendations (W3C, 2025). We also plan to optimise performance by refining the game loop and reducing unnecessary processing during non-active states such as menus and pauses.
+
+## 9.? Sequel: Lost In Bristol 2
+
+A potential sequel could expand the game world into an alternate version of Bristol, such as a historical setting or an alien invasion scenario. Additionally, Bristol-themed visuals could be incorporated into the maze levels themselves, rather than only being included in cutscenes. This allows for unique and varied environments and level designs. 
+
+Furthermore, introducing characters with unique abilities would encourage different playstyles and increase replayability as each character would offer a different way to experience the game. This supports research showing that character variety and mechanical differences can improve player engagement and retention (Sweetser & Wyeth, 2005). 
+
+Moreover, adding alternative endings based on the character chosen and player performance would further increase replayability and depth to the game’s lore. 
 
 # 10. Contribution Statement
 
