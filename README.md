@@ -45,7 +45,7 @@
   <i>Group members from left to right of Figure 1.</i> <br>
   <p align="center">
   
-<table align="center" width="80%">
+<table align="center" width="60%">
   <tr>
     <th> Name</th>
     <th>Email</th>
