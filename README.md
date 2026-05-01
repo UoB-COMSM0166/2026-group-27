@@ -703,9 +703,9 @@ If we had the opportunity to develop a sequel, we could develop a more robust st
 
 We primarily used AI for the visual arts in our game. This allowed us to focus more on developing the game mechanics and internal code, while also maintaining a consistent art style for our game.
 
-The majority of game objects in [Table 2](https://github.com/UoB-COMSM0166/2026-group-27/tree/main#game-objects) and characters in [Table 3](https://github.com/UoB-COMSM0166/2026-group-27/tree/main#meet-our-characters) were designed using AI, apart from the portal design and animation, and the fox character, which was done by Thanusha using [Piskel](https://www.piskelapp.com/).
+The cut-scenes' visuals were all developed using AI. The majority of game objects in [Table 2](https://github.com/UoB-COMSM0166/2026-group-27/tree/main#game-objects) and characters in [Table 3](https://github.com/UoB-COMSM0166/2026-group-27/tree/main#meet-our-characters) were designed using AI, apart from the portal design and animation, and the fox character, which was done by Thanusha using [Piskel](https://www.piskelapp.com/).
 
-Some initial pixel art drafts were created by Thanusha and Maniza, specifically the maze walls and the Lando Norris character, which were then used as references for generating these assets using AI (see figures below). 
+Some initial pixel art drafts were created by Thanusha and Maniza, specifically the maze walls and the Lando Norris character, which were then used as references for generating these assets using AI (see Appendix ? for pixel art drafts). 
 
 We also used AI tools to support development by helping debug code and identify errors. Additionally, AI was used to translate code snippets and labels, allowing each team member to read and understand the code in their preferred language.
 
