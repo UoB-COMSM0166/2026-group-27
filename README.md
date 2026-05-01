@@ -206,14 +206,6 @@ The game also includes narrative cutscenes after each level, which gradually rev
 
 # 3. Requirements
 
-thanusha
-- 15% ~750 words
-- Early stages design. Ideation process. How did you decide as a team what to develop?
-- ✅ Stakeholders
-- ✅ User stories and epics 
-- Case diagrams
-<img width="4096" height="1621" alt="usecase" src="https://github.com/user-attachments/assets/16b03d51-2f1d-4dda-b27f-89d67d60a6a2" />
-
 ## 3.1 Ideation Process 
 
 We used [Miro](https://miro.com/) to brainstorm ideas for our game. Initially, each team member selected a game they really enjoyed and listed key features that made it unique, which we could potentially include in our own game, such as combat, multiplayer options, and story modes (Figure 2).
