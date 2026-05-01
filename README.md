@@ -5,7 +5,7 @@
 <img width="1920" height="869" alt="image" src="https://github.com/user-attachments/assets/78b9eb01-eadd-4dc7-b6c4-707eb198c6bf" />
 </p>
 
-game set up instructions and link to play game. [Here is our game](https://uob-comsm0166.github.io/2026-group-27/)
+game set up instructions and link to play game. 🦊[Click Here To Play!]🦊(https://uob-comsm0166.github.io/2026-group-27/)
 
 # Video Demonstration
 
