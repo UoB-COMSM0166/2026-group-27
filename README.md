@@ -7,12 +7,8 @@
 
 game set up instructions and link to play game. 
 
-<p align="center">
-<h3>🌙 [Click Here To Play!](https://uob-comsm0166.github.io/2026-group-27/) 🌙</h3>
-</p>
-<p align="center">
 
-<h7>🌙 [Click Here To Play!](https://uob-comsm0166.github.io/2026-group-27/) 🌙</h7>
+<h>🌙 [Click Here To Play!](https://uob-comsm0166.github.io/2026-group-27/) 🌙</h>
 </p>
 
 # Video Demonstration
