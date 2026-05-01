@@ -740,6 +740,31 @@ The AI tools for these tasks were primarily Google Gemini and ChatGPT.
 
 # 12. References
 
+Alexander, I., & Robertson, S. (2004). Understanding project sociology by modeling stakeholders. IEEE Software, 21(1), 23–27. https://doi.org/10.1109/ms.2004.1259199
+
+Cohn, M. (2004). User stories applied: for agile software development. Addison-Wesley Professional.
+
+de Biase, M. S., Bernardi, S., & Marrone, S. (2024). Completion of SysML state machines from Given–When–Then requirements. Software & Systems Modeling, 23, 1455–1491. https://doi.org/10.1007/s10270-024-01228-3
+
+Maxim, R. I., & Arnedo-Moreno, J. (2025). EDTF: A User-Centered Approach to Digital Educational Games Design and Development. Information, 16(9), 794. https://doi.org/10.3390/info16090794
+
+Nielsen, L., Salminen, J., Jung, S.-H., & Jansen, B. J. (2021). Think-Aloud Surveys. Springer EBooks, 504–508. https://doi.org/10.1007/978-3-030-85607-6_67
+
+Nikiforova, O., Sejans, J., & Cernickins, A. (2011). Role of UML Class Diagram in Object-Oriented Software Development. Scientific Journal of Riga Technical University. Computer Sciences, 44(1), 65–74. https://doi.org/10.2478/v10143-011-0023-4
+
+Olsen, T., Procci, K., & Bowers, C. A. (2011). Serious Games Usability Testing: How to Ensure Proper Usability, Playability, and Effectiveness. In: Marcus, A. (Eds) Design, User Experience, and Usability. Theory, Methods, Tools and Practice., 625–634. https://doi.org/10.1007/978-3-642-21708-1_70
+
+Pellicone, A., Weintrop, D., Ketelhut, D. J., Shokeen, E., Cukier, M., Plane, J. D., & Rahimian, F. (2022). Playing Aloud. International Journal of Gaming and Computer-Mediated Simulations, 14(1), 1–16. https://doi.org/10.4018/ijgcms.296705
+
+Pirozzi, M. (2019). Stakeholders, who are they? PM World Journal, VIII(IX). https://pmworldlibrary.net/wp-content/uploads/2019/10/pmwj86-Oct2019-Pirozzi-stakeholders-who-are-they.pdf
+
+Social Science Statistics. (n.d.). Wilcoxon Signed-Rank Test Calculator. https://www.socscistatistics.com/tests/signedranks/calculator/
+Sweetser, P., & Wyeth, P. (2005). GameFlow: A Model for Evaluating Player Enjoyment in Games. Computers in Entertainment, 3(3). https://doi.org/10.1145/1077246.1077253
+
+W3C. (2025, May 6). Web Content Accessibility Guidelines (WCAG) 2.1. W3.org. https://www.w3.org/TR/WCAG21/
+
+Wiese, M., Heinrichs, A., Rusieshvili, N., Almeida, R. R. de, & Borowa, K. (2025). The TechDebt Game - Enabling Discussions about Technical Debt. 2025 IEEE/ACM International Conference on Technical Debt (TechDebt), 23–33. https://doi.org/10.1109/techdebt66644.2025.00010
+
 # 13. Appendices
 
 ## Appendix 1: SUS Results
