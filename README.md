@@ -63,7 +63,7 @@
     <td>Maniza Singh</td>
     <td>jq25952@bristol.ac.uk</td>
     <td>@ManizaS17</td>
-    <td>Product Owner / Scrum Master</td>
+    <td>Product Manager / Scrum Master</td>
   </tr>
 
   <tr>
