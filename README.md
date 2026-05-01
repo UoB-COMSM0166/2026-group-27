@@ -598,7 +598,7 @@ The project succeeded because the team allowed its own working methods to evolve
 
 While developing Lost in Bristol, we considered how the game impacts environmental, technical, and social factors using the Sustainability Awareness Framework (SusAF) to help us evaluate the strengths and potential limitations of our design. 
 
-<img width="1254" height="1254" alt="susAD" src="https://github.com/user-attachments/assets/1d827fca-87fb-499e-ba8f-1f0a10b2ed1b" />
+<img width="500"  alt="susAD" src="https://github.com/user-attachments/assets/1d827fca-87fb-499e-ba8f-1f0a10b2ed1b" />
 
 
 ## 8.1 Environmental
