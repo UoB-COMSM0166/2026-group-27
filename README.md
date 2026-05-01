@@ -566,11 +566,6 @@ Test cases included normal, boundary, and error conditions. Boundary cases teste
 
 However, as black-box testing does not consider the internal code, some issues were not detected. For example, an input bug with the Enter key was discovered during the Think Aloud tests ([Section 6.1](https://github.com/UoB-COMSM0166/2026-group-27/tree/main#61-qualitative-evaluation-think-aloud-ta)). This highlights the importance of combining both code structure testing and player-focused evaluation to produce more reliable results. 
 
-# 7. Process 
-
-- 15% ~750 words
-
-- Teamwork. How did you work together? What tools and methods did you use? Did you define team roles? Reflection on how you worked together. Be honest, we want to hear about what didn't work as well as what did work, and importantly, how your team adapted throughout the project.
 
 # 7. Process
 
