@@ -574,6 +574,8 @@ However, as black-box testing does not consider the internal code, some issues w
 
 # 7. Process
 
+## Collaboration
+
 As a team, we adopted an iterative and collaborative development approach aligned with Agile principles, with a strong emphasis on communication, adaptability, and continuous progress tracking. This ensured that all members contributed effectively throughout the project. This was particularly important for us as we had new members who joined the group halfway through the project, so we needed to familiarise them with our game design and plans. Regular communication and documentation helped manage this transition and ensured that development continued smoothly despite these changes.
 
 To stay on track, we held weekly in-person meetings outside of the timetabled workshop session to review progress, discuss new ideas and ensure we all were on the same page. Additionally, we had a WhatsApp group chat for daily communication, allowing us to share updates or ask questions outside of university and in-person meetings (Figure ?).
