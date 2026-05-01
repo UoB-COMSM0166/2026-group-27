@@ -573,6 +573,26 @@ However, as black-box testing does not consider the internal code, some issues w
 
 # 7. Process
 
+As a team, we adopted an iterative and collaborative development approach aligned with Agile principles, with a strong emphasis on communication, adaptability, and continuous progress tracking. This ensured that all members contributed effectively throughout the project. This was particularly important for us as we had new members who joined the group halfway through the project, so we needed to familiarise them with our game design and plans. Regular communication and documentation helped manage this transition and ensured that development continued smoothly despite these changes.
+
+To stay on track, we held weekly in-person meetings outside of the timetabled workshop session to review progress, discuss new ideas and ensure we all were on the same page. Additionally, we had a WhatsApp group chat for daily communication, allowing us to share updates or ask questions outside of university and in-person meetings (Figure ?).
+
+<p align="center">
+  <b>Figure ?: </b>
+  <i>Screenshot of WhatsApp Group Chat</i> <br>
+ 
+<img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/f6eb2dd289198ac83513909ae7b6078e33eb18dc/5.%20readme%20docs/05.%20boss%20move%20%2B%20attack.gif" width= "40%">
+</p>
+
+
+The WhatsApp group was also greatly helpful for overcoming language barriers within the team, as not all members had the same level of English proficiency. Written communication within the group allowed ideas to be expressed more clearly and translated if necessary to help us understand each other better, improving overall collaboration and reducing the risk of miscommunication. 
+
+We also used GitHub as a development tool, specifically a devlog README file where every week each team member recorded tasks they completed, work in progress and planned future work. This improved transparency and allowed us to track individual contributions across the project. 
+Jira - makes sure that wokr was spread evenly across team members 
+
+
+
+
 ## 7.1 Team Composition and Workflow
 
 Our team of six divided responsibilities across four axes. Suki, Yizhou, and Liz led on programming, UI, level design, and testing—implementing the three levels, the main menu, the shop, and the character rendering pipeline, and shaping the moment-to-moment gameplay through decisions about maze layouts, enemy density, item placement regions, and pacing thresholds. Liz additionally led on storyline development, weaving the Bristol-set narrative that frames the three levels and gives them thematic continuity. Maniza and Thanusha led on written content, visual art, and testing, producing the pop-up text, instruction screens, hand-illustrated pickup icons, and the aged-bronze UI frames, while also providing structured feedback on difficulty and usability across playthroughs. Yuki led on audio design and testing. Roles were not strictly rigid—members stepped into adjacent areas when deadlines approached—but having a lead for each area meant every decision had a clear owner and no subsystem was left in limbo.
