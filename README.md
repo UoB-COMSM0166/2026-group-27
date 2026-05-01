@@ -752,7 +752,7 @@ Nielsen, L., Salminen, J., Jung, S.-H., & Jansen, B. J. (2021). Think-Aloud Surv
 
 Nikiforova, O., Sejans, J., & Cernickins, A. (2011). Role of UML Class Diagram in Object-Oriented Software Development. Scientific Journal of Riga Technical University. Computer Sciences, 44(1), 65–74. https://doi.org/10.2478/v10143-011-0023-4
 
-Olsen, T., Procci, K., & Bowers, C. A. (2011). Serious Games Usability Testing: How to Ensure Proper Usability, Playability, and Effectiveness. In: Marcus, A. (Eds) Design, User Experience, and Usability. Theory, Methods, Tools and Practice., 625–634. https://doi.org/10.1007/978-3-642-21708-1_70
+Olsen, T., Procci, K., & Bowers, C. A. (2011). Serious Games Usability Testing: How to Ensure Proper Usability, Playability, and Effectiveness. In: Marcus, A. (Eds) Design, User Experience, and Usability. Theory, Methods, Tools and Practice, 625–634. https://doi.org/10.1007/978-3-642-21708-1_70
 
 Pellicone, A., Weintrop, D., Ketelhut, D. J., Shokeen, E., Cukier, M., Plane, J. D., & Rahimian, F. (2022). Playing Aloud. International Journal of Gaming and Computer-Mediated Simulations, 14(1), 1–16. https://doi.org/10.4018/ijgcms.296705
 
