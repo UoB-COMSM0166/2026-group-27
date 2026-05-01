@@ -614,7 +614,7 @@ For game development, collaboration was supported through GitHub using a fork-an
 
 ### Other tools and techniques:
 
-Furthermore, to stay on track, we held weekly in-person meetings outside of the timetabled workshop session to review progress, discuss new ideas and ensure we all were on the same page. Additionally, we had a WhatsApp group chat for daily communication, allowing us to share updates or ask questions outside of university and in-person meetings (Figure ?).
+Furthermore, to stay on track, we held weekly in-person meetings outside of the timetabled workshop session to review progress, discuss new ideas and ensure we all were on the same page. Additionally, we had a WhatsApp group chat for daily communication, allowing us to share updates or ask questions outside of university and in-person meetings (Figure 18).
 
 <p align="center">
   <b>Figure 18: </b>
