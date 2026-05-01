@@ -212,7 +212,7 @@ We used [Miro](https://miro.com/) to brainstorm ideas for our game. Initially, e
 
 <p align="center">
 <b>Figure 2: </b>
-  <i>Exsisting games for inspiration brainstorm</i> <br>
+  <i>Existing games for inspiration brainstorm</i> <br>
 
 <img src = "https://github.com/UoB-COMSM0166/2026-group-27/blob/3cdb4f3052e580042f58e75d640b9036f2ad641f/5.%20readme%20docs/03.%20Game%20Inspo.jpg" width="80%">
 
