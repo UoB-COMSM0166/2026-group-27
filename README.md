@@ -232,6 +232,7 @@ Next, as a team, we developed two game ideas that combined features from at leas
    </p>
 
 In workshop 3, we developed prototypes for the two game ideas. This gave us a visual representation of what our two potential game ideas could look and function. This helped us compare how each team member pictured the potential game designs and encouraged discussion to agree on a shared vision for each game idea. It also helped us see how complex the mechanics were and if they could be realistically built (Figure 5 and 6).
+<br> 
 
 <table align="center" width="100%">
  <tr>
@@ -250,6 +251,7 @@ In workshop 3, we developed prototypes for the two game ideas. This gave us a vi
   </td>
 </tr>
 </table>
+<br> 
 
 We chose Lost in Bristol as our final game idea, after a group discussion, as it allowed us to incorporate features from most of the games we had listed during our inspiration brainstorm. We also felt that the Bristol theme could be represented more effectively by using cutscenes with Bristol-themed visuals. 
 
