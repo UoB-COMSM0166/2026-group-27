@@ -434,7 +434,7 @@ We created two sequence diagrams for Lost in Bristol: one for the storyline and 
 
 * **Storyline Sequence Diagram**
 
-  - The storyline sequence diagram illustrates how cutscenes are displayed within the game. For example, after completing a level, the              system initiates a cutscene that displays dialogue and transitions the player to the next level. This shows how story elements are              included in the overall gameplay experience (Figure 9).
+  - The storyline sequence diagram illustrates how cutscenes are displayed within the game. For example, after completing a level, the              system initiates a cutscene that displays dialogue and transitions the player to the next level. This shows how story elements are              included in the overall gameplay experience (Figure 10).
 
 <p align="center">
       <b>Figure 10: </b>
@@ -444,7 +444,7 @@ We created two sequence diagrams for Lost in Bristol: one for the storyline and 
 
 * **Gameplay Sequence Diagram**
 
-  - The gameplay sequence diagram shows how the player interacts with the game during maze levels. For example, when the player attacks an          enemy, this input is processed by the game system, which then interacts with classes such as the `WeaponSystem` and `Enemy` to calculate        damage. This shows how multiple classes interact with each other to update game progress for the player (Figure 10). 
+  - The gameplay sequence diagram shows how the player interacts with the game during maze levels. For example, when the player attacks an          enemy, this input is processed by the game system, which then interacts with classes such as the `WeaponSystem` and `Enemy` to calculate        damage. This shows how multiple classes interact with each other to update game progress for the player (Figure 11). 
 
  
  <p align="center">
@@ -481,7 +481,7 @@ Another difficulty we faced was making the final boss in level 3 more challengin
 
 To address this, we implemented a distance-based behaviour system. The boss calculates its distance from the player and changes its behaviour depending on how far away the player is, making the battle less predictable and challenging without requiring a complex AI system. 
 
-When the player is within attack range (130-340 px), the boss becomes more aggressive by moving towards the player while attacking simultaneously, increasing combat pressure. A timer (1.6 seconds) controls how often the boss shoots, ensuring consistent behaviour across different frame rates (Figure 11). When the timer reaches zero, the boss fires three projectiles while moving towards the player. This makes the attacks harder to dodge, as it covers a larger area compared to a single projectile (Figure 12).
+When the player is within attack range (130-340 px), the boss becomes more aggressive by moving towards the player while attacking simultaneously, increasing combat pressure. A timer (1.6 seconds) controls how often the boss shoots, ensuring consistent behaviour across different frame rates (Figure 12). When the timer reaches zero, the boss fires three projectiles while moving towards the player. This makes the attacks harder to dodge, as it covers a larger area compared to a single projectile (Figure 113).
 
   <p align="center">
   <b>Figure 12: </b>
@@ -503,7 +503,7 @@ When the player is within attack range (130-340 px), the boss becomes more aggre
 </p>
 <br>
 
-At very close range (distance < 130 px), the boss stops moving but continues attacking, making it harder to avoid attacks due to the close proximity (Figure 13). Contact damage is applied when the player touches the boss, making the fight more challenging.
+At very close range (distance < 130 px), the boss stops moving but continues attacking, making it harder to avoid attacks due to the close proximity (Figure 14). Contact damage is applied when the player touches the boss, making the fight more challenging.
 
 
 <p align="center">
