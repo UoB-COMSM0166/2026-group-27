@@ -600,8 +600,7 @@ Furthermore, we used GitHub as a development tool, specifically a [devlog README
 ## Areas of Improvement
 
 Although communication within the team was generally strong and we assigned roles to each member, we fell behind schedule at times due to a lack of clearly defined deadlines for individual tasks. This resulted in some work being rushed towards the end of the project.
-We rarely communicated during term breaks as we did not plan meetings or send many updates on our group chat. While the holidays were a break for us, it slowed overall progress. After the break, when we started working on the project again, we needed time to regain our momentum and ensure all team members were actively working on tasks and communicating effectively again. This highlights the importance of maintaining minimal communication even during breaks.
-
+We rarely communicated during term breaks as we did not plan meetings or send many updates on our group chat. While the holidays were a break for us, it slowed overall progress. After the break,we needed time to regain momentum and get everyone back to working and communicate effectively. Also our lack of art background had made creating pixel art a bit challenging.
 
 ## Agile Discussion:
 
