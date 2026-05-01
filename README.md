@@ -403,7 +403,7 @@ The diagram follows OOD principles by separating the game into modular component
 * <b>Player and Core Systems: </b>
   (`CharacterDataManager`, `CharacterRender`, `LevelBase`, `Camera`, `Maze`)
 
-  - `Maze` and `LevelBase` define the structure of each level, while the `Camera` controls the player’s view of the game. `CharacterRender`          handles the character chosen by the player and displays it in the game 
+  - `Maze` and `LevelBase` define the structure of each level, while the `Camera` controls the player’s view of the game. `CharacterRender`          handles the character chosen by the player and displays it in the game. 
 
    - These systems separate gameplay logic, rendering, and environment, making the code easier to manage and maintain.
 
