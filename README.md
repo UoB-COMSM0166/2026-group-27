@@ -235,22 +235,18 @@ In workshop 3, we developed prototypes for the two game ideas. This gave us a vi
 
 <table align="center" width="100%">
  <tr>
-<p align="center">
+<td align="center">
   <b>Figure 5: </b>
   <i>Paper Prototype for Lost in Bristol 
     developed during Workshop 3 </i> <br>
-  </p>
-
-<p align="center">
 <img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/f6eb2dd289198ac83513909ae7b6078e33eb18dc/5.%20readme%20docs/03.%20paper%20protoype%20lost%20in%20bristol.gif" width= "30%">
-</p>
- </tr>
-<tr>
-<p align="center">
+</td>
+
+<td align="center">
   <b>Figure 6: </b>
   <i>Prototype for The Will and the Fox </i> <br>
  <img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/1654f265acb071d30c2705c8287f72e56f9c53fc/5.%20readme%20docs/03.%20Prototype%202.gif" width="40%">
-  </p>
+  </td>
 </tr>
 </table>
 
