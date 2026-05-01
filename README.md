@@ -90,18 +90,11 @@ game set up instructions and link to play game.
 
 # 2. Introduction
 
-Lost in Bristol is an immersive, third-person maze-puzzle game that challenges players to navigate a stylized, labyrinthine recreation of Bristol’s iconic urban landscape. Developed as a tribute to the city’s unique cultural identity, the game tasks players with escaping a series of increasingly complex districts within a strict time limit. The project’s core objective was to blend traditional maze-solving mechanics with high-stakes survival elements and environmental storytelling.
+Lost in Bristol is a third-person maze-based story game inspired by classic arcade maze games such as Pac-Man, along with story-driven combat games like Hollow Knight. In terms of the “twists”, the game combines exploration, combat, storytelling and level progression to create a darker and more immersive take on the traditional maze game genre.
 
-## The "Twist": Survival and Strategy
-     
+Set in a cursed version of Bristol, the game follows the player as they navigate through 3 maze-based levels, each introducing new mechanics and increasing in difficulty. In Level 1, the player is introduced to basic navigation and a simple weapon system using a crossbow. Level 2 increases difficulty by introducing a darker environment where the player must find items such as a lamp and other essential weapons, while also defeating and avoiding enemies. Level 3 expands the gameplay further by introducing portals that allow the player to teleport across the maze, alongside a final boss that must be defeated by imprisoning it.
 
-What makes Lost in Bristol novel is its departure from passive exploration. While most maze games focus solely on pathfinding, our implementation introduces three "Twists" that heighten the difficulty:
-
-* Hostile Environment: The city is not empty; players must dodge active "enemies" that deplete their health upon contact. This transforms the maze from a spatial puzzle into a tactical survival challenge where health management is as critical as navigation.
-
-* Teleportation: To counter the maze’s complexity, we implemented transportation through portals scattered around the map. These allow for rapid repositioning, adding a layer of strategic "risk vs. reward" as players can decide whether to go through a portal or stick to their current path.
-
-* Dynamic Visibility: In specialised "Dark Maps," the gameplay shifts entirely. Players must find and manage a torch and physical map pick-ups to see, forcing them to rely on memory and limited visual cues rather than simple trial and error.
+The game also includes narrative cutscenes after each level, which gradually reveal the game’s lore and deepen player engagement, requiring the player to complete each level in order to fully unlock the story.
 
 
 ### Game Objects
