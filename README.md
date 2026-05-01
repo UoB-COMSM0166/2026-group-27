@@ -579,9 +579,9 @@ As a team, we adopted a flexible and collaborative approach aligned with Agile p
 
 ### Agile practices:
 
-We used Agile methodology that allowed the team to be flexible, we could create new features in small increments and refine them as needed. This approach helped enable the team to develop and learn on-the-go given their limited experience at the time.
+We used Agile methodology that allowed the team to be flexible, we could create new features in small increments and refine them as needed. This approach helped enable the team to develop and learn on the go, given our limited experience at the time.
 
-We used GitHub as a development tool, specifically a [devlog README file](https://github.com/UoB-COMSM0166/2026-group-27/tree/542337afaf5a9f9f3a855065c2fda8c948da1b56/1.%20devlog) where every week each team member recorded tasks they completed, work in progress and planned future work. We also used a Jira board to keep track of individual progress. 
+We used GitHub as a development tool, specifically a [devlog README file](https://github.com/UoB-COMSM0166/2026-group-27/tree/542337afaf5a9f9f3a855065c2fda8c948da1b56/1.%20devlog), where each team member recorded weekly tasks they completed, work in progress, and planned future work. We also used a Jira board to keep track of individual progress. 
 
 
 <p align="center">
