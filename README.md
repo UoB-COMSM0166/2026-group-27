@@ -655,7 +655,7 @@ The social aspect of the game refers to inclusiveness, user experience, trust, a
 
 The game also supports diversity through character selection, allowing players to choose from characters of different races, genders, and species. Additionally, gameplay encourages problem-solving, spatial awareness, and cognitive reasoning to progress through the game, which supports player engagement and skill development. Consistent mechanics and predictable behaviour help build trust, as players can rely on the system responding in a consistent way, increasing player confidence. 
 
-However, the current version has limitations in accessibility. There are no dedicated features for colourblind users or players with visual impairments, which restricts inclusivity. Additionally, while the game promotes engagement through immersion, there is a delicate balance between providing satisfaction and optimal engagement, as excessive engagement may result in user fatigue and reduced performance quality. For example, our game includes a time-based element, which may create pressure for players to complete the game quickly, potentially leading to stress. 
+However, the current version has limitations in accessibility. There are no dedicated features for colourblind users or players with visual impairments, which restricts inclusivity. Additionally, while the game promotes engagement through immersion, there is a delicate balance between providing satisfaction and optimal engagement, as excessive engagement may result in user fatigue and reduced performance quality. For example, the maze levels display the time taken to exit the maze, which may create pressure for players to complete the game quickly, potentially leading to stress. 
 
 # 9. Conclusion
 
