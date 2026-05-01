@@ -8,6 +8,8 @@
 <div align="center">
 
 <b>🔮 [Click Here To Play!](https://uob-comsm0166.github.io/2026-group-27/) 🔮</b>
+<br>
+<b> 🎬 [Video Demo] 🎬 (https://youtu.be/Biab6xEhAnk?si=kKMJweJxlfRQGLw2) </b> 
 
 </div>
 
