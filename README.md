@@ -42,7 +42,7 @@
 
 <p align="center">
 <b>Table 1: </b>
-<i>Group Members and Roles .</i> <br>
+<i>Group Members and Roles</i> <br>
 
 <table align="center" width="60%">
   <tr>
