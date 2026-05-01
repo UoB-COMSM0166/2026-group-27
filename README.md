@@ -364,10 +364,7 @@ Acceptance criteria were included to determine when a feature has been successfu
 
 ## 3.4 Use-case Specification
 
-# 4. Design - thanusha
-
-- 15% ~750 words 
-- System architecture. Class diagrams, behavioural diagrams
+# 4. Design
 
 ## 4.1 Class Diagram
 
