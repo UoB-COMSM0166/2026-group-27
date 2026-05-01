@@ -201,6 +201,7 @@ thanusha
 - ✅ Stakeholders
 - ✅ User stories and epics 
 - Case diagrams
+<img width="4096" height="1621" alt="usecase" src="https://github.com/user-attachments/assets/16b03d51-2f1d-4dda-b27f-89d67d60a6a2" />
 
 ## 3.1 Ideation Process 
 
