@@ -245,7 +245,7 @@ In workshop 3, we developed prototypes for the two game ideas. This gave us a vi
 <td align="center">
   <b>Figure 6: </b>
   <i>Prototype for The Will and the Fox </i> <br>
- <img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/1654f265acb071d30c2705c8287f72e56f9c53fc/5.%20readme%20docs/03.%20Prototype%202.gif" width="200">
+ <img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/1654f265acb071d30c2705c8287f72e56f9c53fc/5.%20readme%20docs/03.%20Prototype%202.gif" width="300">
   </td>
 </tr>
 </table>
