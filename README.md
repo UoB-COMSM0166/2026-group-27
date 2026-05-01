@@ -616,11 +616,11 @@ We used WhatsApp as our main method of communication, primarily for coordinating
   <br>
   <em>Figure 7.2: WhatsApp communication</em>
 </p>
-There were some minor problems during the course of development. A few of the tasks we completed in the early phases of development had to be revised because they had not been clearly defined. We also experienced a few merge conflicts when working on files that were being worked on by multiple users. Additionally, some of the features were developed quickly and were subsequently improved to provide a more logical structure and improve maintainability.
 
-As the team continued on the project, they were able to adapt by enhancing their communication methods, clearly identifying task ownership, and developing/refining coding practices. This allowed for the entire team to be much more efficient in developing the final product and have a more stable final game.
+## Agile Discussion:
 
-
+We used Agile methodology that allowed the team to be flexible,therefore, we could create new features in small increments and refine them as needed. This approach helped enable the team to develop and learn on-the-go given their limited experience at the time.
+Due to the speed at which features were developed initially, the code base contained some items that would be difficult to maintain therefore, it was determined that a more formalized process needed to be put in place to help improve the level of collaboration, code quality and maintainability for software application.  As a result, the Pull Request/Code Review process became part of the workflow for the team to accomplish these goals.
 
 # 8. Sustainability, Ethics and Accessibility
 
