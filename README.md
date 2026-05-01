@@ -712,18 +712,18 @@ Moreover, adding alternative endings based on the character chosen and player pe
   </tr>
 
   <tr>
+  <td>Maniza Singh</td>
+  <td>1.0</td>
+  </tr>
+
+  <tr>
   <td>Keyu Zhou</td>
   <td>
    - Did not attend demo session <br>
    - Was not in contact with the team <br> 
      towards the end of the project (after easter) <br>
    - No known contribution to game design,<br>
-     code, or repo</td>
-  </tr>
-
-  <tr>
-  <td>Maniza Singh</td>
-  <td>1.0</td>
+     code, or repo </td>
   </tr>
 
   </table>
