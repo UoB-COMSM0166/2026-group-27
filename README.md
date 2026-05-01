@@ -589,31 +589,17 @@ To stay on track, we held weekly in-person meetings outside of the timetabled wo
 
 The WhatsApp group was also greatly helpful for overcoming language barriers within the team, as not all members had the same level of English proficiency. Written communication within the group allowed ideas to be expressed more clearly and translated if necessary to help us understand each other better, improving overall collaboration and reducing the risk of miscommunication. 
 
-We also used GitHub as a development tool, specifically a [devlog README file](https://github.com/UoB-COMSM0166/2026-group-27/tree/542337afaf5a9f9f3a855065c2fda8c948da1b56/1.%20devlog) where every week each team member recorded tasks they completed, work in progress and planned future work. This improved transparency and allowed us to track individual contributions across the project. 
-
-
-Jira - makes sure that work was spread evenly across team members 
-
-
-## Tools and Techniques:
-We used Jira to manage our tasks via a Kanban board for better organisation of work and to track our progress through each stage of the process. We used GitHub as our primary source control so that all developers could work together to build on the code and share their work seamlessly. 
+Furthermore, we used GitHub as a development tool, specifically a [devlog README file](https://github.com/UoB-COMSM0166/2026-group-27/tree/542337afaf5a9f9f3a855065c2fda8c948da1b56/1.%20devlog) where every week each team member recorded tasks they completed, work in progress and planned future work. We also used a Jira board to keep track of individual progress. 
 
 <p align="center">
+ <b>Figure ?: </b>
+ <i>Jira Kanban Board</i> <br>
   <img alt="Kanban board" src="https://github.com/user-attachments/assets/ea0182d3-3a1e-47b9-aab0-bd22b0b1d998" width="500">
-  <br>
-  <em>Figure 7.1: Our Kanban board</em>
-</p>
-We used WhatsApp as our main method of communication, primarily for coordinating our efforts and updating each other on status, team meetings or other issues that required resolution. Our development used a variation of agile development; we developed the game in weekly iterations, allowing for continuous enhancement of the product.
-
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/ea7bd895-4ff3-43e4-aa6f-99437fc8b478" alt="WhatsApp chat" width="500">
-  <br>
-  <em>Figure 7.2: WhatsApp communication</em>
 </p>
 
 ## Agile Discussion:
 
-We used Agile methodology that allowed the team to be flexible,therefore, we could create new features in small increments and refine them as needed. This approach helped enable the team to develop and learn on-the-go given their limited experience at the time.
+We used Agile methodology that allowed the team to be flexible; therefore, we could create new features in small increments and refine them as needed. This approach helped enable the team to develop and learn on-the-go given their limited experience at the time.
 Due to the speed at which features were developed initially, the code base contained some items that would be difficult to maintain therefore, it was determined that a more formalized process needed to be put in place to help improve the level of collaboration, code quality and maintainability for software application.  As a result, the Pull Request/Code Review process became part of the workflow for the team to accomplish these goals.
 
 # 8. Sustainability, Ethics and Accessibility
