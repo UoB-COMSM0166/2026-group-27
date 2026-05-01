@@ -587,7 +587,7 @@ To stay on track, we held weekly in-person meetings outside of the timetabled wo
 <img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/e87cc7f13cc2b0ad7c3e630d19e73bb6d4225184/5.%20readme%20docs/07.%20Whatsapp%20Screenshot.jpg" width= "30%">
 </p>
 
-The WhatsApp group was also greatly helpful for overcoming language barriers within the team, as not all members had the same level of English proficiency. Written communication within the group allowed ideas to be expressed more clearly and translated if necessary to help us understand each other better, improving overall collaboration and reducing the risk of miscommunication. 
+The WhatsApp group was also really helpful for overcoming language barriers within the team, as not all members had the same level of English proficiency. Written communication within the group allowed ideas to be expressed more clearly and translated if necessary to help us understand each other better, improving overall collaboration and reducing the risk of miscommunication. 
 
 Furthermore, we used GitHub as a development tool, specifically a [devlog README file](https://github.com/UoB-COMSM0166/2026-group-27/tree/542337afaf5a9f9f3a855065c2fda8c948da1b56/1.%20devlog) where every week each team member recorded tasks they completed, work in progress and planned future work. We also used a Jira board to keep track of individual progress. 
 
@@ -596,6 +596,12 @@ Furthermore, we used GitHub as a development tool, specifically a [devlog README
  <i>Jira Kanban Board</i> <br>
   <img alt="Kanban board" src="https://github.com/user-attachments/assets/ea0182d3-3a1e-47b9-aab0-bd22b0b1d998" width="500">
 </p>
+
+## Areas of Improvement:
+
+Although communication within the team was generally strong and we assigned roles to each member, we fell behind schedule at times due to a lack of clearly defined deadlines for individual tasks. This resulted in some work being rushed towards the end of the project.
+We rarely communicated during term breaks as we did not plan meetings or send many updates on our group chat. While the holidays were a break for us, it slowed overall progress. After the break, when we started working on the project again, we needed time to regain our momentum and ensure all team members were actively working on tasks and communicating effectively again. This highlights the importance of maintaining minimal communication even during breaks.
+
 
 ## Agile Discussion:
 
