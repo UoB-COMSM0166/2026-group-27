@@ -609,11 +609,6 @@ Furthermore, we used GitHub as a development tool, specifically a [devlog README
 
   As a result, we used AI-generated elements to support the visuals of the game, allowing us to save time and continue development and focus on   other tasks effectively. Although we were able to adapt our approach, this highlighted the importance of accurately assessing a team’s skill    sets during the planning phase and choosing methods that align with those capabilities.
 
-## Agile Discussion:
-
-We used Agile methodology that allowed the team to be flexible; therefore, we could create new features in small increments and refine them as needed. This approach helped enable the team to develop and learn on-the-go given their limited experience at the time.
-Due to the speed at which features were developed initially, the code base contained some items that would be difficult to maintain therefore, it was determined that a more formalized process needed to be put in place to help improve the level of collaboration, code quality and maintainability for software application.  As a result, the Pull Request/Code Review process became part of the workflow for the team to accomplish these goals.
-
 # 8. Sustainability, Ethics and Accessibility
 
 While developing Lost in Bristol, we considered how the game impacts environmental, technical, and social factors using the Sustainability Awareness Framework (SusAF) to help us evaluate the strengths and potential limitations of our design. 
