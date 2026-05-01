@@ -591,17 +591,19 @@ The WhatsApp group was also really helpful for overcoming language barriers with
 
 Furthermore, we used GitHub as a development tool, specifically a [devlog README file](https://github.com/UoB-COMSM0166/2026-group-27/tree/542337afaf5a9f9f3a855065c2fda8c948da1b56/1.%20devlog) where every week each team member recorded tasks they completed, work in progress and planned future work. We also used a Jira board to keep track of individual progress. 
 
+
 <p align="center">
  <b>Figure ?: </b>
  <i>Jira Kanban Board</i> <br>
   <img alt="Kanban board" src="https://github.com/user-attachments/assets/ea0182d3-3a1e-47b9-aab0-bd22b0b1d998" width="500">
 </p>
 
+For game development, collaboration was supported through GitHub using a fork-and-branch workflow. Each team member worked on separate forks, allowing features to be developed independently and reviewed by other team members before being merged into the main repository. We found in-person meetings to be the most efficient in discussing and organising code. 
 
 ## Areas of Improvement
 
 * Although communication within the team was generally strong and we assigned roles to each member, we fell behind schedule at times due to a     lack of clearly defined deadlines for individual tasks. This resulted in some work being rushed towards the end of the project.
-  We rarely communicated during term breaks as we did not plan meetings or send many updates on our group chat. While the holidays were a break   for us, it slowed overall progress. After the break, when we started working on the project again, we needed time to regain our momentum and    ensure all team members were actively working on tasks and communicating effectively again. 
+  We rarely communicated during term breaks as we did not plan meetings or send many updates on our group chat. After the break, when we started working on the project again, we needed time to regain our momentum and    ensure all team members were actively working on tasks and communicating effectively again. 
 
 * Furthermore, we assigned each team member specific roles (see [Table 1](https://github.com/UoB-COMSM0166/2026-group-27/tree/main#1-our-group)   for group roles). However, these roles were not strictly enforced, meaning that members could contribute to other areas of the project, such    as assisting with the repo or supporting development tasks. While this encouraged collaboration and gave all members exposure to different      aspects of the project, it also slowed us down. Specifically, the lack of clearly defined responsibilities and deadlines meant that multiple    tasks were ongoing but not complete across multiple areas. 
 
