@@ -8,9 +8,7 @@
 game set up instructions and link to play game. 
 
 <p align="center">
-
 <b>🌙 [Click Here To Play!](https://uob-comsm0166.github.io/2026-group-27/) 🌙</b>
-
 </p>
 
 # Video Demonstration
