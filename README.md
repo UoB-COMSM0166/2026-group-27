@@ -586,6 +586,9 @@ However, as black-box testing does not consider the internal code, some issues w
 As a team, we adopted a flexible and collaborative approach aligned with Agile principles, with a strong emphasis on communication and continuous progress tracking. This ensured that all members contributed effectively throughout the project. This was particularly important for us as we had new members who joined the group halfway through the project, so we needed to familiarise them with our game design and plans. Regular communication and documentation helped manage this transition and ensured that development continued smoothly despite these changes.
 
 ### Agile practices:
+
+We used Agile methodology that allowed the team to be flexible, we could create new features in small increments and refine them as needed. This approach helped enable the team to develop and learn on-the-go given their limited experience at the time.
+
 We used GitHub as a development tool, specifically a [devlog README file](https://github.com/UoB-COMSM0166/2026-group-27/tree/542337afaf5a9f9f3a855065c2fda8c948da1b56/1.%20devlog) where every week each team member recorded tasks they completed, work in progress and planned future work. We also used a Jira board to keep track of individual progress. 
 
 
