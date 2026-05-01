@@ -605,7 +605,7 @@ The principal collaboration tool was a shared GitHub repository, used as the sin
 We used Jira to manage our tasks via a Kanban board for better organisation of work and to track our progress through each stage of the process. We used GitHub as our primary source control so that all developers could work together to build on the code and share their work seamlessly. 
 
 <p align="center">
- <img width="300" height="300" alt="Kanban board" src="https://github.com/user-attachments/assets/ea0182d3-3a1e-47b9-aab0-bd22b0b1d998" /> 
+ <img width="500" height="500" alt="Kanban board" src="https://github.com/user-attachments/assets/ea0182d3-3a1e-47b9-aab0-bd22b0b1d998" /> 
  <em>Figure 7.1: Our Kanban board </em>
 </p>
 
