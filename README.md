@@ -605,17 +605,17 @@ The principal collaboration tool was a shared GitHub repository, used as the sin
 We used Jira to manage our tasks via a Kanban board for better organisation of work and to track our progress through each stage of the process. We used GitHub as our primary source control so that all developers could work together to build on the code and share their work seamlessly. 
 
 <p align="center">
- <img width="500" alt="Kanban board" src="https://github.com/user-attachments/assets/ea0182d3-3a1e-47b9-aab0-bd22b0b1d998" /> 
- <em>Figure 7.1: Our Kanban board </em>
+  <img alt="Kanban board" src="https://github.com/user-attachments/assets/ea0182d3-3a1e-47b9-aab0-bd22b0b1d998" width="500">
+  <br>
+  <em>Figure 7.1: Our Kanban board</em>
 </p>
-
 We used WhatsApp as our main method of communication, primarily for coordinating our efforts and updating each other on status, team meetings or other issues that required resolution. Our development used a variation of agile development; we developed the game in weekly iterations, allowing for continuous enhancement of the product.
 
 <p align="center">
- <img width="500"  alt="whatsapp chat" src="https://github.com/user-attachments/assets/ea7bd895-4ff3-43e4-aa6f-99437fc8b478" />
- <em>Figure 7.1: Whatsapp Communicaton </em>
+  <img src="https://github.com/user-attachments/assets/ea7bd895-4ff3-43e4-aa6f-99437fc8b478" alt="WhatsApp chat" width="500">
+  <br>
+  <em>Figure 7.2: WhatsApp communication</em>
 </p>
-
 There were some minor problems during the course of development. A few of the tasks we completed in the early phases of development had to be revised because they had not been clearly defined. We also experienced a few merge conflicts when working on files that were being worked on by multiple users. Additionally, some of the features were developed quickly and were subsequently improved to provide a more logical structure and improve maintainability.
 
 As the team continued on the project, they were able to adapt by enhancing their communication methods, clearly identifying task ownership, and developing/refining coding practices. This allowed for the entire team to be much more efficient in developing the final product and have a more stable final game.
