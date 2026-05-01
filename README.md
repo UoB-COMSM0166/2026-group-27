@@ -42,7 +42,7 @@
 
 <p align="center">
 <b>Table 1: </b>
-<i>Group members from left to right of Figure 1.</i> <br>
+<i>Group Members and Roles .</i> <br>
 
 <table align="center" width="60%">
   <tr>
@@ -674,16 +674,14 @@ Developing Lost in Bristol helped us improve and apply our software engineering 
 
 We also gained experience in collaborative software development and coordinating work across multiple team members. As features were developed at the same time by different team members, communication was essential to ensure consistency and avoid conflicts within the repository. This reflected real-world development practices and improved our understanding of team-based software engineering.
 
-* The first significant thing we as a team learned was how critical it is to plan early. The original vision for the Maze-survival Game lacked clarity, leading to a number of reworks during the course of development. This demonstrated an evolution in the original concept and illustrated the need for flexibility and planning early when developing interactive systems.
- 
-* The second major takeaway was that structuring code correctly is extremely important. As we progressed through the game with more and more features being added, we began to realise that unorganised code was making it increasingly difficult to debug. As a result, we decided to compartmentalise the code into smaller, modular components (such as player movement, enemy and level), which became easy to track and maintain the system efficiently. Overall, this reinforced the importance of good coding practices when it comes to sustaining and eventually scaling a project.  
+We experienced some challenges in teamwork regarding communication and setting deadlines. However, these experiences were valuable as they provided  insight into how to adapt and improve collaboration in a team-based development environment.
 
-## 9.? Future Work
+## 9.2 Future Work
 In the short term, potential future work could prioritise improving accessibility features such as colourblind friendly palettes, aligning with the Web Content Accessibility Guidelines (WCAG) recommendations (W3C, 2025). We also plan to optimise performance by refining the game loop and reducing unnecessary processing during non-active states such as menus and pauses.
 
 Another important improvement would be making the game accessible on mobile devices by adapting the controls and interface for touch screens. This would allow the game to reach a wider audience and improve usability across different platforms.
 
-## 9.? Sequel: Lost In Bristol 2
+## 9.3 Sequel: Lost In Bristol 2
 
 A potential sequel could expand the game world into an alternate version of Bristol, such as a historical setting or an alien invasion scenario. Additionally, Bristol-themed visuals could be incorporated into the maze levels themselves, rather than only being included in cutscenes. This allows for unique and varied environments and level designs. 
 
