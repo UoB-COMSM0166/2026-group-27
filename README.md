@@ -233,7 +233,7 @@ Next, as a team, we developed two game ideas that combined features from at leas
 
 In workshop 3, we developed prototypes for the two game ideas. This gave us a visual representation of what our two potential game ideas could look and function. This helped us compare how each team member pictured the potential game designs and encouraged discussion to agree on a shared vision for each game idea. It also helped us see how complex the mechanics were and if they could be realistically built (Figure 5 and 6). <br>
 <br>
-<br>
+
 <table align="center" width="100%">
  <tr>
 <td align="center">
