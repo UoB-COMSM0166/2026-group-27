@@ -585,6 +585,7 @@ However, as black-box testing does not consider the internal code, some issues w
 
 As a team, we adopted a flexible and collaborative approach aligned with Agile principles, with a strong emphasis on communication and continuous progress tracking. This ensured that all members contributed effectively throughout the project. This was particularly important for us as we had new members who joined the group halfway through the project, so we needed to familiarise them with our game design and plans. Regular communication and documentation helped manage this transition and ensured that development continued smoothly despite these changes.
 
+### Agile practices:
 We used GitHub as a development tool, specifically a [devlog README file](https://github.com/UoB-COMSM0166/2026-group-27/tree/542337afaf5a9f9f3a855065c2fda8c948da1b56/1.%20devlog) where every week each team member recorded tasks they completed, work in progress and planned future work. We also used a Jira board to keep track of individual progress. 
 
 
@@ -600,6 +601,8 @@ For game development, collaboration was supported through GitHub using a fork-an
  <i>Overview of task progress and distribution using Jira Kanban board </i> <br>
   <img alt="pie chart jira" src="https://github.com/user-attachments/assets/0568d962-1234-45ae-9e9b-e96867b4b467" width="350" />
 </p>
+
+### Other tools and Techniques:
 
 Furthermore, to stay on track, we held weekly in-person meetings outside of the timetabled workshop session to review progress, discuss new ideas and ensure we all were on the same page. Additionally, we had a WhatsApp group chat for daily communication, allowing us to share updates or ask questions outside of university and in-person meetings (Figure ?).
 
