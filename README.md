@@ -237,7 +237,7 @@ In workshop 3, we developed prototypes for the two game ideas. This gave us a vi
  <tr>
 <td align="center">
   <b>Figure 5: </b>
-  <i>Paper Prototype for Lost in Bristol 
+  <i>Paper Prototype for Lost in Bristol <br> 
     developed during Workshop 3 </i> <br>
 <img src= "https://github.com/UoB-COMSM0166/2026-group-27/blob/f6eb2dd289198ac83513909ae7b6078e33eb18dc/5.%20readme%20docs/03.%20paper%20protoype%20lost%20in%20bristol.gif" width= "200">
 </td>
