@@ -42,32 +42,17 @@
 
 <p align="center">
 <b>Table 1: </b>
-  <i>Group members from left to right of Figure 1.</i> <br>
-  <p align="center">
-  
+<i>Group members from left to right of Figure 1.</i> <br>
+
 <table align="center" width="60%">
   <tr>
-    <th> Name</th>
+    <th>Name</th>
     <th>Email</th>
     <th>GitHub Username</th>
-   <th>Role</th>
+    <th>Role</th>
   </tr>
 
   <tr>
-    <td>Suki Dai</td>
-    <td>daisy20010313@gmail.com</td>
-    <td>@Suki0515</td>
-   <td>UI/UX Designer and Documentation</td>
-  </tr>
-
-  <tr>
-    <td>Thanusha Gorva</td>
-    <td>jx25475@bristol.ac.uk</td>
-    <td>@thanusha170</td>
-   <td>UI/UX Designer and Lead Documentation </td>
-  </tr>
-
-   <tr>
     <td>Liz Chen</td>
     <td>ji25241@bristol.ac.uk</td>
     <td>@lizchen0201</td>
@@ -75,26 +60,40 @@
   </tr>
 
   <tr>
+    <td>Maniza Singh</td>
+    <td>jq25952@bristol.ac.uk</td>
+    <td>@ManizaS17</td>
+    <td>Product Owner / Scrum Master</td>
+  </tr>
+
+  <tr>
     <td>Yizhou Pan</td>
     <td>izapan610@gmail.com</td>
     <td>@izapan610</td>
-   <td>Lead Developer and Sound Designer</td>
+    <td>Lead Developer and Sound Designer</td>
+  </tr>
+
+  <tr>
+    <td>Thanusha Gorva</td>
+    <td>jx25475@bristol.ac.uk</td>
+    <td>@thanusha170</td>
+    <td>UI/UX Designer and Lead Documentation</td>
+  </tr>
+
+  <tr>
+    <td>Suki Dai</td>
+    <td>daisy20010313@gmail.com</td>
+    <td>@Suki0515</td>
+    <td>UI/UX Designer and Documentation</td>
   </tr>
 
   <tr>
     <td>Keyu Zhou</td>
     <td>email</td>
     <td>@zhoukeyu63-netizen</td>
-   <td>Role</td>
+    <td>-</td>
   </tr>
 
-   <tr>
-    <td>Maniza Singh</td>
-    <td>jq25952@bristol.ac.uk</td>
-    <td>@ManizaS17</td>
-    <td>Scrum Master / Product Manager</td>
-  </tr>
-  
 </table>
 
 # 2. Introduction
